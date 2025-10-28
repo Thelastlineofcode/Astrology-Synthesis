@@ -150,8 +150,8 @@ const BirthDataForm = ({ onCalculate, loading }) => {
           </div>
         </div>
 
-              <div className="form-section">
-        <h3>Location Details</h3>
+        <div className="form-section">
+          <h3>Location Details</h3>
         <div className="location-toggle">
           <label>
             <input

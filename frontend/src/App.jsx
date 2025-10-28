@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BirthDataForm from './components/InputForm/BirthDataForm';
+import SimpleBirthDataForm from './components/InputForm/SimpleBirthDataForm';
 import PlanetList from './components/PlanetList/PlanetList';
 import AspectTable from './components/AspectTable/AspectTable';
 import HouseTable from './components/HouseTable/HouseTable';
@@ -40,7 +40,7 @@ function App() {
 
       <div className="app-container">
         <div className="sidebar">
-          <BirthDataForm 
+          <SimpleBirthDataForm 
             onCalculate={handleCalculate}
             loading={loading}
           />
@@ -66,11 +66,11 @@ function App() {
               <div className="chart-info">
                 <h2>Chart Information</h2>
                 <div className="info-grid">
-                  <div><strong>Zodiac Type:</strong> {chartData.chartInfo.zodiacType}</div>
-                  {chartData.chartInfo.ayanamsa && (
-                    <div><strong>Ayanamsa:</strong> {chartData.chartInfo.ayanamsa}</div>
+                  <div><strong>Zodiac Type:</strong> {chartData.metadata.zodiac_type}</div>
+                  {chartData.metadata.ayanamsa && (
+                    <div><strong>Ayanamsa:</strong> {chartData.metadata.ayanamsa}</div>
                   )}
-                  <div><strong>House System:</strong> {chartData.chartInfo.houseSystem}</div>
+                  <div><strong>House System:</strong> {chartData.metadata.house_system}</div>
                 </div>
               </div>
 
@@ -82,7 +82,6 @@ function App() {
                 <section className="chart-section">
                   <HouseTable 
                     houses={chartData.houses} 
-                    angles={chartData.angles}
                   />
                 </section>
 

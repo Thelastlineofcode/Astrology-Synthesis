@@ -17,25 +17,41 @@ const ZODIAC_SYMBOLS = {
 };
 
 const HouseTable = ({ houses, angles }) => {
-  if (!houses || houses.length === 0) return null;
+  if (!houses || Object.keys(houses).length === 0) return null;
 
-  const formatDegree = (degree, minute) => {
-    return `${degree}°${minute}'`;
+  const formatDegree = (degree) => {
+    const deg = Math.floor(degree);
+    const min = Math.floor((degree - deg) * 60);
+    return `${deg}°${min}'`;
   };
+
+  // Convert houses object to array for display
+  const houseArray = [];
+  for (let i = 1; i <= 12; i++) {
+    const houseKey = `house_${i}`;
+    if (houses[houseKey]) {
+      houseArray.push({
+        house: i,
+        zodiacSign: houses[houseKey].sign,
+        degree: houses[houseKey].degree,
+        cusp: houses[houseKey].longitude
+      });
+    }
+  }
 
   return (
     <div className="house-table">
       <h2>Houses & Angles</h2>
       
-      {angles && (
+      {houses.ascendant && (
         <div className="angles-section">
           <div className="angle-card ascendant">
             <div className="angle-label">🌅 Ascendant (Rising)</div>
             <div className="angle-value">
-              <span className="zodiac-symbol">{ZODIAC_SYMBOLS[angles.ascendant.zodiacSign]}</span>
-              <span className="sign-name">{angles.ascendant.zodiacSign}</span>
+              <span className="zodiac-symbol">{ZODIAC_SYMBOLS[houses.ascendant.sign]}</span>
+              <span className="sign-name">{houses.ascendant.sign}</span>
               <span className="degree">
-                {formatDegree(angles.ascendant.degree, angles.ascendant.minute)}
+                {formatDegree(houses.ascendant.degree)}
               </span>
             </div>
           </div>
@@ -43,10 +59,10 @@ const HouseTable = ({ houses, angles }) => {
           <div className="angle-card midheaven">
             <div className="angle-label">🌠 Midheaven (MC)</div>
             <div className="angle-value">
-              <span className="zodiac-symbol">{ZODIAC_SYMBOLS[angles.midheaven.zodiacSign]}</span>
-              <span className="sign-name">{angles.midheaven.zodiacSign}</span>
+              <span className="zodiac-symbol">{ZODIAC_SYMBOLS[houses.midheaven.sign]}</span>
+              <span className="sign-name">{houses.midheaven.sign}</span>
               <span className="degree">
-                {formatDegree(angles.midheaven.degree, angles.midheaven.minute)}
+                {formatDegree(houses.midheaven.degree)}
               </span>
             </div>
           </div>
@@ -64,7 +80,7 @@ const HouseTable = ({ houses, angles }) => {
             </tr>
           </thead>
           <tbody>
-            {houses.map((house) => (
+            {houseArray.map((house) => (
               <tr key={house.house} className={`house-row house-${house.house}`}>
                 <td className="house-number">
                   <span className="house-badge">{house.house}</span>
@@ -74,7 +90,7 @@ const HouseTable = ({ houses, angles }) => {
                   <span>{house.zodiacSign}</span>
                 </td>
                 <td className="house-position">
-                  {formatDegree(house.degree, house.minute)}
+                  {formatDegree(house.degree)}
                 </td>
                 <td className="house-cusp monospace">
                   {house.cusp.toFixed(4)}°
