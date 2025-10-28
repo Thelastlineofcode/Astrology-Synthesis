@@ -31,13 +31,13 @@ const SimpleBirthDataForm = ({ onCalculate, loading }) => {
 
   const loadSample = () => {
     setFormData({
-      year: 1990,
-      month: 7,
-      day: 4,
-      hour: 12,
-      minute: 0,
-      latitude: 40.7128,
-      longitude: -74.0060
+      year: 1984,
+      month: 12,
+      day: 19,
+      hour: 18,
+      minute: 59,
+      latitude: 30.0019,
+      longitude: -90.1767
     });
   };
 
@@ -153,7 +153,7 @@ const SimpleBirthDataForm = ({ onCalculate, loading }) => {
 
         <div className="form-actions">
           <button type="button" onClick={loadSample} disabled={loading}>
-            Load Sample (July 4, 1990, NYC)
+            Load Sample (Dec 19, 1984, Metairie LA)
           </button>
           <button type="submit" disabled={loading} className="primary">
             {loading ? '🔮 Calculating...' : '✨ Calculate My Chart'}
