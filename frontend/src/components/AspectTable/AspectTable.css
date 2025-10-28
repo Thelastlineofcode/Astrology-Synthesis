@@ -1,0 +1,65 @@
+.aspect-table {
+  margin-bottom: 2rem;
+}
+
+.aspect-table h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.aspects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.aspect-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--aspect-color);
+  transition: transform 0.3s ease;
+}
+
+.aspect-card:hover {
+  transform: translateY(-4px);
+}
+
+.aspect-planets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.aspect-symbol {
+  font-size: 1.5rem;
+  color: var(--aspect-color);
+}
+
+.aspect-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+.aspect-name {
+  text-transform: capitalize;
+  font-weight: 600;
+  color: var(--aspect-color);
+}
+
+.applying {
+  color: #48bb78;
+}
+
+.separating {
+  color: #ed8936;
+}

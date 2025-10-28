@@ -1,0 +1,77 @@
+.location-picker {
+  margin-top: 1rem;
+}
+
+.address-input {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.address-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.address-input button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.address-input button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.map-container {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.error-message {
+  color: #ff6b6b;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 4px;
+}
+
+/* Leaflet specific styles */
+.leaflet-container {
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.leaflet-control-zoom a {
+  color: #333 !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.location-toggle {
+  margin-bottom: 1rem;
+}
+
+.location-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.location-toggle input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
