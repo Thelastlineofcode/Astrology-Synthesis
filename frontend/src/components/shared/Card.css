@@ -1,0 +1,72 @@
+/* Card Component Styles */
+.card {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  transition: all 200ms ease;
+}
+
+/* Variants */
+.card--default {
+  border: 1px solid var(--border-color);
+}
+
+.card--elevated {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.card--outlined {
+  border: 2px solid var(--color-primary);
+  background: transparent;
+}
+
+/* Padding Options */
+.card--padding-none .card__content {
+  padding: 0;
+}
+
+.card--padding-small .card__content {
+  padding: var(--space-3);
+}
+
+.card--padding-medium .card__content {
+  padding: var(--space-5);
+}
+
+.card--padding-large .card__content {
+  padding: var(--space-7);
+}
+
+/* Header and Footer */
+.card__header,
+.card__footer {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card__footer {
+  border-top: 1px solid var(--border-color);
+  border-bottom: none;
+}
+
+/* Interactive States */
+.card--hoverable:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.card--clickable {
+  cursor: pointer;
+}
+
+.card--clickable:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .card--padding-large .card__content {
+    padding: var(--space-5);
+  }
+}

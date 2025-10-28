@@ -1,3 +1,37 @@
+:root {
+  /* Colors - Healing Cosmos Palette */
+  --color-primary: #3E4B6E;
+  --color-secondary: #A5B8A4;
+  --color-accent: #B296CA;
+  --color-cta: #C17B5C;
+  
+  /* Neutrals */
+  --color-neutral-light: #F5F3EE;
+  --color-neutral-dark: #2D3142;
+  
+  /* Semantic Colors */
+  --color-success: #81987F;
+  --color-warning: #E8B86D;
+  --color-error: #C17B5C;
+  --color-info: #7FA99B;
+  
+  /* Background Colors */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F3EE;
+  
+  /* Border Colors */
+  --border-color: #E2E8F0;
+  
+  /* Spacing Scale (8pt Grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
