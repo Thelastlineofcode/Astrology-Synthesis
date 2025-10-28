@@ -34,8 +34,11 @@ const ZODIAC_SYMBOLS = {
 const PlanetList = ({ planets }) => {
   if (!planets) return null;
 
-  const formatDegree = (degree, minute, second) => {
-    return `${degree}°${minute}'${second || 0}"`;
+  const formatDegree = (degree) => {
+    const deg = Math.floor(degree);
+    const min = Math.floor((degree - deg) * 60);
+    const sec = Math.floor(((degree - deg) * 60 - min) * 60);
+    return `${deg}°${min}'${sec}"`;
   };
 
   const getPlanetColor = (planetName) => {
@@ -74,7 +77,7 @@ const PlanetList = ({ planets }) => {
                   <span className="planet-symbol">{PLANET_SYMBOLS[name]}</span>
                   <span className="planet-text">{name}</span>
                 </div>
-                {data.isRetrograde && (
+                {data.retrograde && (
                   <span className="retrograde-badge" title="Retrograde">℞</span>
                 )}
               </div>
@@ -83,15 +86,15 @@ const PlanetList = ({ planets }) => {
                 <div className="info-row">
                   <span className="label">Sign:</span>
                   <span className="value">
-                    <span className="zodiac-symbol">{ZODIAC_SYMBOLS[data.zodiacSign]}</span>
-                    {data.zodiacSign}
+                    <span className="zodiac-symbol">{ZODIAC_SYMBOLS[data.sign]}</span>
+                    {data.sign}
                   </span>
                 </div>
                 
                 <div className="info-row">
                   <span className="label">Position:</span>
                   <span className="value monospace">
-                    {formatDegree(data.degree, data.minute, data.second)}
+                    {formatDegree(data.degree)}
                   </span>
                 </div>
                 
