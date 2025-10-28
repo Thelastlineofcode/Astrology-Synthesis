@@ -141,12 +141,12 @@ describe('Card component', () => {
     it('has tabIndex="0" when clickable', () => {
       const handleClick = jest.fn();
       const { container } = render(<Card onClick={handleClick}>Content</Card>);
-      expect(container.firstChild).toHaveAttribute('tabIndex', '0');
+      expect(container.firstChild).toHaveAttribute('tabindex', '0');
     });
 
     it('does not have tabIndex when not clickable', () => {
       const { container } = render(<Card>Content</Card>);
-      expect(container.firstChild).not.toHaveAttribute('tabIndex');
+      expect(container.firstChild).not.toHaveAttribute('tabindex');
     });
 
     it('triggers onClick on Enter key press', () => {
