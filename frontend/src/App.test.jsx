@@ -3,15 +3,15 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('App component', () => {
-    it('renders the app title', () => {
+    it('renders the app header', () => {
         render(<App />);
-        const titleElement = screen.getByText(/app title/i);
+        const titleElement = screen.getByText(/Astrology Chart Calculator/i);
         expect(titleElement).toBeInTheDocument();
     });
 
-    it('renders a button', () => {
+    it('renders navigation', () => {
         render(<App />);
-        const buttonElement = screen.getByRole('button', { name: /click me/i });
-        expect(buttonElement).toBeInTheDocument();
+        const navElement = screen.getByRole('navigation', { name: /main navigation/i });
+        expect(navElement).toBeInTheDocument();
     });
 });
