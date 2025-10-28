@@ -47,17 +47,24 @@ export const RadioGroup = ({
 }) => {
   const id = useId();
   const errorId = `${id}-error`;
+  const labelId = `${id}-label`;
   
   return (
     <div className={`form-radio-group ${error ? 'form-radio-group--error' : ''} ${className}`}>
-      <div className="form-radio-group__label" role="group" aria-labelledby={id}>
-        <span id={id}>
+      <div className="form-radio-group__label">
+        <span id={labelId}>
           {label}
           {required && <span className="form-label__required" aria-label="required">*</span>}
         </span>
       </div>
       
-      <div className="form-radio-group__options" {...props}>
+      <div 
+        className="form-radio-group__options" 
+        role="radiogroup"
+        aria-labelledby={labelId}
+        aria-describedby={error ? errorId : undefined}
+        {...props}
+      >
         {options.map(option => (
           <Radio
             key={option.value}
