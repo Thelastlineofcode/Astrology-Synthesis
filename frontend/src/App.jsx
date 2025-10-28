@@ -3,6 +3,7 @@ import SimpleBirthDataForm from './components/InputForm/SimpleBirthDataForm';
 import PlanetList from './components/PlanetList/PlanetList';
 import AspectTable from './components/AspectTable/AspectTable';
 import HouseTable from './components/HouseTable/HouseTable';
+import ThemeToggle from './components/shared/ThemeToggle';
 import { calculateChart } from './services/api';
 import './App.css';
 
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <ThemeToggle />
       <header className="App-header">
         <h1>🌟 Astrology Chart Calculator</h1>
         <p>Vedic & Western Astrology Charts with Swiss Ephemeris</p>
