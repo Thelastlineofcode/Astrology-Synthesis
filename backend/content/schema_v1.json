@@ -1,0 +1,472 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/symbolon-v1.schema.json",
+  "title": "Symbolon Universal Astrology Cards v1",
+  "description": "JSON Schema for Symbolon card interpretations integrating Vedic, Vodou, Arabic, KP, Sidereal, Hermetic, Rosicrucian, and African systems",
+  "type": "object",
+  "required": [
+    "meta",
+    "cards"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "version",
+        "created_at",
+        "author",
+        "encoding",
+        "systems"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "author": {
+          "type": "string"
+        },
+        "encoding": {
+          "type": "string",
+          "enum": [
+            "UTF-8"
+          ]
+        },
+        "systems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "cards": {
+      "type": "array",
+      "minItems": 78,
+      "maxItems": 78,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "slug",
+          "info",
+          "interpretations",
+          "lineage",
+          "timing",
+          "tags"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 78
+          },
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "info": {
+            "type": "object",
+            "required": [
+              "number",
+              "name",
+              "zodiac_signs",
+              "ruling_planets",
+              "element_combo",
+              "modality_combo",
+              "decans",
+              "nakshatra"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 78
+              },
+              "name": {
+                "type": "string"
+              },
+              "zodiac_signs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Aries",
+                    "Taurus",
+                    "Gemini",
+                    "Cancer",
+                    "Leo",
+                    "Virgo",
+                    "Libra",
+                    "Scorpio",
+                    "Sagittarius",
+                    "Capricorn",
+                    "Aquarius",
+                    "Pisces"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "ruling_planets": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Sun",
+                    "Moon",
+                    "Mercury",
+                    "Venus",
+                    "Mars",
+                    "Jupiter",
+                    "Saturn",
+                    "Uranus",
+                    "Neptune",
+                    "Pluto",
+                    "Rahu",
+                    "Ketu",
+                    "Chiron"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "element_combo": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Fire",
+                    "Earth",
+                    "Air",
+                    "Water"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "modality_combo": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Cardinal",
+                    "Fixed",
+                    "Mutable"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "decans": {
+                "type": "object",
+                "required": [
+                  "tropical",
+                  "sidereal_lahiri"
+                ],
+                "properties": {
+                  "tropical": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "range_deg",
+                        "ruler"
+                      ],
+                      "properties": {
+                        "range_deg": {
+                          "type": "string"
+                        },
+                        "ruler": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sidereal_lahiri": {
+                    "type": "array",
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "approx_range_deg",
+                        "ruler"
+                      ],
+                      "properties": {
+                        "approx_range_deg": {
+                          "type": "string"
+                        },
+                        "ruler": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "nakshatra": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "range_deg_sidereal",
+                    "ruler",
+                    "deity"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "range_deg_sidereal": {
+                      "type": "string"
+                    },
+                    "ruler": {
+                      "type": "string"
+                    },
+                    "deity": {
+                      "type": "string"
+                    },
+                    "pada_ranges": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "interpretations": {
+            "type": "object",
+            "required": [
+              "core_archetype",
+              "natal",
+              "shadow",
+              "growth",
+              "outcome",
+              "synastry",
+              "transit",
+              "affirmations",
+              "journals",
+              "related_cards",
+              "culture",
+              "applications"
+            ],
+            "properties": {
+              "core_archetype": {
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 1000
+              },
+              "natal": {
+                "type": "object",
+                "required": [
+                  "summary",
+                  "houses"
+                ],
+                "properties": {
+                  "summary": {
+                    "type": "string",
+                    "minLength": 150,
+                    "maxLength": 1500
+                  },
+                  "houses": {
+                    "type": "object",
+                    "required": [
+                      "h1_4",
+                      "h5_8",
+                      "h9_12"
+                    ],
+                    "properties": {
+                      "h1_4": {
+                        "type": "string"
+                      },
+                      "h5_8": {
+                        "type": "string"
+                      },
+                      "h9_12": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "shadow": {
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 1000
+              },
+              "growth": {
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 1000
+              },
+              "outcome": {
+                "type": "string",
+                "minLength": 75,
+                "maxLength": 800
+              },
+              "synastry": {
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 1000
+              },
+              "transit": {
+                "type": "string",
+                "minLength": 75,
+                "maxLength": 800
+              },
+              "affirmations": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 5,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "journals": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 5,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "related_cards": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 5,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "ref",
+                    "relation"
+                  ],
+                  "properties": {
+                    "ref": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 78
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "relation": {
+                      "type": "string",
+                      "enum": [
+                        "support",
+                        "challenge",
+                        "complement",
+                        "tension"
+                      ]
+                    }
+                  }
+                }
+              },
+              "culture": {
+                "type": "string",
+                "minLength": 50,
+                "maxLength": 500
+              },
+              "applications": {
+                "type": "object",
+                "required": [
+                  "career",
+                  "health",
+                  "creativity",
+                  "spirituality"
+                ],
+                "properties": {
+                  "career": {
+                    "type": "string"
+                  },
+                  "health": {
+                    "type": "string"
+                  },
+                  "creativity": {
+                    "type": "string"
+                  },
+                  "spirituality": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "lineage": {
+            "type": "object",
+            "required": [
+              "systems",
+              "cosmology_notes"
+            ],
+            "properties": {
+              "systems": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "cosmology_notes": {
+                "type": "string"
+              }
+            }
+          },
+          "timing": {
+            "type": "object",
+            "required": [
+              "kp",
+              "transit_window_weeks"
+            ],
+            "properties": {
+              "kp": {
+                "type": "object",
+                "required": [
+                  "event_significators",
+                  "cautions"
+                ],
+                "properties": {
+                  "event_significators": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "cautions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "transit_window_weeks": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "created_at": "2025-10-28T14:35:00Z",
+    "author": "The Last of Laplace",
+    "encoding": "UTF-8",
+    "systems": [
+      "KP",
+      "Sidereal (Lahiri)",
+      "Vedic",
+      "Hermetic",
+      "Rosicrucian",
+      "African/Vodou",
+      "Arabic"
+    ],
+    "notes": "All cards include decans (tropical+sidereal) and nakshatra context. Interpretations integrate Vodou, Vedic, Arabic, KP, Sidereal, Hermetic, Rosicrucian, and African cosmologies."
+  },
+  "cards": [
+    {
+      "id": 1,
+      "slug": "the-warrior",
+      "info": {
+        "number": 1,
+        "name": "The Warrior",
+        "zodiac_signs": [
+          "Aries",
+          "Aries"
+        ],
+        "ruling_planets": [
+          "Mars",
+          "Mars"
+        ],
+        "element_combo": [
+          "Fire",
+          "Fire"
+        ],
+        "modality_combo": [
+          "Cardinal",
+          "Cardinal"
+        ],
+        "decans": {
+          "tropical": [
+            {
+              "range_deg": "0-10",
+              "ruler": "Mars"
+            },
+            {
+              "range_deg": "10-20",
+              "ruler": "Sun"
+            },
+            {
+              "range_deg": "20-30",
+              "ruler": "Jupiter"
+            }
+          ],
+          "sidereal_lahiri": [
+            {
+              "approx_range_deg": "0-10",
+              "ruler": "Mars"
+            },
+            {
+              "approx_range_deg": "10-20",
+              "ruler": "Sun"
+            },
+            {
+              "approx_range_deg": "20-30",
+              "ruler": "Jupiter"
+            }
+          ]
+        },
+        "nakshatra": [
+          {
+            "name": "Ashwini",
+            "range_deg_sidereal": "0°00'-13°20' Aries",
+            "ruler": "Ketu",
+            "deity": "Ashvins (Divine Physicians)",
+            "pada_ranges": [
+              "0°00'-3°20'",
+              "3°20'-6°40'",
+              "6°40'-10°00'",
+              "10°00'-13°20'"
+            ]
+          },
+          {
+            "name": "Bharani",
+            "range_deg_sidereal": "13°20'-26°40' Aries",
+            "ruler": "Venus",
+            "deity": "Yama (God of Death/Dharma)",
+            "pada_ranges": [
+              "13°20'-16°40'",
+              "16°40'-20°00'",
+              "20°00'-23°20'",
+              "23°20'-26°40'"
+            ]
+          },
+          {
+            "name": "Krittika",
+            "range_deg_sidereal": "26°40' Aries - 10°00' Taurus",
+            "ruler": "Sun",
+            "deity": "Agni (Fire God)",
+            "pada_ranges": [
+              "26°40'-30°00' Aries",
+              "0°00'-3°20' Taurus",
+              "3°20'-6°40' Taurus",
+              "6°40'-10°00' Taurus"
+            ]
+          }
+        ]
+      },
+      "interpretations": {
+        "core_archetype": "The Warrior is the ignition spark—life-force concentrated into initiative, courage, boundaries, and decisive action. Psychologically it corresponds to ego formation, locomotor assertiveness, and protection of self/tribe under pressure, with a Jungian tone of Hero/Protector in its day-world expression and Berserker/Avenger in its shadow. It teaches that anger is compressed vitality requiring channel, not suppression, so that assertion becomes moral courage rather than reactivity. In sidereal doctrine Aries is prishthodaya (rising head-first), quick, lean, valiant; in Vodou, it resonates with Ogou's heated iron-will, ritualized through rhythm and steel; Hermetically, it is sulfur—active, combustive, the red work that begins all Great Works; Arabic temperamentally sanguine-choleric, quick to heat, born to commence. When upright, it cuts the first path where none existed.",
+        "natal": {
+          "summary": "Expect a pioneering temperament—self-starting, competitive, energized by obstacles and allergic to stagnation. The life path favors leadership, martial arts, entrepreneurship, emergency response, and causes that demand first moves. Self-development hinges on transforming impulse into disciplined valor and learning the somatic difference between boundary and attack. Shadow work focuses on temper modulation, head-first risk, and repair after ruptures. KP-wise, Mars as cuspal sub-lord of 1/10/6 tends to manifest initiation in career/health conflicts—watch sub-lord linkage for timing decisive breakthroughs.",
+          "houses": {
+            "h1_4": "In 1st house: raw charisma and athletic drive set the tone. In 2nd: assertive earning and speech that cuts. In 3rd: courageous communication and sibling rivalry dynamics. In 4th: fierce protection of home yet domestic volatility—cooling rituals advised.",
+            "h5_8": "In 5th: risk-taking romance/creative sport. In 6th: combative competence, litigation, and training discipline. In 7th: hot partnerships—learn to spar not scorch. In 8th: crisis surgeon energy and taboo-facing courage.",
+            "h9_12": "In 9th: militant philosophy or pilgrim-warrior. In 10th: executive decisiveness. In 11th: competitive networks. In 12th: invisible battles, hospitals, retreats—train anger into prayerful heat."
+          }
+        },
+        "shadow": "Unrefined, the Warrior becomes the quarrel-seeker—impatience, impulsive conflict, head injuries, and ruptured ties. Psychologically this is fight-dominant nervous system habit, shaped by early environments where safety equaled striking first. Daily life shows clipped tone, road rage, scorched bridges, and inflammation. Root causes include survival learning, praise for winning without repair, and somatic overdrive. Medical astrology flags fevers and inflammation. Trauma-informed work reframes activation as a signal to orient, ground, and choose, not to explode.",
+        "growth": "Concrete steps: adopt heat management—breath ratios 1:2 exhale, alternate-nostril pranayama, cold rinses post-training; schedule 'ethical battles' (sport, resistance training) to discharge charge; practice repair rituals within 24 hours of rupture. Therapeutics: somatic experiencing for fight-patterns; martial arts with bowing etiquette to ritualize heat into honor; KP timing—initiate when Mars links 3/6/10/11, avoid if connected to 8/12 with Saturn affliction. Questions: Where is anger protecting innocence? What boundary was crossed? What value merits courage today? Practices: Ogou offerings (iron, rum on earth), drumming for cadence before meetings; Hermetic red work—iron talisman consecrated on Tuesday hour of Mars; mantra 'Om Hraam Hreem Hraum Sah Mangalaya Namah' for calibrated action.",
+        "outcome": "Healing looks like calm readiness—moving first without haste, saying no without war, and protecting without punishment. Signs include fewer apologies needed, consistent training, and allies who trust your edge. The mature Warrior becomes a guardian—sword sheathed unless necessary, decisive when required, tender in victory. Gifts: courage, momentum, trailblazing leadership.",
+        "synastry": "Between two people, this card brings heat, chemistry, and frankness. Dynamics: fast attachment, direct conflict, quick repair if maturity present. Growth lies in rules of engagement (time-outs, body-based resets, post-conflict rituals). Compatibility rises with partners who respect autonomy and pace. Watch Mars-Mars squares for escalation; use co-regulation drills (synchronized breath before hard talks). Love becomes sparring as devotion—steel sharpening steel.",
+        "transit": "Activated by Mars transits to angles or natal Mars, expect initiation windows, combustible edges, and necessary confrontations. Lessons: act early, simplify, move your body daily. Best use: 6-8 week cycles per Mars sign stay. KP: event triggers when Mars sub-lord signifies 1/3/6/10/11 connected to transit. Protect head, cool liver, hydrate.",
+        "affirmations": [
+          "I channel heat into honorable action.",
+          "My boundaries are clear and kind.",
+          "I move first with calm strength.",
+          "I repair swiftly and lead wisely."
+        ],
+        "journals": [
+          "What fight is worthy of my life-force this month?",
+          "How does my body signal boundary vs. attack?",
+          "What training turns anger into skill?"
+        ],
+        "related_cards": [
+          {
+            "ref": 2,
+            "name": "The Builder",
+            "relation": "support"
+          },
+          {
+            "ref": 10,
+            "name": "The Strategist",
+            "relation": "support"
+          },
+          {
+            "ref": 6,
+            "name": "The Healer",
+            "relation": "support"
+          },
+          {
+            "ref": 8,
+            "name": "The Scorpion",
+            "relation": "challenge"
+          }
+        ],
+        "culture": "Vodou: Ogou Feray—the iron general who forges will and protects community. Vedic: Kartikeya/Skanda, commander of divine armies. Arabic-Islamicate: Mars as al-Mirrikh, red, cutting. Hermetic: sulfuric principle initiating the opus. All echo the sacred right to begin.",
+        "applications": {
+          "career": "Crisis responder, athlete, entrepreneur, military/law, startup operator. Thrive where first-mover advantage matters and stakes are clear.",
+          "health": "Manage heat: anti-inflammatory nutrition, breathwork, sparring with safety. Watch head, adrenals, blood pressure. Program deload weeks.",
+          "creativity": "Performance art, live pitching, slam poetry, street dance battles. Convert urgency into cadence.",
+          "spirituality": "Warrior ethics: courage in truth-telling; pilgrimage-by-doing; yogic yamas of non-harm through skillful strength; Ogou rites align will with duty."
+        }
+      },
+      "lineage": {
+        "systems": [
+          "Vodou",
+          "Vedic",
+          "Arabic",
+          "KP",
+          "Sidereal",
+          "Hermetic",
+          "Rosicrucian",
+          "African"
+        ],
+        "cosmology_notes": "Ogou heat tempered into oath; Mangal ethics; al-Mirrikh red force; Ashwini swift initiation."
+      },
+      "timing": {
+        "kp": {
+          "event_significators": [
+            "1",
+            "3",
+            "6",
+            "10",
+            "11"
+          ],
+          "cautions": [
+            "8",
+            "12"
+          ]
+        },
+        "transit_window_weeks": 6
+      },
+      "tags": [
+        "warrior",
+        "initiative",
+        "mars",
+        "fire",
+        "courage",
+        "boundaries"
+      ]
+    }
+  ]
+}
