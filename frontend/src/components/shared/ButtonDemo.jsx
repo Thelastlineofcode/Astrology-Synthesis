@@ -16,13 +16,13 @@ const ButtonDemo = () => {
   };
 
   const PlusIcon = () => (
-    <svg viewBox="0 0 20 20" fill="currentColor">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
     </svg>
   );
 
   const ArrowIcon = () => (
-    <svg viewBox="0 0 20 20" fill="currentColor">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
     </svg>
   );
@@ -131,8 +131,8 @@ const ButtonDemo = () => {
       <section className="demo-section">
         <h2>Accessibility Testing</h2>
         <div className="button-row">
-          <Button aria-label="Add new user" iconLeft={<PlusIcon />} onClick={handleClick}>
-            Add User (with aria-label)
+          <Button iconLeft={<PlusIcon />} onClick={handleClick}>
+            Add User
           </Button>
           <Button onClick={handleClick}>
             Keyboard Test (Tab + Enter/Space)
@@ -140,6 +140,9 @@ const ButtonDemo = () => {
         </div>
         <p className="accessibility-note">
           ⌨️ Test keyboard navigation: Use Tab to focus, Enter or Space to activate
+        </p>
+        <p className="accessibility-note">
+          ℹ️ Icons have aria-hidden="true" since the button text provides sufficient context
         </p>
       </section>
     </div>
