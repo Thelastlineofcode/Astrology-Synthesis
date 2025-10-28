@@ -156,6 +156,10 @@ class BehaviorPredictor:
         """Get behavioral indicators from a planet's position."""
         indicators = []
         
+        # Handle None planet data (e.g., missing ephemeris files)
+        if planet_data is None:
+            return indicators
+        
         sign = planet_data.get('sign')
         house = planet_data.get('house')
         
@@ -246,6 +250,10 @@ class BehaviorPredictor:
     def _get_planet_triggers(self, planet_name: str, planet_data: Dict) -> List[BehaviorTrigger]:
         """Get behavioral triggers associated with a planet."""
         triggers = []
+        
+        # Handle None planet data
+        if planet_data is None:
+            return triggers
         
         sign = planet_data.get('sign')
         degree = planet_data.get('degree', 0)

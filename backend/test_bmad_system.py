@@ -128,10 +128,12 @@ def run_basic_functionality_test():
         # Test basic model creation
         print("Testing basic model creation...")
         
+        from bmad.models.personality import IntensityLevel
+        
         trait = Trait(
             name="Test Trait",
             dimension=PersonalityDimension.EXTRAVERSION,
-            intensity=trait.intensity if hasattr(trait, 'intensity') else "HIGH",
+            intensity=IntensityLevel.HIGH,
             description="Test description",
             astrological_source={"test": "data"}
         )

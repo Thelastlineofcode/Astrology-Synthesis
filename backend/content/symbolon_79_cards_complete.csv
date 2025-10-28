@@ -1,0 +1,80 @@
+Card_ID,Card_Name,Sign1,Sign2,Planet1,Planet2,Element,Modality,Status
+1,The Warrior,Aries,Aries,Mars,Mars,Fire,Cardinal,FULLY_DETAILED
+2,The Builder,Taurus,Taurus,Venus,Venus,Earth,Fixed,FULLY_DETAILED
+3,The Messenger,Gemini,Gemini,Mercury,Mercury,Air,Mutable,TEMPLATE_READY
+4,The Nurturer,Cancer,Cancer,Moon,Moon,Water,Cardinal,TEMPLATE_READY
+5,The Sovereign,Leo,Leo,Sun,Sun,Fire,Fixed,TEMPLATE_READY
+6,The Healer,Virgo,Virgo,Mercury,Mercury,Earth,Mutable,TEMPLATE_READY
+7,The Diplomat,Libra,Libra,Venus,Venus,Air,Cardinal,TEMPLATE_READY
+8,The Alchemist,Scorpio,Scorpio,Mars/Pluto,Mars/Pluto,Water,Fixed,TEMPLATE_READY
+9,The Seeker,Sagittarius,Sagittarius,Jupiter,Jupiter,Fire,Mutable,TEMPLATE_READY
+10,The Architect,Capricorn,Capricorn,Saturn,Saturn,Earth,Cardinal,TEMPLATE_READY
+11,The Visionary,Aquarius,Aquarius,Saturn/Uranus,Saturn/Uranus,Air,Fixed,TEMPLATE_READY
+12,The Mystic,Pisces,Pisces,Jupiter/Neptune,Jupiter/Neptune,Water,Mutable,TEMPLATE_READY
+13,The Impulsive Lover,Aries,Taurus,Mars,Venus,Fire/Earth,Cardinal/Fixed,STRUCTURE_READY
+14,The Quick Thinker,Aries,Gemini,Mars,Mercury,Fire/Air,Cardinal/Mutable,STRUCTURE_READY
+15,The Protective Fighter,Aries,Cancer,Mars,Moon,Fire/Water,Cardinal/Cardinal,STRUCTURE_READY
+16,The Bold Leader,Aries,Leo,Mars,Sun,Fire/Fire,Cardinal/Fixed,STRUCTURE_READY
+17,The Disciplined Warrior,Aries,Virgo,Mars,Mercury,Fire/Earth,Cardinal/Mutable,STRUCTURE_READY
+18,The Fair Fighter,Aries,Libra,Mars,Venus,Fire/Air,Cardinal/Cardinal,STRUCTURE_READY
+19,The Passionate Transformer,Aries,Scorpio,Mars,Pluto,Fire/Water,Cardinal/Fixed,STRUCTURE_READY
+20,The Adventure Seeker,Aries,Sagittarius,Mars,Jupiter,Fire/Fire,Cardinal/Mutable,STRUCTURE_READY
+21,The Ambitious Pioneer,Aries,Capricorn,Mars,Saturn,Fire/Earth,Cardinal/Cardinal,STRUCTURE_READY
+22,The Revolutionary,Aries,Aquarius,Mars,Uranus,Fire/Air,Cardinal/Fixed,STRUCTURE_READY
+23,The Spiritual Warrior,Aries,Pisces,Mars,Neptune,Fire/Water,Cardinal/Mutable,STRUCTURE_READY
+24,The Sensual Communicator,Taurus,Gemini,Venus,Mercury,Earth/Air,Fixed/Mutable,STRUCTURE_READY
+25,The Nurturing Provider,Taurus,Cancer,Venus,Moon,Earth/Water,Fixed/Cardinal,STRUCTURE_READY
+26,The Loyal Companion,Taurus,Leo,Venus,Sun,Earth/Fire,Fixed/Fixed,STRUCTURE_READY
+27,The Practical Helper,Taurus,Virgo,Venus,Mercury,Earth/Earth,Fixed/Mutable,STRUCTURE_READY
+28,The Aesthetic Peacemaker,Taurus,Libra,Venus,Venus,Earth/Air,Fixed/Cardinal,STRUCTURE_READY
+29,The Sensual Depth,Taurus,Scorpio,Venus,Pluto,Earth/Water,Fixed/Fixed,STRUCTURE_READY
+30,The Abundant Seeker,Taurus,Sagittarius,Venus,Jupiter,Earth/Fire,Fixed/Mutable,STRUCTURE_READY
+31,The Master Builder,Taurus,Capricorn,Venus,Saturn,Earth/Earth,Fixed/Cardinal,STRUCTURE_READY
+32,The Progressive Traditionalist,Taurus,Aquarius,Venus,Uranus,Earth/Air,Fixed/Fixed,STRUCTURE_READY
+33,The Earth Mystic,Taurus,Pisces,Venus,Neptune,Earth/Water,Fixed/Mutable,STRUCTURE_READY
+34,The Emotional Communicator,Gemini,Cancer,Mercury,Moon,Air/Water,Mutable/Cardinal,STRUCTURE_READY
+35,The Creative Messenger,Gemini,Leo,Mercury,Sun,Air/Fire,Mutable/Fixed,STRUCTURE_READY
+36,The Analytical Mind,Gemini,Virgo,Mercury,Mercury,Air/Earth,Mutable/Mutable,STRUCTURE_READY
+37,The Diplomatic Thinker,Gemini,Libra,Mercury,Venus,Air/Air,Mutable/Cardinal,STRUCTURE_READY
+38,The Deep Investigator,Gemini,Scorpio,Mercury,Pluto,Air/Water,Mutable/Fixed,STRUCTURE_READY
+39,The Philosophical Wanderer,Gemini,Sagittarius,Mercury,Jupiter,Air/Fire,Mutable/Mutable,STRUCTURE_READY
+40,The Strategic Communicator,Gemini,Capricorn,Mercury,Saturn,Air/Earth,Mutable/Cardinal,STRUCTURE_READY
+41,The Innovative Networker,Gemini,Aquarius,Mercury,Uranus,Air/Air,Mutable/Fixed,STRUCTURE_READY
+42,The Intuitive Writer,Gemini,Pisces,Mercury,Neptune,Air/Water,Mutable/Mutable,STRUCTURE_READY
+43,The Radiant Caregiver,Cancer,Leo,Moon,Sun,Water/Fire,Cardinal/Fixed,STRUCTURE_READY
+44,The Devoted Servant,Cancer,Virgo,Moon,Mercury,Water/Earth,Cardinal/Mutable,STRUCTURE_READY
+45,The Harmonious Nurturer,Cancer,Libra,Moon,Venus,Water/Air,Cardinal/Cardinal,STRUCTURE_READY
+46,The Protective Transformer,Cancer,Scorpio,Moon,Pluto,Water/Water,Cardinal/Fixed,STRUCTURE_READY
+47,The Adventurous Caretaker,Cancer,Sagittarius,Moon,Jupiter,Water/Fire,Cardinal/Mutable,STRUCTURE_READY
+48,The Responsible Parent,Cancer,Capricorn,Moon,Saturn,Water/Earth,Cardinal/Cardinal,STRUCTURE_READY
+49,The Unconventional Nurturer,Cancer,Aquarius,Moon,Uranus,Water/Air,Cardinal/Fixed,STRUCTURE_READY
+50,The Compassionate Healer,Cancer,Pisces,Moon,Neptune,Water/Water,Cardinal/Mutable,STRUCTURE_READY
+51,The Regal Perfectionist,Leo,Virgo,Sun,Mercury,Fire/Earth,Fixed/Mutable,STRUCTURE_READY
+52,The Gracious Ruler,Leo,Libra,Sun,Venus,Fire/Air,Fixed/Cardinal,STRUCTURE_READY
+53,The Powerful Transformer,Leo,Scorpio,Sun,Pluto,Fire/Water,Fixed/Fixed,STRUCTURE_READY
+54,The Generous Explorer,Leo,Sagittarius,Sun,Jupiter,Fire/Fire,Fixed/Mutable,STRUCTURE_READY
+55,The Authoritative Leader,Leo,Capricorn,Sun,Saturn,Fire/Earth,Fixed/Cardinal,STRUCTURE_READY
+56,The Unique Creator,Leo,Aquarius,Sun,Uranus,Fire/Air,Fixed/Fixed,STRUCTURE_READY
+57,The Inspired Artist,Leo,Pisces,Sun,Neptune,Fire/Water,Fixed/Mutable,STRUCTURE_READY
+58,The Balanced Analyst,Virgo,Libra,Mercury,Venus,Earth/Air,Mutable/Cardinal,STRUCTURE_READY
+59,The Transformative Healer,Virgo,Scorpio,Mercury,Pluto,Earth/Water,Mutable/Fixed,STRUCTURE_READY
+60,The Wise Teacher,Virgo,Sagittarius,Mercury,Jupiter,Earth/Fire,Mutable/Mutable,STRUCTURE_READY
+61,The Efficient Organizer,Virgo,Capricorn,Mercury,Saturn,Earth/Earth,Mutable/Cardinal,STRUCTURE_READY
+62,The Scientific Reformer,Virgo,Aquarius,Mercury,Uranus,Earth/Air,Mutable/Fixed,STRUCTURE_READY
+63,The Compassionate Server,Virgo,Pisces,Mercury,Neptune,Earth/Water,Mutable/Mutable,STRUCTURE_READY
+64,The Intense Negotiator,Libra,Scorpio,Venus,Pluto,Air/Water,Cardinal/Fixed,STRUCTURE_READY
+65,The Philosophical Artist,Libra,Sagittarius,Venus,Jupiter,Air/Fire,Cardinal/Mutable,STRUCTURE_READY
+66,The Committed Partner,Libra,Capricorn,Venus,Saturn,Air/Earth,Cardinal/Cardinal,STRUCTURE_READY
+67,The Humanitarian Peacemaker,Libra,Aquarius,Venus,Uranus,Air/Air,Cardinal/Fixed,STRUCTURE_READY
+68,The Divine Lover,Libra,Pisces,Venus,Neptune,Air/Water,Cardinal/Mutable,STRUCTURE_READY
+69,The Depth Seeker,Scorpio,Sagittarius,Pluto,Jupiter,Water/Fire,Fixed/Mutable,STRUCTURE_READY
+70,The Strategic Powerhouse,Scorpio,Capricorn,Pluto,Saturn,Water/Earth,Fixed/Cardinal,STRUCTURE_READY
+71,The Revolutionary Transformer,Scorpio,Aquarius,Pluto,Uranus,Water/Air,Fixed/Fixed,STRUCTURE_READY
+72,The Mystical Shaman,Scorpio,Pisces,Pluto,Neptune,Water/Water,Fixed/Mutable,STRUCTURE_READY
+73,The Ambitious Traveler,Sagittarius,Capricorn,Jupiter,Saturn,Fire/Earth,Mutable/Cardinal,STRUCTURE_READY
+74,The Revolutionary Teacher,Sagittarius,Aquarius,Jupiter,Uranus,Fire/Air,Mutable/Fixed,STRUCTURE_READY
+75,The Transcendent Seeker,Sagittarius,Pisces,Jupiter,Neptune,Fire/Water,Mutable/Mutable,STRUCTURE_READY
+76,The Visionary Architect,Capricorn,Aquarius,Saturn,Uranus,Earth/Air,Cardinal/Fixed,STRUCTURE_READY
+77,The Spiritual Master,Capricorn,Pisces,Saturn,Neptune,Earth/Water,Cardinal/Mutable,STRUCTURE_READY
+78,The Universal Healer,Aquarius,Pisces,Uranus,Neptune,Air/Water,Fixed/Mutable,STRUCTURE_READY
+79,The Cosmos/Integration,All,All,All,All,All,All,MASTER_CARD

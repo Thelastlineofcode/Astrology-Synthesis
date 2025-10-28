@@ -1,6 +1,7 @@
 """
 BMAD Personality Analysis Service
 Analyzes astrological chart data to generate personality profiles and traits.
+Enhanced with Symbolon card archetypal analysis.
 """
 
 import uuid
@@ -18,11 +19,20 @@ class PersonalityAnalyzer:
     def __init__(self):
         self.trait_rules = self._initialize_trait_rules()
         self.pattern_rules = self._initialize_pattern_rules()
+        
+        # Initialize Symbolon analyzer if available
+        self.symbolon_analyzer = None
+        try:
+            from .symbolon_analyzer import SymbolonAnalyzer
+            self.symbolon_analyzer = SymbolonAnalyzer()
+        except ImportError:
+            print("Symbolon analyzer not available - continuing with basic analysis")
     
     def analyze_personality(self, chart_data: Dict, birth_data: Dict, 
                           profile_name: str = None) -> PersonalityProfile:
         """
         Generate a comprehensive personality profile from chart data.
+        Enhanced with Symbolon archetypal analysis.
         
         Args:
             chart_data: Calculated astrological chart data
@@ -38,14 +48,19 @@ class PersonalityAnalyzer:
         # Extract traits from chart data
         traits = self._extract_traits(chart_data)
         
+        # Add Symbolon archetypal insights if available
+        if self.symbolon_analyzer:
+            symbolon_traits = self._extract_symbolon_traits(chart_data, birth_data)
+            traits.extend(symbolon_traits)
+        
         # Identify behavioral patterns
         behavioral_patterns = self._identify_patterns(chart_data, traits)
         
         # Determine dominant personality dimensions
         dominant_dimensions = self._find_dominant_dimensions(traits)
         
-        # Generate summary
-        summary = self._generate_personality_summary(traits, behavioral_patterns)
+        # Generate summary (enhanced with Symbolon if available)
+        summary = self._generate_personality_summary(chart_data, traits, behavioral_patterns)
         
         return PersonalityProfile(
             profile_id=profile_id,
@@ -131,7 +146,8 @@ class PersonalityAnalyzer:
         """Analyze Sun sign for core personality traits."""
         traits = []
         
-        if not sun_data or 'sign' not in sun_data:
+        # Handle None or empty sun data
+        if not sun_data or sun_data is None or 'sign' not in sun_data:
             return traits
         
         sign = sun_data['sign']
@@ -161,7 +177,8 @@ class PersonalityAnalyzer:
         """Analyze Moon sign for emotional and instinctive traits."""
         traits = []
         
-        if not moon_data or 'sign' not in moon_data:
+        # Handle None or empty moon data
+        if not moon_data or moon_data is None or 'sign' not in moon_data:
             return traits
         
         sign = moon_data['sign']
@@ -253,6 +270,10 @@ class PersonalityAnalyzer:
         traits = []
         
         for planet_name, planet_data in planets_data.items():
+            # Handle None planet data
+            if planet_data is None:
+                continue
+                
             house = planet_data.get('house')
             if house:
                 house_key = f"{planet_name}_house_{house}"
@@ -509,3 +530,160 @@ class PersonalityAnalyzer:
         return {
             # Pattern identification rules would go here
         }
+    
+    def _extract_symbolon_traits(self, chart_data: Dict, birth_data: Dict) -> List[Trait]:
+        """Extract personality traits using Symbolon archetypal analysis."""
+        traits = []
+        
+        if not self.symbolon_analyzer:
+            return traits
+        
+        try:
+            # Get Symbolon reading
+            symbolon_reading = self.symbolon_analyzer.analyze_chart(chart_data, birth_data)
+            
+            # Extract personality insights from primary archetypes
+            insights = self.symbolon_analyzer.get_personality_insights(symbolon_reading.primary_archetypes)
+            
+            # Convert archetypal insights to traits
+            for archetype in symbolon_reading.primary_archetypes[:5]:  # Top 5 archetypes
+                trait = self._create_archetypal_trait(archetype, symbolon_reading.card_matches)
+                if trait:
+                    traits.append(trait)
+            
+            return traits
+            
+        except Exception as e:
+            print(f"Error extracting Symbolon traits: {e}")
+            return traits
+    
+    def _create_archetypal_trait(self, archetype, card_matches: Dict[int, float]) -> Optional[Trait]:
+        """Create a personality trait from a Symbolon archetype."""
+        match_score = card_matches.get(archetype.card_id, 0.0)
+        
+        if match_score < 0.1:  # Too weak to be meaningful
+            return None
+        
+        # Determine intensity based on match score
+        if match_score >= 0.7:
+            intensity = 5
+        elif match_score >= 0.5:
+            intensity = 4
+        elif match_score >= 0.3:
+            intensity = 3
+        elif match_score >= 0.2:
+            intensity = 2
+        else:
+            intensity = 1
+        
+        # Map archetype to personality dimension
+        dimension = self._map_archetype_to_dimension(archetype)
+        
+        # Create archetypal description
+        description = f"Embodies the {archetype.card_name} archetype, bringing {self._get_archetypal_qualities(archetype)}"
+        
+        return Trait(
+            name=f"Archetypal {archetype.card_name}",
+            dimension=dimension,
+            intensity=intensity,
+            description=description,
+            astrological_basis=[f"Symbolon Card: {archetype.card_name}"],
+            created_timestamp=datetime.now().isoformat()
+        )
+    
+    def _map_archetype_to_dimension(self, archetype) -> str:
+        """Map a Symbolon archetype to a personality dimension."""
+        # Mapping based on archetypal qualities
+        archetype_mappings = {
+            1: 'extraversion',     # The Warrior
+            2: 'conscientiousness', # The Builder
+            3: 'openness',         # The Messenger
+            4: 'empathy',          # The Nurturer
+            5: 'extraversion',     # The Sovereign
+            6: 'conscientiousness', # The Healer
+            7: 'agreeableness',    # The Diplomat
+            8: 'analytical_thinking', # The Alchemist
+            9: 'openness',         # The Seeker
+            10: 'independence',    # The Architect
+            11: 'independence',    # The Visionary
+            12: 'spiritual_orientation' # The Mystic
+        }
+        
+        # Default mapping for combination cards
+        if archetype.card_id not in archetype_mappings:
+            if archetype.is_pure_sign:
+                # Map based on primary sign characteristics
+                sign_mappings = {
+                    'Aries': 'extraversion',
+                    'Taurus': 'conscientiousness',
+                    'Gemini': 'openness',
+                    'Cancer': 'empathy',
+                    'Leo': 'extraversion',
+                    'Virgo': 'conscientiousness',
+                    'Libra': 'agreeableness',
+                    'Scorpio': 'analytical_thinking',
+                    'Sagittarius': 'openness',
+                    'Capricorn': 'independence',
+                    'Aquarius': 'independence',
+                    'Pisces': 'spiritual_orientation'
+                }
+                return sign_mappings.get(archetype.sign1, 'openness')
+            else:
+                return 'openness'  # Default for combination cards
+        
+        return archetype_mappings[archetype.card_id]
+    
+    def _get_archetypal_qualities(self, archetype) -> str:
+        """Get the key qualities associated with an archetype."""
+        quality_mappings = {
+            1: "courage, initiative, and pioneering spirit",
+            2: "stability, persistence, and practical wisdom",
+            3: "adaptability, communication skills, and intellectual curiosity",
+            4: "nurturing care, emotional sensitivity, and protective instincts",
+            5: "creative expression, confidence, and natural leadership",
+            6: "analytical precision, service orientation, and healing abilities",
+            7: "diplomatic balance, aesthetic appreciation, and harmony-seeking",
+            8: "transformative depth, investigative insight, and regenerative power",
+            9: "philosophical wisdom, adventurous spirit, and truth-seeking",
+            10: "ambitious drive, disciplined focus, and authoritative competence",
+            11: "innovative vision, humanitarian ideals, and unique perspective",
+            12: "compassionate understanding, intuitive wisdom, and spiritual connection"
+        }
+        
+        return quality_mappings.get(archetype.card_id, f"the essence of {archetype.card_name.lower()}")
+    
+    def _generate_personality_summary(self, chart_data: Dict, traits: List[Trait], 
+                                    behavioral_patterns: List[BehavioralPattern]) -> str:
+        """Generate enhanced personality summary including Symbolon insights."""
+        # Get basic summary
+        summary_parts = []
+        
+        # Trait summary
+        if traits:
+            trait_count = len(traits)
+            summary_parts.append(f"This personality profile reveals {trait_count} significant traits")
+            
+            # Highlight archetypal traits if present
+            archetypal_traits = [t for t in traits if "Archetypal" in t.name]
+            if archetypal_traits:
+                archetype_names = [t.name.replace("Archetypal ", "") for t in archetypal_traits]
+                summary_parts.append(f"The core archetypal patterns include: {', '.join(archetype_names)}")
+        
+        # Symbolon archetypal summary if available
+        if self.symbolon_analyzer:
+            try:
+                symbolon_reading = self.symbolon_analyzer.analyze_chart(chart_data, {})
+                if symbolon_reading.primary_archetypes:
+                    primary_archetype = symbolon_reading.primary_archetypes[0]
+                    summary_parts.append(f"The dominant life archetype is {primary_archetype.card_name}")
+            except:
+                pass  # Continue without Symbolon summary if there's an error
+        
+        # Behavioral patterns summary
+        if behavioral_patterns:
+            summary_parts.append(f"Key behavioral patterns include {len(behavioral_patterns)} distinct tendencies")
+        
+        if not summary_parts:
+            summary_parts.append("A unique personality profile with individual characteristics")
+        
+        return ". ".join(summary_parts) + "."
