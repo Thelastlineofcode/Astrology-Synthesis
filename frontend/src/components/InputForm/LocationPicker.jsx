@@ -1,119 +1,151 @@
-import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import React, { useState } from "react";
 import axios from "axios";
-import L from "leaflet";
-
-// Fix for default marker icons in Leaflet with React
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
-
-const MapUpdater = ({ center }) => {
-  const map = useMap();
-  useEffect(() => {
-    map.setView(center, map.getZoom());
-  }, [center, map]);
-  return null;
-};
+import "./LocationPicker.css";
 
 const LocationPicker = ({ onLocationSelect }) => {
   const [address, setAddress] = useState("");
-  const [mapCenter, setMapCenter] = useState([0, 0]);
-  const [marker, setMarker] = useState(null);
-  const [showMap, setShowMap] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleAddressSearch = async () => {
+    if (!address.trim()) {
+      setError("Please enter a location");
+      return;
+    }
+
     try {
+      setLoading(true);
       setError("");
+      setSuggestions([]);
+      
       // Using Nominatim for geocoding (OpenStreetMap)
       const response = await axios.get(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=5`,
+        {
+          headers: {
+            'User-Agent': 'AstrologyApp/1.0'
+          }
+        }
       );
 
       if (response.data && response.data.length > 0) {
-        const location = response.data[0];
-        const newLocation = [
-          parseFloat(location.lat),
-          parseFloat(location.lon),
-        ];
-        setMapCenter(newLocation);
-        setMarker(newLocation);
-        setShowMap(true);
-        onLocationSelect({
-          latitude: newLocation[0],
-          longitude: newLocation[1],
-          address: location.display_name,
-        });
+        setSuggestions(response.data);
+        setError("");
       } else {
-        setError("Location not found");
+        setError("Location not found. Please try a different search term.");
+        setSuggestions([]);
       }
     } catch (error) {
       console.error("Geocoding error:", error);
-      setError("Error searching for location");
+      setError("Error searching for location. Please try again.");
+      setSuggestions([]);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleMapClick = (e) => {
-    const newLocation = [e.latlng.lat, e.latlng.lng];
-    setMarker(newLocation);
-    onLocationSelect({
-      latitude: newLocation[0],
-      longitude: newLocation[1],
+  const handleSelectLocation = (location) => {
+    const lat = parseFloat(location.lat);
+    const lon = parseFloat(location.lon);
+    
+    setSelectedLocation({
+      latitude: lat,
+      longitude: lon,
+      address: location.display_name
     });
 
-    // Reverse geocoding to get address
-    axios
-      .get(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${newLocation[0]}&lon=${newLocation[1]}`
-      )
-      .then((response) => {
-        if (response.data && response.data.display_name) {
-          onLocationSelect({
-            latitude: newLocation[0],
-            longitude: newLocation[1],
-            address: response.data.display_name,
-          });
-        }
-      })
-      .catch((error) => console.error("Reverse geocoding error:", error));
+    onLocationSelect({
+      latitude: lat,
+      longitude: lon,
+      address: location.display_name
+    });
+
+    setSuggestions([]);
+  };
+
+  const handleClear = () => {
+    setAddress("");
+    setSuggestions([]);
+    setSelectedLocation(null);
+    setError("");
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddressSearch();
+    }
   };
 
   return (
     <div className="location-picker">
-      <div className="address-input">
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="Enter an address"
-          className="form-control"
-        />
-        <button onClick={handleAddressSearch} className="btn btn-primary">
-          Search
-        </button>
+      <div className="location-search-form">
+        <div className="search-input-group">
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Enter city, address, or landmark (e.g., New York, USA)"
+            className="location-input"
+            disabled={loading}
+          />
+          <button 
+            type="button"
+            onClick={handleAddressSearch}
+            className="search-button"
+            disabled={loading}
+          >
+            {loading ? "Searching..." : "🔍 Search"}
+          </button>
+          {address && (
+            <button 
+              type="button" 
+              onClick={handleClear}
+              className="clear-button"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className="location-error">{error}</div>}
 
-      <div className="map-container">
-        <MapContainer
-          center={mapCenter}
-          zoom={2}
-          style={{ height: "300px", width: "100%" }}
-          onClick={handleMapClick}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <MapUpdater center={mapCenter} />
-          {marker && <Marker position={marker} />}
-        </MapContainer>
+      {selectedLocation && (
+        <div className="selected-location">
+          <div className="location-badge">✓ Selected Location</div>
+          <div className="location-details">
+            <div className="location-name">{selectedLocation.address}</div>
+            <div className="location-coords">
+              📍 {selectedLocation.latitude.toFixed(6)}, {selectedLocation.longitude.toFixed(6)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {suggestions.length > 0 && (
+        <div className="location-suggestions">
+          <div className="suggestions-header">Select a location:</div>
+          {suggestions.map((location, index) => (
+            <div
+              key={index}
+              className="suggestion-item"
+              onClick={() => handleSelectLocation(location)}
+            >
+              <div className="suggestion-name">{location.display_name}</div>
+              <div className="suggestion-coords">
+                {parseFloat(location.lat).toFixed(4)}, {parseFloat(location.lon).toFixed(4)}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="location-help">
+        💡 <strong>Tip:</strong> Search for your city name and country for best results
       </div>
     </div>
   );

@@ -66,11 +66,11 @@ function App() {
               <div className="chart-info">
                 <h2>Chart Information</h2>
                 <div className="info-grid">
-                  <div><strong>Zodiac Type:</strong> {chartData.metadata.zodiac_type}</div>
-                  {chartData.metadata.ayanamsa && (
+                  <div><strong>Zodiac Type:</strong> {chartData.metadata?.zodiac_type || 'tropical'}</div>
+                  {chartData.metadata?.ayanamsa && (
                     <div><strong>Ayanamsa:</strong> {chartData.metadata.ayanamsa}</div>
                   )}
-                  <div><strong>House System:</strong> {chartData.metadata.house_system}</div>
+                  <div><strong>House System:</strong> {chartData.metadata?.house_system || 'P'}</div>
                 </div>
               </div>
 
