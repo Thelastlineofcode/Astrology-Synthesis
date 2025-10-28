@@ -1,0 +1,48 @@
+/* Theme helpers and accessibility-focused styles */
+/* Visible focus rings and high-contrast outlines */
+:root, [data-theme="dark"] {
+  --focus-ring: 3px solid rgba(178,150,202,0.18);
+}
+
+:where(:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button.theme-toggle {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--space-2);
+  border-radius: 8px;
+}
+
+/* Small helpers for accessible contrast changes */
+.interactive-strong {
+  background-color: var(--color-primary);
+  color: var(--color-neutral-50);
+}
+
+/* Ensure focus outlines are visible in both themes */
+.focus-ring {
+  box-shadow: 0 0 0 3px rgba(162,133,181,0.14);
+}
+
+/* Button utilities replacing hardcoded Tailwind arbitrary colors */
+.btn-foreground {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.btn-foreground:hover {
+  background: color-mix(in srgb, var(--bg-secondary) 85%, var(--color-neutral-700) 15%);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid rgba(45,31,66,0.06);
+}
+.btn-outline:hover {
+  background: color-mix(in srgb, var(--bg-primary) 90%, var(--color-neutral-700) 10%);
+}
