@@ -24,17 +24,26 @@ def create_app(config_name='default'):
         print("https://www.astro.com/ftp/swisseph/ephe/")
     swe.set_ephe_path(ephe_path)
     
+    # Register main API routes
     from api.routes import api_bp
     app.register_blueprint(api_bp, url_prefix='/api')
+    
+    # Register BMAD API routes
+    from bmad.api.routes import bmad_bp
+    app.register_blueprint(bmad_bp, url_prefix='/api/bmad')
     
     @app.route('/')
     def index():
         return {
-            'message': 'Astrology Chart API',
+            'message': 'Astrology Chart API with BMAD',
             'version': '1.0.0',
             'endpoints': {
                 'calculate_chart': '/api/chart',
-                'health': '/api/health'
+                'health': '/api/health',
+                'bmad_personality': '/api/bmad/personality/analyze',
+                'bmad_behavior': '/api/bmad/behavior/profile',
+                'bmad_full_analysis': '/api/bmad/combined/full-analysis',
+                'bmad_info': '/api/bmad/info/endpoints'
             }
         }
     
