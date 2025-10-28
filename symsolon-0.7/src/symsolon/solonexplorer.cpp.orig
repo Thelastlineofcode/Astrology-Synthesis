@@ -1,0 +1,83 @@
+/***************************************************************************
+ *   SymSolon - a free astrology software                                  *
+ *   Copyright (C) 2007 by Bela MIHALIK                                    *
+ *   bela.mihalik@gmail.com                                                *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 3 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ ***************************************************************************/
+
+
+#include "solonexplorer.h"
+
+#include <QtGui/QVBoxLayout>
+
+
+SolonExplorerClass::SolonExplorerClass(QWidget *parent) : StudioWindowClass(parent)
+{
+    UI_TO_WORKSPACE( new Ui::SolonExplorerForm() );
+    set_user_info("SolonExplorerClass");
+    
+    // add a scope object to the middle of this window
+    scope = new ScopeWidgetClass();
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addWidget(scope);
+    layout->setMargin(0);
+    layout->setSpacing(0);
+    m_ui->frame->setLayout( layout );
+    scope->show();
+    
+    scope->setStyle( SCOPE_SYMBOLON_EXPLORE );
+    scope->repaint();
+}
+
+
+SolonExplorerClass::~SolonExplorerClass()
+{
+}
+
+
+void
+SolonExplorerClass::set_card( int symNum )
+{
+    if ( symNum<1 && symNum>=SYMBOLON_MAX ) return;
+    
+    scope->setAnalysedSymbolon( symNum );
+    scope->repaint();
+    
+    QRegExp doubleEnter("\n\n");
+    QRegExp doubleUp("\\^\\^");
+    
+    QString general = Symbol->symbolonInfo[symNum].description.general;
+    general = general.replace( doubleEnter, "^^" ).remove('\n').replace(doubleUp,"\n");
+    
+    QString problem = Symbol->symbolonInfo[symNum].description.problem.remove('\n');
+    QString way     = Symbol->symbolonInfo[symNum].description.way.remove('\n');
+    QString outcome = Symbol->symbolonInfo[symNum].description.outcome.remove('\n');
+    
+    m_ui->text->clear();
+    m_ui->text->append( general );
+    
+    m_ui->text->append( "\nProblem:" );
+    m_ui->text->append( problem );
+    
+    m_ui->text->append( "\nWay:" );
+    m_ui->text->append( way );
+    
+    m_ui->text->append( "\nOutcome:" );
+    m_ui->text->append( outcome );
+    
+    m_ui->text->moveCursor( QTextCursor::Start );
+}

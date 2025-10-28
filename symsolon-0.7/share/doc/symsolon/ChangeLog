@@ -1,0 +1,56 @@
+
+Version 0.7 - 2009.02.20
+
+- Correct Engish symbolon card descriptions attached now! (Thanks to R.)
+- Printing support
+- Symbolon Explorer (click with mouse on symbolon card)
+- Alcabitius house system fix
+
+Version 0.6 - 2009.01.18
+
+- synastry symbolons and point calculation
+- advancement to support more languages
+- Alcabitius house system
+- fix: displaying the path of the moon in transits before 1900 is corrcet now
+
+Version 0.5 - 2007.12.19
+- Ubuntu packaged version
+
+Version 0.4 - 2007.11.29
+- separate packages released: a basic software, and extra data parts
+   NORMAL: ephemerids 1000...2100 + larger cities
+   EXTRA: ephemerids -4000...4000 + 2.6 million cities
+- faster city serach
+- automatic Time-Zone/DST handling (Time-Zones according to countries, and the nearest city)
+- qulaity tables
+- symbolon card view in classic horoscope window
+- transit calculation
+- life circle calculation
+- two new symbolon table (planets in houses and in signs)
+- magnify/move function (mouse track and right-drag)
+- ayanamsa
+- rectangular horoscope view with equal house system
+- bugfixes
+
+Version 0.3 - 2007.09.19
+- house systems
+- manual time stepping in astrology chart
+- swiss ephem integration
+- classical synastry support
+- aspect matrix table
+- fictional/hypotetical planets calculation
+- hungarian translation corrections
+
+Version 0.2 - 2007.08.31
+- options are working
+- city search is working
+- possible to set timezone
+- tooltips for symbolon cards
+- minor graphical enhancements
+
+Version 0.1 - 2007.06.25
+- calculate planet positions with 2 minute degrees
+- placidus house system
+- using planet and aspect orbits defined in the astrological book of Peter Orban; now only shows planets that used by the symbolon system (the software calculated the position of other planets also, but it will be olny accesabble in the next releases)
+- create classic circle horoscope, and symbolon tables also
+- english and hungarian user interface (if you delete the symsolon_hu.qm file then the user interface become english)

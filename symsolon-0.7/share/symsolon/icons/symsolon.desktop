@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Symsolon
+Comment=Symsolon Free Astrology Software
+Comment[hu_HU]=Symsolon Ingyenes Asztrológiai Program
+TryExec=symsolon
+Icon=symsolon
+Category=Application;Science;Astronomy

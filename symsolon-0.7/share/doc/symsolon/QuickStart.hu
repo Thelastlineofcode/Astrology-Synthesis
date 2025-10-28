@@ -1,0 +1,39 @@
+SymSolon Asztrológiai Szoftver
+	
+A SymSolon asztrológiai program horoszkóp elemzését SYMBOLON kártyákkal segíti.
+Jelenleg a 0.4-es verzió érhető el.
+
+*** Hogyan használható a 0.4 verzó? (Windows felhasználóknak)
+
+1. Töltsd le es indisd el a symsolon-win32-0.4.exe -et!
+2. Indisd el a programot.
+3. A "Fájl" menüböl válaszd az "Új" menüpontot
+4. A megjelenő ablajban töltsd ki a következő rublikákat:
+  - név
+  - nem
+  - születési hely (varos kereses funkcio hasznalata ajanlott)
+  - születés dátuma
+  - születés időpontja
+  - aztan nyomd le a "Beallit>>" gombot
+5. Mentsd el az adatokat ha akarod
+6. A "Nézet" menüből válaszd ki a "Klasszikus horoszkóp" pontot, és a megjelenő ablakban ellenőrizd, hogy jól számolja-e a horoszkópot a rendszer (persze csak akkor tudod ellenőrizni, ha már ismered a horoszkópot... de sajnos ennél a 0.1 verziónál még ajánlatos visszaellenőrizni a kapott képletet)
+7. A "Nézet" menüpontban válaszd a "Symbolon tába" pontot. Ekkor megjelenik az első tábla
+8. A kirakási metódusok között az symbolon tábla ablak fenti részében lehet válogatni. Lehet ascendens, MC, Nap befolyást nézni, és bolygóhelyzetet analizálni. Hogy épp melyik bolygót analizálja a rendszer azt szintén felül a metódus doboz mellett lehet állítani.
+
+Sok sikert! - érdemes az ablakot maxra kinyitni, mert a kártyanevek helyenként még elég picik. Majd fejlődik.
+
+*** Linux felhasználók le tudják fordítani a programot forrásból
+QT rendszert használtam, tehát a fordítás menete:
+
+# qmake
+# make
+# cd bin
+# ./symsolon
+
+
+Ha valami gond van írj nyugodtan e-mail nekem:
+(vagy használd a sourceforge.net hibabejelentő rendszerét)
+
+Mihalik Béla
+<bela.mihalik@gmail.com>
+

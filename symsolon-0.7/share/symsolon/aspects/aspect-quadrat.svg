@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/data/world/proj/Kproj/symsolon/share/symsolon/aspects"
+   sodipodi:docname="planet-ceres.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.1007245"
+     inkscape:cx="26.025284"
+     inkscape:cy="26.561246"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="626"
+     inkscape:window-x="10"
+     inkscape:window-y="73" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(1.3406656e-2,0,0,1.3406656e-2,-199.70084,-24.215916)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1339">
+      <desc
+         id="desc1341">Drawing</desc>
+      <g
+         id="g1343"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1345"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1347"
+             d="M 16230,4260 L 15254,4260 L 15254,4110 L 15254,3960 L 16230,3960 L 16230,4110 L 16230,4260 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1349"
+             d="M 15254,4110 L 15254,4260 L 15228,4258 L 15203,4251 L 15179,4240 L 15158,4225 L 15139,4206 L 15124,4185 L 15113,4161 L 15106,4136 L 15104,4110 L 15104,4110 L 15254,4110 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1351"
+             d="M 15104,4110 L 15104,2158 L 15254,2158 L 15404,2158 L 15404,4110 L 15254,4110 L 15104,4110 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1353"
+             d="M 15254,2158 L 15104,2158 L 15106,2132 L 15113,2107 L 15124,2083 L 15139,2062 L 15158,2043 L 15179,2028 L 15203,2017 L 15228,2010 L 15254,2008 L 15254,2008 L 15254,2158 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1355"
+             d="M 15254,2008 L 17206,2008 L 17206,2158 L 17206,2308 L 15254,2308 L 15254,2158 L 15254,2008 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1357"
+             d="M 17206,2158 L 17206,2008 L 17232,2010 L 17257,2017 L 17281,2028 L 17302,2043 L 17321,2062 L 17336,2083 L 17347,2107 L 17354,2132 L 17356,2158 L 17356,2158 L 17206,2158 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1359"
+             d="M 17356,2158 L 17356,4110 L 17206,4110 L 17056,4110 L 17056,2158 L 17206,2158 L 17356,2158 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1361"
+             d="M 17206,4110 L 17356,4110 L 17354,4136 L 17347,4161 L 17336,4185 L 17321,4206 L 17302,4225 L 17281,4240 L 17257,4251 L 17232,4258 L 17206,4260 L 17206,4260 L 17206,4110 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1363"
+             d="M 17206,4260 L 16230,4260 L 16230,4110 L 16230,3960 L 17206,3960 L 17206,4110 L 17206,4260 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1365"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

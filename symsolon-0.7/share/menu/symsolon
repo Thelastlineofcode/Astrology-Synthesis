@@ -1,0 +1,7 @@
+?package(symsolon):\
+  needs="x11"\
+  section="Apps/Games"\
+  title="SymSolon"\
+  longtitle="SymSolon Free Astrology Software"\
+  command="/usr/bin/symsolon"\
+  icon="/usr/share/pixmaps/symsolon.xpm"

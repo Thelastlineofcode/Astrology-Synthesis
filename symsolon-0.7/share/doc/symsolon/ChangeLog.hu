@@ -1,0 +1,55 @@
+
+Verzio 0.7 - 2009.02.20
+
+- Korrekt angol kartya leirasok (Koszonet R-nek)
+- Nyomtatasi funkcio
+- Symbolon Explorer (klikk egerrel a kartyara)
+- Alcabitius hazrendszer megjelenesi hibaja javitva
+
+Verzio 0.6 - 2009.01.18:
+- Szinasztria symbolon es pont kalkulacio
+- nemi elorelepes tobb nyelv tamogatasara
+- Alcabitius hazrendszer
+- javitas: tranzitkereses uzemmodban a holpalyat jol jeleniti meg 1900-as evek
+elott is
+
+Verzio 0.5 - 2007.12.19.
+- Ubuntu csomag kialakitasa
+
+Verzio 0.4 - 2007.11.29
+- csomag szetvalasztasa prgramta es estra adatokra
+   NORMAL: efemeridak 1900->2100 + nagyobb varosok
+   EXTRA: efemeridak -4000->+4000 + 2.6 millio varos
+- gyorsitott varoskereses
+- idozona/nyari idoszamitas tablazat kezelese (idozona orszagok szerint, azon belul legkozelebbi varos szerint)
+- minosegtablak
+- klasszikus nezetben is az oldalso ablakban megjelenithetok planetekra vonatkozo symbolon kartyak
+- tranzit-szamitas
+- eletkor-szamitas
+- ket uj symbolon tabla (planetak hazakban es planetak jegyekben)
+- nagyitas/mozgatas funkcio
+- allithato ayanamsa
+- hibajavitasok
+
+Verzio 0.3 - 2007.09.19
+- haz rendszerek
+- az ido kezi leptetesenek lehetosege a kalsszikus horoszkopnal
+- svajci-efemerida hasznalat lehetosege
+- klasszikus syinasztria abra kesyitesenek lehetosege
+- fenyszog-matrix tablazat keszitese
+- fantayiabeli/hipotetikus planetak szamitasa
+- magyar forditas korrekciok
+
+Verzio 0.2 - 2007.08.31
+- opciok mukodenek, elmenthetok
+- varos adatbazis mellekelve (hosszusagi es szalessegi fokokat keres)
+- lehet idozonat allitani (ezt jelenleg mindig kezzel kell)
+- felugro magyarazatok jonnek a symbolon kertyakhoz, illetbe a bolygokhoz info
+- kissebb grafikai atalakitasok
+
+Verzio 0.1 - 2007.06.25
+- planéták számítása 2 percfok pontossággal történik
+- placidus házrendszer számítása
+- Peter Orban "Asztológia tankönyve" c. könyvében megadott bolygó és aspektus orbiszok vannak beállítva, illetve csak a symbolon rendszer által használt planéták vannak megjelenítve (a program számolja a többi bolygó helyzetét is - késöbbi verziókban elérhető lesz)
+- rajzol klasszikus kör horoszkópot és symbolon táblákat
+- angol / magyar vezérlő felülete van (angol ha kitörlöd a symsolon_hu.qm fájlt)

@@ -1,0 +1,17 @@
+Source: symsolon
+Section: games
+Priority: optional
+Maintainer: Bela MIHALIK <bela.mihalik@gmail.com>
+Standards-Version: 3.7.2
+
+Package: symsolon
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Free Astrology Software
+  Astrology software inspired by the SYMBOLON deck.
+  This software calculates the planet positions and make
+  symbolon card tables according to the calculated
+  constellation. It can draw the classical circular
+  horoscope also.
+  .
+  Homepage: http://jurtaplanetarium.hu/symsolon

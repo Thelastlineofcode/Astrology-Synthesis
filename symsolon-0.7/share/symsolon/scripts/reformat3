@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# temporary script
+# split symsolon german card-descripton file into pieces
+
+filex="symbolon_de.txt"
+outfile="@0"
+
+while read line
+do
+	line=`echo $line |tr -d '\n' |tr -d '\r'`
+	startchar=`echo $line |cut -c 1`
+	
+	if [ "$startchar" = "@" ];
+	then
+		outfile="proc/$line"
+		echo $outfile
+	fi
+	
+	echo $line >>$outfile
+	
+done < $filex
+

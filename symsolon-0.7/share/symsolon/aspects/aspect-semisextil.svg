@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/data/world/proj/Kproj/symsolon/share/symsolon/aspects"
+   sodipodi:docname="planet-ceres.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.0170015"
+     inkscape:cx="0.79131245"
+     inkscape:cy="17.556514"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="626"
+     inkscape:window-x="10"
+     inkscape:window-y="73" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(9.4023725e-3,0,0,9.4023725e-3,-52.133849,-46.978777)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1531">
+      <desc
+         id="desc1533">Drawing</desc>
+      <g
+         id="g1535"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1537"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1539"
+             d="M 5889,7437 L 9063,7437 L 9063,7737 L 5889,7737 L 5889,7437 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1541"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(9.4023725e-3,0,0,9.4023725e-3,-52.133849,-46.978777)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1543">
+      <desc
+         id="desc1545">Drawing</desc>
+      <g
+         id="g1547"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1549"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1551"
+             d="M 6271,6100 L 7652,7481 L 7440,7693 L 6059,6312 L 6271,6100 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1553"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(9.4023725e-3,0,0,9.4023725e-3,-52.133849,-46.978777)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1555">
+      <desc
+         id="desc1557">Drawing</desc>
+      <g
+         id="g1559"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1561"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1563"
+             d="M 8940,6312 L 7559,7693 L 7347,7481 L 8728,6100 L 8940,6312 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1565"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

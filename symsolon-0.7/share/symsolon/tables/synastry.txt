@@ -1,0 +1,163 @@
+
+
+; MySign + YourSign = point
+
+
+Aries + Aries = 3
+Aries + Taurus = 5
+Aries + Gemini = 4
+Aries + Cancer = 2
+Aries + Leo = 3
+Aries + Virgo = 3.5
+Aries + Libra = 3
+Aries + Scorpion = 1.5
+Aries + Sagittarius = 2.5
+Aries + Capricorn = 2.5
+Aries + Aquarius = 2.5
+Aries + Pisces = 2
+
+
+Taurus + Aries = 5
+Taurus + Taurus = 3
+Taurus + Gemini = 4
+Taurus + Cancer = 4
+Taurus + Leo = 5
+Taurus + Virgo = 4
+Taurus + Libra = 4.5
+Taurus + Scorpion = 3
+Taurus + Sagittarius = 4
+Taurus + Capricorn = 3
+Taurus + Aquarius = 2
+Taurus + Pisces = 3.5
+
+
+Gemini + Aries = 4
+Gemini + Taurus = 4.5
+Gemini + Gemini = 6
+Gemini + Cancer = 4
+Gemini + Leo = 4
+Gemini + Virgo = 4.5
+Gemini + Libra = 5
+Gemini + Scorpion = 4
+Gemini + Sagittarius = 3
+Gemini + Capricorn = 4
+Gemini + Aquarius = 3.5
+Gemini + Pisces = 5
+
+Cancer + Aries = 2
+Cancer + Taurus = 4
+Cancer + Gemini = 4
+Cancer + Cancer = 2.5
+Cancer + Leo = 5.5
+Cancer + Virgo = 4.5
+Cancer + Libra = 5
+Cancer + Scorpion = 1.5
+Cancer + Sagittarius = 3.5
+Cancer + Capricorn = 1.5
+Cancer + Aquarius = 2
+Cancer + Pisces = 5
+
+Leo + Aries = 3
+Leo + Taurus = 5
+Leo + Gemini = 4
+Leo + Cancer = 5.5
+Leo + Leo = 3
+Leo + Virgo = 3.5
+Leo + Libra = 6
+Leo + Scorpion = 2
+Leo + Sagittarius = 4.5
+Leo + Capricorn = 3.5
+Leo + Aquarius = 1
+Leo + Pisces = 3.5
+
+Virgo + Aries = 3.5
+Virgo + Taurus = 4
+Virgo + Gemini = 4.5
+Virgo + Cancer = 4.5
+Virgo + Leo = 3.5
+Virgo + Virgo = 5.5
+Virgo + Libra = 5.5
+Virgo + Scorpion = 3.5
+Virgo + Sagittarius = 4.5
+Virgo + Capricorn = 5.5
+Virgo + Aquarius = 2.5
+Virgo + Pisces = 5.5
+
+Libra + Aries = 3
+Libra + Taurus = 4.5
+Libra + Gemini = 5
+Libra + Cancer = 5
+Libra + Leo = 6
+Libra + Virgo = 5.5
+Libra + Libra = 6
+Libra + Scorpion = 3.5
+Libra + Sagittarius = 5.5
+Libra + Capricorn = 5.5
+Libra + Aquarius = 3.5
+Libra + Pisces = 5
+
+Scorpion + Aries = 1.5
+Scorpion + Taurus = 3
+Scorpion + Gemini = 4
+Scorpion + Cancer = 1.5
+Scorpion + Leo = 2
+Scorpion + Virgo = 3.5
+Scorpion + Libra = 3.5
+Scorpion + Scorpion = 2
+Scorpion + Sagittarius = 2.5
+Scorpion + Capricorn = 3
+Scorpion + Aquarius = 1
+Scorpion + Pisces = 4
+
+Sagittarius + Aries = 2.5
+Sagittarius + Taurus = 4
+Sagittarius + Gemini = 3
+Sagittarius + Cancer = 3.5
+Sagittarius + Leo = 4.5
+Sagittarius + Virgo = 4.5
+Sagittarius + Libra = 5.5
+Sagittarius + Scorpion = 2.5
+Sagittarius + Sagittarius = 3
+Sagittarius + Capricorn = 4.5
+Sagittarius + Aquarius = 3
+Sagittarius + Pisces = 4
+
+Capricorn + Aries = 2.5
+Capricorn + Taurus = 3
+Capricorn + Gemini = 4
+Capricorn + Cancer = 1.5
+Capricorn + Leo = 3.5
+Capricorn + Virgo = 5.5
+Capricorn + Libra = 5.5
+Capricorn + Scorpion = 3
+Capricorn + Sagittarius = 4.5
+Capricorn + Capricorn = 5
+Capricorn + Aquarius = 2
+Capricorn + Pisces = 3
+
+Aquarius + Aries = 2.5
+Aquarius + Taurus = 2
+Aquarius + Gemini = 3.5
+Aquarius + Cancer = 2
+Aquarius + Leo = 1
+Aquarius + Virgo = 2.5
+Aquarius + Libra = 3.5
+Aquarius + Scorpion = 1
+Aquarius + Sagittarius = 3
+Aquarius + Capricorn = 2
+Aquarius + Aquarius = 3
+Aquarius + Pisces = 3.5
+
+Pisces + Aries = 2
+Pisces + Taurus = 3.5
+Pisces + Gemini = 5
+Pisces + Cancer = 5
+Pisces + Leo = 3.5
+Pisces + Virgo = 5.5
+Pisces + Libra = 5
+Pisces + Scorpion = 4
+Pisces + Sagittarius = 4
+Pisces + Capricorn = 3
+Pisces + Aquarius = 3.5
+Pisces + Pisces = 2.5
+

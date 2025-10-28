@@ -1,0 +1,39 @@
+SymSolon Asztrology Software
+
+The SymSolon Software helps to analyze horoscopes wiyh SYMBOLON cards.
+The current release is version 0.4
+
+*** How can i use SymSolon Version a 0.4 ? (instruction for Windows users)
+
+1. Dowload and run symsolon-win32-0.4.exe!
+2. Start the application
+4. From the "File" menu choose "New" 
+5. Fill the following empty lines:
+  - name
+  - sex
+  - find the nearest city to bitrh place
+  - birth date
+  - birth time
+  - Push "Set>>" button
+6. Save your data if you would like (with "Save" button)
+7. From the "View" menu choose "Classic Scope", and you can verify your horoscope in the appearing window
+8. From the "View" menu choose "Symbolon Table". Then you can see the first symbolon table.
+9. You can choose between the different drawing methods with the pulldown box at the top of this window. If you choose "Planet Ananlysis" or "Planet Aspects" then you can select between the analised planets. Otherwise the planet pulldown box is disabled.
+
+Good luck! - it is proposed to open your window to full size, because the card names somewhere very small. Later i will fix this problem.
+
+*** Linux users can compile it from source code
+This project made with QT development libraries
+you can compile it with the following commands:
+
+# qmake
+# make
+# cd bin
+# ./symsolon
+
+if you have any problem, send e-mail to me, and i will answer as soon as i can
+(or use the sourceforge bug report system)
+
+Bela MIHAIK
+<bela.mihalik@gmail.com>
+

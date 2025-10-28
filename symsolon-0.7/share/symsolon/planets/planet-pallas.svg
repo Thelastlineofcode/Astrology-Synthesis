@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   version="1.0"
+   sodipodi:docbase="/world/proj/Kproj/symsolon/data"
+   sodipodi:docname="planet-pallas.svg">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.373555"
+     inkscape:cx="17.716536"
+     inkscape:cy="17.513433"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="589"
+     inkscape:window-x="0"
+     inkscape:window-y="68" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(9.189037e-3,0,0,9.189037e-3,-85.36757,-19.58299)"
+       style="fill:#949494;fill-opacity:1;visibility:visible"
+       id="g437">
+      <desc
+         id="desc439">Drawing</desc>
+      <g
+         id="g441"
+         style="fill:#949494;fill-opacity:1">
+        <g
+           id="g443"
+           style="fill:#949494;fill-opacity:1;stroke:none">
+          <path
+             id="path445"
+             d="M 9920,4865 L 12730,4865 L 12730,5165 L 9920,5165 L 9920,4865 z "
+             style="fill:#949494;fill-opacity:1" />
+        </g>
+        <g
+           id="g447"
+           style="fill:#949494;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(9.189037e-3,0,0,9.189037e-3,-85.36757,-19.58299)"
+       style="fill:#949494;fill-opacity:1;visibility:visible"
+       id="g449">
+      <desc
+         id="desc451">Drawing</desc>
+      <g
+         id="g453"
+         style="fill:#949494;fill-opacity:1">
+        <g
+           id="g455"
+           style="fill:#949494;fill-opacity:1;stroke:none">
+          <path
+             id="path457"
+             d="M 11103,5920 L 11103,4491 L 11403,4491 L 11403,5920 L 11103,5920 z "
+             style="fill:#949494;fill-opacity:1" />
+        </g>
+        <g
+           id="g459"
+           style="fill:#949494;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(9.189037e-3,0,0,9.189037e-3,-85.36757,-19.58299)"
+       style="fill:#949494;fill-opacity:1;visibility:visible"
+       id="g461">
+      <desc
+         id="desc463">Drawing</desc>
+      <g
+         id="g465"
+         style="fill:#949494;fill-opacity:1">
+        <g
+           id="g467"
+           style="fill:#949494;fill-opacity:1;stroke:none">
+          <path
+             id="path469"
+             d="M 11157,4654 L 10300,3940 L 10396,3825 L 10492,3710 L 11349,4424 L 11253,4539 L 11157,4654 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path471"
+             d="M 10396,3825 L 10300,3940 L 10281,3922 L 10266,3900 L 10255,3877 L 10248,3852 L 10246,3826 L 10248,3799 L 10255,3774 L 10266,3750 L 10266,3750 L 10396,3825 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path473"
+             d="M 10266,3750 L 11123,2274 L 11253,2349 L 11383,2424 L 10526,3900 L 10396,3825 L 10266,3750 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path475"
+             d="M 11253,2349 L 11123,2274 L 11138,2252 L 11157,2234 L 11178,2219 L 11202,2208 L 11227,2201 L 11253,2199 L 11279,2201 L 11305,2208 L 11328,2219 L 11350,2234 L 11368,2253 L 11383,2274 L 11253,2349 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path477"
+             d="M 11383,2274 L 12241,3750 L 12111,3825 L 11981,3900 L 11123,2424 L 11253,2349 L 11383,2274 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path479"
+             d="M 12111,3825 L 12241,3750 L 12252,3773 L 12259,3799 L 12261,3825 L 12259,3851 L 12252,3876 L 12241,3900 L 12226,3921 L 12208,3940 L 12207,3940 L 12111,3825 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path481"
+             d="M 12207,3940 L 11349,4654 L 11253,4539 L 11157,4424 L 12015,3710 L 12111,3825 L 12207,3940 z "
+             style="fill:#949494;fill-opacity:1" />
+          <path
+             id="path483"
+             d="M 11253,4539 L 11349,4654 L 11327,4669 L 11304,4680 L 11278,4687 L 11252,4689 L 11226,4687 L 11201,4680 L 11177,4669 L 11157,4654 L 11253,4539 z "
+             style="fill:#949494;fill-opacity:1" />
+        </g>
+        <g
+           id="g485"
+           style="fill:#949494;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

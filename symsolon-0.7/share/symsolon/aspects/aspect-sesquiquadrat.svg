@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/data/world/proj/Kproj/symsolon/share/symsolon/aspects"
+   sodipodi:docname="aspect-semiquintil.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.0170015"
+     inkscape:cx="0.79131245"
+     inkscape:cy="17.556514"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="626"
+     inkscape:window-x="10"
+     inkscape:window-y="73" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(1.0562059e-2,0,0,1.0562059e-2,-167.01474,-95.833319)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1487">
+      <desc
+         id="desc1489">Drawing</desc>
+      <g
+         id="g1491"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1493"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1495"
+             d="M 17587,11561 L 16611,11561 L 16611,11411 L 16611,11261 L 17587,11261 L 17587,11411 L 17587,11561 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1497"
+             d="M 16611,11411 L 16611,11561 L 16585,11559 L 16560,11552 L 16536,11541 L 16515,11526 L 16496,11507 L 16481,11486 L 16470,11462 L 16463,11437 L 16461,11411 L 16461,11411 L 16611,11411 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1499"
+             d="M 16461,11411 L 16461,9459 L 16611,9459 L 16761,9459 L 16761,11411 L 16611,11411 L 16461,11411 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1501"
+             d="M 16611,9459 L 16461,9459 L 16463,9433 L 16470,9408 L 16481,9384 L 16496,9363 L 16515,9344 L 16536,9329 L 16560,9318 L 16585,9311 L 16611,9309 L 16611,9309 L 16611,9459 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1503"
+             d="M 16611,9309 L 18563,9309 L 18563,9459 L 18563,9609 L 16611,9609 L 16611,9459 L 16611,9309 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1505"
+             d="M 18563,9459 L 18563,9309 L 18589,9311 L 18614,9318 L 18638,9329 L 18659,9344 L 18678,9363 L 18693,9384 L 18704,9408 L 18711,9433 L 18713,9459 L 18713,9459 L 18563,9459 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1507"
+             d="M 18713,9459 L 18713,11411 L 18563,11411 L 18413,11411 L 18413,9459 L 18563,9459 L 18713,9459 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1509"
+             d="M 18563,11411 L 18713,11411 L 18711,11437 L 18704,11462 L 18693,11486 L 18678,11507 L 18659,11526 L 18638,11541 L 18614,11552 L 18589,11559 L 18563,11561 L 18563,11561 L 18563,11411 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1511"
+             d="M 18563,11561 L 17587,11561 L 17587,11411 L 17587,11261 L 18563,11261 L 18563,11411 L 18563,11561 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1513"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(1.0562059e-2,0,0,1.0562059e-2,-167.01474,-95.833319)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1515">
+      <desc
+         id="desc1517">Drawing</desc>
+      <g
+         id="g1519"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1521"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1523"
+             d="M 18266,10946 L 17028,12184 L 16922,12078 L 16816,11972 L 18054,10734 L 18160,10840 L 18266,10946 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1525"
+             d="M 16922,12078 L 16922,12228 L 16896,12226 L 16871,12219 L 16847,12208 L 16826,12193 L 16807,12174 L 16792,12153 L 16781,12129 L 16774,12104 L 16772,12078 L 16774,12052 L 16781,12027 L 16792,12003 L 16807,11982 L 16816,11972 L 16922,12078 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1527"
+             d="M 16922,11928 L 18230,11928 L 18230,12078 L 18230,12228 L 16922,12228 L 16922,12078 L 16922,11928 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1529"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

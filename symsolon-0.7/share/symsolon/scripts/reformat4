@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# temporary script
+# join splitted card-descriptions to one file
+# ( don't forget to wrap the with "fold -w 60 -s" command )
+
+num=1
+outfile="symbolon_de.txt-new"
+
+while [ 1 ]
+do
+	[ "$num" = "79" ] && exit;
+	echo $num
+	cat "proc/@$num" "proc/s-$num" >>$outfile
+	num=`expr $num + 1`
+done
+

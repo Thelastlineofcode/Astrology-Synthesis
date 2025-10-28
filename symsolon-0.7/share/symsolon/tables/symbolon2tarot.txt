@@ -1,0 +1,97 @@
+#
+# Conversion between Tarot and Symbolon pictures
+#
+# Bela Mihalik, 2008.10.24
+#
+# The following pairs are questionable
+# (needs review in the future):
+#
+#   SYMBOLON-19 Abortion       <=> TAROT Wands-Ace        (at the beginning of the path of the emotions - ???)
+#   SYMBOLON-34 Eros           <=> TAROT Wands-Knight     (hot power - ???)
+#   SYMBOLON-43 Golden-girl    <=> TAROT Pentacles-Ace    (external or internal wealth)
+#   SYMBOLON-46 Marionette     <=> TAROT XII.             (life is controlled by empty-ideas or by god)
+#   SYMBOLON-60 Inquisition    <=> TAROT Swords-Ace       (so called "spiritual" overpower)
+#   SYMBOLON-61 Fear           <=> TAROT Wands-Seven      (many enemies - really only one: death, the end)
+#   SYMBOLON-66 Sadness        <=> TAROT Wands-Page       (loss instead of windfall profit - ???)
+#   SYMBOLON-69 Black-Mass     <=> TAROT Cups-Knight      (black magic instead of harmony)
+#   SYMBOLON-73 Confession     <=> TAROT Pentacles-Knight (follow or not follow the rules and regulations)
+#
+
+SYMBOLON-01   TAROT-1
+SYMBOLON-02   TAROT-3
+SYMBOLON-03   TAROT-cups-page
+SYMBOLON-04   TAROT-2
+SYMBOLON-05   TAROT-4
+SYMBOLON-06   TAROT-pentacles-8
+SYMBOLON-07   TAROT-8
+SYMBOLON-08   TAROT-13
+SYMBOLON-09   TAROT-5
+SYMBOLON-10   TAROT-9
+SYMBOLON-11   TAROT-0
+SYMBOLON-12   TAROT-17
+SYMBOLON-13   TAROT-wands-9
+SYMBOLON-14   TAROT-18
+SYMBOLON-15   TAROT-swords-2
+SYMBOLON-16   TAROT-7
+SYMBOLON-17   TAROT-cups-6
+SYMBOLON-18   TAROT-cups-3
+SYMBOLON-19   TAROT-wands-ace
+SYMBOLON-20   TAROT-swords-8
+SYMBOLON-21   TAROT-swords-queen
+SYMBOLON-22   TAROT-21
+SYMBOLON-23   TAROT-swords-10
+SYMBOLON-24   TAROT-wands-5
+SYMBOLON-25   TAROT-wands-queen
+SYMBOLON-26   TAROT-wands-king
+SYMBOLON-27   TAROT-swords-4
+SYMBOLON-28   TAROT-cups-10
+SYMBOLON-29   TAROT-cups-king
+SYMBOLON-30   TAROT-19
+SYMBOLON-31   TAROT-wands-3
+SYMBOLON-32   TAROT-pentacles-king
+SYMBOLON-33   TAROT-cups-9
+SYMBOLON-34   TAROT-wands-knight
+SYMBOLON-35   TAROT-swords-5
+SYMBOLON-36   TAROT-wands-2
+SYMBOLON-37   TAROT-cups-2
+SYMBOLON-38   TAROT-cups-5
+SYMBOLON-39   TAROT-swords-knight
+SYMBOLON-40   TAROT-wands-10
+SYMBOLON-41   TAROT-wands-8
+SYMBOLON-42   TAROT-cups-4
+SYMBOLON-43   TAROT-pentacles-ace
+SYMBOLON-44   TAROT-pentacles-4
+SYMBOLON-45   TAROT-pentacles-queen
+SYMBOLON-46   TAROT-12
+SYMBOLON-47   TAROT-pentacles-6
+SYMBOLON-48   TAROT-pentacles-9
+SYMBOLON-49   TAROT-cups-8
+SYMBOLON-50   TAROT-pentacles-7
+SYMBOLON-51   TAROT-swords-king
+SYMBOLON-52   TAROT-wands-6
+SYMBOLON-53   TAROT-pentacles-2
+SYMBOLON-54   TAROT-pentacles-3
+SYMBOLON-55   TAROT-pentacles-5
+SYMBOLON-56   TAROT-swords-7
+SYMBOLON-57   TAROT-6
+SYMBOLON-58   TAROT-pentacles-10
+SYMBOLON-59   TAROT-swords-3
+SYMBOLON-60   TAROT-swords-ace
+SYMBOLON-61   TAROT-wands-7
+SYMBOLON-62   TAROT-16
+SYMBOLON-63   TAROT-pentacles-page
+SYMBOLON-64   TAROT-15
+SYMBOLON-65   TAROT-wands-4
+SYMBOLON-66   TAROT-wands-page
+SYMBOLON-67   TAROT-swords-page
+SYMBOLON-68   TAROT-cups-7
+SYMBOLON-69   TAROT-cups-knight
+SYMBOLON-70   TAROT-swords-9
+SYMBOLON-71   TAROT-20
+SYMBOLON-72   TAROT-14
+SYMBOLON-73   TAROT-pentacles-knight
+SYMBOLON-74   TAROT-swords-6
+SYMBOLON-75   TAROT-cups-queen
+SYMBOLON-76   TAROT-10
+SYMBOLON-77   TAROT-11
+SYMBOLON-78   TAROT-cups-ace

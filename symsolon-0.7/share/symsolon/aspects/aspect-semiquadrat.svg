@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/data/world/proj/Kproj/symsolon/share/symsolon/aspects"
+   sodipodi:docname="aspect-semisextil.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.0170015"
+     inkscape:cx="0.79131245"
+     inkscape:cy="17.556514"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="626"
+     inkscape:window-x="10"
+     inkscape:window-y="73" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(1.4977878e-2,0,0,1.4977878e-2,-169.16973,-84.867375)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g1439">
+      <desc
+         id="desc1441">Drawing</desc>
+      <g
+         id="g1443"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g1445"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path1447"
+             d="M 13455,6074 L 11788,7741 L 11682,7635 L 11576,7529 L 13243,5862 L 13349,5968 L 13455,6074 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1449"
+             d="M 11682,7635 L 11682,7785 L 11656,7783 L 11631,7776 L 11607,7765 L 11586,7750 L 11567,7731 L 11552,7710 L 11541,7686 L 11534,7661 L 11532,7635 L 11534,7609 L 11541,7584 L 11552,7560 L 11567,7539 L 11576,7529 L 11682,7635 z "
+             style="fill:#ffffff;fill-opacity:1" />
+          <path
+             id="path1451"
+             d="M 11682,7485 L 13444,7485 L 13444,7635 L 13444,7785 L 11682,7785 L 11682,7635 L 11682,7485 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g1453"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

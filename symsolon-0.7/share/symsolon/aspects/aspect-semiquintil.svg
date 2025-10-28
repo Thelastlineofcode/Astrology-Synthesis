@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1cm"
+   height="1cm"
+   id="svg9908"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   version="1.0"
+   sodipodi:docbase="/data/world/proj/Kproj/symsolon/share/symsolon/aspects"
+   sodipodi:docname="aspect-biquintil.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
+  <defs
+     id="defs9910" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.0170015"
+     inkscape:cx="0.79131245"
+     inkscape:cy="17.556514"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="966"
+     inkscape:window-height="626"
+     inkscape:window-x="10"
+     inkscape:window-y="73" />
+  <metadata
+     id="metadata9913">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="1. réteg"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="matrix(1.2243466e-2,0,0,1.2243466e-2,-132.45933,-112.80578)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g2283">
+      <desc
+         id="desc2285">Drawing</desc>
+      <g
+         id="g2287"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g2289"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path2291"
+             d="M 12373,9683 L 12373,11539 L 12073,11539 L 12073,9683 L 12373,9683 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g2293"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+    <g
+       transform="matrix(1.2243466e-2,0,0,1.2243466e-2,-132.45933,-112.80578)"
+       style="fill:#ffffff;fill-opacity:1;visibility:visible"
+       id="g2295">
+      <desc
+         id="desc2297">Drawing</desc>
+      <g
+         id="g2299"
+         style="fill:#ffffff;fill-opacity:1">
+        <g
+           id="g2301"
+           style="fill:#ffffff;fill-opacity:1;stroke:none">
+          <path
+             id="path2303"
+             d="M 10937,11341 L 13635,11341 L 13635,11641 L 10937,11641 L 10937,11341 z "
+             style="fill:#ffffff;fill-opacity:1" />
+        </g>
+        <g
+           id="g2305"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>

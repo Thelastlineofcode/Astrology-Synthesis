@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Reformat 'tesseract' OCR output to symsolon workfile
+#
+# Source text:
+#   * original german text is from http://www.symbolon.de/books2005/Kartenbuch.pdf
+#   * pdftoppm -f 1 -l 128 Kartenbuch.pdf >ppmfile
+#   * convert <ppmfile> <tifffile>
+#   * tesseract <tifffile> <textfile> -l deu
+#
+
+num=1
+
+for filex in `ls -1 *.txt`
+do
+
+	outfile="proc/s-$num"
+
+	echostart=0
+	while read line
+	do
+		start=`echo $line |cut -c 1-2`
+		case "$start" in
+			A.|A,)
+				echo "\n@@a) Das Problem\n" >>$outfile
+				echostart=1
+				;;
+			B.|B,)
+				echo "\n@@b) Der Weg durch das Problem hindurch\n" >>$outfile
+				;;
+			C.|C,)
+				echo "\n@@c) Das Ergebnis des Weges\n" >>$outfile
+				;;
+			*)
+				start2=`echo $line |cut -c 1-5`
+				if [ "$echostart" = "1" ] && [ "$start2" != "DURCH" ]
+				then
+					echo "$line" >>$outfile
+				fi
+				;;
+		esac
+	done < $filex
+
+	num=`expr $num + 1`
+
+done
+
