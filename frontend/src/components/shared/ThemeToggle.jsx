@@ -8,7 +8,17 @@ const ThemeToggle = () => {
   useEffect(() => {
     // Check localStorage or system preference
     const savedTheme = localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    let systemTheme = 'light';
+    
+    try {
+      if (window.matchMedia) {
+        systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    } catch (e) {
+      // matchMedia not supported, default to light
+      systemTheme = 'light';
+    }
+    
     const initialTheme = savedTheme || systemTheme;
     
     setTheme(initialTheme);
