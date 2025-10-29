@@ -389,9 +389,16 @@ npm install
 
 ## 📚 Additional Documentation
 
+### Development & Setup
 - [CONTRIBUTING.md](./CONTRIBUTING.md) - Git workflow and contribution guidelines
 - [DEVELOPMENT.md](./DEVELOPMENT.md) - Detailed development setup
 - [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) - Database design and schema
+
+### Design System & UI
+- [COLOR_PALETTE_AND_DESIGN_SYSTEM.md](./docs/COLOR_PALETTE_AND_DESIGN_SYSTEM.md) - Complete design system reference
+- [ACCESSIBILITY_TESTING_GUIDE.md](./docs/ACCESSIBILITY_TESTING_GUIDE.md) - Accessibility testing and WCAG compliance
+- [Project Overview](./docs/redesign/PROJECT_OVERVIEW.md) - BMAD redesign vision and architecture
+- [Quick Reference](./docs/redesign/QUICK_REFERENCE.md) - Design system quick reference
 
 ## 🗺️ Roadmap
 
