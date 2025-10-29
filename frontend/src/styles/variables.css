@@ -1,89 +1,9 @@
-/* Healing Cosmos - design tokens (colors, spacing, etc.)
-   Based on QUICK_REFERENCE.md and design documentation
+/* Healing Cosmos Design System - CSS Variables
+   Based on QUICK_REFERENCE.md, AI_COPILOT_GUIDE.md, and Issue #10 specifications
+   
+   This file defines the complete design token system for the Roots Revealed app,
+   including colors, spacing, typography, and theme-specific semantic tokens.
 */
-:root {
-  /* Colors - Healing Cosmos Palette (from QUICK_REFERENCE.md) */
-  --color-primary: #3E4B6E;        /* Deep Indigo */
-  --color-secondary: #A5B8A4;      /* Soft Sage */
-  --color-accent: #B296CA;         /* Muted Lavender */
-  --color-cta: #C17B5C;            /* Warm Terracotta */
-
-  /* Neutrals */
-  --color-neutral-light: #F5F3EE;  /* Cream */
-  --color-neutral-dark: #2D3142;   /* Charcoal */
-
-  /* Extended neutrals for granular control */
-  --color-neutral-50: #F5F3EE;
-  --color-neutral-100: #E8E4DB;
-  --color-neutral-200: #D4CEC1;
-  --color-neutral-700: #4A4E5C;
-  --color-neutral-800: #383C4A;
-  --color-neutral-900: #2D3142;
-
-  /* Semantic Colors */
-  --color-success: #81987F;        /* Forest Sage */
-  --color-warning: #E8B86D;        /* Golden Amber */
-  --color-error: #C17B5C;          /* Terracotta */
-  --color-info: #7FA99B;           /* Soft Teal */
-
-  /* Spacing Scale (8pt Grid) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-7: 64px;
-
-  /* Typography scale */
-  --font-size-h1: 32px;
-  --font-size-h2: 24px;
-  --font-size-h3: 20px;
-  --font-size-body: 16px;
-  --font-size-small: 14px;
-  --font-size-tiny: 12px;
-
-  /* Mobile typography */
-  --font-size-h1-mobile: 28px;
-  --font-size-h2-mobile: 22px;
-  --font-size-h3-mobile: 18px;
-
-  /* Border radius and spacing */
-  --radius-1: 6px;
-  --radius-2: 8px;
-  --radius-3: 12px;
-
-  /* Theme variables (reassignable by theme) */
-  --bg-primary: var(--color-neutral-light);
-  --bg-secondary: #FFFFFF;
-  --surface-elev-1: #FFFFFF;
-  --surface-elev-2: #F8F6F3;
-
-  --text-primary: var(--color-neutral-dark);
-  --text-secondary: rgba(62, 75, 110, 0.7); /* Primary with opacity */
-  --muted: var(--color-neutral-700);
-  --border-color: rgba(165, 184, 164, 0.3); /* Secondary with opacity */
-
-  /* Focus & accessibility */
-  --focus-ring: 2px solid var(--color-primary);
-  --focus-outline-offset: 2px;
-
-  /* Elevation shadows */
-  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.16);
-}
-
-/* A small utility to ensure reduced-motion is respected globally */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-/* Healing Cosmos - design tokens (colors, spacing, semantic tokens) */
 :root {
   /* Colors - Healing Cosmos Palette */
   --color-primary: #3E4B6E;
@@ -147,6 +67,7 @@
   --font-size-h4: 20px;
   --font-size-h3: 24px;
   --font-size-h2: 28px;
+  --font-size-h1: 32px;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -226,3 +147,13 @@ html, body {
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }
 .border { border-color: var(--border-color); }
+
+/* Accessibility - Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
