@@ -1,25 +1,26 @@
+/* Quick Chart Card */
 .quick-chart-card {
-  min-height: 200px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-neutral-50);
 }
 
 .quick-chart-card__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  padding: var(--space-4);
 }
 
-.quick-chart-card__header h2 {
-  font-size: var(--font-size-h3);
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
+.quick-chart-card__text h2 {
+  font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-2);
+  color: var(--color-neutral-50);
 }
 
-.quick-chart-card__header p {
+.quick-chart-card__description {
   font-size: var(--font-size-base);
-  color: var(--text-secondary);
   line-height: var(--line-height-normal);
+  opacity: 0.95;
 }
 
 .quick-chart-card__actions {
@@ -28,6 +29,7 @@
   flex-wrap: wrap;
 }
 
+/* Responsive */
 @media (max-width: 767px) {
   .quick-chart-card__actions {
     flex-direction: column;
@@ -35,5 +37,11 @@
   
   .quick-chart-card__actions button {
     width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .quick-chart-card__content {
+    gap: var(--space-4);
   }
 }

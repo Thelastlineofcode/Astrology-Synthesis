@@ -11,15 +11,14 @@ describe('Home Page', () => {
 
   it('renders the dashboard link', () => {
     render(<Home />);
-    const dashboardLink = screen.getByText(/Go to Dashboard/i);
+    const dashboardLink = screen.getByText(/View Dashboard/i);
     expect(dashboardLink).toBeInTheDocument();
     expect(dashboardLink).toHaveAttribute('href', '/dashboard');
   });
 
-  it('renders the Symbolon demo link', () => {
+  it('renders the description text', () => {
     render(<Home />);
-    const symbolonLink = screen.getByText(/Symbolon Demo/i);
-    expect(symbolonLink).toBeInTheDocument();
-    expect(symbolonLink).toHaveAttribute('href', '/symbolon-demo');
+    const description = screen.getByText(/Explore the depths of your birth chart/i);
+    expect(description).toBeInTheDocument();
   });
 });

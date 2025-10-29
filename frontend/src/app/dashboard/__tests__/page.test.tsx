@@ -3,65 +3,96 @@ import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Dashboard from '../page';
 
-interface LocalStorageMock {
-  getItem: jest.Mock;
-  setItem: jest.Mock;
-  clear: jest.Mock;
-}
+// Mock the dashboard card components
+jest.mock('@/components/dashboard/QuickChartCard', () => {
+  return function MockQuickChartCard() {
+    return <div data-testid="quick-chart-card">Quick Chart Card</div>;
+  };
+});
 
-// Mock localStorage
-const localStorageMock: LocalStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  clear: jest.fn(),
-};
-global.localStorage = localStorageMock as unknown as Storage;
+jest.mock('@/components/dashboard/RecentChartsCard', () => {
+  return function MockRecentChartsCard({ charts, loading }: { charts: any[], loading: boolean }) {
+    return (
+      <div data-testid="recent-charts-card">
+        {loading ? 'Loading...' : `${charts.length} charts`}
+      </div>
+    );
+  };
+});
+
+jest.mock('@/components/dashboard/BMADSummaryCard', () => {
+  return function MockBMADSummaryCard() {
+    return <div data-testid="bmad-summary-card">BMAD Summary Card</div>;
+  };
+});
+
+jest.mock('@/components/dashboard/SymbolonCard', () => {
+  return function MockSymbolonCard() {
+    return <div data-testid="symbolon-card">Symbolon Card</div>;
+  };
+});
 
 describe('Dashboard', () => {
   beforeEach(() => {
-    localStorageMock.getItem.mockClear();
+    // Clear localStorage before each test
+    localStorage.clear();
   });
 
-  it('renders dashboard header', () => {
-    localStorageMock.getItem.mockReturnValue('[]');
+  test('renders dashboard header', () => {
     render(<Dashboard />);
-    
     expect(screen.getByText('Your Astrology Dashboard')).toBeInTheDocument();
-    expect(screen.getByText(/Welcome back. Ready to explore the cosmos?/i)).toBeInTheDocument();
+    expect(screen.getByText('Welcome back. Ready to explore the cosmos?')).toBeInTheDocument();
   });
 
-  it('displays empty state when no recent charts exist', async () => {
-    localStorageMock.getItem.mockReturnValue('[]');
+  test('renders all dashboard cards', () => {
     render(<Dashboard />);
-    
+    expect(screen.getByTestId('quick-chart-card')).toBeInTheDocument();
+    expect(screen.getByTestId('recent-charts-card')).toBeInTheDocument();
+    expect(screen.getByTestId('bmad-summary-card')).toBeInTheDocument();
+    expect(screen.getByTestId('symbolon-card')).toBeInTheDocument();
+  });
+
+  test('loads recent charts from localStorage', async () => {
+    const mockCharts = [
+      { id: '1', name: 'Chart 1', date: '2025-10-01' },
+      { id: '2', name: 'Chart 2', date: '2025-10-02' },
+    ];
+    localStorage.setItem('recentCharts', JSON.stringify(mockCharts));
+
+    render(<Dashboard />);
+
     await waitFor(() => {
-      expect(screen.getByText(/No charts yet. Generate your first chart to get started!/i)).toBeInTheDocument();
+      expect(screen.getByText('2 charts')).toBeInTheDocument();
     });
   });
 
-  it('renders all dashboard cards', () => {
-    localStorageMock.getItem.mockReturnValue('[]');
+  test('handles empty localStorage gracefully', async () => {
     render(<Dashboard />);
-    
-    // Check for card headers
-    expect(screen.getByText('Generate Your Chart')).toBeInTheDocument();
-    expect(screen.getByText('Recent Charts')).toBeInTheDocument();
-    expect(screen.getByText('BMAD Analysis')).toBeInTheDocument();
-    expect(screen.getByText('Symbolon Cards')).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText('0 charts')).toBeInTheDocument();
+    });
   });
 
-  it('handles localStorage data correctly', async () => {
+  test('limits recent charts to 3', async () => {
     const mockCharts = [
-      { id: '1', name: 'My Chart', date: '2024-01-15' },
-      { id: '2', name: 'Test Chart', date: '2024-01-16' },
+      { id: '1', name: 'Chart 1', date: '2025-10-01' },
+      { id: '2', name: 'Chart 2', date: '2025-10-02' },
+      { id: '3', name: 'Chart 3', date: '2025-10-03' },
+      { id: '4', name: 'Chart 4', date: '2025-10-04' },
+      { id: '5', name: 'Chart 5', date: '2025-10-05' },
     ];
-    
-    // Set up localStorage before rendering
-    Storage.prototype.getItem = jest.fn(() => JSON.stringify(mockCharts));
-    
+    localStorage.setItem('recentCharts', JSON.stringify(mockCharts));
+
     render(<Dashboard />);
-    
-    // Component should render without crashing
+
+    await waitFor(() => {
+      expect(screen.getByText('3 charts')).toBeInTheDocument();
+    });
+  });
+
+  test('dashboard renders without errors', () => {
+    render(<Dashboard />);
     expect(screen.getByText('Your Astrology Dashboard')).toBeInTheDocument();
   });
 });
