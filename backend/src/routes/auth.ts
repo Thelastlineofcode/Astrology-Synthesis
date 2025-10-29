@@ -8,7 +8,25 @@ import { createError } from '../middleware/errorHandler';
 const router = Router();
 
 // In-memory user storage (replace with database in production)
-const users: Array<{ id: string; email: string; password: string; name: string }> = [];
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  birthDate?: string;
+  birthTime?: string;
+  birthPlace?: string;
+  latitude?: number;
+  longitude?: number;
+  zodiacSign?: string;
+  sunSign?: string;
+  moonSign?: string;
+  risingSign?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const users: User[] = [];
 
 /**
  * @swagger
@@ -93,11 +111,13 @@ router.post(
       const hashedPassword = await bcrypt.hash(password, config.bcrypt.saltRounds);
 
       // Create user
-      const user = {
+      const user: User = {
         id: Date.now().toString(),
         email,
         password: hashedPassword,
         name,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
       users.push(user);
 
