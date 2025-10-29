@@ -1,0 +1,300 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop, copilot/** ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  backend-tests:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./backend
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run linter
+      run: npm run lint
+      continue-on-error: true
+    
+    - name: Run tests with coverage
+      run: npm test
+    
+    - name: Upload backend coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./backend/coverage/coverage-final.json
+        flags: backend
+        name: backend-coverage
+        fail_ci_if_error: false
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    
+    - name: Archive test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-test-results-${{ matrix.node-version }}
+        path: backend/coverage/
+        retention-days: 30
+
+  frontend-tests:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./frontend
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run linter
+      run: npm run lint
+      continue-on-error: true
+    
+    - name: Run tests with coverage
+      run: npm run test:coverage
+    
+    - name: Upload frontend coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./frontend/coverage/coverage-final.json
+        flags: frontend
+        name: frontend-coverage
+        fail_ci_if_error: false
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    
+    - name: Archive test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-test-results-${{ matrix.node-version }}
+        path: frontend/coverage/
+        retention-days: 30
+
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: npm ci
+    
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: npm ci
+    
+    - name: Install E2E dependencies
+      working-directory: ./e2e
+      run: npm ci
+    
+    - name: Install Playwright browsers
+      working-directory: ./e2e
+      run: npx playwright install --with-deps
+    
+    - name: Start backend server
+      working-directory: ./backend
+      run: |
+        npm run build
+        npm start &
+        echo $! > backend.pid
+      env:
+        NODE_ENV: test
+        PORT: 3001
+    
+    - name: Start frontend server
+      working-directory: ./frontend
+      run: |
+        npm run build
+        npm start &
+        echo $! > frontend.pid
+      env:
+        NODE_ENV: test
+        NEXT_PUBLIC_API_URL: http://localhost:3001
+    
+    - name: Wait for servers to be ready
+      run: |
+        npx wait-on http://localhost:3000 http://localhost:3001/api/health -t 60000
+    
+    - name: Run E2E tests
+      working-directory: ./e2e
+      run: npm test
+      env:
+        CI: true
+        BASE_URL: http://localhost:3000
+    
+    - name: Upload E2E test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: e2e-test-results
+        path: |
+          e2e/test-results/
+          e2e/playwright-report/
+        retention-days: 30
+    
+    - name: Stop servers
+      if: always()
+      run: |
+        [ -f backend/backend.pid ] && kill $(cat backend/backend.pid) || true
+        [ -f frontend/frontend.pid ] && kill $(cat frontend/frontend.pid) || true
+
+  build-backend:
+    name: Build Backend
+    runs-on: ubuntu-latest
+    needs: backend-tests
+    
+    defaults:
+      run:
+        working-directory: ./backend
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build backend
+      run: npm run build
+    
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-dist
+        path: backend/dist/
+        retention-days: 7
+
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    needs: frontend-tests
+    
+    defaults:
+      run:
+        working-directory: ./frontend
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build frontend
+      run: npm run build
+    
+    - name: Archive build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: frontend/.next/
+        retention-days: 7
+
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, e2e-tests]
+    if: always()
+    
+    steps:
+    - name: Download backend coverage
+      uses: actions/download-artifact@v4
+      with:
+        pattern: backend-test-results-*
+        path: ./coverage/backend
+        merge-multiple: true
+      continue-on-error: true
+    
+    - name: Download frontend coverage
+      uses: actions/download-artifact@v4
+      with:
+        pattern: frontend-test-results-*
+        path: ./coverage/frontend
+        merge-multiple: true
+      continue-on-error: true
+    
+    - name: Download E2E test results
+      uses: actions/download-artifact@v4
+      with:
+        name: e2e-test-results
+        path: ./e2e-results
+      continue-on-error: true
+    
+    - name: Display test summary
+      run: |
+        echo "## Test Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Backend Tests" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Backend tests completed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Frontend Tests" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Frontend tests completed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### E2E Tests" >> $GITHUB_STEP_SUMMARY
+        echo "✅ E2E tests completed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Coverage Reports" >> $GITHUB_STEP_SUMMARY
+        echo "Coverage reports and test results available in artifacts" >> $GITHUB_STEP_SUMMARY
+
