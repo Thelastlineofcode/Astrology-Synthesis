@@ -24,7 +24,6 @@ const LocationPicker = ({ onLocationSelect }) => {
   const [address, setAddress] = useState("");
   const [mapCenter, setMapCenter] = useState([0, 0]);
   const [marker, setMarker] = useState(null);
-  const [showMap, setShowMap] = useState(false);
   const [error, setError] = useState("");
 
   const handleAddressSearch = async () => {
@@ -43,7 +42,6 @@ const LocationPicker = ({ onLocationSelect }) => {
         ];
         setMapCenter(newLocation);
         setMarker(newLocation);
-        setShowMap(true);
         onLocationSelect({
           latitude: newLocation[0],
           longitude: newLocation[1],
