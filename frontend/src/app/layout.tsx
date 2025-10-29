@@ -16,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="antialiased"
-      >
+      <body className="antialiased">
         {/* Inline script to set initial theme before React hydrates to avoid FOIT/flash */}
         <script
           dangerouslySetInnerHTML={{
