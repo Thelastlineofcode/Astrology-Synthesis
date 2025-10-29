@@ -40,8 +40,8 @@ describe('ChartCanvas Component', () => {
       render(<ChartCanvas chartData={mockChartData} />);
       
       // Check that planet buttons are rendered
-      mockChartData.planets.forEach(planet => {
-        const planetElement = screen.getByRole('button', { name: new RegExp(planet.name, 'i') });
+      Object.keys(mockChartData.planets).forEach(planetName => {
+        const planetElement = screen.getByRole('button', { name: new RegExp(planetName, 'i') });
         expect(planetElement).toBeInTheDocument();
       });
     });
