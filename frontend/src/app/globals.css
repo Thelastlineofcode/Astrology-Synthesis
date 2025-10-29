@@ -1,4 +1,9 @@
-@import "tailwindcss";
+/* Basic CSS reset and body styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 /* ============================================
    TYPOGRAPHY SYSTEM - Roots Revealed
@@ -72,11 +77,9 @@
   --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--bg-primary);
-    --foreground: var(--text-primary);
-  }
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Base Typography Styles */

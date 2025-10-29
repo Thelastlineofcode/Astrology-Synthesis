@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/variables.css";
 import "../styles/themes.css";
 import "./globals.css";
 import ThemeToggle from "../components/shared/ThemeToggle";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Roots Revealed",
@@ -41,7 +52,9 @@ export default function RootLayout({
           }}
         />
 
-        <ThemeToggle />
+        <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}>
+          <ThemeToggle />
+        </div>
         {children}
       </body>
     </html>
