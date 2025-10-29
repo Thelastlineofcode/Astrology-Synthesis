@@ -1,0 +1,144 @@
+.chart-canvas-container {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: var(--space-4);
+  box-shadow: var(--elevation-1);
+}
+
+.chart-canvas-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.chart-canvas-icon {
+  font-size: 1.75rem;
+}
+
+.chart-svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--bg-primary);
+  border-radius: 8px;
+}
+
+.chart-svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Zodiac segments */
+.zodiac-segment {
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.zodiac-segment:hover {
+  opacity: 0.8;
+}
+
+.zodiac-symbol {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* House lines and numbers */
+.house-line {
+  stroke-dasharray: 5, 5;
+}
+
+.house-number {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Planet markers */
+.planet-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.planet-marker:hover {
+  transform: scale(1.1);
+}
+
+.planet-circle {
+  transition: all 0.2s ease;
+}
+
+.planet-marker:hover .planet-circle {
+  stroke-width: 3;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}
+
+.planet-symbol-text {
+  pointer-events: none;
+  user-select: none;
+  font-weight: 600;
+}
+
+/* Ascendant marker */
+.ascendant-marker {
+  pointer-events: none;
+}
+
+.ascendant-line {
+  stroke-dasharray: 2, 2;
+}
+
+/* Legend */
+.chart-canvas-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chart-canvas-container {
+    padding: var(--space-3);
+  }
+
+  .chart-svg-wrapper {
+    padding: var(--space-2);
+  }
+
+  .chart-canvas-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+}
+
+/* Accessibility */
+.chart-svg text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
