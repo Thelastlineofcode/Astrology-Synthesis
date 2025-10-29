@@ -6,17 +6,19 @@ describe('Home Page', () => {
     render(<Home />);
     const heading = screen.getByRole('heading', { level: 1 });
     expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent('Roots Revealed');
   });
 
-  it('renders the Deploy Now link', () => {
+  it('renders the dashboard link', () => {
     render(<Home />);
-    const deployLink = screen.getByText(/Deploy Now/i);
-    expect(deployLink).toBeInTheDocument();
+    const dashboardLink = screen.getByText(/View Dashboard/i);
+    expect(dashboardLink).toBeInTheDocument();
+    expect(dashboardLink).toHaveAttribute('href', '/dashboard');
   });
 
-  it('renders the Documentation link', () => {
+  it('renders the description text', () => {
     render(<Home />);
-    const docsLink = screen.getByText(/Documentation/i);
-    expect(docsLink).toBeInTheDocument();
+    const description = screen.getByText(/Explore the depths of your birth chart/i);
+    expect(description).toBeInTheDocument();
   });
 });

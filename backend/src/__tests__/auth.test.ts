@@ -85,4 +85,72 @@ describe('Auth Routes', () => {
       expect(response.body.success).toBe(false);
     });
   });
+
+  describe('POST /api/auth/logout', () => {
+    let authToken: string;
+
+    beforeAll(async () => {
+      const registerResponse = await request(app)
+        .post('/api/auth/register')
+        .send({ 
+          email: 'logout@example.com', 
+          password: 'password123',
+          name: 'Logout Test User',
+        });
+      authToken = registerResponse.body.data.token;
+    });
+
+    it('should logout successfully with valid token', async () => {
+      const response = await request(app)
+        .post('/api/auth/logout')
+        .set('Authorization', `Bearer ${authToken}`);
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.message).toBe('Logout successful');
+    });
+  });
+
+  describe('POST /api/auth/refresh', () => {
+    let authToken: string;
+
+    beforeAll(async () => {
+      const registerResponse = await request(app)
+        .post('/api/auth/register')
+        .send({ 
+          email: 'refresh@example.com', 
+          password: 'password123',
+          name: 'Refresh Test User',
+        });
+      authToken = registerResponse.body.data.token;
+    });
+
+    it('should refresh token with valid token', async () => {
+      const response = await request(app)
+        .post('/api/auth/refresh')
+        .set('Authorization', `Bearer ${authToken}`);
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.data).toHaveProperty('token');
+      expect(response.body.message).toBe('Token refreshed successfully');
+    });
+
+    it('should fail without token', async () => {
+      const response = await request(app)
+        .post('/api/auth/refresh');
+
+      expect(response.status).toBe(401);
+      expect(response.body.success).toBe(false);
+    });
+
+    it('should fail with invalid token', async () => {
+      const response = await request(app)
+        .post('/api/auth/refresh')
+        .set('Authorization', 'Bearer invalid-token');
+
+      expect(response.status).toBe(401);
+      expect(response.body.success).toBe(false);
+    });
+  });
 });
