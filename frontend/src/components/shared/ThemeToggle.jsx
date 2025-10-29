@@ -8,15 +8,25 @@ const ThemeToggle = () => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    // Set mounted flag
     setHasMounted(true);
+    
+    // Initialize theme from localStorage or system preference
+    let initial = 'light';
     try {
       const saved = localStorage.getItem('theme');
       const system = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      const initial = saved || system;
-      setTheme(initial);
+      initial = saved || system;
       document.documentElement.setAttribute('data-theme', initial);
+    } catch (_e) {
+      // ignore (server or privacy constraints)
+    }
+    
+    // Update state after mount
+    setTheme(initial);
 
-      // Listen to changes in system preference if user hasn't chosen explicitly
+    // Listen to changes in system preference if user hasn't chosen explicitly
+    try {
       const mql = window.matchMedia('(prefers-color-scheme: dark)');
       const onChange = (e) => {
         const savedTheme = localStorage.getItem('theme');
@@ -33,15 +43,15 @@ const ThemeToggle = () => {
         if (mql && mql.removeEventListener) mql.removeEventListener('change', onChange);
         else if (mql && mql.removeListener) mql.removeListener(onChange);
       };
-    } catch (e) {
-      // ignore (server or privacy constraints)
+    } catch (_e) {
+      // ignore
     }
   }, []);
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
+    try { localStorage.setItem('theme', next); } catch (_e) { /* ignore */ }
     document.documentElement.setAttribute('data-theme', next);
   };
 

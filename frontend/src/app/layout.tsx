@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/variables.css";
 import "../styles/themes.css";
 import "./globals.css";
 import ThemeToggle from "../components/shared/ThemeToggle";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Roots Revealed",
@@ -27,24 +16,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        {/* Preconnect to Google Fonts for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Inter for primary text, JetBrains Mono for code/data */}
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <body className="antialiased">
         {/* Inline script to set initial theme before React hydrates to avoid FOIT/flash */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(${String(function () {
               try {
-                var saved = localStorage.getItem('theme');
-                var systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                var theme = saved || systemPref;
+                const saved = localStorage.getItem('theme');
+                const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const theme = saved || systemPref;
                 document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) { /* ignore */ }
+              } catch (_e) { /* ignore */ }
             })})();`,
           }}
         />
 
-        <ThemeToggle />
+        <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}>
+          <ThemeToggle />
+        </div>
         {children}
       </body>
     </html>
