@@ -1,0 +1,48 @@
+.symbolon-card {
+  min-height: 200px;
+}
+
+.symbolon-card h3 {
+  font-size: var(--font-size-h4);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  font-weight: var(--font-weight-bold);
+}
+
+.symbolon-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.symbolon-description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.symbolon-cta {
+  display: flex;
+}
+
+.symbolon-button {
+  background: var(--color-secondary);
+  color: var(--color-neutral-900);
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.symbolon-button:hover {
+  background: var(--color-secondary-dark);
+}
+
+.symbolon-button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}

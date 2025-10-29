@@ -1,0 +1,56 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import QuickChartCard from '@/components/dashboard/QuickChartCard';
+import RecentChartsCard from '@/components/dashboard/RecentChartsCard';
+import BMADSummaryCard from '@/components/dashboard/BMADSummaryCard';
+import SymbolonCard from '@/components/dashboard/SymbolonCard';
+import './dashboard.css';
+
+interface Chart {
+  id: string;
+  name: string;
+  date: string;
+}
+
+export default function Dashboard() {
+  const [recentCharts, setRecentCharts] = useState<Chart[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch recent charts from localStorage
+    const loadCharts = () => {
+      try {
+        const storedCharts = JSON.parse(localStorage.getItem('recentCharts') || '[]') as Chart[];
+        return storedCharts.slice(0, 3);
+      } catch (error) {
+        console.error('Error loading recent charts:', error);
+        return [];
+      }
+    };
+    
+    const charts = loadCharts();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setRecentCharts(charts);
+    setLoading(false);
+  }, []);
+
+  return (
+    <div className="dashboard">
+      <header className="dashboard__header">
+        <h1>Your Astrology Dashboard</h1>
+        <p className="dashboard__subtitle">
+          Welcome back. Ready to explore the cosmos?
+        </p>
+      </header>
+
+      <div className="dashboard__grid">
+        <QuickChartCard />
+        <RecentChartsCard charts={recentCharts} loading={loading} />
+        <BMADSummaryCard />
+        <SymbolonCard />
+      </div>
+    </div>
+  );
+}
+
