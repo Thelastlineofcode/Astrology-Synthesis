@@ -7,6 +7,8 @@ import TabNavigation from '@/components/dashboard/TabNavigation';
 import StatCard from '@/components/dashboard/StatCard';
 import ListWidget from '@/components/dashboard/ListWidget';
 import ChartWidget from '@/components/dashboard/ChartWidget';
+import DateRangeFilter from '@/components/dashboard/DateRangeFilter';
+import CategoryFilter from '@/components/dashboard/CategoryFilter';
 
 // Mock data for demonstration
 const mockStats = {
@@ -49,8 +51,32 @@ const tabs = [
   { id: 'teaching', label: 'Teaching' },
 ];
 
+const categories = [
+  'Natal Charts',
+  'Synastry',
+  'Transits',
+  'Solar Returns',
+  'Progressions',
+  'Composite Charts',
+];
+
 export default function StatisticsPage() {
   const [activeTab, setActiveTab] = useState('general');
+  const [dateRange, setDateRange] = useState({ start: '', end: '' });
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showFilters, setShowFilters] = useState(false);
+
+  const handleDateRangeChange = (start: string, end: string) => {
+    setDateRange({ start, end });
+    // In a real app, you would fetch filtered data here
+    console.log('Date range changed:', { start, end });
+  };
+
+  const handleCategoryChange = (categories: string[]) => {
+    setSelectedCategories(categories);
+    // In a real app, you would fetch filtered data here
+    console.log('Categories changed:', categories);
+  };
 
   return (
     <div className="flex min-h-screen bg-[var(--bg-primary)]">
@@ -63,11 +89,36 @@ export default function StatisticsPage() {
           {/* Tab Navigation */}
           <div className="mb-6 flex items-center justify-between">
             <TabNavigation tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-            <button className="flex items-center gap-2 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg">
-              <span>⚙️</span>
-              Edit My Widgets
-            </button>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => setShowFilters(!showFilters)}
+                className={`flex items-center gap-2 px-4 py-2 text-sm border border-[var(--border-color)] rounded-lg transition-colors ${
+                  showFilters 
+                    ? 'bg-[var(--color-primary)] text-white' 
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                }`}
+              >
+                <span>🔍</span>
+                Filters
+              </button>
+              <button className="flex items-center gap-2 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg">
+                <span>⚙️</span>
+                Edit My Widgets
+              </button>
+            </div>
           </div>
+
+          {/* Filters Section */}
+          {showFilters && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+              <DateRangeFilter onFilterChange={handleDateRangeChange} />
+              <CategoryFilter 
+                categories={categories}
+                selectedCategories={selectedCategories}
+                onFilterChange={handleCategoryChange}
+              />
+            </div>
+          )}
 
           {/* Key Metrics Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
