@@ -40,7 +40,7 @@ export const mockChartData = {
     {
       name: 'Mars',
       longitude: 330.7,
-      sign: 'Pisces',
+      sign: 'Aquarius',
       degree: 0.7,
       house: 1,
       retrograde: false
@@ -72,7 +72,7 @@ export const mockChartData = {
     {
       name: 'Neptune',
       longitude: 270.5,
-      sign: 'Capricorn',
+      sign: 'Sagittarius',
       degree: 0.5,
       house: 10,
       retrograde: false
