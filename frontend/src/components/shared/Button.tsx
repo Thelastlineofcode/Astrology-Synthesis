@@ -3,7 +3,13 @@
 import React from 'react';
 import './Button.css';
 
-const Button = ({ 
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary';
+  size?: 'small' | 'medium' | 'large';
+}
+
+const Button: React.FC<ButtonProps> = ({ 
   children, 
   variant = 'primary', 
   size = 'medium',

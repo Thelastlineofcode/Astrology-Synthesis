@@ -15,7 +15,7 @@ import './ChartCanvas.css';
  * - Zoom controls (+/- buttons)
  * 
  * @param {Object} chartData - Chart data containing planets, houses, aspects
- * @param {Array} chartData.planets - Array of planet objects with name, longitude, sign, degree, house, retrograde
+ * @param {Object} chartData.planets - Object with planet names as keys and planet data as values
  * @param {Object} chartData.houses - Object with house cusps (house_1 through house_12)
  * @param {Array} chartData.aspects - Array of aspect objects with planet1, planet2, type, orb
  * 
@@ -108,7 +108,7 @@ const ChartCanvas = ({ chartData }) => {
   };
   
   // If no chart data provided, show placeholder
-  if (!chartData || !chartData.planets) {
+  if (!chartData || !chartData.planets || Object.keys(chartData.planets).length === 0) {
     return (
       <div className="chart-canvas">
         <div className="chart-placeholder">
@@ -168,7 +168,7 @@ const ChartCanvas = ({ chartData }) => {
           className="chart-svg"
           style={{ transform: `scale(${zoom})` }}
           role="img"
-          aria-label={`Natal chart wheel with ${chartData.planets.length} planets`}
+          aria-label={`Natal chart wheel with ${Object.keys(chartData.planets).length} planets`}
         >
           {/* Background circle */}
           <circle
@@ -241,8 +241,8 @@ const ChartCanvas = ({ chartData }) => {
           
           {/* Aspect lines */}
           {showAspects && chartData.aspects && chartData.aspects.map((aspect, i) => {
-            const planet1 = chartData.planets.find(p => p.name === aspect.planet1);
-            const planet2 = chartData.planets.find(p => p.name === aspect.planet2);
+            const planet1 = chartData.planets[aspect.planet1];
+            const planet2 = chartData.planets[aspect.planet2];
             if (!planet1 || !planet2) return null;
             
             const pos1 = calculatePosition(planet1.longitude, radius * 0.6);
@@ -264,20 +264,22 @@ const ChartCanvas = ({ chartData }) => {
           })}
           
           {/* Planets */}
-          {chartData.planets.map((planet) => {
+          {Object.entries(chartData.planets).map(([planetName, planet]) => {
+            if (!planet) return null;
             const pos = calculatePosition(planet.longitude, radius * 0.8);
+            const planetData = { name: planetName, ...planet };
             return (
               <g
-                key={planet.name}
+                key={planetName}
                 className="planet-group"
-                onMouseEnter={() => setHoveredPlanet(planet)}
+                onMouseEnter={() => setHoveredPlanet(planetData)}
                 onMouseLeave={() => setHoveredPlanet(null)}
-                onFocus={() => setHoveredPlanet(planet)}
+                onFocus={() => setHoveredPlanet(planetData)}
                 onBlur={() => setHoveredPlanet(null)}
-                onKeyDown={(e) => handlePlanetKeyDown(e, planet)}
+                onKeyDown={(e) => handlePlanetKeyDown(e, planetData)}
                 tabIndex={0}
                 role="button"
-                aria-label={`${planet.name} at ${planet.degree.toFixed(2)} degrees ${planet.sign}${planet.retrograde ? ', retrograde' : ''}`}
+                aria-label={`${planetName} at ${planet.degree.toFixed(2)} degrees ${planet.sign}${planet.retrograde ? ', retrograde' : ''}`}
               >
                 <circle
                   cx={pos.x}
@@ -298,7 +300,7 @@ const ChartCanvas = ({ chartData }) => {
                   className="planet-symbol"
                   pointerEvents="none"
                 >
-                  {getPlanetSymbol(planet)}
+                  {getPlanetSymbol(planetData)}
                 </text>
                 {planet.retrograde && (
                   <text
