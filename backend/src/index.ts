@@ -77,6 +77,9 @@ app.use('/api/bmad', bmadRouter);
  *                     charts:
  *                       type: string
  *                       example: /api/charts
+ *                     bmad:
+ *                       type: string
+ *                       example: /api/bmad
  */
 app.get('/', (_req, res) => {
   res.json({
@@ -86,6 +89,7 @@ app.get('/', (_req, res) => {
       health: '/api/health',
       auth: '/api/auth',
       charts: '/api/charts',
+      bmad: '/api/bmad',
       docs: '/api-docs',
     },
   });
