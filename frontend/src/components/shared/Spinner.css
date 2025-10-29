@@ -1,0 +1,74 @@
+/* /frontend/src/components/shared/Spinner.css */
+.spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Sizes */
+.spinner--small {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner--medium {
+  width: 40px;
+  height: 40px;
+}
+
+.spinner--large {
+  width: 60px;
+  height: 60px;
+}
+
+/* Colors */
+.spinner--primary .spinner__circle {
+  stroke: var(--color-primary);
+}
+
+.spinner--secondary .spinner__circle {
+  stroke: var(--color-secondary);
+}
+
+.spinner--light .spinner__circle {
+  stroke: var(--color-neutral-50);
+}
+
+/* Spinner animation */
+.spinner__circle {
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: spinner-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* Visually hidden (for screen readers) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
