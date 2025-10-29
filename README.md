@@ -453,9 +453,15 @@ npm install
 
 ## 📚 Additional Documentation
 
+### Development Guides
 - [CONTRIBUTING.md](./CONTRIBUTING.md) - Git workflow and contribution guidelines
 - [DEVELOPMENT.md](./DEVELOPMENT.md) - Detailed development setup
 - [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) - Database design and schema
+
+### Design System
+- [COLOR_PALETTE_AND_DESIGN_SYSTEM.md](./COLOR_PALETTE_AND_DESIGN_SYSTEM.md) - Comprehensive design system, color palette, typography, and component patterns
+- [ACCESSIBILITY_TESTING_GUIDE.md](./ACCESSIBILITY_TESTING_GUIDE.md) - WCAG 2.1 compliance and accessibility testing guidelines
+- [Quick Reference Guide](./docs/redesign/QUICK_REFERENCE.md) - Quick reference for developers
 
 ## 🗺️ Roadmap
 

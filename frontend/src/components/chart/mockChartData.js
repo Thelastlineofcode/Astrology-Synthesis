@@ -4,101 +4,91 @@
  */
 
 export const mockChartData = {
-  planets: [
-    {
-      name: 'Sun',
+  planets: {
+    Sun: {
       longitude: 267.5,
       sign: 'Sagittarius',
       degree: 27.5,
       house: 10,
       retrograde: false
     },
-    {
-      name: 'Moon',
+    Moon: {
       longitude: 45.2,
       sign: 'Taurus',
       degree: 15.2,
       house: 3,
       retrograde: false
     },
-    {
-      name: 'Mercury',
+    Mercury: {
       longitude: 252.8,
       sign: 'Sagittarius',
       degree: 12.8,
       house: 9,
       retrograde: true
     },
-    {
-      name: 'Venus',
+    Venus: {
       longitude: 290.3,
       sign: 'Capricorn',
       degree: 20.3,
       house: 11,
       retrograde: false
     },
-    {
-      name: 'Mars',
+    Mars: {
       longitude: 330.7,
       sign: 'Aquarius',
       degree: 0.7,
       house: 1,
       retrograde: false
     },
-    {
-      name: 'Jupiter',
+    Jupiter: {
       longitude: 308.4,
       sign: 'Aquarius',
       degree: 8.4,
       house: 12,
       retrograde: false
     },
-    {
-      name: 'Saturn',
+    Saturn: {
       longitude: 246.1,
       sign: 'Scorpio',
       degree: 26.1,
       house: 9,
       retrograde: false
     },
-    {
-      name: 'Uranus',
+    Uranus: {
       longitude: 252.9,
       sign: 'Sagittarius',
       degree: 12.9,
       house: 9,
       retrograde: false
     },
-    {
-      name: 'Neptune',
+    Neptune: {
       longitude: 270.5,
       sign: 'Sagittarius',
       degree: 0.5,
       house: 10,
       retrograde: false
     },
-    {
-      name: 'Pluto',
+    Pluto: {
       longitude: 214.3,
       sign: 'Scorpio',
       degree: 4.3,
       house: 8,
       retrograde: false
     }
-  ],
+  },
   houses: {
-    house_1: { longitude: 315.5, sign: 'Pisces' },
-    house_2: { longitude: 345.2, sign: 'Aries' },
-    house_3: { longitude: 15.8, sign: 'Taurus' },
-    house_4: { longitude: 45.3, sign: 'Gemini' },
-    house_5: { longitude: 75.7, sign: 'Cancer' },
-    house_6: { longitude: 105.1, sign: 'Leo' },
-    house_7: { longitude: 135.5, sign: 'Virgo' },
-    house_8: { longitude: 165.2, sign: 'Libra' },
-    house_9: { longitude: 195.8, sign: 'Scorpio' },
-    house_10: { longitude: 225.3, sign: 'Sagittarius' },
-    house_11: { longitude: 255.7, sign: 'Capricorn' },
-    house_12: { longitude: 285.1, sign: 'Aquarius' }
+    house_1: { longitude: 315.5, sign: 'Pisces', degree: 15.5 },
+    house_2: { longitude: 345.2, sign: 'Aries', degree: 15.2 },
+    house_3: { longitude: 15.8, sign: 'Taurus', degree: 15.8 },
+    house_4: { longitude: 45.3, sign: 'Gemini', degree: 15.3 },
+    house_5: { longitude: 75.7, sign: 'Cancer', degree: 15.7 },
+    house_6: { longitude: 105.1, sign: 'Leo', degree: 15.1 },
+    house_7: { longitude: 135.5, sign: 'Virgo', degree: 15.5 },
+    house_8: { longitude: 165.2, sign: 'Libra', degree: 15.2 },
+    house_9: { longitude: 195.8, sign: 'Scorpio', degree: 15.8 },
+    house_10: { longitude: 225.3, sign: 'Sagittarius', degree: 15.3 },
+    house_11: { longitude: 255.7, sign: 'Capricorn', degree: 15.7 },
+    house_12: { longitude: 285.1, sign: 'Aquarius', degree: 15.1 }
   },
   aspects: [
     {

@@ -8,7 +8,25 @@ import { createError } from '../middleware/errorHandler';
 const router = Router();
 
 // In-memory user storage (replace with database in production)
-const users: Array<{ id: string; email: string; password: string; name: string; role: 'user' | 'admin' }> = [];
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+  birthDate?: string;
+  birthTime?: string;
+  birthPlace?: string;
+  latitude?: number;
+  longitude?: number;
+  zodiacSign?: string;
+  sunSign?: string;
+  moonSign?: string;
+  risingSign?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const users: User[] = [];
 
 /**
  * @swagger
@@ -71,9 +89,7 @@ router.post(
   '/register',
   [
     body('email').isEmail().withMessage('Valid email is required'),
-    body('password')
-      .isLength({ min: 6 })
-      .withMessage('Password must be at least 6 characters'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
     body('name').notEmpty().withMessage('Name is required'),
   ],
   async (req: Request, res: Response, next: NextFunction) => {
@@ -95,21 +111,20 @@ router.post(
       const hashedPassword = await bcrypt.hash(password, config.bcrypt.saltRounds);
 
       // Create user
-      const user = {
+      const user: User = {
         id: Date.now().toString(),
         email,
         password: hashedPassword,
         name,
-        role: 'user' as 'user' | 'admin',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
       users.push(user);
 
       // Generate token
-      const token = jwt.sign(
-        { id: user.id, email: user.email, role: user.role },
-        config.jwt.secret,
-        { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
-      );
+      const token = jwt.sign({ id: user.id, email: user.email }, config.jwt.secret, {
+        expiresIn: config.jwt.expiresIn,
+      } as jwt.SignOptions);
 
       res.status(201).json({
         success: true,
@@ -211,11 +226,9 @@ router.post(
       }
 
       // Generate token
-      const token = jwt.sign(
-        { id: user.id, email: user.email, role: user.role },
-        config.jwt.secret,
-        { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
-      );
+      const token = jwt.sign({ id: user.id, email: user.email }, config.jwt.secret, {
+        expiresIn: config.jwt.expiresIn,
+      } as jwt.SignOptions);
 
       res.json({
         success: true,

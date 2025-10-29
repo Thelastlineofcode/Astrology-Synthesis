@@ -18,7 +18,7 @@ describe('Home Page', () => {
 
   it('renders the description text', () => {
     render(<Home />);
-    const description = screen.getByText(/Explore your cosmic journey/i);
+    const description = screen.getByText(/Explore the depths of your birth chart/i);
     expect(description).toBeInTheDocument();
   });
 });
