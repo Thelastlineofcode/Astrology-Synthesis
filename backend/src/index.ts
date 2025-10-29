@@ -5,6 +5,7 @@ import { errorHandler } from './middleware/errorHandler';
 import healthRouter from './routes/health';
 import authRouter from './routes/auth';
 import chartRouter from './routes/chart';
+import userRouter from './routes/user';
 
 // Load environment variables
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/charts', chartRouter);
+app.use('/api/users', userRouter);
 
 // Root route
 app.get('/', (_req, res) => {
@@ -34,6 +36,7 @@ app.get('/', (_req, res) => {
       health: '/api/health',
       auth: '/api/auth',
       charts: '/api/charts',
+      users: '/api/users',
     },
   });
 });
