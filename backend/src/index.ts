@@ -7,6 +7,7 @@ import { swaggerSpec } from './config/swagger';
 import healthRouter from './routes/health';
 import authRouter from './routes/auth';
 import chartRouter from './routes/chart';
+import bmadRouter from './routes/bmad';
 
 // Load environment variables
 dotenv.config();
@@ -15,10 +16,12 @@ const app: Application = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -38,6 +41,7 @@ app.get('/api-docs.json', (_req, res) => {
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/charts', chartRouter);
+app.use('/api/bmad', bmadRouter);
 
 // Root route
 /**
@@ -73,6 +77,9 @@ app.use('/api/charts', chartRouter);
  *                     charts:
  *                       type: string
  *                       example: /api/charts
+ *                     bmad:
+ *                       type: string
+ *                       example: /api/bmad
  */
 app.get('/', (_req, res) => {
   res.json({
@@ -82,6 +89,7 @@ app.get('/', (_req, res) => {
       health: '/api/health',
       auth: '/api/auth',
       charts: '/api/charts',
+      bmad: '/api/bmad',
       docs: '/api-docs',
     },
   });
