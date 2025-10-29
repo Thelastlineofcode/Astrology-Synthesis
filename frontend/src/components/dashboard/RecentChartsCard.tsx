@@ -51,8 +51,8 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({ charts, loading }) 
       </div>
 
       <ul className="chart-list">
-        {charts.map((chart, i) => (
-          <li key={i} className="chart-item">
+        {charts.map((chart) => (
+          <li key={chart.id} className="chart-item">
             <div className="chart-item__info">
               <strong>{chart.name || 'Unnamed Chart'}</strong>
               <span className="chart-item__date">

@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import Card from '../shared/Card';
 import Button from '../shared/Button';
 import './QuickChartCard.css';
@@ -15,12 +16,16 @@ const QuickChartCard = () => {
         </div>
         
         <div className="quick-chart-card__actions">
-          <Button variant="primary" onClick={() => window.location.href = '/chart'}>
-            New Chart
-          </Button>
-          <Button variant="secondary" onClick={() => window.location.href = '/symbolon-demo'}>
-            Explore Symbolon
-          </Button>
+          <Link href="/chart">
+            <Button variant="primary">
+              New Chart
+            </Button>
+          </Link>
+          <Link href="/symbolon-demo">
+            <Button variant="secondary">
+              Explore Symbolon
+            </Button>
+          </Link>
         </div>
       </div>
     </Card>
