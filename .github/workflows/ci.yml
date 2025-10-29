@@ -6,10 +6,18 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+# Default permissions - restrict to read-only
+permissions:
+  contents: read
+
 jobs:
   backend-tests:
     name: Backend Tests
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      actions: read
     
     defaults:
       run:
@@ -62,6 +70,10 @@ jobs:
     name: Frontend Tests
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+      actions: read
+    
     defaults:
       run:
         working-directory: ./frontend
@@ -113,6 +125,10 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     needs: [backend-tests, frontend-tests]
+    
+    permissions:
+      contents: read
+      actions: read
     
     steps:
     - name: Checkout code
@@ -194,6 +210,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: backend-tests
     
+    permissions:
+      contents: read
+      actions: read
+    
     defaults:
       run:
         working-directory: ./backend
@@ -226,6 +246,10 @@ jobs:
     name: Build Frontend
     runs-on: ubuntu-latest
     needs: frontend-tests
+    
+    permissions:
+      contents: read
+      actions: read
     
     defaults:
       run:
@@ -260,6 +284,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [backend-tests, frontend-tests, e2e-tests]
     if: always()
+    
+    permissions:
+      contents: read
+      actions: read
     
     steps:
     - name: Download backend coverage
