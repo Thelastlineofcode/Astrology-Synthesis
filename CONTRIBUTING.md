@@ -1,7 +1,7 @@
 # Git Workflow and Branching Strategy
 
 ## Overview
-This document outlines the Git workflow and branching strategy for the Astrology Synthesis project.
+This document outlines the Git workflow and branching strategy for the Roots Revealed project.
 
 ## Branch Structure
 

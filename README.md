@@ -1,4 +1,4 @@
-# Astrology Synthesis - Full-Stack Astrological Analysis System
+# Roots Revealed - Full-Stack Astrological Analysis System
 
 A modern full-stack astrology application built with Next.js, Node.js/Express, TypeScript, and PostgreSQL.
 
@@ -71,9 +71,9 @@ psql postgres
 
 In the PostgreSQL console:
 ```sql
-CREATE DATABASE astrology_db;
-CREATE USER astrology_user WITH ENCRYPTED PASSWORD 'your_secure_password';
-GRANT ALL PRIVILEGES ON DATABASE astrology_db TO astrology_user;
+CREATE DATABASE roots_revealed_db;
+CREATE USER roots_revealed_user WITH ENCRYPTED PASSWORD 'your_secure_password';
+GRANT ALL PRIVILEGES ON DATABASE roots_revealed_db TO roots_revealed_user;
 \q
 ```
 
@@ -126,7 +126,7 @@ Frontend will run on: **http://localhost:3000**
 ## 📁 Project Structure
 
 ```
-Astrology-Synthesis/
+Roots-Revealed/
 ├── backend/                    # Node.js/Express API
 │   ├── src/
 │   │   ├── config/            # Configuration files
@@ -186,8 +186,8 @@ JWT_EXPIRES_IN=24h
 # Database
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=astrology_db
-DB_USER=astrology_user
+DB_NAME=roots_revealed_db
+DB_USER=roots_revealed_user
 DB_PASSWORD=your_password_here
 
 # CORS
@@ -364,7 +364,7 @@ pg_isready
 
 2. Check database exists:
 ```bash
-psql -U astrology_user -d astrology_db
+psql -U roots_revealed_user -d roots_revealed_db
 ```
 
 3. Verify credentials in `.env` file

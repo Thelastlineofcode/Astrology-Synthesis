@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive Astrology Synthesis Application Test
+Comprehensive Roots Revealed Application Test
 Tests all major functionality across both servers.
 """
 

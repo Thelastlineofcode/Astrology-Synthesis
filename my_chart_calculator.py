@@ -10,7 +10,7 @@ from datetime import datetime
 
 def get_birth_data():
     """Get birth data from user input."""
-    print("🌟 Welcome to Your Personal Astrology Chart Calculator!")
+    print("🌟 Welcome to Your Personal Chart Calculator with Roots Revealed!")
     print("="*60)
     print("Please enter your birth information:")
     
@@ -239,7 +239,7 @@ def main():
     print("\n" + "="*60)
     print("🎉 YOUR COMPLETE ASTROLOGICAL ANALYSIS IS COMPLETE!")
     print("="*60)
-    print("Thank you for using the Astrology Synthesis system!")
+    print("Thank you for using the Roots Revealed system!")
 
 if __name__ == "__main__":
     main()

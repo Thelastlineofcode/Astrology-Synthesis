@@ -18,7 +18,7 @@ describe('Root Endpoint', () => {
     const response = await request(app).get('/');
     
     expect(response.status).toBe(200);
-    expect(response.body.message).toBe('Astrology Synthesis API');
+    expect(response.body.message).toBe('Roots Revealed API');
     expect(response.body).toHaveProperty('endpoints');
   });
 });
