@@ -1,46 +1,46 @@
-import React, { useState } from 'react';
-import LocationPicker from './LocationPicker';
-import './BirthDataForm.css';
+import React, { useState } from "react";
+import LocationPicker from "./LocationPicker";
+import "./BirthDataForm.css";
 
 const BirthDataForm = ({ onCalculate, loading }) => {
   const [formData, setFormData] = useState({
-    year: '',
-    month: '',
-    day: '',
-    hour: '',
-    minute: '',
-    latitude: '',
-    longitude: '',
-    address: '',
-    useManualCoordinates: false
+    year: "",
+    month: "",
+    day: "",
+    hour: "",
+    minute: "",
+    latitude: "",
+    longitude: "",
+    address: "",
+    useManualCoordinates: false,
   });
 
   const [options, setOptions] = useState({
-    zodiacType: 'sidereal',
-    ayanamsa: 'LAHIRI',
-    houseSystem: 'P',
-    includeMinorAspects: false
+    zodiacType: "sidereal",
+    ayanamsa: "LAHIRI",
+    houseSystem: "P",
+    includeMinorAspects: false,
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleOptionChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setOptions(prev => ({
+    setOptions((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const birthData = {
       year: parseInt(formData.year),
       month: parseInt(formData.month),
@@ -48,7 +48,7 @@ const BirthDataForm = ({ onCalculate, loading }) => {
       hour: parseInt(formData.hour),
       minute: parseInt(formData.minute),
       latitude: parseFloat(formData.latitude),
-      longitude: parseFloat(formData.longitude)
+      longitude: parseFloat(formData.longitude),
     };
 
     onCalculate(birthData, options);
@@ -56,22 +56,22 @@ const BirthDataForm = ({ onCalculate, loading }) => {
 
   const loadSampleData = () => {
     setFormData({
-      year: '1990',
-      month: '8',
-      day: '15',
-      hour: '14',
-      minute: '30',
-      latitude: '29.7604',
-      longitude: '-95.3698',
-      location: 'Houston, TX',
-      timezone: 'CST'
+      year: "1990",
+      month: "8",
+      day: "15",
+      hour: "14",
+      minute: "30",
+      latitude: "29.7604",
+      longitude: "-95.3698",
+      location: "Houston, TX",
+      timezone: "CST",
     });
   };
 
   return (
     <div className="birth-data-form">
       <h2>Birth Information</h2>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="form-section">
           <h3>📅 Date</h3>
@@ -150,65 +150,67 @@ const BirthDataForm = ({ onCalculate, loading }) => {
           </div>
         </div>
 
-              <div className="form-section">
-        <h3>Location Details</h3>
-        <div className="location-toggle">
-          <label>
-            <input
-              type="checkbox"
-              name="useManualCoordinates"
-              checked={formData.useManualCoordinates}
-              onChange={(e) => setFormData(prev => ({
-                ...prev,
-                useManualCoordinates: e.target.checked
-              }))}
+        <div className="form-section">
+          <h3>Location Details</h3>
+          <div className="location-toggle">
+            <label>
+              <input
+                type="checkbox"
+                name="useManualCoordinates"
+                checked={formData.useManualCoordinates}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    useManualCoordinates: e.target.checked,
+                  }))
+                }
+              />
+              Enter coordinates manually
+            </label>
+          </div>
+
+          {formData.useManualCoordinates ? (
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="latitude">Latitude</label>
+                <input
+                  type="number"
+                  step="0.000001"
+                  id="latitude"
+                  name="latitude"
+                  value={formData.latitude}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="longitude">Longitude</label>
+                <input
+                  type="number"
+                  step="0.000001"
+                  id="longitude"
+                  name="longitude"
+                  value={formData.longitude}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          ) : (
+            <LocationPicker
+              onLocationSelect={({ latitude, longitude, address }) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  latitude: String(latitude),
+                  longitude: String(longitude),
+                  address,
+                }));
+              }}
             />
-            Enter coordinates manually
-          </label>
+          )}
         </div>
 
-        {formData.useManualCoordinates ? (
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="latitude">Latitude</label>
-              <input
-                type="number"
-                step="0.000001"
-                id="latitude"
-                name="latitude"
-                value={formData.latitude}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="longitude">Longitude</label>
-              <input
-                type="number"
-                step="0.000001"
-                id="longitude"
-                name="longitude"
-                value={formData.longitude}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-        ) : (
-          <LocationPicker
-            onLocationSelect={({ latitude, longitude, address }) => {
-              setFormData(prev => ({
-                ...prev,
-                latitude: String(latitude),
-                longitude: String(longitude),
-                address
-              }));
-            }}
-          />
-        )}
-      </div>
+        <div className="form-section">
+          <h3>⚙️ Chart Options</h3>
 
-      <div className="form-section">
-        <h3>⚙️ Chart Options</h3>
-          
           <div className="form-group">
             <label>Zodiac Type</label>
             <select
@@ -221,7 +223,7 @@ const BirthDataForm = ({ onCalculate, loading }) => {
             </select>
           </div>
 
-          {options.zodiacType === 'sidereal' && (
+          {options.zodiacType === "sidereal" && (
             <div className="form-group">
               <label>Ayanamsa</label>
               <select
@@ -275,12 +277,8 @@ const BirthDataForm = ({ onCalculate, loading }) => {
           >
             Load Sample
           </button>
-          <button
-            type="submit"
-            className="btn-primary"
-            disabled={loading}
-          >
-            {loading ? 'Calculating...' : 'Calculate Chart'}
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? "Calculating..." : "Calculate Chart"}
           </button>
         </div>
       </form>
