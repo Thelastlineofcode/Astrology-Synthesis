@@ -204,9 +204,10 @@ const BirthDataForm = ({ onCalculate, loading }) => {
             }}
           />
         )}
+      </div>
 
-        <div className="form-section">
-          <h3>⚙️ Chart Options</h3>
+      <div className="form-section">
+        <h3>⚙️ Chart Options</h3>
           
           <div className="form-group">
             <label>Zodiac Type</label>
