@@ -28,7 +28,7 @@ app.use('/api/charts', chartRouter);
 // Root route
 app.get('/', (_req, res) => {
   res.json({
-    message: 'Astrology Synthesis API',
+    message: 'Roots Revealed API',
     version: '1.0.0',
     endpoints: {
       health: '/api/health',

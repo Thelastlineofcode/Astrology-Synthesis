@@ -1,6 +1,6 @@
 # 🧠 BMAD Method Usage Guide
 
-The **Behavioral Model and Data (BMAD)** framework is now fully integrated into your astrology application! Here are all the ways you can use it:
+The **Behavioral Model and Data (BMAD)** framework is now fully integrated into Roots Revealed! Here are all the ways you can use it:
 
 ## 🚀 Quick Start
 

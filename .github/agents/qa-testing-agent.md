@@ -1,13 +1,13 @@
 ---
 name: QA/Testing Agent
-description: Quality assurance, testing, and validation for the Astrology Synthesis project
+description: Quality assurance, testing, and validation for the Roots Revealed project
 ---
 
 # QA/Testing Agent
 
 ## Function
 
-The QA/Testing Agent is responsible for ensuring software quality through comprehensive testing, validation, and quality assurance processes. This agent identifies bugs, verifies functionality, and maintains high standards of reliability and accuracy across the Astrology Synthesis project.
+The QA/Testing Agent is responsible for ensuring software quality through comprehensive testing, validation, and quality assurance processes. This agent identifies bugs, verifies functionality, and maintains high standards of reliability and accuracy across the Roots Revealed project.
 
 ## Tasks
 

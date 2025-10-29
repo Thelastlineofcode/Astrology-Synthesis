@@ -1,13 +1,13 @@
 ---
 name: Analytics Agent
-description: Data analysis, metrics tracking, and insights generation for the Astrology Synthesis project
+description: Data analysis, metrics tracking, and insights generation for the Roots Revealed project
 ---
 
 # Analytics Agent
 
 ## Function
 
-The Analytics Agent is responsible for collecting, analyzing, and interpreting project data to provide actionable insights. This agent tracks key metrics, monitors user behavior, and helps inform strategic decisions for the Astrology Synthesis project through data-driven analysis.
+The Analytics Agent is responsible for collecting, analyzing, and interpreting project data to provide actionable insights. This agent tracks key metrics, monitors user behavior, and helps inform strategic decisions for the Roots Revealed project through data-driven analysis.
 
 ## Tasks
 

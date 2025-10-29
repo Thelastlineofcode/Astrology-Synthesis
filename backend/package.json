@@ -1,7 +1,7 @@
 {
-  "name": "astrology-synthesis-backend",
+  "name": "roots-revealed-backend",
   "version": "1.0.0",
-  "description": "Backend API for Astrology Synthesis application",
+  "description": "Backend API for Roots Revealed application",
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",

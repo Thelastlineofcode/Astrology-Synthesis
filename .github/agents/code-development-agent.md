@@ -1,13 +1,13 @@
 ---
 name: Code Development Agent
-description: Implementation, coding, and technical development for the Astrology Synthesis project
+description: Implementation, coding, and technical development for the Roots Revealed project
 ---
 
 # Code Development Agent
 
 ## Function
 
-The Code Development Agent is responsible for implementing features, writing clean and maintainable code, and ensuring technical excellence across the Astrology Synthesis project. This agent translates requirements into functional code while following best practices and coding standards.
+The Code Development Agent is responsible for implementing features, writing clean and maintainable code, and ensuring technical excellence across the Roots Revealed project. This agent translates requirements into functional code while following best practices and coding standards.
 
 ## Tasks
 
