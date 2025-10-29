@@ -130,7 +130,7 @@ router.post(
         success: true,
         message: 'User registered successfully',
         data: {
-          user: { id: user.id, email: user.email, name: user.name },
+          user: { id: user.id, email: user.email, name: user.name, role: user.role },
           token,
         },
       });
@@ -234,7 +234,7 @@ router.post(
         success: true,
         message: 'Login successful',
         data: {
-          user: { id: user.id, email: user.email, name: user.name },
+          user: { id: user.id, email: user.email, name: user.name, role: user.role },
           token,
         },
       });
