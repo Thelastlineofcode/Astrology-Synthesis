@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   TYPOGRAPHY SYSTEM - Healing Cosmos
+   TYPOGRAPHY SYSTEM - Roots Revealed
    Font families, sizes, weights, line heights
    ============================================ */
 
@@ -36,7 +36,7 @@
   --font-size-small: 14px;
   --font-size-tiny: 12px;
   
-  /* Map legacy tokens to design-system tokens */
+  /* Map legacy tokens to theme system tokens */
   --background: var(--bg-primary);
   --foreground: var(--text-primary);
 }

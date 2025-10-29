@@ -45,7 +45,7 @@ export default function ChartDemoPage() {
         </p>
       </div>
       
-      <ChartCanvas planets={mockChartData.planets} houses={mockChartData.houses} aspects={mockChartData.aspects} />
+      <ChartCanvas chartData={mockChartData} />
       
       <div style={{ 
         marginTop: '3rem', 
