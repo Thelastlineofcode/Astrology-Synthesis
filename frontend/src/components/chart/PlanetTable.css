@@ -1,0 +1,170 @@
+.planet-table-container {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: var(--space-4);
+  box-shadow: var(--elevation-1);
+}
+
+.planet-table-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.planet-table-icon {
+  font-size: 1.75rem;
+}
+
+.planet-table-wrapper {
+  overflow-x: auto;
+}
+
+.planet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.planet-table thead {
+  background: var(--bg-primary);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.planet-table th {
+  padding: var(--space-3);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.planet-table tbody tr {
+  border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  transition: background-color 0.2s ease;
+}
+
+.planet-table tbody tr:hover {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.02));
+}
+
+.planet-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.planet-table td {
+  padding: var(--space-3);
+  color: var(--text-secondary);
+}
+
+.planet-row td:first-child {
+  font-weight: 500;
+}
+
+.planet-symbol {
+  font-size: 1.25rem;
+  margin-right: var(--space-2);
+  color: var(--color-primary);
+  display: inline-block;
+  min-width: 24px;
+}
+
+.planet-name {
+  color: var(--text-primary);
+}
+
+.sign-symbol {
+  font-size: 1.1rem;
+  margin-right: var(--space-2);
+  color: var(--color-accent);
+  display: inline-block;
+  min-width: 20px;
+}
+
+.sign-name {
+  color: var(--text-secondary);
+}
+
+.planet-degree {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.planet-house {
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.planet-status {
+  text-align: center;
+}
+
+.retrograde-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  background: #ef4444;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.direct-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  background: #10b981;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.planet-unavailable {
+  opacity: 0.5;
+}
+
+.planet-unavailable-text {
+  font-style: italic;
+  color: var(--text-tertiary, #999);
+  text-align: center;
+}
+
+.planet-table-footer {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+}
+
+.planet-count {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .planet-table-container {
+    padding: var(--space-3);
+  }
+
+  .planet-table {
+    font-size: 0.85rem;
+  }
+
+  .planet-table th,
+  .planet-table td {
+    padding: var(--space-2);
+  }
+
+  .planet-symbol,
+  .sign-symbol {
+    margin-right: var(--space-1);
+  }
+}
