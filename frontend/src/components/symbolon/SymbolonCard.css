@@ -1,0 +1,78 @@
+.symbolon-card {
+  overflow: hidden;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.symbolon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.symbolon-card__image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2/3;
+  background: var(--bg-hover);
+}
+
+.symbolon-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.symbolon-card__skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg-secondary), var(--bg-hover), var(--bg-secondary));
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.symbolon-card__number {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  border-radius: 50%;
+  font-size: var(--font-size-small);
+}
+
+.symbolon-card__content {
+  padding: var(--space-4);
+}
+
+.symbolon-card__title {
+  font-size: var(--font-size-h4);
+  margin-bottom: var(--space-3);
+  color: var(--color-primary);
+}
+
+.symbolon-card__keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.symbolon-card__excerpt {
+  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+}
