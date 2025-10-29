@@ -1,25 +1,57 @@
-/* Dashboard Layout Styles */
+/* Dashboard Layout Styles - Mystical Dark Theme */
 .dashboard {
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--space-6) var(--space-4);
   min-height: 100vh;
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+/* Mystical pattern overlay */
+.dashboard::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(139, 111, 71, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(74, 95, 142, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard > * {
+  position: relative;
+  z-index: 1;
 }
 
 .dashboard__header {
   margin-bottom: var(--space-7);
+  text-align: center;
 }
 
 .dashboard__header h1 {
   font-size: var(--font-size-h2);
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin-bottom: var(--space-2);
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard__subtitle {
   font-size: var(--font-size-h4);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-weight: var(--font-weight-medium);
 }
 
@@ -27,6 +59,23 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
+}
+
+/* Card base styling */
+.dashboard__grid > * {
+  background: var(--color-card-dark);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard__grid > *:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
 }
 
 /* Tablet */
@@ -53,7 +102,7 @@
   .dashboard {
     padding: var(--space-4);
   }
-  
+
   .dashboard__grid {
     grid-template-columns: 1fr;
     gap: var(--space-4);

@@ -1,15 +1,90 @@
-/* BMAD Summary Card */
+/* BMAD Summary Card - Statistics Card Style */
 .bmad-summary-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  background: var(--color-card-dark);
 }
 
 .bmad-summary-card h3 {
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   margin: 0;
+  text-align: center;
+}
+
+/* Balance Display - Large Number */
+.bmad-balance {
+  text-align: center;
+  padding: var(--space-5) 0;
+}
+
+.bmad-balance__amount {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1;
+}
+
+.bmad-balance__label {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+}
+
+/* Chart Section */
+.bmad-chart {
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bmad-chart__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+.bmad-chart__change {
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+}
+
+.bmad-chart__bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100px;
+  gap: var(--space-1);
+}
+
+.bmad-chart__bar {
+  flex: 1;
+  background: var(--color-text-muted);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  min-height: 20%;
+  transition: background 0.2s ease;
+}
+
+.bmad-chart__bar.active {
+  background: var(--color-accent-orange);
+}
+
+.bmad-chart__bar:hover {
+  opacity: 0.8;
+}
+
+.bmad-chart__labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-tiny);
+  color: var(--color-text-secondary);
 }
 
 /* Empty State */
@@ -19,8 +94,8 @@
 }
 
 .bmad-summary-card .empty-state__text {
-  font-size: var(--font-size-base);
-  color: var(--text-secondary);
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
   margin: 0;
 }
@@ -28,38 +103,48 @@
 /* BMAD Summary */
 .bmad-summary {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-3);
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
 }
 
 .bmad-metric {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: var(--space-4);
-  background: var(--bg-primary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  padding: var(--space-3);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  transition: background 0.2s ease;
 }
 
 .bmad-metric:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--elevation-2);
-}
-
-.bmad-metric__value {
-  font-size: 32px;
-  font-weight: var(--font-weight-bold);
-  color: var(--color-accent);
-  margin-bottom: var(--space-1);
-  line-height: 1;
+  background: var(--color-bg-tertiary);
 }
 
 .bmad-metric__label {
-  font-size: var(--font-size-small);
-  color: var(--text-secondary);
-  text-align: center;
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+}
+
+.bmad-metric__values {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.bmad-metric__value {
+  text-align: right;
+}
+
+.bmad-metric__value-number {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.bmad-metric__value-label {
+  font-size: var(--font-size-tiny);
+  color: var(--color-text-muted);
+  text-transform: capitalize;
 }
 
 /* Responsive */
@@ -67,14 +152,14 @@
   .bmad-summary {
     grid-template-columns: 1fr;
   }
+
+  .bmad-chart__bars {
+    height: 80px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .bmad-summary {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .bmad-metric:last-child {
-    grid-column: span 2;
+    grid-template-columns: 1fr;
   }
 }
