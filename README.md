@@ -235,92 +235,156 @@ npm run test:coverage
 
 ## 📖 API Documentation
 
+### Interactive Documentation
+
+The API includes comprehensive interactive documentation:
+
+- **Swagger UI**: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
+- **OpenAPI Spec**: [http://localhost:5000/api-docs.json](http://localhost:5000/api-docs.json)
+- **Postman Collection**: `backend/Roots-Revealed-API.postman_collection.json`
+
 ### Base URL
 
 ```
 http://localhost:5000/api
 ```
 
-### Endpoints
+### Quick Reference
+
+#### Authentication Endpoints
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout user (requires auth)
+- `POST /api/auth/refresh` - Refresh JWT token (requires auth)
+
+#### Chart Management Endpoints
+- `GET /api/charts` - Get all charts (paginated, requires auth)
+- `POST /api/charts` - Create new chart (requires auth)
+- `GET /api/charts/:id` - Get specific chart (requires auth)
+- `PUT /api/charts/:id` - Update chart (requires auth)
+- `DELETE /api/charts/:id` - Delete chart (requires auth)
+
+#### Calculation & Interpretation Endpoints
+- `POST /api/charts/calculate` - Calculate birth chart (requires auth)
+- `GET /api/charts/:id/interpretation` - Get BMAD & Symbolon interpretation (requires auth)
 
 #### Health Check
-```http
-GET /api/health
+- `GET /api/health` - API health status
+- `GET /` - API information
+
+For detailed request/response examples and schemas, visit the **Swagger UI** when the server is running.
+
+### Using the API
+
+#### 1. Register & Login
+
+```bash
+# Register
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123","name":"John Doe"}'
+
+# Login
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123"}'
 ```
 
-**Response:**
+#### 2. Create a Chart
+
+```bash
+curl -X POST http://localhost:5000/api/charts \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Birth Chart",
+    "birthDate": "1990-01-15",
+    "birthTime": "14:30",
+    "latitude": 40.7128,
+    "longitude": -74.0060
+  }'
+```
+
+#### 3. Calculate Chart Data
+
+```bash
+curl -X POST http://localhost:5000/api/charts/calculate \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "birthDate": "1990-01-15",
+    "birthTime": "14:30",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "houseSystem": "Placidus"
+  }'
+```
+
+### Importing Postman Collection
+
+1. Open Postman
+2. Click "Import" button
+3. Select `backend/Roots-Revealed-API.postman_collection.json`
+4. The collection includes all endpoints with example requests
+5. Set the `baseUrl` variable to your server URL
+6. Authenticate using Register/Login to auto-populate `authToken`
+
+### Authentication
+
+Protected endpoints require a JWT token in the Authorization header:
+
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+Tokens are obtained from `/api/auth/register` or `/api/auth/login` responses and can be refreshed using `/api/auth/refresh`.
+
+### Pagination
+
+List endpoints support pagination via query parameters:
+
+```
+GET /api/charts?page=1&limit=10
+```
+
+Response includes pagination metadata:
+
 ```json
 {
   "success": true,
-  "message": "API is healthy",
-  "timestamp": "2025-10-28T20:00:00.000Z",
-  "uptime": 1234.56
-}
-```
-
-#### Authentication
-
-##### Register
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "password123",
-  "name": "John Doe"
-}
-```
-
-##### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "password123"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "data": {
-    "user": {
-      "id": "123",
-      "email": "user@example.com",
-      "name": "John Doe"
-    },
-    "token": "jwt.token.here"
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 25,
+    "totalPages": 3
   }
 }
 ```
 
-#### Charts (Protected - Requires Authentication)
+### Error Handling
 
-##### Get All Charts
-```http
-GET /api/charts
-Authorization: Bearer <token>
-```
+All endpoints return consistent error responses:
 
-##### Create Chart
-```http
-POST /api/charts
-Authorization: Bearer <token>
-Content-Type: application/json
-
+```json
 {
-  "name": "My Birth Chart",
-  "birthDate": "1990-01-15",
-  "birthTime": "14:30",
-  "latitude": 40.7128,
-  "longitude": -74.0060
+  "success": false,
+  "error": {
+    "message": "Error description",
+    "statusCode": 400
+  }
 }
 ```
+
+Common status codes:
+- `200` - Success
+- `201` - Created
+- `400` - Bad Request (validation error)
+- `401` - Unauthorized (missing/invalid token)
+- `404` - Not Found
+- `500` - Internal Server Error
+
+### Example: Complete Workflow
 
 ## 🔧 Development
 
