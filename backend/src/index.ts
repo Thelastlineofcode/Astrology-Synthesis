@@ -3,8 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { errorHandler } from './middleware/errorHandler';
 import healthRouter from './routes/health';
-import authRouter from './routes/auth';
+import authRouter, { createAdminUser } from './routes/auth';
 import chartRouter from './routes/chart';
+import adminRouter from './routes/admin';
 
 // Load environment variables
 dotenv.config();
@@ -20,10 +21,14 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Initialize admin user
+createAdminUser().catch(console.error);
+
 // Routes
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/charts', chartRouter);
+app.use('/api/admin', adminRouter);
 
 // Root route
 app.get('/', (_req, res) => {
@@ -34,6 +39,7 @@ app.get('/', (_req, res) => {
       health: '/api/health',
       auth: '/api/auth',
       charts: '/api/charts',
+      admin: '/api/admin',
     },
   });
 });

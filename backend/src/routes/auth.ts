@@ -8,7 +8,7 @@ import { createError } from '../middleware/errorHandler';
 const router = Router();
 
 // In-memory user storage (replace with database in production)
-const users: Array<{ id: string; email: string; password: string; name: string }> = [];
+const users: Array<{ id: string; email: string; password: string; name: string; role: 'user' | 'admin' }> = [];
 
 // Register route
 router.post(
@@ -44,12 +44,13 @@ router.post(
         email,
         password: hashedPassword,
         name,
+        role: 'user' as 'user' | 'admin',
       };
       users.push(user);
 
       // Generate token
       const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, role: user.role },
         config.jwt.secret,
         { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
       );
@@ -58,7 +59,7 @@ router.post(
         success: true,
         message: 'User registered successfully',
         data: {
-          user: { id: user.id, email: user.email, name: user.name },
+          user: { id: user.id, email: user.email, name: user.name, role: user.role },
           token,
         },
       });
@@ -98,7 +99,7 @@ router.post(
 
       // Generate token
       const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, role: user.role },
         config.jwt.secret,
         { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
       );
@@ -107,7 +108,7 @@ router.post(
         success: true,
         message: 'Login successful',
         data: {
-          user: { id: user.id, email: user.email, name: user.name },
+          user: { id: user.id, email: user.email, name: user.name, role: user.role },
           token,
         },
       });
@@ -116,5 +117,23 @@ router.post(
     }
   }
 );
+
+// Helper function to create initial admin user for testing
+export const createAdminUser = async () => {
+  const adminExists = users.find((u) => u.email === 'admin@roots-revealed.com');
+  if (!adminExists) {
+    const hashedPassword = await bcrypt.hash('admin123', config.bcrypt.saltRounds);
+    users.push({
+      id: 'admin-1',
+      email: 'admin@roots-revealed.com',
+      password: hashedPassword,
+      name: 'Admin User',
+      role: 'admin',
+    });
+  }
+};
+
+// Export users for admin routes
+export const getUsers = () => users;
 
 export default router;
