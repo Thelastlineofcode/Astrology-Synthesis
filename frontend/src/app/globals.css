@@ -1,0 +1,163 @@
+/* Basic CSS reset and body styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============================================
+   TYPOGRAPHY SYSTEM - Roots Revealed
+   Font families, sizes, weights, line heights
+   ============================================ */
+
+:root {
+  /* Font Families */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;    /* Headings */
+  --line-height-normal: 1.5;   /* Body text */
+  --line-height-loose: 1.75;   /* Loose text */
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;  /* Large headings */
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;    /* Small text, uppercase */
+  
+  /* Desktop Font Sizes */
+  --font-size-h1: 40px;
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-tiny: 12px;
+  
+  /* Map legacy tokens to theme system tokens */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+}
+
+/* Tablet breakpoint - moderate reduction */
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 36px;
+    --font-size-h2: 28px;
+    --font-size-h3: 22px;
+    --font-size-h4: 18px;
+    --font-size-body: 16px;
+    --font-size-small: 14px;
+  }
+}
+
+/* Mobile breakpoint - significant reduction */
+@media (max-width: 480px) {
+  :root {
+    --font-size-h1: 28px;
+    --font-size-h2: 24px;
+    --font-size-h3: 20px;
+    --font-size-h4: 18px;
+    --font-size-body: 16px;
+    --font-size-small: 14px;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base Typography Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+/* Body Text Styles */
+p {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Small and Tiny Text */
+small, .text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-normal);
+}
+
+.text-tiny {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-normal);
+}
+
+/* Monospace Text - for code, data, coordinates */
+code, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-small);
+}
+
+/* Utility Classes for Text Styles */
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.line-height-tight { line-height: var(--line-height-tight); }
+.line-height-normal { line-height: var(--line-height-normal); }
+.line-height-loose { line-height: var(--line-height-loose); }

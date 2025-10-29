@@ -1,328 +1,520 @@
-# Astrology Synthesis - Sidereal/Vedic Astrology Chart Calculator
+# Roots Revealed - Full-Stack Astrological Analysis System
 
-A full-stack web application for calculating sidereal (Vedic) and tropical astrological charts with planetary positions, house cusps, and aspect calculations.
+A modern full-stack astrology application built with Next.js, Node.js/Express, TypeScript, and PostgreSQL.
 
-## 🌟 Features
+## 🏗️ Architecture
 
-- **Accurate Sidereal Calculations**: Uses Swiss Ephemeris for precise astronomical data
-- **Multiple Ayanamsas**: Supports Lahiri, Raman, Krishnamurti, and Fagan-Bradley
-- **House Systems**: Placidus, Koch, Whole Sign, Equal, and Regiomontanus
-- **Comprehensive Aspects**: Major and minor aspects with orb calculations
-- **React Frontend**: Modern, responsive UI for chart input and display
-- **REST API**: Clean JSON API for integration with other tools
+### Technology Stack
+
+#### Frontend
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: React Context API / Zustand (future)
+- **Testing**: Jest + React Testing Library
+
+#### Backend
+- **Runtime**: Node.js 20+
+- **Framework**: Express.js
+- **Language**: TypeScript
+- **Database**: PostgreSQL 14+
+- **Authentication**: JWT (JSON Web Tokens)
+- **Testing**: Jest + Supertest
+
+#### DevOps
+- **Version Control**: Git
+- **Package Manager**: npm
+- **Linting**: ESLint
+- **Formatting**: Prettier
+- **CI/CD**: GitHub Actions (future)
 
 ## 📋 Prerequisites
 
-- **Python 3.8+** with pip
-- **Node.js 14+** with npm
-- **Swiss Ephemeris data files** (see setup instructions)
-- **macOS, Linux, or Windows**
+### Required Software
 
-## 🚀 Quick Start (macOS)
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
+- **PostgreSQL**: v14.0 or higher
+- **Git**: v2.30 or higher
 
-### 1. Clone and Navigate
+### Verify Installations
 
 ```bash
-cd /Users/houseofobi/Documents/GitHub/Astrology-Synthesis
+node --version  # Should be v18+
+npm --version   # Should be v9+
+psql --version  # Should be v14+
+git --version   # Should be v2.30+
 ```
 
-### 2. Download Swiss Ephemeris Files
+## 🚀 Quick Start
 
-**Option A: Automated Script (Recommended)**
+### 1. Clone the Repository
 
 ```bash
-chmod +x download_ephemeris.sh
-./download_ephemeris.sh
+git clone https://github.com/Thelastlineofcode/Astrology-Synthesis.git
+cd Astrology-Synthesis
 ```
 
-**Option B: Manual Download with curl**
+### 2. Set Up PostgreSQL Database
 
 ```bash
-cd backend/ephe
-curl -O https://www.astro.com/ftp/swisseph/ephe/sepl_18.se1
-curl -O https://www.astro.com/ftp/swisseph/ephe/semo_18.se1
-curl -O https://www.astro.com/ftp/swisseph/ephe/seas_18.se1
-cd ../..
+# Start PostgreSQL service
+# macOS (Homebrew):
+brew services start postgresql@14
+
+# Linux (Ubuntu/Debian):
+sudo systemctl start postgresql
+
+# Create database and user
+psql postgres
 ```
 
-**Option C: One-Line Command**
-
-```bash
-cd backend/ephe && curl -O https://www.astro.com/ftp/swisseph/ephe/sepl_18.se1 -O https://www.astro.com/ftp/swisseph/ephe/semo_18.se1 -O https://www.astro.com/ftp/swisseph/ephe/seas_18.se1 && cd ../..
+In the PostgreSQL console:
+```sql
+CREATE DATABASE roots_revealed_db;
+CREATE USER roots_revealed_user WITH ENCRYPTED PASSWORD 'your_secure_password';
+GRANT ALL PRIVILEGES ON DATABASE roots_revealed_db TO roots_revealed_user;
+\q
 ```
 
 ### 3. Backend Setup
 
 ```bash
 cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python test_astrology_app.py  # Should show 3 tests passing
+
+# Copy environment file
+cp .env.example .env
+
+# Edit .env with your database credentials
+nano .env  # or use your preferred editor
+
+# Install dependencies
+npm install
+
+# Build TypeScript
+npm run build
+
+# Run tests
+npm test
+
+# Start development server
+npm run dev
 ```
+
+Backend will run on: **http://localhost:5000**
 
 ### 4. Frontend Setup
 
 ```bash
 cd ../frontend
+
+# Copy environment file
+cp .env.local.example .env.local
+
+# Install dependencies
 npm install
+
+# Run tests
+npm test
+
+# Start development server
+npm run dev
 ```
 
-### 5. Run the Application
+Frontend will run on: **http://localhost:3000**
 
-**Terminal 1 (Backend)**:
+## 📁 Project Structure
+
+```
+Roots-Revealed/
+├── backend/                    # Node.js/Express API
+│   ├── src/
+│   │   ├── config/            # Configuration files
+│   │   ├── controllers/       # Request handlers
+│   │   ├── middleware/        # Express middleware
+│   │   ├── models/            # Database models
+│   │   ├── routes/            # API routes
+│   │   ├── services/          # Business logic
+│   │   ├── types/             # TypeScript types
+│   │   ├── utils/             # Utility functions
+│   │   ├── __tests__/         # Tests
+│   │   └── index.ts           # Entry point
+│   ├── dist/                  # Compiled JavaScript
+│   ├── .env.example           # Environment template
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── jest.config.js
+│
+├── frontend/                   # Next.js Application
+│   ├── src/
+│   │   ├── app/               # Next.js App Router
+│   │   │   ├── __tests__/     # Page tests
+│   │   │   ├── layout.tsx     # Root layout
+│   │   │   ├── page.tsx       # Home page
+│   │   │   └── globals.css    # Global styles
+│   │   ├── components/        # React components
+│   │   ├── lib/               # Utility libraries
+│   │   └── types/             # TypeScript types
+│   ├── public/                # Static assets
+│   ├── .env.local.example     # Environment template
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── tailwind.config.ts
+│   └── jest.config.ts
+│
+├── .env.example               # Root environment template
+├── .gitignore
+├── README.md
+├── CONTRIBUTING.md            # Contribution guidelines
+├── DEVELOPMENT.md             # Development setup guide
+└── DATABASE_SCHEMA.md         # Database schema documentation
+```
+
+## 🔑 Environment Variables
+
+### Backend (.env)
+
+```env
+# Server
+PORT=5000
+NODE_ENV=development
+
+# JWT
+JWT_SECRET=your-secret-key-change-in-production
+JWT_EXPIRES_IN=24h
+
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=roots_revealed_db
+DB_USER=roots_revealed_user
+DB_PASSWORD=your_password_here
+
+# CORS
+CORS_ORIGIN=http://localhost:3000
+```
+
+### Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+NEXT_PUBLIC_DEBUG=true
+```
+
+## 🧪 Testing
+
+### Backend Tests
+
 ```bash
 cd backend
-source venv/bin/activate
-python app.py
+
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm test -- --coverage
 ```
 
-**Terminal 2 (Frontend)**:
+### Frontend Tests
+
 ```bash
 cd frontend
-npm start
+
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
 ```
 
-Open **http://localhost:3000** in your browser!
+## 📖 API Documentation
 
-## 📡 API Documentation
+### Interactive Documentation
 
-### Endpoints
+The API includes comprehensive interactive documentation:
 
-#### `GET /api/health`
-Health check endpoint.
+- **Swagger UI**: [http://localhost:5000/api-docs](http://localhost:5000/api-docs)
+- **OpenAPI Spec**: [http://localhost:5000/api-docs.json](http://localhost:5000/api-docs.json)
+- **Postman Collection**: `backend/Roots-Revealed-API.postman_collection.json`
 
-**Response**:
-```json
-{
-  "status": "healthy",
-  "timestamp": "2025-10-22T22:53:00.000000"
-}
+### Base URL
+
+```
+http://localhost:5000/api
 ```
 
-#### `POST /api/chart`
-Calculate natal chart with planets, houses, and aspects.
+### Quick Reference
 
-**Request Body**:
+#### Authentication Endpoints
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout user (requires auth)
+- `POST /api/auth/refresh` - Refresh JWT token (requires auth)
+
+#### Chart Management Endpoints
+- `GET /api/charts` - Get all charts (paginated, requires auth)
+- `POST /api/charts` - Create new chart (requires auth)
+- `GET /api/charts/:id` - Get specific chart (requires auth)
+- `PUT /api/charts/:id` - Update chart (requires auth)
+- `DELETE /api/charts/:id` - Delete chart (requires auth)
+
+#### Calculation & Interpretation Endpoints
+- `POST /api/charts/calculate` - Calculate birth chart (requires auth)
+- `GET /api/charts/:id/interpretation` - Get BMAD & Symbolon interpretation (requires auth)
+
+#### Health Check
+- `GET /api/health` - API health status
+- `GET /` - API information
+
+For detailed request/response examples and schemas, visit the **Swagger UI** when the server is running.
+
+### Using the API
+
+#### 1. Register & Login
+
+```bash
+# Register
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123","name":"John Doe"}'
+
+# Login
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"password123"}'
+```
+
+#### 2. Create a Chart
+
+```bash
+curl -X POST http://localhost:5000/api/charts \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My Birth Chart",
+    "birthDate": "1990-01-15",
+    "birthTime": "14:30",
+    "latitude": 40.7128,
+    "longitude": -74.0060
+  }'
+```
+
+#### 3. Calculate Chart Data
+
+```bash
+curl -X POST http://localhost:5000/api/charts/calculate \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "birthDate": "1990-01-15",
+    "birthTime": "14:30",
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "houseSystem": "Placidus"
+  }'
+```
+
+### Importing Postman Collection
+
+1. Open Postman
+2. Click "Import" button
+3. Select `backend/Roots-Revealed-API.postman_collection.json`
+4. The collection includes all endpoints with example requests
+5. Set the `baseUrl` variable to your server URL
+6. Authenticate using Register/Login to auto-populate `authToken`
+
+### Authentication
+
+Protected endpoints require a JWT token in the Authorization header:
+
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+Tokens are obtained from `/api/auth/register` or `/api/auth/login` responses and can be refreshed using `/api/auth/refresh`.
+
+### Pagination
+
+List endpoints support pagination via query parameters:
+
+```
+GET /api/charts?page=1&limit=10
+```
+
+Response includes pagination metadata:
+
 ```json
 {
-  "birthData": {
-    "year": 1990,
-    "month": 8,
-    "day": 15,
-    "hour": 14,
-    "minute": 30,
-    "latitude": 29.7604,
-    "longitude": -95.3698
-  },
-  "options": {
-    "zodiacType": "sidereal",
-    "ayanamsa": "LAHIRI",
-    "houseSystem": "P",
-    "includeMinorAspects": false
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 25,
+    "totalPages": 3
   }
 }
 ```
 
-**Parameters**:
-- `zodiacType`: "sidereal" or "tropical" (default: "tropical")
-- `ayanamsa`: "LAHIRI", "RAMAN", "KRISHNAMURTI", "FAGAN_BRADLEY" (default: "LAHIRI")
-- `houseSystem`: "P" (Placidus), "K" (Koch), "W" (Whole Sign), "E" (Equal), "R" (Regiomontanus)
-- `includeMinorAspects`: boolean (default: false)
+### Error Handling
 
-**Response**:
+All endpoints return consistent error responses:
+
 ```json
 {
-  "success": true,
-  "chart": {
-    "planets": { ... },
-    "houses": [ ... ],
-    "angles": { ... },
-    "aspects": [ ... ],
-    "chartInfo": { ... }
-  },
-  "birthData": { ... }
+  "success": false,
+  "error": {
+    "message": "Error description",
+    "statusCode": 400
+  }
 }
 ```
 
-#### `GET /api/zodiac-info`
-Get static zodiac signs, symbols, and house system information.
+Common status codes:
+- `200` - Success
+- `201` - Created
+- `400` - Bad Request (validation error)
+- `401` - Unauthorized (missing/invalid token)
+- `404` - Not Found
+- `500` - Internal Server Error
 
-### Testing the API
+### Example: Complete Workflow
+
+## 🔧 Development
+
+### Code Quality
 
 ```bash
-# Health check
-curl http://localhost:5000/api/health
+# Lint backend
+cd backend && npm run lint
 
-# Calculate chart (Houston, TX example)
-curl -X POST http://localhost:5000/api/chart \
-  -H "Content-Type: application/json" \
-  -d '{
-    "birthData": {
-      "year": 1990,
-      "month": 8,
-      "day": 15,
-      "hour": 14,
-      "minute": 30,
-      "latitude": 29.7604,
-      "longitude": -95.3698
-    },
-    "options": {
-      "zodiacType": "sidereal",
-      "ayanamsa": "LAHIRI",
-      "houseSystem": "P",
-      "includeMinorAspects": false
-    }
-  }'
+# Lint frontend
+cd frontend && npm run lint
+
+# Format code
+npm run format
 ```
 
-## 🗂️ Project Structure
+### Building for Production
 
-```
-Astrology-Synthesis/
-├── backend/
-│   ├── api/
-│   │   ├── __init__.py
-│   │   └── routes.py           # API endpoints
-│   ├── calculations/
-│   │   ├── __init__.py
-│   │   ├── chart_calculator.py # Chart calculation logic
-│   │   └── aspects.py          # Aspect calculations
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   └── constants.py        # Zodiac signs, planets, aspects
-│   ├── ephe/                   # Swiss Ephemeris data (download separately)
-│   ├── app.py                  # Flask application factory
-│   ├── config.py               # Configuration
-│   ├── requirements.txt        # Python dependencies
-│   └── test_astrology_app.py   # Unit tests
-├── frontend/
-│   ├── src/
-│   │   ├── components/         # React components
-│   │   ├── App.js
-│   │   └── index.js
-│   ├── public/
-│   ├── package.json
-│   └── node_modules/
-├── download_ephemeris.sh   # Automated ephemeris downloader
-└── README.md
-```
-
-## 🧠 Testing
-
-### Backend Unit Tests
-
+#### Backend
 ```bash
 cd backend
-source venv/bin/activate
-python test_astrology_app.py
+npm run build
+npm start
 ```
 
-Expected output: 3 tests passing
-- Health check endpoint
-- Missing data validation
-- Valid chart calculation
+#### Frontend
+```bash
+cd frontend
+npm run build
+npm start
+```
 
-## 🐛 Troubleshooting
+## 🛠️ Troubleshooting
 
-### "Swiss Ephemeris file not found"
-- Ensure ephemeris files are downloaded to `backend/ephe/`
-- Run the `download_ephemeris.sh` script
-- Or download manually from: https://www.astro.com/ftp/swisseph/ephe/
+### Database Connection Issues
 
-### "Module not found" errors
-- Activate virtual environment: `source venv/bin/activate`
-- Reinstall dependencies: `pip install -r requirements.txt`
+1. Verify PostgreSQL is running:
+```bash
+pg_isready
+```
 
-### Frontend can't connect to backend
-- Ensure backend is running on port 5000
-- Check proxy setting in `frontend/package.json`
-- Verify CORS configuration in `backend/app.py`
+2. Check database exists:
+```bash
+psql -U roots_revealed_user -d roots_revealed_db
+```
 
-### "wget: command not found" (macOS)
-- Use `curl` instead (built into macOS)
-- Or install wget: `brew install wget`
-- Use the provided `download_ephemeris.sh` script
+3. Verify credentials in `.env` file
 
-## 🎯 Sample Test Data
+### Port Already in Use
 
-**Houston, TX**:
-- Latitude: 29.7604°N
-- Longitude: -95.3698°W
-- Date: August 15, 1990
-- Time: 14:30 (2:30 PM)
+```bash
+# Kill process on port 5000 (backend)
+lsof -ti:5000 | xargs kill -9
 
-**New York, NY**:
-- Latitude: 40.7128°N
-- Longitude: -74.0060°W
+# Kill process on port 3000 (frontend)
+lsof -ti:3000 | xargs kill -9
+```
 
-**Mumbai, India**:
-- Latitude: 19.0760°N
-- Longitude: 72.8777°E
+### Module Not Found Errors
 
-## 📚 Technologies Used
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
 
-### Backend
-- **Flask 3.0.0** - Web framework
-- **pyswisseph 2.10.3.2** - Astronomical calculations
-- **Flask-CORS 4.0.0** - CORS support
-- **python-dateutil 2.8.2** - Date utilities
-- **pytz 2023.3** - Timezone handling
+## 📚 Additional Documentation
 
-### Frontend
-- **React 18.2.0** - UI framework
-- **Axios 1.6.0** - HTTP client
-- **React Scripts 5.0.1** - Build tooling
+### Development Guides
+- [CONTRIBUTING.md](./CONTRIBUTING.md) - Git workflow and contribution guidelines
+- [DEVELOPMENT.md](./DEVELOPMENT.md) - Detailed development setup
+- [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) - Database design and schema
 
-## ⚠️ Important Notes
+### Design System
+- [COLOR_PALETTE_AND_DESIGN_SYSTEM.md](./COLOR_PALETTE_AND_DESIGN_SYSTEM.md) - Comprehensive design system, color palette, typography, and component patterns
+- [ACCESSIBILITY_TESTING_GUIDE.md](./ACCESSIBILITY_TESTING_GUIDE.md) - WCAG 2.1 compliance and accessibility testing guidelines
+- [Quick Reference Guide](./docs/redesign/QUICK_REFERENCE.md) - Quick reference for developers
 
-- **Time zones**: All input times should be in local time; the app handles UTC conversion
-- **Coordinate format**: Latitude (positive = North) and Longitude (positive = East, negative = West)
-- **Sidereal preference**: This application is optimized for sidereal/Vedic astrology
-- **Accuracy**: Uses Swiss Ephemeris for professional-grade astronomical accuracy
+## 🗺️ Roadmap
 
-## 🔮 Supported Features
+### Phase 1: Foundation (Current)
+- [x] Project setup with Next.js and Express
+- [x] TypeScript configuration
+- [x] JWT authentication
+- [x] PostgreSQL integration ready
+- [x] Testing frameworks
+- [x] Code quality tools (ESLint, Prettier)
 
-### Zodiac Systems
-- **Tropical** (Western astrology)
-- **Sidereal** (Vedic/Indian astrology)
+### Phase 2: Core Features (Next)
+- [ ] User profile management
+- [ ] Chart calculation engine
+- [ ] Real database integration
+- [ ] Chart storage and retrieval
+- [ ] API rate limiting
 
-### Ayanamsas (Sidereal)
-- **LAHIRI** - Most common in Vedic astrology
-- **RAMAN** - Traditional Indian system
-- **KRISHNAMURTI** - KP astrology
-- **FAGAN_BRADLEY** - Western sidereal
+### Phase 3: Advanced Features
+- [ ] Chart visualization
+- [ ] Aspect calculations
+- [ ] Transit calculations
+- [ ] Synastry analysis
+- [ ] PDF chart reports
 
-### House Systems
-- **Placidus (P)** - Most popular
-- **Koch (K)** - Time-based
-- **Whole Sign (W)** - Traditional Vedic
-- **Equal (E)** - Equal 30° divisions
-- **Regiomontanus (R)** - Medieval system
+### Phase 4: Production
+- [ ] Deployment configuration
+- [ ] CI/CD pipeline
+- [ ] Performance optimization
+- [ ] Security hardening
+- [ ] Monitoring and logging
 
-### Planets
-- Sun, Moon, Mercury, Venus, Mars
-- Jupiter, Saturn, Uranus, Neptune, Pluto
-- North Node (Rahu), South Node (Ketu)
-- Chiron
+## 🤝 Contributing
 
-### Aspects
-**Major**: Conjunction (0°), Opposition (180°), Trine (120°), Square (90°), Sextile (60°)
+We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
-**Minor**: Quincunx (150°), Semisextile (30°), Semisquare (45°), Sesquisquare (135°), Quintile (72°), Biquintile (144°)
+## 📄 License
 
-## 🔮 Future Enhancements
+ISC License
 
-See `TODO.md` for planned features:
-- Divisional charts (D9, D10, etc.)
-- Dasha calculations (Vimshottari)
-- Yogas detection
-- Transit calculations
-- Synastry (chart comparison)
-- Chart visualization wheel
+## 👥 Authors
+
+- Product Management Team
+- Development Team
+
+## 📞 Support
+
+For issues and questions:
+- Create an issue on GitHub
+- Contact the development team
 
 ---
 
-**Last Updated**: October 22, 2025  
+**Last Updated**: October 28, 2025  
 **Version**: 1.0.0  
-**Status**: Production Ready
+**Status**: Development

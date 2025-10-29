@@ -1,0 +1,2643 @@
+{
+  "timestamp": "2025-10-28T16:45:40.110924",
+  "person_name": "Sample Analysis",
+  "birth_data": {
+    "year": 1990,
+    "month": 8,
+    "day": 15,
+    "hour": 14,
+    "minute": 30,
+    "latitude": 40.7128,
+    "longitude": -74.006
+  },
+  "personality_profile": {
+    "profile_id": "8069ee99-6db0-4759-a752-3adc1d5e24ef",
+    "name": "Sample Analysis",
+    "birth_data": {
+      "year": 1990,
+      "month": 8,
+      "day": 15,
+      "hour": 14,
+      "minute": 30,
+      "latitude": 40.7128,
+      "longitude": -74.006
+    },
+    "traits": [
+      {
+        "name": "Emotional Sensitivity",
+        "dimension": "emotional_stability",
+        "intensity": 4,
+        "description": "Deep emotional sensitivity and intuition",
+        "astrological_source": {
+          "type": "moon_sign",
+          "sign": "Cancer",
+          "degree": 22.3
+        },
+        "keywords": [
+          "sensitive",
+          "intuitive",
+          "caring",
+          "protective"
+        ]
+      }
+    ],
+    "behavioral_patterns": [],
+    "dominant_dimensions": [
+      "emotional_stability"
+    ],
+    "summary": "Key personality strengths include Emotional Sensitivity. Profile based on analysis of 1 personality traits.",
+    "created_timestamp": "2025-10-28T16:45:40.109805",
+    "chart_data_reference": {
+      "planets": {
+        "Sun": {
+          "sign": "Leo",
+          "degree": 15.5,
+          "house": 5
+        },
+        "Moon": {
+          "sign": "Cancer",
+          "degree": 22.3,
+          "house": 4
+        },
+        "Mercury": {
+          "sign": "Virgo",
+          "degree": 8.1,
+          "house": 6
+        },
+        "Venus": {
+          "sign": "Leo",
+          "degree": 20.0,
+          "house": 5
+        },
+        "Mars": {
+          "sign": "Aries",
+          "degree": 12.0,
+          "house": 1
+        },
+        "Jupiter": {
+          "sign": "Sagittarius",
+          "degree": 8.0,
+          "house": 9
+        },
+        "Saturn": {
+          "sign": "Capricorn",
+          "degree": 18.0,
+          "house": 10
+        }
+      },
+      "houses": {
+        "house_1": {
+          "sign": "Aries",
+          "degree": 12.0
+        },
+        "house_4": {
+          "sign": "Cancer",
+          "degree": 12.0
+        },
+        "house_5": {
+          "sign": "Leo",
+          "degree": 12.0
+        },
+        "house_6": {
+          "sign": "Virgo",
+          "degree": 12.0
+        },
+        "house_9": {
+          "sign": "Sagittarius",
+          "degree": 12.0
+        },
+        "house_10": {
+          "sign": "Capricorn",
+          "degree": 12.0
+        }
+      },
+      "aspects": [
+        {
+          "planet1": "Sun",
+          "planet2": "Venus",
+          "aspect": "conjunction",
+          "orb": 4.5
+        },
+        {
+          "planet1": "Moon",
+          "planet2": "Mars",
+          "aspect": "trine",
+          "orb": 2.3
+        },
+        {
+          "planet1": "Mercury",
+          "planet2": "Jupiter",
+          "aspect": "sextile",
+          "orb": 3.1
+        }
+      ]
+    }
+  },
+  "behavior_profile": {
+    "profile_id": "addb9cae-ee0e-4c86-abde-0f8399e29fbb",
+    "person_name": "Sample Analysis",
+    "birth_data": {
+      "year": 1990,
+      "month": 8,
+      "day": 15,
+      "hour": 14,
+      "minute": 30,
+      "latitude": 40.7128,
+      "longitude": -74.006
+    },
+    "current_indicators": [
+      {
+        "indicator_id": "5d7d461b-8fe0-4ab2-a45a-6f3dab007b98",
+        "name": "Assertive Leadership",
+        "category": "professional",
+        "description": "Strong drive for leadership in professional settings",
+        "intensity": 0.8,
+        "astrological_basis": {
+          "planet": "Mars",
+          "sign": "Aries",
+          "house": 1
+        },
+        "manifestation_age": null,
+        "life_phases": [
+          "young_adult",
+          "adult"
+        ]
+      }
+    ],
+    "behavior_triggers": [
+      {
+        "trigger_id": "99143304-5487-4ef6-b377-9bc66d0e92cf",
+        "name": "Emotional Sensitivity Trigger",
+        "astrological_condition": {
+          "planet": "Moon",
+          "sign": "Cancer",
+          "degree_range": [
+            0,
+            30
+          ]
+        },
+        "triggered_behaviors": [
+          "emotional reactivity",
+          "protective behavior",
+          "nurturing actions"
+        ],
+        "activation_probability": 0.6,
+        "duration_hours": 12,
+        "intensity_pattern": "wave",
+        "historical_activations": []
+      },
+      {
+        "trigger_id": "859a5f73-5ef9-4fb4-92c0-34177f1be7df",
+        "name": "Competitive Trigger",
+        "astrological_condition": {
+          "planet": "Mars",
+          "sign": "Aries",
+          "degree_range": [
+            0,
+            30
+          ]
+        },
+        "triggered_behaviors": [
+          "increased assertiveness",
+          "competitive behavior",
+          "leadership actions"
+        ],
+        "activation_probability": 0.7,
+        "duration_hours": 48,
+        "intensity_pattern": "immediate",
+        "historical_activations": []
+      }
+    ],
+    "future_predictions": [
+      {
+        "prediction_id": "200dec02-c46b-4a01-b866-1e2def62df1f",
+        "target_date": "2025-11-27",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "0552800a-a0e5-4e69-a70f-15aaf45d5ea9",
+        "target_date": "2025-11-27",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "f305a698-055f-435b-a310-3c772ce5359f",
+        "target_date": "2025-11-27",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "7c7b0b23-439a-444c-96c7-9b42384ae089",
+        "target_date": "2025-11-27",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "7d6816c7-effd-45d9-b205-b80031c8c2c0",
+        "target_date": "2025-11-27",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "fa199422-debd-4600-b4ff-1519b272bd2a",
+        "target_date": "2025-11-27",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "e12010b9-cabc-43cd-b82f-f1e8a219770d",
+        "target_date": "2025-11-27",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "88fbdb7f-4a35-49c4-bcc2-4754f498cc0e",
+        "target_date": "2025-11-27",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "f5293836-6073-4240-b5e6-b5f11b10e1ba",
+        "target_date": "2025-11-27",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "c3cf0642-7b03-41bc-adde-b14306f991c0",
+        "target_date": "2025-11-27",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-11-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "0a33ca14-97a9-41c8-ba92-bf1d01194a25",
+        "target_date": "2025-12-27",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "1a48760d-8275-4b62-b839-385c5ff4eced",
+        "target_date": "2025-12-27",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "32bdda54-fc29-44cb-838e-43ba5b83845c",
+        "target_date": "2025-12-27",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "1a4f30ff-41ab-4fb1-b758-b153941dcd07",
+        "target_date": "2025-12-27",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "a5759b35-61ef-47e8-be5d-098a6a95bda9",
+        "target_date": "2025-12-27",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "3c91575e-a41f-45af-9663-213b4b3dcd72",
+        "target_date": "2025-12-27",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "9308ad90-67c9-4879-9a1e-52e17f12036d",
+        "target_date": "2025-12-27",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "30616373-af49-4744-a168-c515eecce796",
+        "target_date": "2025-12-27",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "99f9df06-f822-4d9b-98fb-43fcd7c76ddd",
+        "target_date": "2025-12-27",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "7c3b596c-c476-47f1-8e26-7805575e9b3d",
+        "target_date": "2025-12-27",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2025-12-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "6ce29a9f-cfdc-4516-a0ab-7848e3160a8f",
+        "target_date": "2026-01-26",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "8174f42b-cf38-4546-ad74-8f2626970a57",
+        "target_date": "2026-01-26",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "407875fb-7232-4fec-8950-024c2da457f7",
+        "target_date": "2026-01-26",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "103ca6f2-8ce6-48d5-9f24-88fea7081bf4",
+        "target_date": "2026-01-26",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "a4266685-dbd0-4b87-954b-19b4c5cb9923",
+        "target_date": "2026-01-26",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "5afe1b3a-3e25-437d-8ae5-fb0d60d883e4",
+        "target_date": "2026-01-26",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "49faf0f6-77ce-4e92-a71a-a4c1752918cb",
+        "target_date": "2026-01-26",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "99bc6053-dcaa-487e-9b74-f433787270ca",
+        "target_date": "2026-01-26",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "3b8a16fe-b177-4c4e-8c26-7ead41516f77",
+        "target_date": "2026-01-26",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "3388890f-9ad4-4c00-9fc8-0bb636364d40",
+        "target_date": "2026-01-26",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-01-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "cd242034-5686-456d-80e9-d51a93fd9713",
+        "target_date": "2026-02-25",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "223872b6-5376-46d1-8551-8062aaf83b4d",
+        "target_date": "2026-02-25",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "dafdeeca-492d-43eb-9909-b1fe4449d195",
+        "target_date": "2026-02-25",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "6d602f8f-b5ea-46fb-a5d1-80523167d03d",
+        "target_date": "2026-02-25",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "2dba486c-7dfb-4d80-b5fa-bfc24a5980b9",
+        "target_date": "2026-02-25",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "4f5ebb42-d7e7-4af2-8c3d-25a2148039a1",
+        "target_date": "2026-02-25",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "e2e7410e-c304-4a5f-ad8f-c15e028d1ec0",
+        "target_date": "2026-02-25",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "40591108-1e03-4282-8b9b-57ecda114f58",
+        "target_date": "2026-02-25",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "caef522d-204f-4dbe-a2b5-321b836ff4a0",
+        "target_date": "2026-02-25",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "df2f33d0-7687-4b1d-86f7-e7012721a450",
+        "target_date": "2026-02-25",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-02-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "2d3f1396-5522-4852-8f91-2a8e2a1532be",
+        "target_date": "2026-03-27",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "e283dcf1-04b5-4ad3-8725-1421ae1025ff",
+        "target_date": "2026-03-27",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "f843dbf7-73f2-473a-a53c-6f4b38faccc7",
+        "target_date": "2026-03-27",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "f34c7a13-a40a-4ca8-9c0f-2656a1227b57",
+        "target_date": "2026-03-27",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "152593f0-d4e7-4303-8660-f3b6d80d7671",
+        "target_date": "2026-03-27",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "b75b786a-fbbb-4c36-8649-f81560ed3dc6",
+        "target_date": "2026-03-27",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "f874a70a-c892-4fa8-89f7-3f58f4c07448",
+        "target_date": "2026-03-27",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "b5e78dc6-d40d-4637-81a0-3e20676b0216",
+        "target_date": "2026-03-27",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "be8d6df1-db1e-45c2-9b08-e98f44110306",
+        "target_date": "2026-03-27",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "547679b2-9058-481b-94e3-64788a51e9fd",
+        "target_date": "2026-03-27",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-03-27",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "830c2bf4-a413-459d-beda-545688a1164d",
+        "target_date": "2026-04-26",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "ea007a7d-9c2e-4826-a192-971a7bc4243a",
+        "target_date": "2026-04-26",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "4a9969f9-573b-4b22-b303-cf513f111688",
+        "target_date": "2026-04-26",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "f95b84bb-fb94-4abe-b51d-bac7aba7df8f",
+        "target_date": "2026-04-26",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "410ac30a-aa6e-4c53-88e0-b0dcb19d2f81",
+        "target_date": "2026-04-26",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "db225251-87b4-4c03-97b2-4ee4182acc51",
+        "target_date": "2026-04-26",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "5cbec45b-f8a9-4fa8-8b20-5bd8c11b61a0",
+        "target_date": "2026-04-26",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "ff8ff45d-a88b-44e4-83b4-3a7a5d9fd002",
+        "target_date": "2026-04-26",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "f0074f39-e607-4482-b49e-4240389987a1",
+        "target_date": "2026-04-26",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "6a1fe36a-d6e3-4f76-92a6-2ce8e909877b",
+        "target_date": "2026-04-26",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-04-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "6fe4080f-ce01-44cc-b8a6-6aad4022062b",
+        "target_date": "2026-05-26",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "105e2454-d5f7-4773-b8ad-154b382e568f",
+        "target_date": "2026-05-26",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "6c2683eb-5e17-4ae3-bc5a-a8b7d37e4b6a",
+        "target_date": "2026-05-26",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "d994f8e3-ab11-4ea9-819a-b8c650278bc3",
+        "target_date": "2026-05-26",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "a64eeb91-526d-48d4-bff7-0623b71bcc72",
+        "target_date": "2026-05-26",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "7d72da6f-ee34-4040-b591-a77de76f2ef4",
+        "target_date": "2026-05-26",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "c5b10a30-4528-4380-a6b3-cece38367e8a",
+        "target_date": "2026-05-26",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "14359ad0-7ee5-429b-ab85-fbf38dc86e14",
+        "target_date": "2026-05-26",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "d1b0960a-e194-4eb7-935f-334643d2ba29",
+        "target_date": "2026-05-26",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "b72f4272-3b36-4ac3-abbf-8b6378a2dd5c",
+        "target_date": "2026-05-26",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-05-26",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "ed2ef7d5-a5e1-4eb1-a27d-1248a288af3a",
+        "target_date": "2026-06-25",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "b890bc2d-7144-4c13-97d7-c47a47cb59cc",
+        "target_date": "2026-06-25",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "8ba25caf-b89b-4a6f-b45a-fb9a434f40f8",
+        "target_date": "2026-06-25",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "50a87bc2-8899-4204-95f8-7293a1e85d9d",
+        "target_date": "2026-06-25",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "a205f7ff-b658-490d-bfa5-8b01d451b3d4",
+        "target_date": "2026-06-25",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "5de05d48-40d8-4d3c-8861-e065a5b5aa56",
+        "target_date": "2026-06-25",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "1e4a4c5b-d055-4429-bea7-7f354a06d778",
+        "target_date": "2026-06-25",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "674f0db9-d3bd-4026-868a-4a73bfe60e78",
+        "target_date": "2026-06-25",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "1a3dcb78-a9a0-4448-ab02-3d2a80d6b155",
+        "target_date": "2026-06-25",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "64f2d5e6-a452-404c-a217-7ef549b5e7cc",
+        "target_date": "2026-06-25",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-06-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "6484f401-7fe5-45c5-b41a-3c14acae76c5",
+        "target_date": "2026-07-25",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "1c1ed122-0705-4e6a-bdda-e279bad7057c",
+        "target_date": "2026-07-25",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "6772a1f5-77dc-4a3a-a995-837a845add04",
+        "target_date": "2026-07-25",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "7cf49ea0-85f5-41d1-9759-2dddd1cba18f",
+        "target_date": "2026-07-25",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "fd4ed2a9-d395-4827-873c-efd91db33600",
+        "target_date": "2026-07-25",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "14346983-5a17-44ee-908a-789d3678df6f",
+        "target_date": "2026-07-25",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "c1a64dee-e29e-4487-a88a-a6f1d28b366a",
+        "target_date": "2026-07-25",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "3165f825-59ca-448f-8f5f-c1b3e4bb737e",
+        "target_date": "2026-07-25",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "95d3a762-c272-457d-ab50-dbad1989f8e3",
+        "target_date": "2026-07-25",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "e6137a2e-a292-4913-90fd-e7158c178515",
+        "target_date": "2026-07-25",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-07-25",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "81146b4f-1761-498f-be7e-1aee66f3f48c",
+        "target_date": "2026-08-24",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "e5c69baf-7faf-42c9-9857-3240d0e72c66",
+        "target_date": "2026-08-24",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "5eb8f186-337c-4fe2-ba0e-753395f8924b",
+        "target_date": "2026-08-24",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "44095fe9-b59f-45f3-b136-0ba6e4a3491c",
+        "target_date": "2026-08-24",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "9d8ac187-8586-4994-9ad9-06baf6b60238",
+        "target_date": "2026-08-24",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "9333df8a-65ff-4e0d-b6d6-7abd51d510f4",
+        "target_date": "2026-08-24",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "3cc8efb7-a736-4506-a795-4dac79e62349",
+        "target_date": "2026-08-24",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "3cf1b346-9022-418f-af6f-47aec36ae09d",
+        "target_date": "2026-08-24",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "d1ca38cd-45fc-4758-80ae-c008e00d7ee0",
+        "target_date": "2026-08-24",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "466f4dea-3c3a-4b68-bf95-059f7f0667ad",
+        "target_date": "2026-08-24",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-08-24",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "9686d881-518c-4e33-adfa-d346543f0e8b",
+        "target_date": "2026-09-23",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "7a21dd30-87f7-46fe-a337-5e7aabdda73e",
+        "target_date": "2026-09-23",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "a5d58728-c596-47a1-86bb-84df0d8cf067",
+        "target_date": "2026-09-23",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "6f5283c7-e248-4cc3-a69b-838e824f6acc",
+        "target_date": "2026-09-23",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "ba715c38-ea9e-4168-a119-4790e1359ab8",
+        "target_date": "2026-09-23",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "f9d571f6-6685-41ea-8477-39c210a9cc62",
+        "target_date": "2026-09-23",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "a1fe425a-1bab-43d0-9090-7858da431c16",
+        "target_date": "2026-09-23",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "b4d8b377-1d75-406a-894f-01e479000cf5",
+        "target_date": "2026-09-23",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "9f1c9812-73bd-4296-8c3c-65331c2776bf",
+        "target_date": "2026-09-23",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "78ab7f99-ce79-4c34-9dd1-9c568b653227",
+        "target_date": "2026-09-23",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-09-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      },
+      {
+        "prediction_id": "16df7adb-f41d-402f-836d-b32d96ac2699",
+        "target_date": "2026-10-23",
+        "category": "social",
+        "predicted_behaviors": [
+          "Enhanced social behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive social expressions"
+        ]
+      },
+      {
+        "prediction_id": "6b4a190e-f98b-405d-a6d8-f17e578817e2",
+        "target_date": "2026-10-23",
+        "category": "professional",
+        "predicted_behaviors": [
+          "Enhanced professional behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive professional expressions"
+        ]
+      },
+      {
+        "prediction_id": "18b72a6f-f460-4d6a-8db2-92e248569ec8",
+        "target_date": "2026-10-23",
+        "category": "romantic",
+        "predicted_behaviors": [
+          "Enhanced romantic behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive romantic expressions"
+        ]
+      },
+      {
+        "prediction_id": "866557df-5b2c-4ccb-a491-8a70ada9cc62",
+        "target_date": "2026-10-23",
+        "category": "family",
+        "predicted_behaviors": [
+          "Enhanced family behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive family expressions"
+        ]
+      },
+      {
+        "prediction_id": "1ae6f657-2fc7-4b09-84d0-fcc7b1c63583",
+        "target_date": "2026-10-23",
+        "category": "creative",
+        "predicted_behaviors": [
+          "Enhanced creative behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive creative expressions"
+        ]
+      },
+      {
+        "prediction_id": "47ededf2-5d40-4b94-ad31-4a1ba9f8eff7",
+        "target_date": "2026-10-23",
+        "category": "spiritual",
+        "predicted_behaviors": [
+          "Enhanced spiritual behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive spiritual expressions"
+        ]
+      },
+      {
+        "prediction_id": "5f7a3faa-9cf7-4e8e-bdb8-b876b8262f10",
+        "target_date": "2026-10-23",
+        "category": "financial",
+        "predicted_behaviors": [
+          "Enhanced financial behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive financial expressions"
+        ]
+      },
+      {
+        "prediction_id": "caab8da8-8381-4147-bf8f-eec11e1b566e",
+        "target_date": "2026-10-23",
+        "category": "health",
+        "predicted_behaviors": [
+          "Enhanced health behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive health expressions"
+        ]
+      },
+      {
+        "prediction_id": "6d5bc644-7696-4fcb-8cd6-798506ea49fb",
+        "target_date": "2026-10-23",
+        "category": "communication",
+        "predicted_behaviors": [
+          "Enhanced communication behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive communication expressions"
+        ]
+      },
+      {
+        "prediction_id": "242a58d0-f4ee-4150-b581-46029fa365fa",
+        "target_date": "2026-10-23",
+        "category": "decision_making",
+        "predicted_behaviors": [
+          "Enhanced decision_making behaviors"
+        ],
+        "confidence": 3,
+        "astrological_transits": [],
+        "duration_days": 30,
+        "intensity_curve": [
+          [
+            "2026-10-23",
+            0.5
+          ]
+        ],
+        "recommendations": [
+          "Focus on positive decision_making expressions"
+        ]
+      }
+    ],
+    "evolution_history": [],
+    "dominant_categories": [
+      "professional"
+    ],
+    "behavioral_summary": "Primary behavioral focus areas: professional. Strong patterns identified in 1 areas. Analysis based on 1 behavioral indicators.",
+    "last_updated": "2025-10-28T16:45:40.110865"
+  },
+  "future_predictions": [
+    {
+      "prediction_id": "14242fff-cc31-4604-99c6-08f427f29741",
+      "target_date": "2024-06-15",
+      "category": "professional",
+      "predicted_behaviors": [
+        "Activation of professional patterns"
+      ],
+      "confidence": 3,
+      "astrological_transits": [],
+      "duration_days": 1,
+      "intensity_curve": [
+        [
+          "2024-06-15",
+          0.6
+        ]
+      ],
+      "recommendations": [
+        "Be mindful of professional impulses"
+      ]
+    }
+  ],
+  "analysis_summary": "Personality analysis revealed 1 traits with dominant focus on emotional_stability. Behavioral analysis identified 1 key indicators primarily in professional areas. Generated 1 future predictions with varying confidence levels."
+}

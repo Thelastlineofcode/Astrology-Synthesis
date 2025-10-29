@@ -1,0 +1,18 @@
+.card {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  box-shadow: var(--elevation-1);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+.card:not(.card--no-padding) {
+  padding: var(--space-4);
+}
+
+.card--hoverable {
+  cursor: pointer;
+}
+
+.card--hoverable:hover {
+  box-shadow: var(--elevation-2);
+}
