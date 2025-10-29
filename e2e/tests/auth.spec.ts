@@ -37,11 +37,11 @@ test.describe('Authentication Flow', () => {
 
       await page.click('button[type="submit"]');
 
-      // Check for error message
-      await expect(page.getByText(/valid email/i)).toBeVisible({ timeout: 3000 }).catch(() => {
-        // Validation might prevent submission
-        expect(page.locator('input[name="email"]:invalid')).toBeVisible();
-      });
+      // Check for error message or validation state
+      const hasErrorMessage = await page.getByText(/valid email/i).isVisible({ timeout: 3000 }).catch(() => false);
+      const hasInvalidInput = await page.locator('input[name="email"]:invalid').count() > 0;
+      
+      expect(hasErrorMessage || hasInvalidInput).toBeTruthy();
     });
 
     test('should show error for weak password', async ({ page }) => {
@@ -55,39 +55,44 @@ test.describe('Authentication Flow', () => {
       await page.click('button[type="submit"]');
 
       // Check for password error
-      await expect(page.getByText(/password.*characters/i)).toBeVisible({ timeout: 3000 }).catch(() => {
-        expect(page.locator('input[name="password"]:invalid')).toBeVisible();
-      });
+      const hasErrorMessage = await page.getByText(/password.*characters/i).isVisible({ timeout: 3000 }).catch(() => false);
+      const hasInvalidInput = await page.locator('input[name="password"]:invalid').count() > 0;
+      
+      expect(hasErrorMessage || hasInvalidInput).toBeTruthy();
     });
   });
 
   test.describe('Login', () => {
-    test.beforeAll(async ({ browser }) => {
-      // Register a user for login tests
-      const page = await browser.newPage();
+    // Use a unique email for login tests to avoid conflicts
+    const loginTestEmail = `login-${Date.now()}@example.com`;
+
+    test.beforeEach(async ({ page }) => {
+      // Register a user before each login test for isolation
       await page.goto('/auth/register');
       
-      await page.fill('input[name="name"]', testUser.name).catch(() => {});
-      await page.fill('input[name="email"]', `login-${testUser.email}`).catch(() => {});
-      await page.fill('input[name="password"]', testUser.password).catch(() => {});
-      await page.fill('input[name="confirmPassword"]', testUser.password).catch(() => {});
-      await page.click('button[type="submit"]').catch(() => {});
+      await page.fill('input[name="name"]', testUser.name);
+      await page.fill('input[name="email"]', loginTestEmail);
+      await page.fill('input[name="password"]', testUser.password);
+      await page.fill('input[name="confirmPassword"]', testUser.password);
+      await page.click('button[type="submit"]');
       
-      await page.close();
+      // Wait for registration to complete
+      await page.waitForTimeout(1000);
     });
 
     test('should login with valid credentials', async ({ page }) => {
       await page.goto('/auth/login');
 
-      await page.fill('input[name="email"]', `login-${testUser.email}`);
+      await page.fill('input[name="email"]', loginTestEmail);
       await page.fill('input[name="password"]', testUser.password);
 
       await page.click('button[type="submit"]');
 
-      // Should redirect to dashboard
-      await page.waitForURL('**/dashboard', { timeout: 5000 }).catch(() => {
-        expect(page.getByText(/success/i)).toBeVisible();
-      });
+      // Should redirect to dashboard or show success
+      const onDashboard = await page.waitForURL('**/dashboard', { timeout: 5000 }).then(() => true).catch(() => false);
+      const hasSuccess = await page.getByText(/success/i).isVisible({ timeout: 1000 }).catch(() => false);
+      
+      expect(onDashboard || hasSuccess).toBeTruthy();
     });
 
     test('should show error for invalid credentials', async ({ page }) => {
@@ -117,11 +122,11 @@ test.describe('Authentication Flow', () => {
     test('should redirect to login when accessing protected route', async ({ page }) => {
       await page.goto('/dashboard');
 
-      // Should redirect to login
-      await page.waitForURL('**/auth/login', { timeout: 5000 }).catch(() => {
-        // Or show an auth prompt
-        expect(page.getByText(/log.*in/i)).toBeVisible();
-      });
+      // Should redirect to login or show auth prompt
+      const onLoginPage = await page.waitForURL('**/auth/login', { timeout: 5000 }).then(() => true).catch(() => false);
+      const hasLoginPrompt = await page.getByText(/log.*in/i).isVisible({ timeout: 1000 }).catch(() => false);
+      
+      expect(onLoginPage || hasLoginPrompt).toBeTruthy();
     });
   });
 });

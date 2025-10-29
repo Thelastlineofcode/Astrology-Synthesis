@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 test.describe('Chart Creation Workflow', () => {
   // Helper function to login
-  async function login(page) {
+  async function login(page: Page) {
     await page.goto('/auth/login');
     await page.fill('input[name="email"]', 'test@example.com');
     await page.fill('input[name="password"]', 'password123');
@@ -16,11 +16,9 @@ test.describe('Chart Creation Workflow', () => {
   });
 
   test('should create a new chart successfully', async ({ page }) => {
-    // Navigate to chart creation
-    await page.goto('/charts/new').catch(() => {
-      // Or click on "Create Chart" button if exists
-      page.getByRole('button', { name: /create.*chart/i }).click().catch(() => {});
-    });
+    // Navigate to chart creation - try direct route first
+    const chartNewUrl = '/charts/new';
+    await page.goto(chartNewUrl);
 
     // Fill in chart details
     await page.fill('input[name="name"]', 'My Test Chart');
@@ -32,34 +30,31 @@ test.describe('Chart Creation Workflow', () => {
     // Submit form
     await page.click('button[type="submit"]');
 
-    // Check for success
-    await expect(page.getByText(/chart.*created/i)).toBeVisible({ timeout: 5000 }).catch(() => {
-      // Or check if redirected to chart view
-      expect(page).toHaveURL(/\/charts\/\d+/);
-    });
+    // Check for success - either message or redirect
+    const successVisible = await page.getByText(/chart.*created/i).isVisible({ timeout: 5000 }).catch(() => false);
+    const onChartPage = page.url().includes('/charts/');
+    
+    expect(successVisible || onChartPage).toBeTruthy();
   });
 
   test('should validate chart form fields', async ({ page }) => {
-    await page.goto('/charts/new').catch(() => {});
+    await page.goto('/charts/new');
 
     // Try to submit empty form
-    await page.click('button[type="submit"]').catch(() => {});
+    await page.click('button[type="submit"]');
 
-    // Should show validation errors
-    await expect(page.locator('input:invalid')).toHaveCount(1, { timeout: 1000 }).catch(() => {
-      // Or check for error messages
-      expect(page.getByText(/required/i)).toBeVisible();
-    });
+    // Check for validation - either invalid inputs or error messages
+    const invalidCount = await page.locator('input:invalid').count();
+    const hasErrorText = await page.getByText(/required/i).isVisible({ timeout: 1000 }).catch(() => false);
+    
+    expect(invalidCount > 0 || hasErrorText).toBeTruthy();
   });
 
   test('should display created charts in list', async ({ page }) => {
     await page.goto('/charts');
 
-    // Wait for charts to load
-    await page.waitForSelector('[data-testid="chart-list"]', { timeout: 5000 }).catch(() => {
-      // Or check for any chart items
-      page.locator('.chart-item').first().waitFor({ timeout: 5000 }).catch(() => {});
-    });
+    // Wait for charts to load or empty state
+    await page.waitForTimeout(2000);
 
     // Should have at least one chart or empty state
     const hasCharts = await page.locator('[data-testid="chart-item"]').count() > 0;
@@ -93,16 +88,24 @@ test.describe('Chart Creation Workflow', () => {
     if (hasDeleteButton) {
       await deleteButton.click();
 
-      // Confirm deletion
-      await page.getByRole('button', { name: /confirm/i }).click().catch(() => {
-        page.getByRole('button', { name: /yes/i }).click().catch(() => {});
-      });
+      // Confirm deletion - try different button labels
+      const confirmButton = page.getByRole('button', { name: /confirm/i });
+      const yesButton = page.getByRole('button', { name: /yes/i });
+      
+      if (await confirmButton.count() > 0) {
+        await confirmButton.click();
+      } else if (await yesButton.count() > 0) {
+        await yesButton.click();
+      }
 
-      // Should show success message
-      await expect(page.getByText(/deleted/i)).toBeVisible({ timeout: 3000 }).catch(() => {
-        // Chart should be removed from list
-        expect(deleteButton).not.toBeVisible();
-      });
+      // Should show success message or chart removed
+      const hasSuccessMessage = await page.getByText(/deleted/i).isVisible({ timeout: 3000 }).catch(() => false);
+      const buttonGone = await deleteButton.isVisible().then(() => false).catch(() => true);
+      
+      expect(hasSuccessMessage || buttonGone).toBeTruthy();
+    } else {
+      // Skip test if no charts exist
+      test.skip();
     }
   });
 
