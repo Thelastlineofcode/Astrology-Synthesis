@@ -9,6 +9,9 @@ import ListWidget from '@/components/dashboard/ListWidget';
 import ChartWidget from '@/components/dashboard/ChartWidget';
 import DateRangeFilter from '@/components/dashboard/DateRangeFilter';
 import CategoryFilter from '@/components/dashboard/CategoryFilter';
+import ContactsWidget from '@/components/dashboard/ContactsWidget';
+import CoursesWidget from '@/components/dashboard/CoursesWidget';
+import WaitlistWidget from '@/components/dashboard/WaitlistWidget';
 
 // Mock data for demonstration
 const mockStats = {
@@ -58,6 +61,41 @@ const categories = [
   'Solar Returns',
   'Progressions',
   'Composite Charts',
+];
+
+const mockAdvisees = [
+  { 
+    id: '1', 
+    name: 'Luis Arcos', 
+    identifier: 'AA0004',
+    phone: '(480) 250 1555',
+    email: 'larcos@highpoint.com',
+    avatar: 'LA'
+  },
+  { 
+    id: '2', 
+    name: 'Madison Peterson', 
+    identifier: 'AAD027',
+    phone: '(480) 250 1555',
+    email: 'larcos@highpoint.com',
+    avatar: 'MP'
+  },
+];
+
+const mockShoppingCart = [
+  { id: '1', name: 'General Biology I', code: 'ACCT 201-1301', status: 'Open' as const },
+  { id: '2', name: 'Financial Accounting', code: 'ACCT 201-1301', status: 'Open' as const },
+  { id: '3', name: 'Yoga', code: 'ACCT 201-1301', status: 'Open' as const },
+];
+
+const mockWaitlist = [
+  { 
+    id: '1', 
+    name: 'Financial Accounting I', 
+    code: 'ACCT 201 - 2001 (1697)',
+    status: 'Waiting',
+    position: 1
+  },
 ];
 
 export default function StatisticsPage() {
@@ -148,8 +186,8 @@ export default function StatisticsPage() {
             />
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Main Content Grid - 3 Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             {/* Left Column */}
             <div className="space-y-6">
               <ListWidget 
@@ -159,20 +197,36 @@ export default function StatisticsPage() {
                 emptyMessage="No pending tasks"
               />
               
-              <ChartWidget 
-                title="Reading Types Distribution"
-                data={mockChartData}
-                type="bar"
+              <CoursesWidget
+                title="Shopping Cart"
+                subtitle="2019 Spring"
+                courses={mockShoppingCart}
+                viewMoreLink="#"
               />
             </div>
 
-            {/* Right Column */}
+            {/* Middle Column */}
             <div className="space-y-6">
               <ListWidget 
                 title="Holds" 
                 items={mockHolds}
                 viewMoreLink="#"
                 emptyMessage="No items on hold"
+              />
+              
+              <WaitlistWidget
+                title="Waitlist"
+                subtitle="2019 Spring"
+                items={mockWaitlist}
+                viewMoreLink="#"
+              />
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-6">
+              <ContactsWidget
+                title="Advisees"
+                contacts={mockAdvisees}
               />
               
               <ListWidget 
@@ -182,6 +236,15 @@ export default function StatisticsPage() {
                 emptyMessage="No messages"
               />
             </div>
+          </div>
+
+          {/* Chart Section - Full Width */}
+          <div className="mb-6">
+            <ChartWidget 
+              title="Reading Types Distribution"
+              data={mockChartData}
+              type="bar"
+            />
           </div>
 
           {/* Additional Analytics Section */}
