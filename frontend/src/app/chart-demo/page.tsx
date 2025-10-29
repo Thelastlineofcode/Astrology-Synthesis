@@ -1,119 +1,81 @@
 "use client";
 
 import React from 'react';
-import { ChartCanvas, PlanetTable, HouseTable } from '@/components/chart';
-import { ChartData } from '@/types/chart';
+import ChartCanvas from '@/components/chart/ChartCanvas';
+import { mockChartData } from '@/components/chart/mockChartData';
 
-// Sample chart data based on the my_chart_calculator.py output format
-const sampleChartData: ChartData = {
-  planets: {
-    'Sun': { sign: 'Leo', degree: 15.5, house: 5, retrograde: false, longitude: 135.5 },
-    'Moon': { sign: 'Cancer', degree: 22.3, house: 4, retrograde: false, longitude: 112.3 },
-    'Mercury': { sign: 'Virgo', degree: 8.1, house: 6, retrograde: false, longitude: 158.1 },
-    'Venus': { sign: 'Leo', degree: 28.7, house: 5, retrograde: false, longitude: 148.7 },
-    'Mars': { sign: 'Gemini', degree: 12.4, house: 3, retrograde: false, longitude: 72.4 },
-    'Jupiter': { sign: 'Sagittarius', degree: 5.2, house: 9, retrograde: true, longitude: 245.2 },
-    'Saturn': { sign: 'Capricorn', degree: 18.9, house: 10, retrograde: false, longitude: 288.9 },
-    'Uranus': { sign: 'Aquarius', degree: 2.1, house: 11, retrograde: false, longitude: 302.1 },
-    'Neptune': { sign: 'Pisces', degree: 14.5, house: 12, retrograde: false, longitude: 344.5 },
-    'Pluto': { sign: 'Capricorn', degree: 22.8, house: 10, retrograde: false, longitude: 292.8 },
-    'North Node': { sign: 'Gemini', degree: 8.5, house: 3, retrograde: true, longitude: 68.5 },
-    'South Node': { sign: 'Sagittarius', degree: 8.5, house: 9, retrograde: true, longitude: 248.5 },
-    'Chiron': null
-  },
-  houses: {
-    'house_1': { sign: 'Aries', degree: 12.0, longitude: 12.0 },
-    'house_2': { sign: 'Taurus', degree: 8.5, longitude: 38.5 },
-    'house_3': { sign: 'Gemini', degree: 5.2, longitude: 65.2 },
-    'house_4': { sign: 'Cancer', degree: 12.0, longitude: 102.0 },
-    'house_5': { sign: 'Leo', degree: 18.7, longitude: 138.7 },
-    'house_6': { sign: 'Virgo', degree: 21.3, longitude: 171.3 },
-    'house_7': { sign: 'Libra', degree: 12.0, longitude: 192.0 },
-    'house_8': { sign: 'Scorpio', degree: 8.5, longitude: 218.5 },
-    'house_9': { sign: 'Sagittarius', degree: 5.2, longitude: 245.2 },
-    'house_10': { sign: 'Capricorn', degree: 12.0, longitude: 282.0 },
-    'house_11': { sign: 'Aquarius', degree: 18.7, longitude: 318.7 },
-    'house_12': { sign: 'Pisces', degree: 21.3, longitude: 351.3 }
-  },
-  ascendant: { sign: 'Aries', degree: 12.0, longitude: 12.0 },
-  midheaven: { sign: 'Capricorn', degree: 12.0, longitude: 282.0 }
-};
-
-export default function ChartDemo() {
+export default function ChartDemoPage() {
   return (
-    <div style={{
-      padding: '48px 24px',
-      maxWidth: '1400px',
+    <div style={{ 
+      padding: '2rem', 
+      maxWidth: '800px', 
       margin: '0 auto',
-      minHeight: '100vh',
-      background: 'var(--bg-primary)'
+      minHeight: '100vh'
     }}>
-      <div style={{ marginBottom: '48px', textAlign: 'center' }}>
-        <h1 style={{ 
-          fontSize: '2.5rem', 
-          marginBottom: '16px',
-          color: 'var(--color-primary)'
-        }}>
-          Birth Chart Visualization
-        </h1>
-        <p style={{ 
-          fontSize: '1.125rem', 
-          color: 'var(--text-secondary)',
-          maxWidth: '600px',
-          margin: '0 auto'
-        }}>
-          Interactive astrological chart with planetary positions, house cusps, and zodiac wheel.
-        </p>
-      </div>
-
-      {/* Chart Canvas */}
-      <div style={{ marginBottom: '48px' }}>
-        <ChartCanvas chartData={sampleChartData} width={600} height={600} />
-      </div>
-
-      {/* Two-column layout for tables */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
-        gap: '24px',
-        marginBottom: '48px'
+      <h1 style={{ 
+        fontSize: '2rem', 
+        fontWeight: 'bold', 
+        marginBottom: '1rem',
+        color: 'var(--text-primary)'
       }}>
-        {/* Planet Table */}
-        <PlanetTable planets={sampleChartData.planets} />
-
-        {/* House Table */}
-        <HouseTable 
-          houses={sampleChartData.houses}
-          ascendant={sampleChartData.ascendant}
-          midheaven={sampleChartData.midheaven}
-        />
-      </div>
-
-      {/* Information section */}
-      <div style={{ 
-        marginTop: '48px', 
-        padding: '24px',
-        background: 'var(--bg-secondary)',
-        borderRadius: '8px',
-        textAlign: 'center'
+        Interactive Natal Chart Demo
+      </h1>
+      
+      <p style={{ 
+        marginBottom: '2rem', 
+        color: 'var(--text-secondary)',
+        lineHeight: '1.6'
       }}>
+        This is a demonstration of the interactive natal chart canvas. 
+        Try zooming in and out, toggling aspects, and hovering over planets 
+        to see their details.
+      </p>
+      
+      <div style={{ marginBottom: '2rem' }}>
         <h2 style={{ 
-          fontSize: '1.5rem', 
-          marginBottom: '16px',
-          color: 'var(--color-primary)'
+          fontSize: '1.25rem', 
+          fontWeight: '600', 
+          marginBottom: '0.5rem',
+          color: 'var(--text-primary)'
         }}>
-          About Birth Charts
+          Sample Chart Data
         </h2>
-        <p style={{ 
-          color: 'var(--text-secondary)',
-          lineHeight: '1.6',
-          maxWidth: '800px',
-          margin: '0 auto'
-        }}>
-          A birth chart (natal chart) is a snapshot of the heavens at the exact moment and 
-          location of your birth. It shows the positions of planets in zodiac signs and houses, 
-          revealing unique personality traits, life patterns, and potential paths for growth.
+        <p style={{ color: 'var(--text-secondary)' }}>
+          Birth: December 19, 1984, Metairie, LA
         </p>
+      </div>
+      
+      <ChartCanvas chartData={mockChartData} />
+      
+      <div style={{ 
+        marginTop: '3rem', 
+        padding: '1.5rem', 
+        backgroundColor: 'var(--bg-secondary)',
+        borderRadius: '8px'
+      }}>
+        <h3 style={{ 
+          fontSize: '1.125rem', 
+          fontWeight: '600', 
+          marginBottom: '1rem',
+          color: 'var(--text-primary)'
+        }}>
+          Features
+        </h3>
+        <ul style={{ 
+          listStyleType: 'disc', 
+          paddingLeft: '1.5rem',
+          color: 'var(--text-primary)',
+          lineHeight: '1.8'
+        }}>
+          <li>Interactive SVG chart with zoom controls</li>
+          <li>12 houses with division lines</li>
+          <li>Planet glyphs with accurate positioning</li>
+          <li>Zodiac signs around perimeter</li>
+          <li>Toggleable aspect lines between planets</li>
+          <li>Hover tooltips showing planet details</li>
+          <li>Keyboard accessible (Tab to planets, Enter to show tooltip)</li>
+          <li>Responsive design for mobile, tablet, and desktop</li>
+        </ul>
       </div>
     </div>
   );
