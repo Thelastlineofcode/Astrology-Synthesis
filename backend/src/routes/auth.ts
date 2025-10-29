@@ -15,9 +15,7 @@ router.post(
   '/register',
   [
     body('email').isEmail().withMessage('Valid email is required'),
-    body('password')
-      .isLength({ min: 6 })
-      .withMessage('Password must be at least 6 characters'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
     body('name').notEmpty().withMessage('Name is required'),
   ],
   async (req: Request, res: Response, next: NextFunction) => {
@@ -48,11 +46,9 @@ router.post(
       users.push(user);
 
       // Generate token
-      const token = jwt.sign(
-        { id: user.id, email: user.email },
-        config.jwt.secret,
-        { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
-      );
+      const token = jwt.sign({ id: user.id, email: user.email }, config.jwt.secret, {
+        expiresIn: config.jwt.expiresIn,
+      } as jwt.SignOptions);
 
       res.status(201).json({
         success: true,
@@ -97,11 +93,9 @@ router.post(
       }
 
       // Generate token
-      const token = jwt.sign(
-        { id: user.id, email: user.email },
-        config.jwt.secret,
-        { expiresIn: config.jwt.expiresIn } as jwt.SignOptions
-      );
+      const token = jwt.sign({ id: user.id, email: user.email }, config.jwt.secret, {
+        expiresIn: config.jwt.expiresIn,
+      } as jwt.SignOptions);
 
       res.json({
         success: true,

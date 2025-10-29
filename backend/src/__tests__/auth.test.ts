@@ -10,9 +10,7 @@ describe('Auth Routes', () => {
 
   describe('POST /api/auth/register', () => {
     it('should register a new user', async () => {
-      const response = await request(app)
-        .post('/api/auth/register')
-        .send(testUser);
+      const response = await request(app).post('/api/auth/register').send(testUser);
 
       expect(response.status).toBe(201);
       expect(response.body.success).toBe(true);
@@ -49,12 +47,10 @@ describe('Auth Routes', () => {
     });
 
     it('should login with valid credentials', async () => {
-      const response = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: 'login@example.com',
-          password: testUser.password,
-        });
+      const response = await request(app).post('/api/auth/login').send({
+        email: 'login@example.com',
+        password: testUser.password,
+      });
 
       expect(response.status).toBe(200);
       expect(response.body.success).toBe(true);
@@ -62,24 +58,20 @@ describe('Auth Routes', () => {
     });
 
     it('should fail with invalid credentials', async () => {
-      const response = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: 'login@example.com',
-          password: 'wrongpassword',
-        });
+      const response = await request(app).post('/api/auth/login').send({
+        email: 'login@example.com',
+        password: 'wrongpassword',
+      });
 
       expect(response.status).toBe(401);
       expect(response.body.success).toBe(false);
     });
 
     it('should fail with non-existent user', async () => {
-      const response = await request(app)
-        .post('/api/auth/login')
-        .send({
-          email: 'nonexistent@example.com',
-          password: 'password123',
-        });
+      const response = await request(app).post('/api/auth/login').send({
+        email: 'nonexistent@example.com',
+        password: 'password123',
+      });
 
       expect(response.status).toBe(401);
       expect(response.body.success).toBe(false);

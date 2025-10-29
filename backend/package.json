@@ -14,7 +14,12 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\""
   },
-  "keywords": ["astrology", "api", "express", "typescript"],
+  "keywords": [
+    "astrology",
+    "api",
+    "express",
+    "typescript"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

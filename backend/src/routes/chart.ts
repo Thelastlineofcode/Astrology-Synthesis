@@ -32,7 +32,9 @@ router.post(
   [
     body('name').notEmpty().withMessage('Chart name is required'),
     body('birthDate').isISO8601().withMessage('Valid birth date is required'),
-    body('birthTime').matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/).withMessage('Valid time format required (HH:MM)'),
+    body('birthTime')
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)
+      .withMessage('Valid time format required (HH:MM)'),
     body('latitude').isFloat({ min: -90, max: 90 }).withMessage('Valid latitude required'),
     body('longitude').isFloat({ min: -180, max: 180 }).withMessage('Valid longitude required'),
   ],
@@ -68,9 +70,7 @@ router.post(
 
 // Get specific chart
 router.get('/:id', authenticateToken, (req: AuthRequest, res: Response): void => {
-  const chart = charts.find(
-    (c) => c.id === req.params.id && c.userId === req.user?.id
-  );
+  const chart = charts.find((c) => c.id === req.params.id && c.userId === req.user?.id);
 
   if (!chart) {
     res.status(404).json({
@@ -88,9 +88,7 @@ router.get('/:id', authenticateToken, (req: AuthRequest, res: Response): void =>
 
 // Delete chart
 router.delete('/:id', authenticateToken, (req: AuthRequest, res: Response): void => {
-  const index = charts.findIndex(
-    (c) => c.id === req.params.id && c.userId === req.user?.id
-  );
+  const index = charts.findIndex((c) => c.id === req.params.id && c.userId === req.user?.id);
 
   if (index === -1) {
     res.status(404).json({
