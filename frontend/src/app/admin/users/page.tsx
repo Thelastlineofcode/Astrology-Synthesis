@@ -49,7 +49,7 @@ const UserManagement = () => {
     e.preventDefault();
     try {
       // TODO: Replace with actual API call
-      console.log('Creating user:', formData);
+      console.log('Creating user:', { email: formData.email, name: formData.name, role: formData.role });
       setShowCreateModal(false);
       resetForm();
       fetchUsers();
@@ -62,7 +62,7 @@ const UserManagement = () => {
     e.preventDefault();
     try {
       // TODO: Replace with actual API call
-      console.log('Updating user:', editingUser?.id, formData);
+      console.log('Updating user:', editingUser?.id, { email: formData.email, name: formData.name, role: formData.role });
       setEditingUser(null);
       resetForm();
       fetchUsers();

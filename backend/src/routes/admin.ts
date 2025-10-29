@@ -11,6 +11,10 @@ const router = Router();
 // All admin routes require admin authentication
 router.use(authenticateAdmin);
 
+// NOTE: In production, these routes should be rate-limited to prevent abuse.
+// Consider using express-rate-limit or similar middleware.
+// Example: router.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+
 // Get all users (admin only)
 router.get('/users', (_req: Request, res: Response, next: NextFunction) => {
   try {
