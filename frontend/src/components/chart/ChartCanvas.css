@@ -1,0 +1,240 @@
+/* Chart Canvas Styles */
+.chart-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Controls */
+.chart-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3);
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.zoom-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-neutral-50);
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: var(--color-primary-light);
+}
+
+.zoom-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.zoom-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.zoom-level {
+  min-width: 50px;
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.aspect-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-primary);
+}
+
+.aspect-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Chart Container */
+.chart-container {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: var(--space-4);
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  transition: transform 250ms ease;
+  transform-origin: center center;
+}
+
+/* Planet groups */
+.planet-group {
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.planet-group:hover .planet-bg,
+.planet-group:focus .planet-bg {
+  fill: var(--color-accent-light);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.planet-group:focus {
+  outline: none;
+}
+
+.planet-group:focus .planet-bg {
+  filter: drop-shadow(0 0 4px var(--color-primary));
+}
+
+/* Zodiac signs */
+.zodiac-sign {
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+}
+
+/* Tooltip */
+.chart-tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-primary);
+  padding: var(--space-3);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 10;
+  min-width: 150px;
+  border: 1px solid var(--border-color);
+}
+
+.chart-tooltip strong {
+  display: block;
+  font-size: var(--font-size-base);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.chart-tooltip div {
+  font-size: var(--font-size-small);
+  color: var(--text-primary);
+  margin-top: var(--space-1);
+}
+
+.chart-tooltip .retrograde {
+  color: var(--color-error);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Placeholder */
+.chart-placeholder {
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  color: var(--text-secondary);
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 767px) {
+  .chart-canvas {
+    max-width: 100%;
+  }
+  
+  .chart-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .zoom-button {
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+  }
+  
+  .chart-container {
+    padding: var(--space-2);
+  }
+  
+  .chart-tooltip {
+    font-size: var(--font-size-small);
+    padding: var(--space-2);
+    min-width: 120px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chart-canvas {
+    max-width: 550px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chart-canvas {
+    max-width: 600px;
+  }
+  
+  .chart-container {
+    padding: var(--space-5);
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .chart-tooltip {
+  background: var(--bg-secondary);
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Print styles */
+@media print {
+  .chart-controls {
+    display: none;
+  }
+  
+  .chart-canvas {
+    max-width: 100%;
+  }
+  
+  .chart-tooltip {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .planet-bg {
+    stroke-width: 3;
+  }
+  
+  .chart-svg line {
+    stroke-width: 2;
+  }
+  
+  .zoom-button {
+    border: 2px solid currentColor;
+  }
+}

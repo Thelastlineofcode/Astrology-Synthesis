@@ -5,7 +5,7 @@ dotenv.config();
 export const config = {
   port: process.env.PORT || 5000,
   nodeEnv: process.env.NODE_ENV || 'development',
-  
+
   // JWT Configuration
   jwt: {
     secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
@@ -13,7 +13,7 @@ export const config = {
     refreshSecret: process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-change-in-production',
     refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
   },
-  
+
   // Database Configuration
   database: {
     host: process.env.DB_HOST || 'localhost',
@@ -23,12 +23,12 @@ export const config = {
     password: process.env.DB_PASSWORD || 'password',
     ssl: process.env.DB_SSL === 'true',
   },
-  
+
   // CORS Configuration
   cors: {
     origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
   },
-  
+
   // Bcrypt Configuration
   bcrypt: {
     saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS || '10'),
