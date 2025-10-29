@@ -1,25 +1,58 @@
-import Link from "next/link";
-
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans" style={{ background: 'var(--bg-primary)' }}>
-      <main className="flex flex-col items-center gap-6 text-center px-8 py-16">
-        <h1 className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      background: 'var(--bg-primary)',
+      color: 'var(--text-primary)',
+      fontFamily: 'var(--font-geist-sans), Arial, sans-serif'
+    }}>
+      <main style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        gap: '24px', 
+        textAlign: 'center', 
+        padding: '64px 32px' 
+      }}>
+        <h1 style={{ 
+          fontSize: '3rem', 
+          fontWeight: 'bold',
+          color: 'var(--text-primary)',
+          marginBottom: '16px'
+        }}>
           Roots Revealed
         </h1>
-        <p className="text-xl max-w-md" style={{ color: 'var(--text-secondary)' }}>
-          Explore your cosmic journey with our new dashboard.
+        <p style={{ 
+          fontSize: '1.25rem', 
+          maxWidth: '500px',
+          color: 'var(--text-secondary)',
+          lineHeight: '1.6'
+        }}>
+          Explore your cosmic journey with our astrology dashboard. Discover the celestial influences that shape your destiny.
         </p>
-        <Link
+        <a
           href="/dashboard"
-          className="mt-4 px-8 py-4 rounded-lg font-medium transition-all hover:scale-105"
-          style={{ 
-            background: 'var(--color-primary)', 
+          className="cta-button"
+          style={{
+            marginTop: '24px',
+            padding: '16px 32px',
+            borderRadius: '12px',
+            fontWeight: '600',
+            textDecoration: 'none',
+            background: 'var(--color-primary)',
             color: 'var(--color-neutral-50)',
+            transition: 'all 0.3s ease',
+            boxShadow: 'var(--elevation-2)',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'inline-block'
           }}
         >
           View Dashboard
-        </Link>
+        </a>
       </main>
     </div>
   );
