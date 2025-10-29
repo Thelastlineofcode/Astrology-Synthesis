@@ -22,11 +22,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(${String(function () {
               try {
-                var saved = localStorage.getItem('theme');
-                var systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                var theme = saved || systemPref;
+                const saved = localStorage.getItem('theme');
+                const systemPref = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const theme = saved || systemPref;
                 document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) { /* ignore */ }
+              } catch (_e) { /* ignore */ }
             })})();`,
           }}
         />
