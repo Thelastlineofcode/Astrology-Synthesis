@@ -19,7 +19,7 @@ interface RecentChartsCardProps {
 const RecentChartsCard: React.FC<RecentChartsCardProps> = ({ charts, loading }) => {
   if (loading) {
     return (
-      <Card className="recent-charts-card">
+      <Card className="recent-charts-card" onClick={() => {}}>
         <h3>Recent Charts</h3>
         <div className="loading-skeleton">
           <div className="skeleton-line" />
@@ -32,7 +32,7 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({ charts, loading }) 
   
   if (charts.length === 0) {
     return (
-      <Card className="recent-charts-card">
+      <Card className="recent-charts-card" onClick={() => {}}>
         <h3>Recent Charts</h3>
         <div className="empty-state">
           <p className="empty-state__text">
@@ -44,7 +44,7 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({ charts, loading }) 
   }
   
   return (
-    <Card className="recent-charts-card">
+    <Card className="recent-charts-card" onClick={() => {}}>
       <div className="card-header">
         <h3>Recent Charts</h3>
         <Button 

@@ -16,6 +16,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to Google Fonts for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Inter for primary text, JetBrains Mono for code/data */}
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
       <body className="antialiased">
         {/* Inline script to set initial theme before React hydrates to avoid FOIT/flash */}
         <script
@@ -31,7 +41,9 @@ export default function RootLayout({
           }}
         />
 
-        <ThemeToggle />
+        <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}>
+          <ThemeToggle />
+        </div>
         {children}
       </body>
     </html>
