@@ -1,0 +1,388 @@
+{
+  "info": {
+    "name": "Roots Revealed API",
+    "description": "Complete API collection for Astrology Synthesis application with birth chart calculations, BMAD analysis, and Symbolon card interpretations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "chartId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "API Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "health"]
+            },
+            "description": "Check if the API is running and healthy"
+          },
+          "response": []
+        },
+        {
+          "name": "API Info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Get basic information about the API"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('authToken', response.data.token);",
+                  "    console.log('Auth token saved:', response.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"name\": \"John Doe\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "description": "Register a new user account"
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('authToken', response.data.token);",
+                  "    console.log('Auth token saved:', response.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login with email and password"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            },
+            "description": "Logout the current user"
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('authToken', response.data.token);",
+                  "    console.log('Auth token refreshed:', response.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "refresh"]
+            },
+            "description": "Refresh the authentication token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Charts",
+      "item": [
+        {
+          "name": "Get All Charts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/charts?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Items per page"
+                }
+              ]
+            },
+            "description": "Get all birth charts for the authenticated user with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Chart",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const response = pm.response.json();",
+                  "    pm.collectionVariables.set('chartId', response.data.id);",
+                  "    console.log('Chart ID saved:', response.data.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Birth Chart\",\n  \"birthDate\": \"1990-01-15\",\n  \"birthTime\": \"14:30\",\n  \"latitude\": 40.7128,\n  \"longitude\": -74.0060\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/charts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts"]
+            },
+            "description": "Create a new birth chart"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chart by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/charts/{{chartId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts", "{{chartId}}"]
+            },
+            "description": "Get a specific chart by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Chart",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Chart Name\",\n  \"birthTime\": \"15:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/charts/{{chartId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts", "{{chartId}}"]
+            },
+            "description": "Update an existing chart"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Chart",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/charts/{{chartId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts", "{{chartId}}"]
+            },
+            "description": "Delete a chart by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Calculations",
+      "item": [
+        {
+          "name": "Calculate Birth Chart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"birthDate\": \"1990-01-15\",\n  \"birthTime\": \"14:30\",\n  \"latitude\": 40.7128,\n  \"longitude\": -74.0060,\n  \"houseSystem\": \"Placidus\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/charts/calculate",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts", "calculate"]
+            },
+            "description": "Calculate astrological chart data for given birth information"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chart Interpretation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/charts/{{chartId}}/interpretation",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "charts", "{{chartId}}", "interpretation"]
+            },
+            "description": "Get BMAD analysis and Symbolon card interpretations for a chart"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
