@@ -1,77 +1,108 @@
-/* Healing Cosmos - design tokens (colors, spacing, etc.)
-   Based on QUICK_REFERENCE.md and design documentation
+/* Roots Revealed - Mystical Astrology Design System
+   Based on the dashboard mockups - Dark chocolate theme
 */
 :root {
-  /* Colors - Healing Cosmos Palette (from QUICK_REFERENCE.md) */
-  --color-primary: #3E4B6E;        /* Deep Indigo */
-  --color-secondary: #A5B8A4;      /* Soft Sage */
-  --color-accent: #B296CA;         /* Muted Lavender */
-  --color-cta: #C17B5C;            /* Warm Terracotta */
+  /* Primary Colors - From Mockups */
+  --color-bg-primary: #3d2e29; /* Dark chocolate brown background */
+  --color-bg-secondary: #4a3933; /* Slightly lighter brown */
+  --color-bg-tertiary: #2d211e; /* Darkest brown for depth */
 
-  /* Neutrals */
-  --color-neutral-light: #F5F3EE;  /* Cream */
-  --color-neutral-dark: #2D3142;   /* Charcoal */
+  /* Card Backgrounds */
+  --color-card-brown: #8b6f47; /* Warm brown card */
+  --color-card-blue: #4a5f8e; /* Blue accent card */
+  --color-card-dark: #3a2c27; /* Dark card variant */
 
-  /* Extended neutrals for granular control */
-  --color-neutral-50: #F5F3EE;
-  --color-neutral-100: #E8E4DB;
-  --color-neutral-200: #D4CEC1;
-  --color-neutral-700: #4A4E5C;
-  --color-neutral-800: #383C4A;
-  --color-neutral-900: #2D3142;
+  /* Accent Colors */
+  --color-accent-orange: #e86f4d; /* Primary orange accent */
+  --color-accent-orange-hover: #ff8566; /* Lighter orange for hover */
+  --color-accent-blue: #5a7ab8; /* Secondary blue accent */
 
-  /* Semantic Colors */
-  --color-success: #81987F;        /* Forest Sage */
-  --color-warning: #E8B86D;        /* Golden Amber */
-  --color-error: #C17B5C;          /* Terracotta */
-  --color-info: #7FA99B;           /* Soft Teal */
+  /* Text Colors */
+  --color-text-primary: #ffffff; /* White primary text */
+  --color-text-secondary: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  --color-text-muted: rgba(255, 255, 255, 0.5); /* Muted white */
+  --color-text-brown: #d4a574; /* Warm text on brown */
+
+  /* Planet Colors (for sidebar) */
+  --color-planet-blue: #4a7fbf; /* Blue planets */
+  --color-planet-orange: #d4845f; /* Orange/Mars planets */
+  --color-planet-yellow: #e8c76f; /* Yellow/Saturn */
+  --color-planet-gray: #8a8a8a; /* Gray/Mercury */
+
+  /* UI Elements */
+  --color-border: rgba(255, 255, 255, 0.1); /* Subtle borders */
+  --color-divider: rgba(255, 255, 255, 0.15); /* Dividers */
+  --color-overlay: rgba(0, 0, 0, 0.3); /* Modal overlays */
+
+  /* Success/Warning/Error - Adapted for dark theme */
+  --color-success: #6fb881; /* Green success */
+  --color-warning: #e8b86d; /* Yellow warning */
+  --color-error: #e86f6f; /* Red error */
+  --color-info: #6fa8e8; /* Blue info */
 
   /* Spacing Scale (8pt Grid) */
   --space-1: 4px;
   --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-7: 64px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
 
   /* Typography scale */
-  --font-size-h1: 32px;
-  --font-size-h2: 24px;
-  --font-size-h3: 20px;
+  --font-size-h1: 40px;
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
   --font-size-body: 16px;
   --font-size-small: 14px;
   --font-size-tiny: 12px;
 
   /* Mobile typography */
-  --font-size-h1-mobile: 28px;
-  --font-size-h2-mobile: 22px;
-  --font-size-h3-mobile: 18px;
+  --font-size-h1-mobile: 32px;
+  --font-size-h2-mobile: 28px;
+  --font-size-h3-mobile: 20px;
 
-  /* Border radius and spacing */
-  --radius-1: 6px;
-  --radius-2: 8px;
-  --radius-3: 12px;
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
 
-  /* Theme variables (reassignable by theme) */
-  --bg-primary: var(--color-neutral-light);
-  --bg-secondary: #FFFFFF;
-  --surface-elev-1: #FFFFFF;
-  --surface-elev-2: #F8F6F3;
+  /* Theme variables (for compatibility) */
+  --bg-primary: var(--color-bg-primary);
+  --bg-secondary: var(--color-bg-secondary);
+  --surface-elev-1: var(--color-card-dark);
+  --surface-elev-2: var(--color-bg-secondary);
 
-  --text-primary: var(--color-neutral-dark);
-  --text-secondary: rgba(62, 75, 110, 0.7); /* Primary with opacity */
-  --muted: var(--color-neutral-700);
-  --border-color: rgba(165, 184, 164, 0.3); /* Secondary with opacity */
+  --text-primary: var(--color-text-primary);
+  --text-secondary: var(--color-text-secondary);
+  --muted: var(--color-text-muted);
+  --border-color: var(--color-border);
 
   /* Focus & accessibility */
-  --focus-ring: 2px solid var(--color-primary);
+  --focus-ring: 2px solid var(--color-accent-orange);
   --focus-outline-offset: 2px;
 
-  /* Elevation shadows */
-  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.16);
+  /* Elevation shadows - Darker for mystical feel */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6);
+
+  /* Gradient overlays for mystical effect */
+  --gradient-mystical: radial-gradient(
+    circle at 50% 50%,
+    rgba(139, 111, 71, 0.1) 0%,
+    transparent 70%
+  );
+  --gradient-card: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 /* A small utility to ensure reduced-motion is respected globally */
@@ -86,34 +117,34 @@
 /* Healing Cosmos - design tokens (colors, spacing, semantic tokens) */
 :root {
   /* Colors - Healing Cosmos Palette */
-  --color-primary: #3E4B6E;
-  --color-primary-light: #5A6B8F;
-  --color-primary-dark: #2C3651;
+  --color-primary: #3e4b6e;
+  --color-primary-light: #5a6b8f;
+  --color-primary-dark: #2c3651;
 
-  --color-secondary: #A5B8A4;
-  --color-secondary-light: #C4D4C3;
-  --color-secondary-dark: #8A9C89;
+  --color-secondary: #a5b8a4;
+  --color-secondary-light: #c4d4c3;
+  --color-secondary-dark: #8a9c89;
 
-  --color-accent: #B296CA;
-  --color-accent-light: #D1BBE3;
-  --color-accent-dark: #9477A8;
+  --color-accent: #b296ca;
+  --color-accent-light: #d1bbe3;
+  --color-accent-dark: #9477a8;
 
-  --color-cta: #C17B5C;
-  --color-cta-light: #D89C7D;
-  --color-cta-dark: #A56249;
+  --color-cta: #c17b5c;
+  --color-cta-light: #d89c7d;
+  --color-cta-dark: #a56249;
 
-  --color-neutral-50: #F5F3EE;
-  --color-neutral-100: #E8E4DB;
-  --color-neutral-200: #D4CEC1;
-  --color-neutral-700: #4A4E5C;
-  --color-neutral-800: #383C4A;
-  --color-neutral-900: #2D3142;
+  --color-neutral-50: #f5f3ee;
+  --color-neutral-100: #e8e4db;
+  --color-neutral-200: #d4cec1;
+  --color-neutral-700: #4a4e5c;
+  --color-neutral-800: #383c4a;
+  --color-neutral-900: #2d3142;
 
   /* Semantic Colors */
-  --color-success: #81987F;
-  --color-warning: #E8B86D;
-  --color-error: #C17B5C;
-  --color-info: #7FA99B;
+  --color-success: #81987f;
+  --color-warning: #e8b86d;
+  --color-error: #c17b5c;
+  --color-info: #7fa99b;
 
   /* Spacing Scale (8pt grid) */
   --space-1: 4px;
@@ -126,19 +157,20 @@
 
   /* Theme Variables (reassignable) */
   --bg-primary: var(--color-neutral-50);
-  --bg-secondary: #FFFFFF;
+  --bg-secondary: #ffffff;
   --text-primary: var(--color-neutral-900);
   --text-secondary: rgba(62, 75, 110, 0.7);
   --border-color: rgba(165, 184, 164, 0.3);
 
   /* Elevation (Shadows) */
-  --elevation-1: 0 1px 2px rgba(45,49,66,0.04);
-  --elevation-2: 0 4px 12px rgba(45,49,66,0.06);
-  --elevation-3: 0 8px 24px rgba(45,49,66,0.08);
+  --elevation-1: 0 1px 2px rgba(45, 49, 66, 0.04);
+  --elevation-2: 0 4px 12px rgba(45, 49, 66, 0.06);
+  --elevation-3: 0 8px 24px rgba(45, 49, 66, 0.08);
 
   /* Typography - Font Families */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-primary:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
 
   /* Typography - Font Sizes */
   --font-size-tiny: 12px;
@@ -198,7 +230,7 @@
 
 [data-theme="dark"] {
   --bg-primary: var(--color-neutral-900);
-  --bg-secondary: #3A4257;
+  --bg-secondary: #3a4257;
   --text-primary: var(--color-neutral-50);
   --text-secondary: var(--color-secondary);
   --border-color: rgba(62, 75, 110, 0.4);
@@ -208,21 +240,32 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg-primary: var(--color-neutral-900);
-    --bg-secondary: #3A4257;
+    --bg-secondary: #3a4257;
     --text-primary: var(--color-neutral-50);
     --text-secondary: var(--color-secondary);
   }
 }
 
 /* Apply core tokens to document */
-html, body {
+html,
+body {
   background: var(--bg-primary);
   color: var(--text-primary);
 }
 
 /* Utility tokens for components */
-.bg-primary { background-color: var(--bg-primary); }
-.bg-secondary { background-color: var(--bg-secondary); }
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.border { border-color: var(--border-color); }
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.border {
+  border-color: var(--border-color);
+}
