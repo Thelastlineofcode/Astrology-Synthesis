@@ -4,11 +4,11 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 import { createError } from '../middleware/errorHandler';
+import * as UserModel from '../models/User';
+import * as SessionModel from '../models/Session';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
-
-// In-memory user storage (replace with database in production)
-const users: Array<{ id: string; email: string; password: string; name: string }> = [];
 
 // Register route
 router.post(
