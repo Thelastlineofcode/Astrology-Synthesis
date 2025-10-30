@@ -1,3 +1,4 @@
+
 # Roots Revealed Logo Assets
 
 This directory contains all logo variations for the Roots Revealed astrology application.
