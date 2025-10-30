@@ -4,6 +4,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 import { createError } from '../middleware/errorHandler';
+import * as UserModel from '../models/User';
+import * as SessionModel from '../models/Session';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
 
