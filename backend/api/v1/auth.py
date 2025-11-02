@@ -1,19 +1,11 @@
-"""Authentication endpoints."""
+"""
+Authentication API endpoints - redirects to auth_endpoints for full implementation.
+"""
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from datetime import datetime
-from backend.config.database import get_db
-from backend.services.auth_service import AuthenticationService
-from backend.schemas import (
-    RegisterRequest, RegisterResponse, LoginRequest, LoginResponse,
-    RefreshTokenRequest, RefreshTokenResponse, UserProfile
-)
-import logging
+from .auth_endpoints import router
 
-logger = logging.getLogger(__name__)
+__all__ = ["router"]
 
-router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post("/register", response_model=RegisterResponse, status_code=status.HTTP_201_CREATED)
