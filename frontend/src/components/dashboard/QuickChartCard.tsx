@@ -16,7 +16,7 @@ const QuickChartCard = () => {
         </div>
         
         <div className="quick-chart-card__actions">
-          <Link href="/chart">
+          <Link href="/chart-demo">
             <Button variant="primary">
               New Chart
             </Button>

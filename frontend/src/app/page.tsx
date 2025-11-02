@@ -33,7 +33,7 @@ export default function Home() {
               Create your natal chart instantly. Enter your birth details and
               unlock cosmic insights about your personality and life path.
             </p>
-            <Link href="/chart">
+            <Link href="/chart-demo">
               <Button variant="primary" size="large">
                 Calculate Chart
               </Button>
@@ -54,9 +54,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="landing__note">
-              View planetary aspects and transits
-            </p>
+            <p className="landing__note">View planetary aspects and transits</p>
           </Card>
 
           <Card className="landing__card landing__card--tertiary">
@@ -90,7 +88,7 @@ export default function Home() {
             Unlock the ancient wisdom of astrology with precision calculations
             and beautiful visualizations
           </p>
-          <Link href="/chart">
+          <Link href="/chart-demo">
             <Button variant="primary" size="large">
               Calculate Your Chart Now
             </Button>
