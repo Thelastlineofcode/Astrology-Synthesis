@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Card from '../../components/shared/Card';
-import Button from '../../components/shared/Button';
-import './profile.css';
+import React, { useState, useEffect } from "react";
+import Card from "../../components/shared/Card";
+import Button from "../../components/shared/Button";
+import { useAPI } from "@/lib/hooks";
+import { api, User } from "@/lib/api";
+import "./profile.css";
 
-interface UserProfile {
-  id: string;
-  email: string;
-  name: string;
+interface UserProfile extends Partial<User> {
   birthDate?: string;
   birthTime?: string;
   birthPlace?: string;
@@ -18,69 +17,63 @@ interface UserProfile {
   sunSign?: string;
   moonSign?: string;
   risingSign?: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<UserProfile>>({});
 
-  // Mock token for demo - in production, this would come from auth context
-  const authToken = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
+  // Use the new API hook
+  const {
+    data,
+    loading: isLoading,
+    error: apiError,
+    execute,
+  } = useAPI(api.auth.getCurrentUser, {
+    onSuccess: (user) => {
+      setProfile({
+        ...user,
+        birthDate: "1990-05-15", // TODO: These will come from user settings/chart data
+        birthTime: "14:30",
+        birthPlace: "New York, NY",
+        latitude: 40.7128,
+        longitude: -74.006,
+        zodiacSign: "Taurus",
+        sunSign: "Taurus",
+        moonSign: "Cancer",
+        risingSign: "Virgo",
+      });
+    },
+    onError: (err) => {
+      setError(err.message);
+    },
+  });
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  const fetchProfile = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      
-      // If no token, show demo data
-      if (!authToken) {
-        setProfile({
-          id: 'demo',
-          email: 'demo@example.com',
-          name: 'Demo User',
-          birthDate: '1990-05-15',
-          birthTime: '14:30',
-          birthPlace: 'New York, NY',
-          latitude: 40.7128,
-          longitude: -74.0060,
-          zodiacSign: 'Taurus',
-          sunSign: 'Taurus',
-          moonSign: 'Cancer',
-          risingSign: 'Virgo',
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/profile`, {
-        headers: {
-          'Authorization': `Bearer ${authToken}`,
-        },
+    // Try to fetch profile, fallback to demo if not authenticated
+    execute().catch(() => {
+      // Show demo data if not authenticated
+      setProfile({
+        id: 0,
+        email: "demo@example.com",
+        first_name: "Demo",
+        last_name: "User",
+        birthDate: "1990-05-15",
+        birthTime: "14:30",
+        birthPlace: "New York, NY",
+        latitude: 40.7128,
+        longitude: -74.006,
+        zodiacSign: "Taurus",
+        sunSign: "Taurus",
+        moonSign: "Cancer",
+        risingSign: "Virgo",
+        created_at: new Date().toISOString(),
+        is_active: true,
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch profile');
-      }
-
-      const data = await response.json();
-      setProfile(data.data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    });
+  }, []);
 
   const handleEdit = () => {
     setFormData(profile || {});
@@ -94,38 +87,45 @@ export default function ProfilePage() {
   };
 
   const handleChange = (field: string, value: string | number) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSave = async () => {
     try {
       setError(null);
-      
+
       // Demo mode - just update local state
       if (!authToken) {
-        setProfile(prev => prev ? { ...prev, ...formData, updatedAt: new Date().toISOString() } : null);
+        setProfile((prev) =>
+          prev
+            ? { ...prev, ...formData, updatedAt: new Date().toISOString() }
+            : null
+        );
         setIsEditing(false);
         return;
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/profile`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/users/profile`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update profile');
+        throw new Error("Failed to update profile");
       }
 
       const data = await response.json();
       setProfile(data.data);
       setIsEditing(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     }
   };
 
@@ -167,11 +167,7 @@ export default function ProfilePage() {
             )}
           </div>
 
-          {error && (
-            <div className="profile-error-message">
-              {error}
-            </div>
-          )}
+          {error && <div className="profile-error-message">{error}</div>}
 
           {isEditing ? (
             <div className="profile-form">
@@ -182,8 +178,8 @@ export default function ProfilePage() {
                   <input
                     id="name"
                     type="text"
-                    value={formData.name || ''}
-                    onChange={(e) => handleChange('name', e.target.value)}
+                    value={formData.name || ""}
+                    onChange={(e) => handleChange("name", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -206,8 +202,8 @@ export default function ProfilePage() {
                   <input
                     id="birthDate"
                     type="date"
-                    value={formData.birthDate || ''}
-                    onChange={(e) => handleChange('birthDate', e.target.value)}
+                    value={formData.birthDate || ""}
+                    onChange={(e) => handleChange("birthDate", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -215,8 +211,8 @@ export default function ProfilePage() {
                   <input
                     id="birthTime"
                     type="time"
-                    value={formData.birthTime || ''}
-                    onChange={(e) => handleChange('birthTime', e.target.value)}
+                    value={formData.birthTime || ""}
+                    onChange={(e) => handleChange("birthTime", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -224,8 +220,8 @@ export default function ProfilePage() {
                   <input
                     id="birthPlace"
                     type="text"
-                    value={formData.birthPlace || ''}
-                    onChange={(e) => handleChange('birthPlace', e.target.value)}
+                    value={formData.birthPlace || ""}
+                    onChange={(e) => handleChange("birthPlace", e.target.value)}
                     placeholder="City, State/Country"
                   />
                 </div>
@@ -238,8 +234,10 @@ export default function ProfilePage() {
                       step="0.0001"
                       min="-90"
                       max="90"
-                      value={formData.latitude || ''}
-                      onChange={(e) => handleChange('latitude', parseFloat(e.target.value))}
+                      value={formData.latitude || ""}
+                      onChange={(e) =>
+                        handleChange("latitude", parseFloat(e.target.value))
+                      }
                     />
                   </div>
                   <div className="form-group">
@@ -250,8 +248,10 @@ export default function ProfilePage() {
                       step="0.0001"
                       min="-180"
                       max="180"
-                      value={formData.longitude || ''}
-                      onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
+                      value={formData.longitude || ""}
+                      onChange={(e) =>
+                        handleChange("longitude", parseFloat(e.target.value))
+                      }
                     />
                   </div>
                 </div>
@@ -264,8 +264,8 @@ export default function ProfilePage() {
                   <input
                     id="zodiacSign"
                     type="text"
-                    value={formData.zodiacSign || ''}
-                    onChange={(e) => handleChange('zodiacSign', e.target.value)}
+                    value={formData.zodiacSign || ""}
+                    onChange={(e) => handleChange("zodiacSign", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -273,8 +273,8 @@ export default function ProfilePage() {
                   <input
                     id="sunSign"
                     type="text"
-                    value={formData.sunSign || ''}
-                    onChange={(e) => handleChange('sunSign', e.target.value)}
+                    value={formData.sunSign || ""}
+                    onChange={(e) => handleChange("sunSign", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -282,8 +282,8 @@ export default function ProfilePage() {
                   <input
                     id="moonSign"
                     type="text"
-                    value={formData.moonSign || ''}
-                    onChange={(e) => handleChange('moonSign', e.target.value)}
+                    value={formData.moonSign || ""}
+                    onChange={(e) => handleChange("moonSign", e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -291,8 +291,8 @@ export default function ProfilePage() {
                   <input
                     id="risingSign"
                     type="text"
-                    value={formData.risingSign || ''}
-                    onChange={(e) => handleChange('risingSign', e.target.value)}
+                    value={formData.risingSign || ""}
+                    onChange={(e) => handleChange("risingSign", e.target.value)}
                   />
                 </div>
               </div>
@@ -326,38 +326,52 @@ export default function ProfilePage() {
                   <>
                     <div className="profile-field">
                       <span className="field-label">Birth Date:</span>
-                      <span className="field-value">{new Date(profile.birthDate).toLocaleDateString()}</span>
+                      <span className="field-value">
+                        {new Date(profile.birthDate).toLocaleDateString()}
+                      </span>
                     </div>
                     <div className="profile-field">
                       <span className="field-label">Birth Time:</span>
-                      <span className="field-value">{profile.birthTime || 'Not set'}</span>
+                      <span className="field-value">
+                        {profile.birthTime || "Not set"}
+                      </span>
                     </div>
                     <div className="profile-field">
                       <span className="field-label">Birth Place:</span>
-                      <span className="field-value">{profile.birthPlace || 'Not set'}</span>
+                      <span className="field-value">
+                        {profile.birthPlace || "Not set"}
+                      </span>
                     </div>
                     {profile.latitude && profile.longitude && (
                       <div className="profile-field">
                         <span className="field-label">Coordinates:</span>
                         <span className="field-value">
-                          {profile.latitude.toFixed(4)}, {profile.longitude.toFixed(4)}
+                          {profile.latitude.toFixed(4)},{" "}
+                          {profile.longitude.toFixed(4)}
                         </span>
                       </div>
                     )}
                   </>
                 ) : (
-                  <p className="field-empty">No birth information provided yet.</p>
+                  <p className="field-empty">
+                    No birth information provided yet.
+                  </p>
                 )}
               </div>
 
               <div className="profile-section profile-zodiac">
                 <h2>Your Astrological Profile</h2>
-                {profile.zodiacSign || profile.sunSign || profile.moonSign || profile.risingSign ? (
+                {profile.zodiacSign ||
+                profile.sunSign ||
+                profile.moonSign ||
+                profile.risingSign ? (
                   <div className="zodiac-grid">
                     {profile.zodiacSign && (
                       <div className="zodiac-item">
                         <span className="zodiac-label">Zodiac Sign</span>
-                        <span className="zodiac-value">{profile.zodiacSign}</span>
+                        <span className="zodiac-value">
+                          {profile.zodiacSign}
+                        </span>
                       </div>
                     )}
                     {profile.sunSign && (
@@ -375,12 +389,17 @@ export default function ProfilePage() {
                     {profile.risingSign && (
                       <div className="zodiac-item">
                         <span className="zodiac-label">Rising Sign</span>
-                        <span className="zodiac-value">{profile.risingSign}</span>
+                        <span className="zodiac-value">
+                          {profile.risingSign}
+                        </span>
                       </div>
                     )}
                   </div>
                 ) : (
-                  <p className="field-empty">No astrological information provided yet. Click "Edit Profile" to add your signs.</p>
+                  <p className="field-empty">
+                    No astrological information provided yet. Click "Edit
+                    Profile" to add your signs.
+                  </p>
                 )}
               </div>
             </div>
