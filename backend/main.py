@@ -3,6 +3,11 @@ Main FastAPI application.
 Sets up the API, middleware, exception handlers, and route registration.
 """
 
+# Load environment variables first
+from dotenv import load_dotenv
+import os
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware

@@ -68,11 +68,18 @@ class SecurityConfig(BaseSettings):
     # API Keys
     enable_api_key_auth: bool = os.getenv("ENABLE_API_KEY_AUTH", "true").lower() == "true"
     
-    # CORS
-    cors_origins: list = os.getenv("CORS_ORIGINS", "*").split(",") if os.getenv("CORS_ORIGINS") else ["*"]
+    # CORS - using str and splitting manually to avoid Pydantic parsing issues
+    _cors_origins_str: str = os.getenv("CORS_ORIGINS", "*")
     cors_credentials: bool = os.getenv("CORS_CREDENTIALS", "true").lower() == "true"
     cors_methods: list = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     cors_headers: list = ["*"]
+    
+    @property
+    def cors_origins(self) -> list:
+        """Parse CORS origins from comma-separated string."""
+        if self._cors_origins_str == "*":
+            return ["*"]
+        return [origin.strip() for origin in self._cors_origins_str.split(",")]
 
 
 class APIConfig(BaseSettings):
