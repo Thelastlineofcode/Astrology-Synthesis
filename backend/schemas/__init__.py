@@ -40,6 +40,9 @@ class RegisterResponse(BaseModel):
     last_name: str
     created_at: datetime
     api_key: str
+    access_token: str
+    refresh_token: str
+    token_type: str
 
 
 class LoginRequest(BaseModel):
@@ -52,10 +55,12 @@ class LoginRequest(BaseModel):
 class LoginResponse(BaseModel):
     """User login response."""
     
+    user_id: UUID
+    email: str
     access_token: str
     refresh_token: str
     expires_in: int
-    token_type: str = "Bearer"
+    token_type: str = "bearer"
 
 
 class RefreshTokenRequest(BaseModel):

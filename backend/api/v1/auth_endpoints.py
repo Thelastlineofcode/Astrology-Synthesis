@@ -10,6 +10,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 from backend.config.database import get_db
+from backend.config.settings import settings
 from backend.services.auth_service import AuthenticationService
 from backend.schemas import (
     RegisterRequest, RegisterResponse, LoginRequest, LoginResponse,
@@ -229,6 +230,7 @@ async def login(
         email=user.email,
         access_token=access_token,
         refresh_token=refresh_token,
+        expires_in=settings.security.access_token_expire_minutes * 60,
         token_type="bearer",
     )
 
