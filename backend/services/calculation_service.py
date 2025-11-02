@@ -75,8 +75,16 @@ class CalculationService:
             # Format planet positions for consistency
             planet_positions = []
             for planet_name, position in planets.items():
+                degree, minutes, seconds = self._degree_to_dms(position.longitude)
+                house_num = self._get_planet_house(position.longitude, house_cusps)
                 planet_positions.append({
                     "planet": planet_name,
+                    "degree": degree,
+                    "minutes": minutes,
+                    "seconds": seconds,
+                    "house": house_num,
+                    "zodiac_sign": self._get_zodiac_sign(position.longitude),
+                    "zodiac_degree": self._get_zodiac_degree(position.longitude),
                     "longitude": position.longitude,
                     "latitude": position.latitude,
                     "sign": position.sign,
@@ -85,15 +93,32 @@ class CalculationService:
                     "nakshatra": position.nakshatra,
                 })
             
-            # Format house cusps
-            cusps_data = {f"cusp_{i+1}": house_cusps.cusps[i] for i in range(12)}
-            cusps_data["ascendant"] = house_cusps.ascendant
-            cusps_data["midheaven"] = house_cusps.midheaven
+            # Format house cusps as a list of 12 houses
+            houses_list = []
+            for i in range(12):
+                degree, minutes, seconds = self._degree_to_dms(house_cusps.cusps[i])
+                houses_list.append({
+                    "house": i + 1,
+                    "degree": house_cusps.cusps[i],
+                    "zodiac_sign": self._get_zodiac_sign(house_cusps.cusps[i]),
+                    "zodiac_degree": self._get_zodiac_degree(house_cusps.cusps[i]),
+                    "cusp": house_cusps.cusps[i],
+                    "longitude": house_cusps.cusps[i],
+                })
             
             chart_data = {
                 "planet_positions": planet_positions,
-                "house_cusps": cusps_data,
-                "ascendant": house_cusps.ascendant,
+                "house_cusps": houses_list,
+                "ascendant": {
+                    "degree": house_cusps.ascendant,
+                    "zodiac_sign": self._get_zodiac_sign(house_cusps.ascendant),
+                    "zodiac_degree": self._get_zodiac_degree(house_cusps.ascendant),
+                },
+                "midheaven": {
+                    "degree": house_cusps.midheaven,
+                    "zodiac_sign": self._get_zodiac_sign(house_cusps.midheaven),
+                    "zodiac_degree": self._get_zodiac_degree(house_cusps.midheaven),
+                },
                 "timezone": birth_data.timezone,
                 "latitude": birth_data.latitude,
                 "longitude": birth_data.longitude,
@@ -141,12 +166,14 @@ class CalculationService:
                 for aspect_angle, aspect_info in aspect_types.items():
                     orb = aspect_info["orb"]
                     if abs(diff - aspect_angle) <= orb:
+                        orb_diff = abs(diff - aspect_angle)
                         aspects.append({
                             "planet1": name1,
                             "planet2": name2,
-                            "aspect": aspect_info["name"],
+                            "aspect_type": aspect_info["name"],
                             "angle": diff,
-                            "orb": abs(diff - aspect_angle),
+                            "orb": orb_diff,
+                            "is_exact": orb_diff < 1.0,
                         })
                         break
         
@@ -382,3 +409,44 @@ class CalculationService:
             12: "Spirituality & Endings",
         }
         return house_influences.get(house_number, "General Life Area")
+    
+    @staticmethod
+    def _degree_to_dms(degree: float) -> tuple:
+        """Convert decimal degree to degree, minutes, seconds."""
+        d = int(degree)
+        m = int((degree - d) * 60)
+        s = ((degree - d) * 60 - m) * 60
+        return d, m, s
+    
+    @staticmethod
+    def _get_zodiac_sign(degree: float) -> str:
+        """Get zodiac sign from ecliptic degree (0-360)."""
+        zodiac_signs = [
+            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+        ]
+        sign_index = int(degree / 30)
+        return zodiac_signs[min(sign_index, 11)]
+    
+    @staticmethod
+    def _get_zodiac_degree(degree: float) -> float:
+        """Get degree within zodiac sign (0-30)."""
+        return degree % 30
+    
+    @staticmethod
+    def _get_planet_house(planet_degree: float, house_cusps) -> int:
+        """Determine which house a planet is in based on its degree."""
+        cusps = [house_cusps.ascendant] + house_cusps.cusps
+        for i in range(12):
+            cusp1 = cusps[i]
+            cusp2 = cusps[(i + 1) % 12]
+            
+            # Handle the wrap-around at 360/0
+            if cusp1 <= cusp2:
+                if cusp1 <= planet_degree < cusp2:
+                    return i + 1
+            else:  # wrap-around
+                if planet_degree >= cusp1 or planet_degree < cusp2:
+                    return i + 1
+        
+        return 1  # default to house 1
