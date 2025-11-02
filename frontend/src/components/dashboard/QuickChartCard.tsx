@@ -1,10 +1,10 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import Card from '../shared/Card';
-import Button from '../shared/Button';
-import './QuickChartCard.css';
+import React from "react";
+import Link from "next/link";
+import Card from "../shared/Card";
+import Button from "../shared/Button";
+import "./QuickChartCard.css";
 
 const QuickChartCard = () => {
   return (
@@ -14,17 +14,13 @@ const QuickChartCard = () => {
           <h2>Generate Your Chart</h2>
           <p>Start your astrological journey by creating a natal chart</p>
         </div>
-        
+
         <div className="quick-chart-card__actions">
           <Link href="/chart-demo">
-            <Button variant="primary">
-              New Chart
-            </Button>
+            <Button variant="primary">New Chart</Button>
           </Link>
           <Link href="/symbolon-demo">
-            <Button variant="secondary">
-              Explore Symbolon
-            </Button>
+            <Button variant="secondary">Explore Symbolon</Button>
           </Link>
         </div>
       </div>
