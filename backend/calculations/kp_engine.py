@@ -13,17 +13,19 @@ from datetime import datetime, timedelta
 from dataclasses import dataclass
 
 
-# Vimshottari Dasha proportions (degrees in each sub-division)
+# Vimshottari Dasha proportions (degrees in each sub-division within one nakshatra)
+# Total years: 120, Nakshatra length: 13°20' = 800 arc-minutes
+# Each planet gets proportional arc: (years/120) * 800 arc-minutes
 VIMSHOTTARI_PROPORTIONS = {
-    'Ketu': 2 + 46/60 + 40/3600,     # 2°46'40" (7 years)
-    'Venus': 7 + 46/60 + 40/3600,    # 7°46'40" (20 years)
-    'Sun': 2 + 20/60,                # 2°20'00" (6 years)
-    'Moon': 3 + 53/60 + 20/3600,     # 3°53'20" (10 years)
-    'Mars': 2 + 46/60 + 40/3600,     # 2°46'40" (7 years)
-    'Rahu': 7 + 0/60,                # 7°00'00" (18 years)
-    'Jupiter': 6 + 13/60 + 20/3600,  # 6°13'20" (16 years)
-    'Saturn': 7 + 23/60 + 20/3600,   # 7°23'20" (19 years)
-    'Mercury': 6 + 36/60 + 40/3600,  # 6°36'40" (17 years)
+    'Ketu':    (7/120)  * (13 + 20/60),   # 0°46'40" (7 years)
+    'Venus':   (20/120) * (13 + 20/60),   # 2°13'20" (20 years)
+    'Sun':     (6/120)  * (13 + 20/60),   # 0°40'00" (6 years)
+    'Moon':    (10/120) * (13 + 20/60),   # 1°06'40" (10 years)
+    'Mars':    (7/120)  * (13 + 20/60),   # 0°46'40" (7 years)
+    'Rahu':    (18/120) * (13 + 20/60),   # 2°00'00" (18 years)
+    'Jupiter': (16/120) * (13 + 20/60),   # 1°46'40" (16 years)
+    'Saturn':  (19/120) * (13 + 20/60),   # 2°06'40" (19 years)
+    'Mercury': (17/120) * (13 + 20/60),   # 1°53'20" (17 years)
 }
 
 # Sub-lord sequence (order of planets in each nakshatra)
