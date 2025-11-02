@@ -10,11 +10,23 @@ from uuid import UUID
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import uuid
+import os
 
-# Test database setup
-TEST_DATABASE_URL = "sqlite:///./test.db"
+# Test database setup - use a unique file for each test run
+TEST_DB_FILE = f"./test_{uuid.uuid4()}.db"
+TEST_DATABASE_URL = f"sqlite:///{TEST_DB_FILE}"
 engine = create_engine(TEST_DATABASE_URL, connect_args={"check_same_thread": False})
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def cleanup_test_db():
+    """Clean up test database after tests."""
+    yield
+    # Remove test database file after all tests
+    if os.path.exists(TEST_DB_FILE):
+        os.remove(TEST_DB_FILE)
 
 
 @pytest.fixture(scope="session")
@@ -42,27 +54,30 @@ def test_client():
 @pytest.fixture(scope="function")
 def auth_headers(test_client):
     """Register user and get JWT token for authenticated requests."""
+    # Use unique email for each test
+    unique_email = f"test_{uuid.uuid4()}@example.com"
+    
     # Register
     register_response = test_client.post(
         "/api/v1/auth/register",
         json={
-            "email": "test@example.com",
+            "email": unique_email,
             "password": "TestPassword123",
             "first_name": "Test",
             "last_name": "User"
         }
     )
-    assert register_response.status_code == 201
+    assert register_response.status_code == 201, f"Registration failed: {register_response.text}"
     
     # Login
     login_response = test_client.post(
         "/api/v1/auth/login",
         json={
-            "email": "test@example.com",
+            "email": unique_email,
             "password": "TestPassword123"
         }
     )
-    assert login_response.status_code == 200
+    assert login_response.status_code == 200, f"Login failed: {login_response.text}"
     token = login_response.json()["access_token"]
     
     return {"Authorization": f"Bearer {token}"}

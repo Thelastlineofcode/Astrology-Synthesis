@@ -38,14 +38,14 @@ async def create_birth_chart(
         db_chart = BirthChart(
             user_id=current_user.user_id,
             birth_date=chart_request.birth_data.date,
+            birth_time=chart_request.birth_data.time,
             birth_latitude=chart_request.birth_data.latitude,
             birth_longitude=chart_request.birth_data.longitude,
-            birth_timezone=chart_request.birth_data.timezone,
-            birth_location_name=chart_request.birth_data.location_name,
+            timezone=chart_request.birth_data.timezone,
+            birth_location=chart_request.birth_data.location_name,
             chart_data=chart_data,
             ayanamsa=chart_request.ayanamsa,
-            name=chart_request.name,
-            notes=chart_request.notes,
+            house_system=chart_request.house_system or "PLACIDUS",
         )
         
         db.add(db_chart)
@@ -58,13 +58,14 @@ async def create_birth_chart(
             chart_id=db_chart.chart_id,
             user_id=current_user.user_id,
             birth_date=db_chart.birth_date,
+            birth_time=db_chart.birth_time,
             birth_latitude=db_chart.birth_latitude,
             birth_longitude=db_chart.birth_longitude,
-            birth_timezone=db_chart.birth_timezone,
-            birth_location_name=db_chart.birth_location_name,
-            chart_data=BirthChartData(**chart_data),
+            timezone=db_chart.timezone,
+            birth_location=db_chart.birth_location,
+            chart_data=chart_data,
             ayanamsa=db_chart.ayanamsa,
-            name=db_chart.name,
+            house_system=db_chart.house_system,
             created_at=db_chart.created_at,
         )
         
