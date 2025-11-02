@@ -312,7 +312,8 @@ Keep the response concise but meaningful (200-400 words)."""
     def is_available(self) -> bool:
         """Check if service is available (budget remaining)"""
         budget = self.get_budget_remaining()
-        return budget["cost_remaining"] > 0.01  # Need at least $0.01 remaining
+        # Use epsilon for floating point comparison (need at least $0.01 remaining)
+        return budget["cost_remaining"] > 0.009  # Slightly less than 0.01 to handle float precision
     
     def reset_budget_tracking(self) -> None:
         """Reset budget tracking for new month"""
