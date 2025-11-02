@@ -97,7 +97,9 @@ class DashaCalculator:
             Nakshatra number (1-27)
         """
         nakshatra_length = 13 + (20/60)  # 13°20' = 13.333...
-        nakshatra_num = int(moon_longitude / nakshatra_length) + 1
+        # Add epsilon for floating point boundary precision
+        EPSILON = 1e-9
+        nakshatra_num = int((moon_longitude + EPSILON) / nakshatra_length) + 1
         
         # Handle wraparound
         if nakshatra_num > 27:

@@ -295,9 +295,9 @@ def test_formatting():
     query_date = datetime(2025, 11, 1)
     
     position = calculator.calculate_dasha_position(
-        birth_date,
+        birth_date=birth_date,
         moon_longitude=90.0,
-        dasha_balance=12.0,
+        dasha_balance_years=12.0,
         query_date=query_date
     )
     
