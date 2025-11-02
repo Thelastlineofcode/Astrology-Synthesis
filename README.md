@@ -1,32 +1,83 @@
-# Roots Revealed - Full-Stack Astrological Analysis System
+# Syncretic AI Prediction System
 
-A modern full-stack astrology application built with Next.js, Node.js/Express, TypeScript, and PostgreSQL.
+**An AI-powered astrological prediction engine combining KP, Vedic, Vodou, Rosicrucian, and Arabic methodologies**
+
+> 🎯 **New Vision (Nov 2025)**: This project has pivoted from a frontend-focused web app to an AI-first prediction engine. We're building the most accurate astrological prediction system by synthesizing multiple traditions through AI.
+
+---
+
+## 🔮 What This System Does
+
+Input: **Birth data + Life question** (e.g., "When will I get married?")
+
+Output: **Precise prediction with:**
+- ✅ Timing windows (specific dates/periods)
+- ✅ Confidence score (0-100%)
+- ✅ Multi-tradition reasoning (KP, Vedic, Vodou, Rosicrucian, Arabic)
+- ✅ Spiritual remedies (rituals, meditations, offerings)
+- ✅ Supporting evidence from each tradition
+
+**Example Query**:
+```json
+{
+  "birth_data": {
+    "date": "1990-08-15",
+    "time": "14:30",
+    "location": {"lat": 29.7604, "lon": -95.3698}
+  },
+  "question": "When will I get a job promotion?"
+}
+```
+
+**Example Response**:
+```json
+{
+  "prediction": "Job promotion highly likely Nov 2025 - Jan 2026",
+  "confidence": 0.87,
+  "timing_windows": [
+    {"start": "2025-11-15", "end": "2026-01-30", "optimal_dates": ["2025-11-22", "2025-12-13"]}
+  ],
+  "reasoning": {
+    "kp": "10th cusp sub-lord Jupiter activates in Venus transit",
+    "vedic": "Venus-Rahu dasha supports career elevation",
+    "vodou": "Ogou (Mars) + Erzulie (Venus) activation period",
+    "rosicrucian": "Venus-Jupiter hours optimal for negotiations"
+  },
+  "remedies": [
+    {"tradition": "Vodou", "action": "Ogou altar offering", "timing": "Tuesday Mars hour"},
+    {"tradition": "Vedic", "action": "Venus mantra 108x", "timing": "Friday mornings"}
+  ]
+}
+```
+
+---
 
 ## 🏗️ Architecture
 
 ### Technology Stack
 
-#### Frontend
-- **Framework**: Next.js 16 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: React Context API / Zustand (future)
-- **Testing**: Jest + React Testing Library
+#### Calculation Engine (Core)
+- **Swiss Ephemeris**: JPL-precision astronomical calculations
+- **Python 3.14**: Core KP/Vedic calculation engine
+- **KP Engine**: Sub-lord calculator (249 subdivisions per sign) ✅ WORKING
+- **Nakshatra Calculator**: 27 lunar mansions with psychological profiles
 
-#### Backend
-- **Runtime**: Node.js 20+
-- **Framework**: Express.js
-- **Language**: TypeScript
-- **Database**: PostgreSQL 14+
-- **Authentication**: JWT (JSON Web Tokens)
-- **Testing**: Jest + Supertest
+#### AI Interpretation Layer
+- **LangChain**: AI orchestration framework
+- **OpenAI GPT-4** / **Anthropic Claude**: Natural language synthesis
+- **ChromaDB** / **Pinecone**: Vector database for knowledge base RAG
+- **Knowledge Base**: 72+ astrology books for prediction validation
+
+#### Backend API
+- **Flask** / **FastAPI**: Python API server
+- **PostgreSQL 14+**: Birth chart storage, prediction logging
+- **REST API**: Simple `/predict` endpoint (no frontend initially)
 
 #### DevOps
-- **Version Control**: Git
-- **Package Manager**: npm
-- **Linting**: ESLint
-- **Formatting**: Prettier
-- **CI/CD**: GitHub Actions (future)
+- **Git**: Version control
+- **pytest**: Python testing framework
+- **Docker** (future): Containerization
+- **CI/CD** (future): Automated testing
 
 ## 📋 Prerequisites
 
