@@ -3,12 +3,14 @@
 ## 🎯 What Changed
 
 ### OLD VISION (Abandoned)
+
 - **Frontend-focused** "Roots Revealed" web application
 - Multiple features: BMAD analysis, Symbolon cards, journaling, workflows
 - Consumer-facing app with "Healing Cosmos" design system
 - React/Next.js UI development as primary focus
 
 ### NEW VISION (Current)
+
 - **AI-first prediction engine** with no frontend (initially)
 - Syncretic methodology combining KP + Vedic + Vodou + Rosicrucian + Arabic astrology
 - Professional astrology tool focused on prediction accuracy
@@ -19,6 +21,7 @@
 ## ✅ What We Accomplished Today
 
 ### 1. Documentation Created
+
 - **`SYNCRETIC_AI_PREDICTION_SYSTEM.md`** (comprehensive architecture)
   - Complete project vision and philosophy
   - All 5 prediction methodologies explained (KP, Vedic, Vodou, Rosicrucian, Arabic)
@@ -37,6 +40,7 @@
   - Testing strategy
 
 ### 2. Code Implemented
+
 - **`backend/calculations/kp_engine.py`** ✅ WORKING
   - Sub-lord calculation for 249 zodiac subdivisions
   - Vimshottari proportions correctly implemented
@@ -47,6 +51,7 @@
   - Full test suite with example outputs
 
 ### 3. Knowledge Base Prepared
+
 - **72 PDF books** catalogued in `knowledge_base/`
   - Vedic astrology classics (27 Stars 27 Gods, Kapiel Raaj, etc.)
   - Psychological astrology (Stephen Arroyo, Jan Spiller)
@@ -102,11 +107,12 @@ Syncretic AI Prediction System
 ## 🧪 Test Results
 
 ### KP Engine Validation
+
 ```
 ✅ Sub-lord calculation: Sun at 15° Leo
    → Purva Phalguni (Venus star)
    → Ketu sub-lord
-   
+
 ✅ Cuspal sub-lords: 12 houses calculated correctly
    → Equal house system: Ketu, Venus, Venus, Venus, Moon, Venus, Venus, Venus, Moon, Venus, Venus, Venus
 
@@ -123,6 +129,7 @@ Syncretic AI Prediction System
 ## 📚 Knowledge Base Status
 
 ### Books We Have (72 PDFs)
+
 - ✅ **Vedic Foundation**: 27 Stars 27 Gods, Astrology At Speed of Light, Gopala Ratnakara
 - ✅ **Psychological**: Astrology Karma & Transformation (Arroyo), Astrology for the Soul (Spiller)
 - ✅ **Medical**: Handbook of Medical Astrology, Ayurveda guides
@@ -130,6 +137,7 @@ Syncretic AI Prediction System
 - ✅ **Vodou Sample**: Aniesha Voodoo Readings.md (chart interpretation example)
 
 ### Books We Need
+
 - ⏳ **KP Classics**: KP Reader 1-6 (K.S. Krishnamurti) - CRITICAL for prediction methods
 - ⏳ **Rosicrucian**: Max Heindel's astrological works
 - ⏳ **Arabic Parts**: Robert Zoller or Robert Hand materials
@@ -139,6 +147,7 @@ Syncretic AI Prediction System
 ## 🎬 Next Steps (Priority Order)
 
 ### Immediate (This Week)
+
 1. **Install PyPDF2** for knowledge base text extraction
 2. **Process 5 key books** into text format:
    - 27 Stars 27 Gods (nakshatra psychology)
@@ -150,6 +159,7 @@ Syncretic AI Prediction System
 4. **Build transit timing calculator** in kp_engine.py
 
 ### Short-term (Next 2 Weeks)
+
 1. **Complete KP prediction logic**:
    - Transit timing through sub-lords
    - Full question classifier (career, marriage, health, etc.)
@@ -163,6 +173,7 @@ Syncretic AI Prediction System
    - Output: Timing windows + confidence + KP reasoning
 
 ### Medium-term (Weeks 3-4)
+
 1. **Build AI interpretation layer**:
    - Knowledge base RAG (Retrieval-Augmented Generation)
    - Multi-source synthesis logic
@@ -176,6 +187,7 @@ Syncretic AI Prediction System
    - Vedic mantra/yantra suggestions
 
 ### Long-term (Month 2+)
+
 1. **Build REST API** (`POST /predict`)
 2. **Test with real birth charts** (validate accuracy)
 3. **Collect feedback** and refine algorithms
@@ -187,19 +199,22 @@ Syncretic AI Prediction System
 ## 🔑 Key Insights
 
 ### Why This Approach is Powerful
-1. **Precision + Meaning**: KP gives *when*, other traditions give *why* and *how to navigate*
+
+1. **Precision + Meaning**: KP gives _when_, other traditions give _why_ and _how to navigate_
 2. **Cross-validation**: When 3+ systems agree → 90%+ confidence
 3. **Actionable**: Remedies empower users (not fatalistic)
 4. **AI Leverage**: LLMs excel at synthesis and natural language generation
 5. **B2B Potential**: Professional astrologers could use API for client consultations
 
 ### What Makes This Unique
+
 - **No one synthesizes KP + Vodou + Rosicrucian + Arabic systematically**
 - AI-powered prediction rare in serious astrology
 - Remedy focus (spiritual work) differentiates from pure calculation tools
 - Respect for all traditions (not dilution, but showing complementary strengths)
 
 ### Technical Advantages
+
 - Swiss Ephemeris = JPL-level precision
 - KP sub-lords = fraction-of-degree accuracy
 - Python/AI stack = rapid iteration and improvement
@@ -210,18 +225,21 @@ Syncretic AI Prediction System
 ## 📊 Progress Metrics
 
 ### Code
+
 - **Lines of Python written today**: ~500 (kp_engine.py)
 - **Functions implemented**: 10 core KP calculations
 - **Test coverage**: Basic validation passing
 - **Performance**: < 1ms per sub-lord calculation
 
 ### Documentation
+
 - **Architecture docs**: 2 comprehensive markdown files
 - **Total words written**: ~8,000+
 - **Code examples**: 15+ Python snippets with explanations
 - **System diagrams**: 3 architectural layers defined
 
 ### Knowledge Base
+
 - **Books catalogued**: 72 PDFs
 - **Sample texts extracted**: 1 (Aniesha Voodoo)
 - **Pages of reference material**: ~50,000+ estimated across all books
@@ -231,6 +249,7 @@ Syncretic AI Prediction System
 ## 💡 Critical Decisions Made
 
 ### What We're NOT Doing (Anymore)
+
 1. ❌ Frontend development (React/Next.js UI)
 2. ❌ BMAD behavioral analysis (deprecated feature)
 3. ❌ Symbolon card system (not core to predictions)
@@ -238,6 +257,7 @@ Syncretic AI Prediction System
 5. ❌ "Healing Cosmos" design system (frontend concerns)
 
 ### What We're Committing To
+
 1. ✅ **AI-first**: Perfect prediction engine before any UI
 2. ✅ **KP foundation**: Sub-lord system is bedrock
 3. ✅ **Syncretic synthesis**: All traditions respected and integrated
@@ -249,17 +269,20 @@ Syncretic AI Prediction System
 ## 🤝 Collaboration Notes
 
 ### For @analyst (Future Session)
+
 - Brainstorming session on Vodou/Rosicrucian integration not yet documented
 - Need to capture original "simple life path predictor app" vision details
 - Discuss B2B vs B2C positioning (professional astrologers vs general public)
 
 ### For Development Team
+
 - KP engine is modular and testable
 - Can add new prediction methods incrementally
 - AI layer will consume KP + other engines via clean interfaces
 - Database schema defined but not yet implemented
 
 ### For Content Team
+
 - 72 books need text extraction and categorization
 - Vodou lwa correspondences need systematic documentation
 - Rosicrucian planetary hours need reference tables
@@ -272,6 +295,7 @@ Syncretic AI Prediction System
 **Goal**: Working end-to-end prediction for ONE question type (marriage)
 
 **Deliverables**:
+
 1. ✅ KP sub-lord engine (DONE)
 2. ⏳ Transit timing calculator (IN PROGRESS)
 3. ⏳ Basic question classifier ("marriage" keyword detection)

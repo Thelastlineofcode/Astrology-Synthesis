@@ -11,6 +11,7 @@
 Input: **Birth data + Life question** (e.g., "When will I get married?")
 
 Output: **Precise prediction with:**
+
 - ✅ Timing windows (specific dates/periods)
 - ✅ Confidence score (0-100%)
 - ✅ Multi-tradition reasoning (KP, Vedic, Vodou, Rosicrucian, Arabic)
@@ -18,24 +19,30 @@ Output: **Precise prediction with:**
 - ✅ Supporting evidence from each tradition
 
 **Example Query**:
+
 ```json
 {
   "birth_data": {
     "date": "1990-08-15",
     "time": "14:30",
-    "location": {"lat": 29.7604, "lon": -95.3698}
+    "location": { "lat": 29.7604, "lon": -95.3698 }
   },
   "question": "When will I get a job promotion?"
 }
 ```
 
 **Example Response**:
+
 ```json
 {
   "prediction": "Job promotion highly likely Nov 2025 - Jan 2026",
   "confidence": 0.87,
   "timing_windows": [
-    {"start": "2025-11-15", "end": "2026-01-30", "optimal_dates": ["2025-11-22", "2025-12-13"]}
+    {
+      "start": "2025-11-15",
+      "end": "2026-01-30",
+      "optimal_dates": ["2025-11-22", "2025-12-13"]
+    }
   ],
   "reasoning": {
     "kp": "10th cusp sub-lord Jupiter activates in Venus transit",
@@ -44,8 +51,16 @@ Output: **Precise prediction with:**
     "rosicrucian": "Venus-Jupiter hours optimal for negotiations"
   },
   "remedies": [
-    {"tradition": "Vodou", "action": "Ogou altar offering", "timing": "Tuesday Mars hour"},
-    {"tradition": "Vedic", "action": "Venus mantra 108x", "timing": "Friday mornings"}
+    {
+      "tradition": "Vodou",
+      "action": "Ogou altar offering",
+      "timing": "Tuesday Mars hour"
+    },
+    {
+      "tradition": "Vedic",
+      "action": "Venus mantra 108x",
+      "timing": "Friday mornings"
+    }
   ]
 }
 ```
@@ -57,23 +72,27 @@ Output: **Precise prediction with:**
 ### Technology Stack
 
 #### Calculation Engine (Core)
+
 - **Swiss Ephemeris**: JPL-precision astronomical calculations
 - **Python 3.14**: Core KP/Vedic calculation engine
 - **KP Engine**: Sub-lord calculator (249 subdivisions per sign) ✅ WORKING
 - **Nakshatra Calculator**: 27 lunar mansions with psychological profiles
 
 #### AI Interpretation Layer
+
 - **LangChain**: AI orchestration framework
 - **OpenAI GPT-4** / **Anthropic Claude**: Natural language synthesis
 - **ChromaDB** / **Pinecone**: Vector database for knowledge base RAG
 - **Knowledge Base**: 72+ astrology books for prediction validation
 
 #### Backend API
+
 - **Flask** / **FastAPI**: Python API server
 - **PostgreSQL 14+**: Birth chart storage, prediction logging
 - **REST API**: Simple `/predict` endpoint (no frontend initially)
 
 #### DevOps
+
 - **Git**: Version control
 - **pytest**: Python testing framework
 - **Docker** (future): Containerization
@@ -121,6 +140,7 @@ psql postgres
 ```
 
 In the PostgreSQL console:
+
 ```sql
 CREATE DATABASE roots_revealed_db;
 CREATE USER roots_revealed_user WITH ENCRYPTED PASSWORD 'your_secure_password';
@@ -303,12 +323,14 @@ http://localhost:5000/api
 ### Quick Reference
 
 #### Authentication Endpoints
+
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
 - `POST /api/auth/logout` - Logout user (requires auth)
 - `POST /api/auth/refresh` - Refresh JWT token (requires auth)
 
 #### Chart Management Endpoints
+
 - `GET /api/charts` - Get all charts (paginated, requires auth)
 - `POST /api/charts` - Create new chart (requires auth)
 - `GET /api/charts/:id` - Get specific chart (requires auth)
@@ -316,10 +338,12 @@ http://localhost:5000/api
 - `DELETE /api/charts/:id` - Delete chart (requires auth)
 
 #### Calculation & Interpretation Endpoints
+
 - `POST /api/charts/calculate` - Calculate birth chart (requires auth)
 - `GET /api/charts/:id/interpretation` - Get BMAD & Symbolon interpretation (requires auth)
 
 #### Health Check
+
 - `GET /api/health` - API health status
 - `GET /` - API information
 
@@ -428,6 +452,7 @@ All endpoints return consistent error responses:
 ```
 
 Common status codes:
+
 - `200` - Success
 - `201` - Created
 - `400` - Bad Request (validation error)
@@ -455,6 +480,7 @@ npm run format
 ### Building for Production
 
 #### Backend
+
 ```bash
 cd backend
 npm run build
@@ -462,6 +488,7 @@ npm start
 ```
 
 #### Frontend
+
 ```bash
 cd frontend
 npm run build
@@ -473,11 +500,13 @@ npm start
 ### Database Connection Issues
 
 1. Verify PostgreSQL is running:
+
 ```bash
 pg_isready
 ```
 
 2. Check database exists:
+
 ```bash
 psql -U roots_revealed_user -d roots_revealed_db
 ```
@@ -505,11 +534,13 @@ npm install
 ## 📚 Additional Documentation
 
 ### Development Guides
+
 - [CONTRIBUTING.md](./CONTRIBUTING.md) - Git workflow and contribution guidelines
 - [DEVELOPMENT.md](./DEVELOPMENT.md) - Detailed development setup
 - [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) - Database design and schema
 
 ### Design System
+
 - [COLOR_PALETTE_AND_DESIGN_SYSTEM.md](./COLOR_PALETTE_AND_DESIGN_SYSTEM.md) - Comprehensive design system, color palette, typography, and component patterns
 - [ACCESSIBILITY_TESTING_GUIDE.md](./ACCESSIBILITY_TESTING_GUIDE.md) - WCAG 2.1 compliance and accessibility testing guidelines
 - [Quick Reference Guide](./docs/redesign/QUICK_REFERENCE.md) - Quick reference for developers
@@ -517,6 +548,7 @@ npm install
 ## 🗺️ Roadmap
 
 ### Phase 1: Foundation (Current)
+
 - [x] Project setup with Next.js and Express
 - [x] TypeScript configuration
 - [x] JWT authentication
@@ -525,6 +557,7 @@ npm install
 - [x] Code quality tools (ESLint, Prettier)
 
 ### Phase 2: Core Features (Next)
+
 - [ ] User profile management
 - [ ] Chart calculation engine
 - [ ] Real database integration
@@ -532,6 +565,7 @@ npm install
 - [ ] API rate limiting
 
 ### Phase 3: Advanced Features
+
 - [ ] Chart visualization
 - [ ] Aspect calculations
 - [ ] Transit calculations
@@ -539,6 +573,7 @@ npm install
 - [ ] PDF chart reports
 
 ### Phase 4: Production
+
 - [ ] Deployment configuration
 - [ ] CI/CD pipeline
 - [ ] Performance optimization
@@ -561,6 +596,7 @@ ISC License
 ## 📞 Support
 
 For issues and questions:
+
 - Create an issue on GitHub
 - Contact the development team
 
