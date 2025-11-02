@@ -134,7 +134,7 @@ curl http://localhost:8000/health
 Update `docker-compose.yml`:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   # PostgreSQL Database
@@ -401,7 +401,7 @@ def check_metrics():
     print(f"  Used: ${budget['used']:.2f} ({budget['percentage_used']:.1f}%)")
     print(f"  Remaining: ${budget['cost_remaining']:.2f}")
     print(f"  Calls: {budget['calls']}")
-    
+
     # Cache stats
     cache = requests.get(f"{BASE_URL}/perplexity/cache-stats").json()
     print(f"\n💾 Cache Stats:")
@@ -409,7 +409,7 @@ def check_metrics():
     print(f"  Total Requests: {cache.get('total_requests', 0)}")
     print(f"  Hits: {cache.get('hits', 0)}")
     print(f"  Misses: {cache.get('misses', 0)}")
-    
+
     # Health check
     health = requests.get(f"{BASE_URL}/perplexity/health").json()
     print(f"\n🏥 System Health:")
@@ -448,18 +448,18 @@ async def metrics_middleware(request: Request, call_next):
     start_time = time.time()
     response = await call_next(request)
     duration = time.time() - start_time
-    
+
     REQUEST_COUNT.labels(
         method=request.method,
         endpoint=request.url.path,
         status=response.status_code
     ).inc()
-    
+
     REQUEST_DURATION.labels(
         method=request.method,
         endpoint=request.url.path
     ).observe(duration)
-    
+
     return response
 
 @app.get("/metrics")
@@ -509,10 +509,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2.0'
+          cpus: "2.0"
           memory: 4G
         reservations:
-          cpus: '1.0'
+          cpus: "1.0"
           memory: 2G
 ```
 
@@ -567,6 +567,7 @@ docker-compose exec redis redis-cli CONFIG SET maxmemory-policy allkeys-lru
 
 **Problem:** LLM requests failing  
 **Solution:**
+
 ```bash
 # Check API key
 docker-compose exec api python -c "import os; print(os.getenv('PERPLEXITY_API_KEY'))"
@@ -580,6 +581,7 @@ curl -X POST https://api.perplexity.ai/chat/completions \
 
 **Problem:** Cache not working  
 **Solution:**
+
 ```bash
 # Check Redis connection
 docker-compose exec api python -c "
@@ -594,6 +596,7 @@ docker-compose logs redis
 
 **Problem:** Vector store errors  
 **Solution:**
+
 ```bash
 # Check if FAISS index exists
 docker-compose exec api ls -lh ./data/faiss_index
@@ -606,6 +609,7 @@ docker-compose exec api python backend/scripts/reindex_knowledge.py
 
 **Problem:** Migration failed  
 **Solution:**
+
 ```bash
 # Check current revision
 docker-compose exec api alembic current
@@ -623,12 +627,13 @@ Base.metadata.create_all(bind=engine)
 
 **Problem:** Slow response times  
 **Solution:**
+
 ```bash
 # Check database query performance
 docker-compose exec db psql -U astrology -d astrology -c "
-SELECT query, calls, mean_exec_time 
-FROM pg_stat_statements 
-ORDER BY mean_exec_time DESC 
+SELECT query, calls, mean_exec_time
+FROM pg_stat_statements
+ORDER BY mean_exec_time DESC
 LIMIT 10;"
 
 # Check Redis memory

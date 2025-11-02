@@ -215,18 +215,21 @@ export function BirthChartWheel({
 ### Week 1-2: Foundation (MVP)
 
 #### User Authentication & Profile
+
 - [ ] Login/Register pages
 - [ ] Password reset flow
 - [ ] Profile management
 - [ ] API key management UI
 
 #### Dashboard
+
 - [ ] User dashboard with stats
 - [ ] Quick actions (new chart, prediction)
 - [ ] Recent activity feed
 - [ ] Favorite charts
 
 #### Birth Chart Viewer
+
 - [ ] Interactive chart wheel
 - [ ] Planetary positions table
 - [ ] House cusps display
@@ -235,6 +238,7 @@ export function BirthChartWheel({
 ### Week 3-4: Core Features
 
 #### Chart Management
+
 - [ ] Create new birth chart flow
 - [ ] Chart library (list view, grid view)
 - [ ] Chart search and filter
@@ -242,6 +246,7 @@ export function BirthChartWheel({
 - [ ] Export chart (PDF, image)
 
 #### Predictions
+
 - [ ] Generate prediction interface
 - [ ] Prediction history
 - [ ] Interpretation quality feedback
@@ -249,6 +254,7 @@ export function BirthChartWheel({
 - [ ] Share predictions
 
 #### Transit Tracking
+
 - [ ] Current transits display
 - [ ] Transit calendar view
 - [ ] Transit notifications
@@ -258,6 +264,7 @@ export function BirthChartWheel({
 ### Week 5-6: Advanced Features
 
 #### Analytics Dashboard
+
 - [ ] User activity metrics
 - [ ] Prediction accuracy tracking
 - [ ] Most used features
@@ -265,12 +272,14 @@ export function BirthChartWheel({
 - [ ] Community insights
 
 #### Collaboration
+
 - [ ] Share charts with others
 - [ ] Collaborative notes on charts
 - [ ] Chart discussions
 - [ ] Expert consultations (future)
 
 #### Mobile Experience
+
 - [ ] Progressive Web App (PWA)
 - [ ] Offline mode
 - [ ] Push notifications
@@ -278,6 +287,7 @@ export function BirthChartWheel({
 - [ ] Touch gestures
 
 #### Enhanced Visualizations
+
 - [ ] 3D birth chart
 - [ ] Animated transits
 - [ ] Solar return chart
@@ -293,7 +303,9 @@ export function BirthChartWheel({
 **Goal:** Working authentication and basic dashboard
 
 **Tasks:**
+
 1. **Setup Next.js project**
+
    ```bash
    npx create-next-app@latest astrology-frontend --typescript --tailwind --app
    cd astrology-frontend
@@ -302,20 +314,21 @@ export function BirthChartWheel({
    ```
 
 2. **Configure API client**
+
    ```typescript
    // lib/api-client.ts
-   import axios from 'axios';
-   
+   import axios from "axios";
+
    export const apiClient = axios.create({
-     baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+     baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000",
      headers: {
-       'Content-Type': 'application/json'
-     }
+       "Content-Type": "application/json",
+     },
    });
-   
+
    // Add auth interceptor
    apiClient.interceptors.request.use((config) => {
-     const token = localStorage.getItem('access_token');
+     const token = localStorage.getItem("access_token");
      if (token) {
        config.headers.Authorization = `Bearer ${token}`;
      }
@@ -324,10 +337,11 @@ export function BirthChartWheel({
    ```
 
 3. **Implement auth store**
+
    ```typescript
    // stores/authStore.ts
-   import { create } from 'zustand';
-   
+   import { create } from "zustand";
+
    interface AuthState {
      user: User | null;
      isAuthenticated: boolean;
@@ -335,7 +349,7 @@ export function BirthChartWheel({
      logout: () => void;
      refreshToken: () => Promise<void>;
    }
-   
+
    export const useAuthStore = create<AuthState>((set) => ({
      user: null,
      isAuthenticated: false,
@@ -347,7 +361,7 @@ export function BirthChartWheel({
      },
      refreshToken: async () => {
        // Implementation
-     }
+     },
    }));
    ```
 
@@ -364,6 +378,7 @@ export function BirthChartWheel({
    - Dark mode toggle
 
 **Success Metrics:**
+
 - [ ] User can register and login
 - [ ] Dashboard displays user stats
 - [ ] Navigation works on all devices
@@ -374,7 +389,9 @@ export function BirthChartWheel({
 **Goal:** Users can create and view beautiful birth charts
 
 **Tasks:**
+
 1. **Chart creation form**
+
    ```typescript
    // components/forms/CreateChartForm.tsx
    interface CreateChartFormData {
@@ -387,7 +404,7 @@ export function BirthChartWheel({
        longitude: number;
      };
      timezone: string;
-     house_system: 'PLACIDUS' | 'WHOLE_SIGN' | 'EQUAL';
+     house_system: "PLACIDUS" | "WHOLE_SIGN" | "EQUAL";
    }
    ```
 
@@ -412,6 +429,7 @@ export function BirthChartWheel({
    - Dominant planets/signs
 
 **Success Metrics:**
+
 - [ ] Chart creation takes < 30 seconds
 - [ ] Chart renders beautifully on all screens
 - [ ] All planetary data visible
@@ -422,6 +440,7 @@ export function BirthChartWheel({
 **Goal:** Generate and display AI-powered interpretations
 
 **Tasks:**
+
 1. **Prediction generation UI**
    - Select chart
    - Choose interpretation type
@@ -441,19 +460,24 @@ export function BirthChartWheel({
    - Notification preferences
 
 4. **WebSocket integration**
+
    ```typescript
    // lib/websocket.ts
-   import { io } from 'socket.io-client';
-   
+   import { io } from "socket.io-client";
+
    export const socket = io(process.env.NEXT_PUBLIC_WS_URL);
-   
-   export function subscribeToPrediction(predictionId: string, callback: (data: any) => void) {
-     socket.emit('subscribe', { predictionId });
-     socket.on('prediction:update', callback);
+
+   export function subscribeToPrediction(
+     predictionId: string,
+     callback: (data: any) => void
+   ) {
+     socket.emit("subscribe", { predictionId });
+     socket.on("prediction:update", callback);
    }
    ```
 
 **Success Metrics:**
+
 - [ ] Real-time prediction status updates
 - [ ] Beautiful interpretation display
 - [ ] Transit calendar is intuitive
@@ -464,6 +488,7 @@ export function BirthChartWheel({
 **Goal:** Production-ready application with delightful UX
 
 **Tasks:**
+
 1. **Performance optimization**
    - Implement code splitting
    - Lazy load components
@@ -472,14 +497,15 @@ export function BirthChartWheel({
    - Preload critical data
 
 2. **PWA implementation**
+
    ```javascript
    // next.config.js
-   const withPWA = require('next-pwa')({
-     dest: 'public',
+   const withPWA = require("next-pwa")({
+     dest: "public",
      register: true,
-     skipWaiting: true
+     skipWaiting: true,
    });
-   
+
    module.exports = withPWA({
      // Next.js config
    });
@@ -504,6 +530,7 @@ export function BirthChartWheel({
    - Retry mechanisms
 
 **Success Metrics:**
+
 - [ ] Lighthouse score > 90
 - [ ] Works offline (PWA)
 - [ ] WCAG 2.1 AA compliant
@@ -527,16 +554,16 @@ import asyncio
 class ConnectionManager:
     def __init__(self):
         self.active_connections: Dict[str, Set[WebSocket]] = {}
-    
+
     async def connect(self, websocket: WebSocket, user_id: str):
         await websocket.accept()
         if user_id not in self.active_connections:
             self.active_connections[user_id] = set()
         self.active_connections[user_id].add(websocket)
-    
+
     def disconnect(self, websocket: WebSocket, user_id: str):
         self.active_connections[user_id].remove(websocket)
-    
+
     async def send_personal_message(self, message: dict, user_id: str):
         if user_id in self.active_connections:
             for connection in self.active_connections[user_id]:
@@ -567,7 +594,7 @@ celery_app = Celery('astrology', broker='redis://localhost:6379/0')
 def generate_prediction_async(chart_data: dict, user_id: str, prediction_id: str):
     """Generate prediction asynchronously and send updates via WebSocket"""
     service = HybridInterpretationService()
-    
+
     # Send progress updates
     await manager.send_personal_message({
         'type': 'prediction:progress',
@@ -575,10 +602,10 @@ def generate_prediction_async(chart_data: dict, user_id: str, prediction_id: str
         'progress': 25,
         'status': 'Analyzing chart...'
     }, user_id)
-    
+
     # Generate interpretation
     result = service.generate_interpretation(chart_data)
-    
+
     # Send completion
     await manager.send_personal_message({
         'type': 'prediction:complete',
@@ -605,22 +632,22 @@ async def list_charts(
 ):
     """List charts with pagination, sorting, and search"""
     query = db.query(BirthChart).filter(BirthChart.user_id == current_user.user_id)
-    
+
     if search:
         query = query.filter(BirthChart.birth_location.ilike(f"%{search}%"))
-    
+
     # Count total
     total = query.count()
-    
+
     # Apply sorting
     if order == "desc":
         query = query.order_by(getattr(BirthChart, sort_by).desc())
     else:
         query = query.order_by(getattr(BirthChart, sort_by))
-    
+
     # Paginate
     charts = query.offset((page - 1) * per_page).limit(per_page).all()
-    
+
     return {
         "charts": charts,
         "pagination": {
@@ -651,10 +678,10 @@ async def export_chart(
         BirthChart.chart_id == chart_id,
         BirthChart.user_id == current_user.user_id
     ).first()
-    
+
     if not chart:
         raise HTTPException(404, "Chart not found")
-    
+
     if format == "pdf":
         buffer = BytesIO()
         p = canvas.Canvas(buffer)
@@ -677,6 +704,7 @@ async def export_chart(
 ### Frontend Optimization
 
 1. **Code Splitting**
+
    ```typescript
    // Dynamic imports
    const BirthChartWheel = dynamic(() => import('@/components/charts/BirthChartWheel'), {
@@ -686,9 +714,10 @@ async def export_chart(
    ```
 
 2. **Image Optimization**
+
    ```typescript
    import Image from 'next/image';
-   
+
    <Image
      src="/zodiac-symbols/aries.svg"
      width={50}
@@ -699,20 +728,22 @@ async def export_chart(
    ```
 
 3. **API Response Caching**
+
    ```typescript
-   import { useQuery } from '@tanstack/react-query';
-   
+   import { useQuery } from "@tanstack/react-query";
+
    const { data: charts } = useQuery({
-     queryKey: ['charts'],
+     queryKey: ["charts"],
      queryFn: fetchCharts,
      staleTime: 5 * 60 * 1000, // 5 minutes
-     cacheTime: 10 * 60 * 1000 // 10 minutes
+     cacheTime: 10 * 60 * 1000, // 10 minutes
    });
    ```
 
 ### Backend Optimization
 
 1. **Database Connection Pooling**
+
    ```python
    # backend/config/database.py
    engine = create_engine(
@@ -725,6 +756,7 @@ async def export_chart(
    ```
 
 2. **Response Compression**
+
    ```python
    from fastapi.middleware.gzip import GZipMiddleware
    app.add_middleware(GZipMiddleware, minimum_size=1000)
@@ -755,7 +787,7 @@ describe('BirthChartWheel', () => {
     render(<BirthChartWheel chartData={mockData} />);
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
-  
+
   it('shows planet details on hover', async () => {
     // Test interactive features
   });
@@ -766,21 +798,21 @@ describe('BirthChartWheel', () => {
 
 ```typescript
 // tests/e2e/chart-creation.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('user can create a birth chart', async ({ page }) => {
-  await page.goto('/login');
-  await page.fill('input[name="email"]', 'test@example.com');
-  await page.fill('input[name="password"]', 'password');
+test("user can create a birth chart", async ({ page }) => {
+  await page.goto("/login");
+  await page.fill('input[name="email"]', "test@example.com");
+  await page.fill('input[name="password"]', "password");
   await page.click('button[type="submit"]');
-  
-  await page.goto('/charts/new');
-  await page.fill('input[name="location"]', 'New York');
-  await page.fill('input[name="date"]', '1995-06-15');
-  await page.fill('input[name="time"]', '14:30');
+
+  await page.goto("/charts/new");
+  await page.fill('input[name="location"]', "New York");
+  await page.fill('input[name="date"]', "1995-06-15");
+  await page.fill('input[name="time"]', "14:30");
   await page.click('button[type="submit"]');
-  
-  await expect(page.locator('.chart-wheel')).toBeVisible();
+
+  await expect(page.locator(".chart-wheel")).toBeVisible();
 });
 ```
 
@@ -792,7 +824,7 @@ test('user can create a birth chart', async ({ page }) => {
 
 ```yaml
 # docker-compose.production.yml
-version: '3.8'
+version: "3.8"
 
 services:
   frontend:
@@ -832,28 +864,28 @@ on:
   push:
     branches: [main]
     paths:
-      - 'frontend/**'
+      - "frontend/**"
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
-      
+          node-version: "18"
+
       - name: Install dependencies
         run: cd frontend && npm ci
-      
+
       - name: Run tests
         run: cd frontend && npm test
-      
+
       - name: Build
         run: cd frontend && npm run build
-      
+
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
@@ -900,30 +932,35 @@ jobs:
 ## Timeline & Milestones
 
 ### Week 1-2: Foundation
+
 - [ ] Next.js setup complete
 - [ ] Authentication working
 - [ ] Dashboard operational
 - [ ] API integration tested
 
 ### Week 3: Chart Interface
+
 - [ ] Chart creation flow complete
 - [ ] Chart visualization beautiful
 - [ ] Chart management working
 - [ ] Mobile-responsive
 
 ### Week 4: Predictions
+
 - [ ] Prediction generation UI
 - [ ] Real-time updates working
 - [ ] Transit tracking
 - [ ] Notifications
 
 ### Week 5: Advanced Features
+
 - [ ] Analytics dashboard
 - [ ] PWA functional
 - [ ] Advanced visualizations
 - [ ] Performance optimized
 
 ### Week 6: Launch Prep
+
 - [ ] All tests passing
 - [ ] Documentation complete
 - [ ] Production deployment
