@@ -114,17 +114,22 @@ def test_antardasha_duration():
     print(f"Antardasha: {saturn_ad} within {venus_md}")
     print(f"  Formula: ({calculator.years[saturn_ad]}/120) × {calculator.years[venus_md]} = {duration:.4f} years")
     print(f"  Expected: {expected:.4f} years")
-    print(f"  Match: {abs(duration - expected) < 0.0001}")
+    match1 = abs(duration - expected) < 0.0001
+    print(f"  Match: {match1}")
     
     # Test multiple Maharashas
     print("\nAntardasha durations within different Maharashas:")
+    all_valid = True
     for md in ['Sun', 'Moon', 'Saturn']:
         print(f"\n  {md} Mahadasha ({calculator.years[md]} years):")
         for ad_index, ad in enumerate(calculator.sequence[:3]):  # First 3 Antardashas
             duration = calculator._get_antardasha_duration(md, ad)
-            print(f"    {ad:8} Antardasha → {duration:.3f} years")
+            expected_duration = (calculator.years[ad] / 120) * calculator.years[md]
+            is_valid = abs(duration - expected_duration) < 0.0001
+            all_valid = all_valid and is_valid
+            print(f"    {ad:8} Antardasha → {duration:.3f} years (expected {expected_duration:.3f})")
     
-    test_passed = abs(duration - expected) < 0.0001
+    test_passed = match1 and all_valid
     print_test_result("Antardasha duration calculation", test_passed)
     return test_passed
 

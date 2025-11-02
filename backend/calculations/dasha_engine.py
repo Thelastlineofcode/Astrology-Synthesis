@@ -14,6 +14,7 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
+import math
 
 
 # Vimshottari dasha sequence and durations (in years)
@@ -97,11 +98,19 @@ class DashaCalculator:
             Nakshatra number (1-27)
         """
         nakshatra_length = 13 + (20/60)  # 13°20' = 13.333...
-        # Add epsilon for floating point boundary precision
-        EPSILON = 1e-9
-        nakshatra_num = int((moon_longitude + EPSILON) / nakshatra_length) + 1
         
-        # Handle wraparound
+        # Normalize to 0-360
+        position = moon_longitude % 360
+        
+        # Calculate which nakshatra
+        # Critical: Due to floating point precision, a position like 13.333333°
+        # may be slightly less than the true boundary 13.33333333...
+        # Add epsilon large enough to push past these precision gaps
+        EPSILON = 1e-5  # Push past floating point precision issues
+        quotient = (position + EPSILON) / nakshatra_length
+        nakshatra_num = int(quotient) + 1
+        
+        # Handle edge case: if exactly at end of zodiac, should be Nak 27
         if nakshatra_num > 27:
             nakshatra_num = 27
         
