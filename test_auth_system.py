@@ -83,7 +83,20 @@ class TestRegistration:
     
     def test_register_duplicate_email(self):
         """Test registration with duplicate email."""
-        response = client.post(
+        # Register first user
+        response1 = client.post(
+            "/api/v1/auth/register",
+            json={
+                "email": "test@example.com",
+                "password": "Pass123!",
+                "first_name": "Test",
+                "last_name": "User1",
+            }
+        )
+        assert response1.status_code == 201
+        
+        # Try to register with same email again
+        response2 = client.post(
             "/api/v1/auth/register",
             json={
                 "email": "test@example.com",
@@ -93,8 +106,8 @@ class TestRegistration:
             }
         )
         
-        assert response.status_code == 409
-        assert "already exists" in response.json()["detail"]
+        assert response2.status_code == 409
+        assert "already exists" in response2.json()["detail"]
     
     def test_register_invalid_email(self):
         """Test registration with invalid email."""
