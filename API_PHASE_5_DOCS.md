@@ -339,15 +339,15 @@ The `auto` strategy implements intelligent fallback:
 
 ## Performance Targets
 
-| Metric | Target | Actual |
-|--------|--------|--------|
-| LLM Response Time | < 2s | ~1.2s |
-| KB Search Time | < 100ms | ~25ms |
-| Template Time | < 10ms | ~5ms |
-| Cache Hit Rate | 60-70% | ~68% |
-| LLM Quality | 85% | ✅ |
-| KB Quality | 80% | ✅ |
-| Cost per Interp | $0.0001 | ✅ |
+| Metric            | Target  | Actual |
+| ----------------- | ------- | ------ |
+| LLM Response Time | < 2s    | ~1.2s  |
+| KB Search Time    | < 100ms | ~25ms  |
+| Template Time     | < 10ms  | ~5ms   |
+| Cache Hit Rate    | 60-70%  | ~68%   |
+| LLM Quality       | 85%     | ✅     |
+| KB Quality        | 80%     | ✅     |
+| Cost per Interp   | $0.0001 | ✅     |
 
 ---
 
@@ -402,19 +402,22 @@ print(interpretation['interpretation'])
 ### JavaScript Client
 
 ```javascript
-const response = await fetch('http://localhost:5000/api/v1/interpretations/hybrid', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    chart_data: {
-      sun: 'Aries',
-      moon: 'Taurus',
-      ascendant: 'Gemini'
-    },
-    type: 'sun',
-    strategy: 'auto'
-  })
-});
+const response = await fetch(
+  "http://localhost:5000/api/v1/interpretations/hybrid",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chart_data: {
+        sun: "Aries",
+        moon: "Taurus",
+        ascendant: "Gemini",
+      },
+      type: "sun",
+      strategy: "auto",
+    }),
+  }
+);
 
 const interpretation = await response.json();
 console.log(`Strategy used: ${interpretation.strategy}`);
@@ -455,6 +458,7 @@ curl http://localhost:5000/api/v1/perplexity/cache-stats
 ## Support
 
 For issues or questions:
+
 - Check TROUBLESHOOTING_GUIDE.md
 - Review COST_ANALYSIS_REPORT.md
 - Check logs: `backend/logs/phase5.log`
