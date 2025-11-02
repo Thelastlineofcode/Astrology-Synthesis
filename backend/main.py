@@ -151,6 +151,12 @@ app.include_router(routes.transits.router, prefix="/api/v1", tags=["Transits"])
 # Include health routes
 app.include_router(routes.health.router, prefix="/api/v1", tags=["Health"])
 
+# Include Phase 5 LLM/Perplexity routes
+app.include_router(routes.perplexity_endpoints.router, tags=["LLM & Interpretations"])
+
+# Include Phase 5 Knowledge Base routes
+app.include_router(routes.knowledge.router, tags=["Knowledge Base"])
+
 
 # ============================================================================
 # Root Endpoint

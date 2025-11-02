@@ -5,8 +5,10 @@ from . import predictions
 from . import charts
 from . import transits
 from . import health
+from . import perplexity_endpoints
+from . import knowledge
 
-__all__ = ["auth", "predictions", "charts", "transits", "health"]
+__all__ = ["auth", "predictions", "charts", "transits", "health", "perplexity_endpoints", "knowledge"]
 
 # Import routers
 auth_router = auth.router
@@ -14,3 +16,5 @@ predictions_router = predictions.router
 charts_router = charts.router
 transits_router = transits.router
 health_router = health.router
+perplexity_router = perplexity_endpoints.router
+knowledge_router = knowledge.router
