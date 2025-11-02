@@ -49,6 +49,9 @@ logs/
 temp-frontend/
 frontend-old/
 
+# Knowledge base (books and large files)
+knowledge_base/
+
 # Package lock files (optional, you can keep these)
 # package-lock.json
 # Pipfile.lock
