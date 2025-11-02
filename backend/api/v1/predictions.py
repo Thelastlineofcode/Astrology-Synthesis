@@ -6,9 +6,9 @@ from datetime import datetime, timedelta
 from uuid import UUID
 from backend.config.database import get_db
 from backend.services.calculation_service import CalculationService
-from backend.models.database import Prediction, PredictionEvent, User
+from backend.models.database import Prediction, User
 from backend.schemas import (
-    PredictionRequest, PredictionResponse, PredictionEventData,
+    PredictionRequest, PredictionResponse,
     PredictionWithRemedies
 )
 from backend.api.v1.auth import get_current_user
@@ -130,16 +130,15 @@ async def get_prediction(
         return PredictionResponse(
             prediction_id=prediction.prediction_id,
             user_id=prediction.user_id,
-            query=prediction.query_text,
-            prediction_window_start=prediction.prediction_start_date,
-            prediction_window_end=prediction.prediction_end_date,
+            query="",
+            prediction_window_start=prediction.prediction_date_start,
+            prediction_window_end=prediction.prediction_date_end,
             confidence_score=prediction.confidence_score,
-            events=[PredictionEventData(**e) for e in events],
-            kp_contribution=prediction.kp_contribution,
-            dasha_contribution=prediction.dasha_contribution,
-            transit_contribution=prediction.transit_contribution,
-            model_version=prediction.model_version,
-            calculation_time_ms=prediction.calculation_time_ms,
+            kp_contribution=0,
+            dasha_contribution=0,
+            transit_contribution=0,
+            model_version="1.0",
+            calculation_time_ms=0,
             created_at=prediction.created_at,
         )
         
@@ -182,16 +181,15 @@ async def list_predictions(
             result.append(PredictionResponse(
                 prediction_id=prediction.prediction_id,
                 user_id=prediction.user_id,
-                query=prediction.query_text,
-                prediction_window_start=prediction.prediction_start_date,
-                prediction_window_end=prediction.prediction_end_date,
+                query="",
+                prediction_window_start=prediction.prediction_date_start,
+                prediction_window_end=prediction.prediction_date_end,
                 confidence_score=prediction.confidence_score,
-                events=[PredictionEventData(**e) for e in events],
-                kp_contribution=prediction.kp_contribution,
-                dasha_contribution=prediction.dasha_contribution,
-                transit_contribution=prediction.transit_contribution,
-                model_version=prediction.model_version,
-                calculation_time_ms=prediction.calculation_time_ms,
+                kp_contribution=0,
+                dasha_contribution=0,
+                transit_contribution=0,
+                model_version="1.0",
+                calculation_time_ms=0,
                 created_at=prediction.created_at,
             ))
         

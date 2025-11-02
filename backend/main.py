@@ -64,9 +64,12 @@ app.add_middleware(
 )
 
 # Trusted host middleware
+allowed_hosts = ["localhost", "127.0.0.1", "testserver"]  # Added testserver for testing
+if not settings.api.debug:
+    allowed_hosts = ["astrology-synthesis.com"]
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=["localhost", "127.0.0.1", "*.astrology-synthesis.com"] if settings.api.debug else ["astrology-synthesis.com"]
+    allowed_hosts=allowed_hosts
 )
 
 

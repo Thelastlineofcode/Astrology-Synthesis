@@ -19,7 +19,7 @@ from backend.schemas import RegisterRequest, LoginRequest
 # Create test database
 Base.metadata.create_all(bind=engine)
 
-client = TestClient(app)
+client = TestClient(app=app, base_url="http://testserver")
 
 
 @pytest.fixture
@@ -42,7 +42,7 @@ def test_user(db_session):
     user = User(
         user_id=uuid4(),
         email="test@example.com",
-        password_hash=AuthenticationService.hash_password("TestPassword123"),
+        password_hash=AuthenticationService.hash_password("Pass123!"),
         first_name="Test",
         last_name="User",
         is_active=True,
@@ -53,36 +53,31 @@ def test_user(db_session):
 
 
 class TestRegistration:
-    """Test user registration."""
+    """Test user registration functionality."""
     
-    def test_register_success(self, db_session):
+    def test_register_success(self):
         """Test successful user registration."""
-        response = client.post(
-            "/auth/register",
-            json={
-                "email": "newuser@example.com",
-                "password": "SecurePass123",
-                "first_name": "New",
-                "last_name": "User",
-            }
-        )
-        
+        response = client.post("/auth/register", json={
+            "email": "newuser@example.com",
+            "password": "Pass123!",
+            "first_name": "New",
+            "last_name": "User",
+        })
         assert response.status_code == 201
         data = response.json()
-        
         assert data["email"] == "newuser@example.com"
         assert "user_id" in data
         assert "access_token" in data
         assert "refresh_token" in data
         assert data["token_type"] == "bearer"
     
-    def test_register_duplicate_email(self, db_session, test_user):
+    def test_register_duplicate_email(self):
         """Test registration with duplicate email."""
         response = client.post(
             "/auth/register",
             json={
                 "email": "test@example.com",
-                "password": "SecurePass123",
+                "password": "Pass123!",
                 "first_name": "Test",
                 "last_name": "User2",
             }
@@ -90,6 +85,18 @@ class TestRegistration:
         
         assert response.status_code == 409
         assert "already exists" in response.json()["detail"]
+    
+    def test_register_invalid_email(self):
+        """Test registration with invalid email."""
+        response = client.post(
+            "/auth/register",
+            json={
+                "email": "invalid-email",
+                "password": "Pass123!",
+                "first_name": "Test",
+                "last_name": "User",
+            }
+        )
     
     def test_register_invalid_email(self):
         """Test registration with invalid email."""
@@ -131,7 +138,7 @@ class TestLogin:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -149,7 +156,7 @@ class TestLogin:
             "/auth/login",
             json={
                 "email": "nonexistent@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -198,7 +205,7 @@ class TestTokenRefresh:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -234,7 +241,7 @@ class TestTokenRefresh:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -260,7 +267,7 @@ class TestUserProfile:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -306,7 +313,7 @@ class TestAPIKeys:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -334,7 +341,7 @@ class TestAPIKeys:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -368,7 +375,7 @@ class TestAPIKeys:
             "/auth/login",
             json={
                 "email": "test@example.com",
-                "password": "TestPassword123",
+                "password": "Pass123!",
             }
         )
         
@@ -404,7 +411,7 @@ class TestSecurityFeatures:
     
     def test_password_hashing(self):
         """Test that passwords are properly hashed."""
-        password = "TestPassword123"
+        password = "Pass123!"
         hash1 = AuthenticationService.hash_password(password)
         hash2 = AuthenticationService.hash_password(password)
         
@@ -417,7 +424,7 @@ class TestSecurityFeatures:
     
     def test_invalid_password_verification(self):
         """Test that incorrect passwords don't verify."""
-        password = "TestPassword123"
+        password = "Pass123!"
         hash_value = AuthenticationService.hash_password(password)
         
         assert not AuthenticationService.verify_password("WrongPassword", hash_value)
