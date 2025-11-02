@@ -59,33 +59,45 @@ class CalculationService:
             tz = pytz.timezone(birth_data.timezone)
             birth_datetime = dt.strptime(birth_date_str, "%Y-%m-%d %H:%M:%S")
             birth_datetime = tz.localize(birth_datetime)
+            # Convert to UTC
+            birth_datetime_utc = birth_datetime.astimezone(pytz.UTC)
             
-            # Get ephemeris calculations
-            planet_positions = self.ephemeris.get_planet_positions(
-                birth_datetime,
-                birth_data.latitude,
-                birth_data.longitude
-            )
+            # Get all planetary positions
+            planets = self.ephemeris.get_all_planets(birth_datetime_utc, tropical=False)
             
+            # Get house cusps
             house_cusps = self.ephemeris.get_house_cusps(
-                birth_datetime,
+                birth_datetime_utc,
                 birth_data.latitude,
                 birth_data.longitude
             )
             
-            ascendant = self.ephemeris.get_ascendant(
-                birth_datetime,
-                birth_data.latitude,
-                birth_data.longitude
-            )
+            # Format planet positions for consistency
+            planet_positions = []
+            for planet_name, position in planets.items():
+                planet_positions.append({
+                    "planet": planet_name,
+                    "longitude": position.longitude,
+                    "latitude": position.latitude,
+                    "sign": position.sign,
+                    "degree_in_sign": position.degree_in_sign,
+                    "is_retrograde": position.is_retrograde,
+                    "nakshatra": position.nakshatra,
+                })
             
-            aspects = self.ephemeris.get_aspects(planet_positions)
+            # Format house cusps
+            cusps_data = {f"cusp_{i+1}": house_cusps.cusps[i] for i in range(12)}
+            cusps_data["ascendant"] = house_cusps.ascendant
+            cusps_data["midheaven"] = house_cusps.midheaven
             
             chart_data = {
                 "planet_positions": planet_positions,
-                "house_cusps": house_cusps,
-                "ascendant": ascendant,
-                "aspects": aspects,
+                "house_cusps": cusps_data,
+                "ascendant": house_cusps.ascendant,
+                "timezone": birth_data.timezone,
+                "latitude": birth_data.latitude,
+                "longitude": birth_data.longitude,
+                "aspects": self._calculate_aspects(planets),
             }
             
             logger.info(f"✅ Birth chart generated for {birth_data.location_name}")
@@ -94,6 +106,51 @@ class CalculationService:
         except Exception as e:
             logger.error(f"❌ Birth chart generation failed: {str(e)}")
             raise
+    
+    def _calculate_aspects(self, planets: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Calculate major aspects between planets.
+        
+        Args:
+            planets: Dictionary of planet positions
+            
+        Returns:
+            List of aspect data
+        """
+        aspects = []
+        aspect_types = {
+            0: {"name": "Conjunction", "orb": 8},
+            60: {"name": "Sextile", "orb": 6},
+            90: {"name": "Square", "orb": 8},
+            120: {"name": "Trine", "orb": 8},
+            180: {"name": "Opposition", "orb": 8},
+        }
+        
+        planet_list = list(planets.items())
+        for i in range(len(planet_list)):
+            for j in range(i + 1, len(planet_list)):
+                name1, pos1 = planet_list[i]
+                name2, pos2 = planet_list[j]
+                
+                # Calculate angular distance
+                diff = abs(pos1.longitude - pos2.longitude)
+                if diff > 180:
+                    diff = 360 - diff
+                
+                # Check against known aspects
+                for aspect_angle, aspect_info in aspect_types.items():
+                    orb = aspect_info["orb"]
+                    if abs(diff - aspect_angle) <= orb:
+                        aspects.append({
+                            "planet1": name1,
+                            "planet2": name2,
+                            "aspect": aspect_info["name"],
+                            "angle": diff,
+                            "orb": abs(diff - aspect_angle),
+                        })
+                        break
+        
+        return aspects
     
     def get_syncretic_prediction(
         self,
