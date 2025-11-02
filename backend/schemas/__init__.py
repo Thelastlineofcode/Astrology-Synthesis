@@ -3,7 +3,7 @@ Pydantic schemas for request/response validation.
 Defines data models for all API endpoints.
 """
 
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, validator, ConfigDict
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from uuid import UUID
@@ -106,6 +106,8 @@ class APIKeyResponse(BaseModel):
     created_at: datetime
     last_used_at: Optional[datetime] = None
     is_active: bool
+    
+    model_config = ConfigDict(exclude_none=False)
 
 
 # ============================================================================
@@ -356,20 +358,6 @@ class RemediesResponse(BaseModel):
 # User Schemas
 # ============================================================================
 
-class UserProfile(BaseModel):
-    """User profile information."""
-    
-    user_id: UUID
-    email: str
-    first_name: Optional[str]
-    last_name: Optional[str]
-    phone_number: Optional[str]
-    timezone: str
-    language: str
-    subscription_tier: str
-    is_verified: bool
-    created_at: datetime
-    last_login_at: Optional[datetime]
 
 
 class UpdateUserRequest(BaseModel):
@@ -420,14 +408,6 @@ class APIKeyCreateRequest(BaseModel):
     key_name: str = Field(..., min_length=1, max_length=100)
 
 
-class APIKeyResponse(BaseModel):
-    """API key response."""
-    
-    key_id: str
-    key_name: str
-    created_at: datetime
-    last_used_at: Optional[datetime] = None
-    is_active: bool
 
 
 # ============================================================================

@@ -283,13 +283,13 @@ class AuthenticationService:
         return raw_key, str(api_key.key_id)
     
     @staticmethod
-    def revoke_api_key(db: Session, key_id: UUID) -> bool:
+    def revoke_api_key(db: Session, key_id: str) -> bool:
         """
         Revoke an API key.
         
         Args:
             db: Database session
-            key_id: API Key ID to revoke
+            key_id: API Key ID to revoke (as string)
             
         Returns:
             True if successful, False otherwise

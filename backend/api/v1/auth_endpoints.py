@@ -357,8 +357,10 @@ async def create_api_key(
         return APIKeyResponse(
             key_id=key_id,
             key_name=request.key_name,
-            raw_key=raw_key,  # Only returned once
+            api_key=raw_key,  # Only returned once
             created_at=datetime.utcnow(),
+            last_used_at=None,
+            is_active=True,
         )
     
     except Exception as e:
@@ -417,8 +419,7 @@ async def revoke_api_key(
     The key can be reactivated later but the primary use case is to cycle keys for security.
     """
     try:
-        key_uuid = UUID(key_id)
-        success = AuthenticationService.revoke_api_key(db, key_uuid)
+        success = AuthenticationService.revoke_api_key(db, key_id)
         
         if not success:
             raise HTTPException(
@@ -438,8 +439,8 @@ async def revoke_api_key(
         
         return {"message": "API key revoked successfully"}
     
-    except ValueError:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid key ID format",
+            detail="Failed to revoke API key",
         )

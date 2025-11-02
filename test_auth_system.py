@@ -354,8 +354,8 @@ class TestAPIKeys:
         
         assert "key_id" in data
         assert data["key_name"] == "test-key"
-        assert "raw_key" in data
-        assert data["raw_key"].startswith("sk_")
+        assert "api_key" in data
+        assert data["api_key"].startswith("sk_")
     
     def test_list_api_keys(self, test_user):
         """Test listing API keys."""
