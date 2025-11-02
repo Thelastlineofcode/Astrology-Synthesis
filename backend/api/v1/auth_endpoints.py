@@ -65,7 +65,7 @@ def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    user_id = UUID(payload.get("user_id"))
+    user_id = payload.get("user_id")  # user_id is already a string
     user = AuthenticationService.get_user_by_id(db, user_id)
     if not user or not user.is_active:
         raise HTTPException(
