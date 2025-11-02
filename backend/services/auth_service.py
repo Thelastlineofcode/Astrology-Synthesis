@@ -119,7 +119,7 @@ class AuthenticationService:
         return raw_key, hashed_key
     
     @staticmethod
-    def register_user(db: Session, register_data: RegisterRequest) -> User:
+    def register_user(db: Session, register_data: RegisterRequest) -> Tuple[User, str]:
         """
         Register a new user with password hashing and initial API key.
         
@@ -128,7 +128,7 @@ class AuthenticationService:
             register_data: Registration request data
             
         Returns:
-            Created User object
+            Tuple of (User object, raw_api_key)
             
         Raises:
             ValueError: If email already exists
@@ -171,8 +171,7 @@ class AuthenticationService:
         db.refresh(user)
         
         logger.info(f"✅ User registered: {user.email}")
-        return user
-    @staticmethod
+        return user, raw_key
     def login_user(db: Session, login_data: LoginRequest) -> Optional[User]:
         """
         Authenticate a user.

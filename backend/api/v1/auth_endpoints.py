@@ -123,7 +123,7 @@ async def register(
     - **last_name**: User's last name
     """
     try:
-        user = AuthenticationService.register_user(db, register_data)
+        user, api_key = AuthenticationService.register_user(db, register_data)
         
         # Log registration
         audit = AuditLog(
@@ -144,6 +144,7 @@ async def register(
             first_name=user.first_name,
             last_name=user.last_name,
             created_at=user.created_at,
+            api_key=api_key,
             access_token=access_token,
             refresh_token=refresh_token,
             token_type="bearer",
