@@ -71,6 +71,36 @@ class RefreshTokenResponse(BaseModel):
     expires_in: int
 
 
+class UserProfile(BaseModel):
+    """User profile information."""
+    
+    user_id: str
+    email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+    is_active: bool
+    is_verified: bool
+
+
+class APIKeyCreateRequest(BaseModel):
+    """API key creation request."""
+    
+    key_name: str = Field(..., min_length=1, max_length=100)
+
+
+class APIKeyResponse(BaseModel):
+    """API key response."""
+    
+    key_id: str
+    key_name: str
+    api_key: Optional[str] = None  # Only returned on creation
+    created_at: datetime
+    last_used_at: Optional[datetime] = None
+    is_active: bool
+
+
 # ============================================================================
 # Birth Chart Schemas
 # ============================================================================
