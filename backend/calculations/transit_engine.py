@@ -25,7 +25,12 @@ import os
 # Import required modules
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 from dasha_engine import DashaCalculator, DashaPosition
-from kp_engine import KPCalculator
+from kp_engine import (
+    get_sub_lord,
+    get_significators_for_house,
+    get_ruling_planets,
+    VIMSHOTTARI_PROPORTIONS
+)
 
 
 @dataclass
@@ -72,8 +77,7 @@ class TransitAnalyzer:
     """
     
     def __init__(self):
-        """Initialize transit analyzer with KP and Dasha engines."""
-        self.kp = KPCalculator()
+        """Initialize transit analyzer with Dasha engine."""
         self.dasha = DashaCalculator()
         
         # House matter keywords for interpretation
@@ -120,16 +124,19 @@ class TransitAnalyzer:
         natal_planets = birth_chart.get('natal_planets', {})
         moon_longitude = birth_chart.get('moon_longitude', 0)
         dasha_balance = birth_chart.get('dasha_balance_years', 0)
+        house_cusps = birth_chart.get('house_cusps', [0] * 12)  # 12 house cusps
         
         # Get KP significators for all houses
         significators = {}
         for house in range(1, 13):
-            sigs = self.kp.get_significators_for_house(
+            sigs = get_significators_for_house(
                 house,
                 natal_planets,
-                moon_longitude
+                house_cusps
             )
-            significators[house] = sigs
+            # Extract planet names from Significator objects
+            sig_planets = [sig.planet for sig in sigs] if sigs else []
+            significators[house] = sig_planets
         
         # Current dasha info
         current_dasha = self.dasha.calculate_dasha_position(
