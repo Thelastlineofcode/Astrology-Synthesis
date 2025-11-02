@@ -31,6 +31,7 @@ from kp_engine import (
     get_ruling_planets,
     VIMSHOTTARI_PROPORTIONS
 )
+from ephemeris import EphemerisCalculator, PlanetPosition
 
 
 @dataclass
@@ -77,8 +78,9 @@ class TransitAnalyzer:
     """
     
     def __init__(self):
-        """Initialize transit analyzer with Dasha engine."""
+        """Initialize transit analyzer with Dasha and Ephemeris engines."""
         self.dasha = DashaCalculator()
+        self.ephemeris = EphemerisCalculator()  # For real planetary positions
         
         # House matter keywords for interpretation
         self.house_matters = {
@@ -338,12 +340,24 @@ class TransitAnalyzer:
     
     
     def _get_transit_planet_at_date(self, date: datetime) -> str:
-        """Stub: Get which planet is transiting at given date."""
-        # TODO: Integrate with ephemeris for real planetary positions
-        planets = ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn']
-        # For now, rotate through planets
-        day_of_year = date.timetuple().tm_yday
-        return planets[day_of_year % len(planets)]
+        """Get planets transiting at given date using real ephemeris data."""
+        # Get all planet positions at this date
+        all_planets = self.ephemeris.get_all_planets(date, tropical=False)
+        
+        # Find the planet with the most significant movement/position
+        # Prioritize faster-moving planets which are more likely transiting
+        planets_by_speed = sorted(
+            all_planets.items(),
+            key=lambda x: x[1].speed,
+            reverse=True
+        )
+        
+        # Return the fastest-moving planet (Moon most likely to be transiting)
+        if planets_by_speed:
+            return planets_by_speed[0][0]
+        
+        # Fallback to a default planet
+        return 'Moon'
     
     
     def _calculate_kp_transit_confidence(
