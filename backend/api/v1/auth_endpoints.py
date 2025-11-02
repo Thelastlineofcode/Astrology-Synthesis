@@ -265,7 +265,7 @@ async def refresh_token(
             detail="Invalid refresh token",
         )
     
-    user_id = UUID(payload.get("user_id"))
+    user_id = payload.get("user_id")  # user_id is already a string
     user = AuthenticationService.get_user_by_id(db, user_id)
     
     if not user or not user.is_active:
@@ -280,6 +280,7 @@ async def refresh_token(
     return RefreshTokenResponse(
         access_token=access_token,
         refresh_token=new_refresh_token,
+        expires_in=settings.security.access_token_expire_minutes * 60,
         token_type="bearer",
     )
 

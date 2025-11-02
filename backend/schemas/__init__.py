@@ -73,7 +73,9 @@ class RefreshTokenResponse(BaseModel):
     """Token refresh response."""
     
     access_token: str
+    refresh_token: str
     expires_in: int
+    token_type: str = "bearer"
 
 
 class UserProfile(BaseModel):
@@ -406,6 +408,26 @@ class SystemStats(BaseModel):
     cache_hit_rate: float
     database_connections_active: int
     timestamp: datetime
+
+
+# ============================================================================
+# API Key Schemas
+# ============================================================================
+
+class APIKeyCreateRequest(BaseModel):
+    """API key creation request."""
+    
+    key_name: str = Field(..., min_length=1, max_length=100)
+
+
+class APIKeyResponse(BaseModel):
+    """API key response."""
+    
+    key_id: str
+    key_name: str
+    created_at: datetime
+    last_used_at: Optional[datetime] = None
+    is_active: bool
 
 
 # ============================================================================
