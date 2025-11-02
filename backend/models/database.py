@@ -1,13 +1,13 @@
 """
 SQLAlchemy database models for the Astrology-Synthesis API.
 Defines all tables for users, charts, predictions, transits, and caching.
+Compatible with both SQLite and PostgreSQL.
 """
 
 from sqlalchemy import (
     Column, String, Integer, Float, Boolean, DateTime, Text, 
-    ForeignKey, Enum, Index, CheckConstraint, JSONB, INET, LargeBinary
+    ForeignKey, JSON, Index, CheckConstraint
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import datetime
