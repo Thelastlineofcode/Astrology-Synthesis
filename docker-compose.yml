@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # FastAPI Application
+  api:
+    build: .
+    container_name: astrology-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./astrology.db
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./backend:/app/backend
+      - ./astrology.db:/app/astrology.db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # PostgreSQL (optional - for production)
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: astrology-db
+  #   environment:
+  #     POSTGRES_USER: astrology
+  #     POSTGRES_PASSWORD: secure_password
+  #     POSTGRES_DB: astrology
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U astrology"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: astrology-network
