@@ -150,7 +150,7 @@ class EphemerisCalculator:
         day = dt.day
         hour = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
         
-        jd = swe.julday(year, month, day, hour, calflag=swe.GREG_CAL)
+        jd = swe.julday(year, month, day, hour, swe.GREG_CAL)
         return jd
     
     
@@ -177,18 +177,18 @@ class EphemerisCalculator:
         planet_id = self.PLANETS[planet_name]
         jd = self._datetime_to_jd(date)
         
-        # Get position
+        # Get position - returns (xx, retflags)
         if tropical:
-            result = swe.calc_ut(jd, planet_id, flag=swe.FLG_SPEED)
+            result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED)
         else:
             # Sidereal (Vedic)
-            result = swe.calc_ut(jd, planet_id, flag=swe.FLG_SPEED | swe.FLG_SIDEREAL)
+            result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED | swe.FLG_SIDEREAL)
         
-        coords = result[0]  # [longitude, latitude, distance]
-        speed = result[1][0]  # Speed in longitude
-        
-        # Normalize longitude to 0-360
-        longitude = coords[0] % 360
+        # result is 6-element tuple: [longitude, latitude, distance, lon_speed, lat_speed, dist_speed]
+        longitude = result[0] % 360
+        latitude = result[1]
+        distance = result[2]
+        speed = result[3]  # Longitude speed
         
         # Determine sign
         sign_index = int(longitude / 30)
@@ -210,8 +210,8 @@ class EphemerisCalculator:
         return PlanetPosition(
             planet_name=planet_name,
             longitude=longitude,
-            latitude=coords[1],
-            distance=coords[2],
+            latitude=latitude,
+            distance=distance,
             speed=abs(speed),
             is_retrograde=is_retrograde,
             house=None,  # Set later if houses calculated
