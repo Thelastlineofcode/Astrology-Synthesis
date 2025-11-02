@@ -41,6 +41,7 @@ The complete authentication system for Astrology Synthesis is now fully implemen
 ## Features Implemented
 
 ### User Registration & Authentication
+
 - ✅ Email validation with EmailStr
 - ✅ Password strength requirements (8+ chars, uppercase, digit)
 - ✅ Bcrypt hashing (12 rounds, ~300ms per hash)
@@ -49,6 +50,7 @@ The complete authentication system for Astrology Synthesis is now fully implemen
 - ✅ Last login tracking
 
 ### API Key Management
+
 - ✅ Generate per-user API keys with human-readable names
 - ✅ SHA256 hashing for secure storage
 - ✅ List all active API keys (masked for security)
@@ -57,6 +59,7 @@ The complete authentication system for Astrology Synthesis is now fully implemen
 - ✅ Key format: `sk_` prefix for easy identification
 
 ### Security Features
+
 - ✅ JWT token validation with payload verification
 - ✅ Authorization header parsing (Bearer scheme)
 - ✅ Per-endpoint access control via dependencies
@@ -65,6 +68,7 @@ The complete authentication system for Astrology Synthesis is now fully implemen
 - ✅ Automatic token expiry (30-min access, 7-day refresh)
 
 ### Zero-Cost Infrastructure
+
 - ✅ SQLite database (file-based, no server)
 - ✅ All dependencies open-source & free
 - ✅ No monthly cloud costs
@@ -77,9 +81,11 @@ The complete authentication system for Astrology Synthesis is now fully implemen
 ### Authentication Endpoints
 
 #### `POST /api/v1/auth/register`
+
 Create a new user account with initial API key.
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -90,6 +96,7 @@ Create a new user account with initial API key.
 ```
 
 **Response (201 Created):**
+
 ```json
 {
   "user_id": "abc123...",
@@ -105,9 +112,11 @@ Create a new user account with initial API key.
 ```
 
 #### `POST /api/v1/auth/login`
+
 Authenticate and receive JWT tokens.
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -116,6 +125,7 @@ Authenticate and receive JWT tokens.
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "user_id": "abc123...",
@@ -128,9 +138,11 @@ Authenticate and receive JWT tokens.
 ```
 
 #### `POST /api/v1/auth/refresh`
+
 Refresh expired access token using refresh token.
 
 **Request:**
+
 ```json
 {
   "refresh_token": "eyJhbGciOiJIUzI1NiIs..."
@@ -138,6 +150,7 @@ Refresh expired access token using refresh token.
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "access_token": "eyJhbGciOiJIUzI1NiIs...",
@@ -148,14 +161,17 @@ Refresh expired access token using refresh token.
 ```
 
 #### `GET /api/v1/auth/profile`
+
 Get current user's profile. **Requires JWT token.**
 
 **Headers:**
+
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
 **Response (200 OK):**
+
 ```json
 {
   "user_id": "abc123...",
@@ -172,9 +188,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ### API Key Endpoints
 
 #### `POST /api/v1/auth/api-keys`
+
 Create a new API key. **Requires JWT token.**
 
 **Request:**
+
 ```json
 {
   "key_name": "mobile-app"
@@ -182,6 +200,7 @@ Create a new API key. **Requires JWT token.**
 ```
 
 **Response (201 Created):**
+
 ```json
 {
   "key_id": "62899aa6...",
@@ -194,9 +213,11 @@ Create a new API key. **Requires JWT token.**
 ```
 
 #### `GET /api/v1/auth/api-keys`
+
 List all API keys for user. **Requires JWT token.**
 
 **Response (200 OK):**
+
 ```json
 {
   "keys": [
@@ -219,9 +240,11 @@ List all API keys for user. **Requires JWT token.**
 ```
 
 #### `DELETE /api/v1/auth/api-keys/{key_id}`
+
 Revoke an API key. **Requires JWT token.**
 
 **Response (200 OK):**
+
 ```json
 {
   "message": "API key revoked successfully"
@@ -233,39 +256,46 @@ Revoke an API key. **Requires JWT token.**
 ## Test Suite - All 22 Tests Passing ✅
 
 ### TestRegistration (4/4 tests)
+
 - ✅ `test_register_success` - Register new user
 - ✅ `test_register_duplicate_email` - Reject duplicate emails
 - ✅ `test_register_invalid_email` - Validate email format
 - ✅ `test_register_weak_password` - Enforce password strength
 
 ### TestLogin (4/4 tests)
+
 - ✅ `test_login_success` - Successful authentication
 - ✅ `test_login_invalid_email` - Reject invalid emails
 - ✅ `test_login_wrong_password` - Reject wrong passwords
 - ✅ `test_login_failed_attempts_lockout` - Lock after 5 failures
 
 ### TestTokenRefresh (3/3 tests)
+
 - ✅ `test_refresh_token_success` - Refresh with valid refresh token
 - ✅ `test_refresh_with_invalid_token` - Reject invalid tokens
 - ✅ `test_refresh_with_access_token` - Reject access tokens (need refresh)
 
 ### TestUserProfile (3/3 tests)
+
 - ✅ `test_get_profile_with_valid_token` - Get profile with JWT
 - ✅ `test_get_profile_without_token` - Reject without auth header
 - ✅ `test_get_profile_with_invalid_token` - Reject invalid JWT
 
 ### TestAPIKeys (4/4 tests)
+
 - ✅ `test_create_api_key` - Create new API key
 - ✅ `test_list_api_keys` - List all user's API keys
 - ✅ `test_revoke_api_key` - Revoke API key
 - ✅ `test_use_revoked_api_key` - Reject revoked keys
 
 ### TestSecurityFeatures (3/3 tests)
+
 - ✅ `test_password_hashing` - Verify bcrypt hashing
 - ✅ `test_invalid_password_verification` - Reject wrong passwords
 - ✅ `test_api_key_format` - Validate key format `sk_*`
 
 ### TestAuthenticationIntegration (1/1 test)
+
 - ✅ `test_full_auth_flow` - Complete user journey (register → login → create key → revoke)
 
 ---
@@ -273,31 +303,37 @@ Revoke an API key. **Requires JWT token.**
 ## Key Issues Fixed
 
 ### 1. UUID String Mismatch ✅
+
 **Problem:** SQLite stores UUIDs as strings but code was converting to UUID objects  
 **Solution:** Changed all `uuid4()` to `str(uuid4())` in service layer  
 **Files:** `backend/services/auth_service.py` (3 locations)
 
 ### 2. PostgreSQL Import Errors ✅
+
 **Problem:** Old code had PostgreSQL-specific imports (JSONB, UUID type, INET)  
 **Solution:** Created new `database.py` with SQLite-compatible String UUIDs and JSON columns  
 **Files:** `backend/models/database.py` (new)
 
 ### 3. Bcrypt Password Length ✅
+
 **Problem:** Test passwords exceeded bcrypt's 72-byte limit  
 **Solution:** Changed to 8-character passwords compatible with bcrypt  
 **Files:** `test_auth_system.py`
 
 ### 4. Authorization Header Parsing ✅
+
 **Problem:** `get_current_user()` dependency converting string user_id to UUID  
 **Solution:** Removed UUID conversions, keep all IDs as strings  
 **Files:** `backend/api/v1/auth_endpoints.py` (2 locations)
 
 ### 5. Duplicate Schema Classes ✅
+
 **Problem:** Two UserProfile and APIKeyResponse classes, second one missing fields  
 **Solution:** Removed duplicate classes, kept updated versions  
 **Files:** `backend/schemas/__init__.py`
 
 ### 6. Response Field Serialization ✅
+
 **Problem:** Optional fields with None defaults being excluded from JSON response  
 **Solution:** Added `model_config = ConfigDict(exclude_none=False)` to APIKeyResponse  
 **Files:** `backend/schemas/__init__.py`
@@ -307,12 +343,14 @@ Revoke an API key. **Requires JWT token.**
 ## Database Infrastructure
 
 ### SQLite Configuration
+
 - **File:** `astrology_synthesis.db` (344 KB)
 - **Location:** Root directory (easily backup & distribute)
 - **Foreign Keys:** Enabled on connection
 - **Indices:** 64 optimized indices for query performance
 
 ### User Table Structure
+
 ```sql
 CREATE TABLE "user" (
   user_id VARCHAR(36) PRIMARY KEY,
@@ -331,6 +369,7 @@ CREATE TABLE "user" (
 ```
 
 ### API Key Table Structure
+
 ```sql
 CREATE TABLE "api_key" (
   key_id VARCHAR(36) PRIMARY KEY,
@@ -349,12 +388,14 @@ CREATE TABLE "api_key" (
 ## Security Specifications
 
 ### Password Hashing
+
 - **Algorithm:** Bcrypt with 12 rounds
 - **Computation Time:** ~300ms per hash (intentional slowdown)
 - **Storage:** Salted hash only, never plaintext
 - **Validation:** Constant-time comparison to prevent timing attacks
 
 ### JWT Tokens
+
 - **Algorithm:** HS256 (HMAC-SHA256)
 - **Secret:** Loaded from environment variable (`.env`)
 - **Access Token:** 30 minutes expiry
@@ -362,18 +403,21 @@ CREATE TABLE "api_key" (
 - **Payload:** Includes user_id, token type, issued/expiry timestamps
 
 ### API Keys
+
 - **Format:** `sk_` prefix + 40 random characters (base64)
 - **Storage:** SHA256 hash only, never plaintext
 - **Revocation:** Soft delete (set `is_active = false`)
 - **Usage Tracking:** `last_used_at` timestamp on validation
 
 ### Account Lockout
+
 - **Trigger:** 5 failed login attempts
 - **Duration:** 15 minutes
 - **Enforcement:** Database check on login attempt
 - **Reset:** Automatic after lockout period
 
 ### Audit Logging
+
 - **Coverage:** User registration, login, token generation, API key operations
 - **Fields:** user_id, action_type, resource_type, resource_id, timestamp
 - **Storage:** `audit_log` table in SQLite
@@ -399,12 +443,14 @@ CREATE TABLE "api_key" (
 ## Next Steps - Phase 3 Week 2
 
 ### Service Layer Integration (Days 1-2)
+
 - Wrap existing calculation engines (KP, Dasha, Transit, Ephemeris)
 - Add authentication checks to all service methods
 - Implement rate limiting for API key usage
 - Add usage tracking and quota management
 
 ### Core API Endpoints (Days 3-4)
+
 - `POST /api/v1/predictions` - Create astrological prediction
 - `GET /api/v1/predictions/{id}` - Retrieve prediction
 - `POST /api/v1/charts` - Generate birth chart
@@ -413,6 +459,7 @@ CREATE TABLE "api_key" (
 - Add filtering, pagination, and sorting
 
 ### Testing & Performance (Days 5-7)
+
 - Add integration tests for full workflows
 - Performance testing with load generation
 - Docker containerization
@@ -422,28 +469,29 @@ CREATE TABLE "api_key" (
 
 ## Code Statistics
 
-| Component | Lines | Status |
-|-----------|-------|--------|
-| auth_service.py | 322 | ✅ Complete |
-| auth_endpoints.py | 448 | ✅ Complete |
-| database.py | 432 | ✅ Complete |
-| schemas/__init__.py | 426 | ✅ Complete |
-| test_auth_system.py | 529 | ✅ 22/22 passing |
-| **Total** | **2,157** | **✅ Production Ready** |
+| Component           | Lines     | Status                  |
+| ------------------- | --------- | ----------------------- |
+| auth_service.py     | 322       | ✅ Complete             |
+| auth_endpoints.py   | 448       | ✅ Complete             |
+| database.py         | 432       | ✅ Complete             |
+| schemas/**init**.py | 426       | ✅ Complete             |
+| test_auth_system.py | 529       | ✅ 22/22 passing        |
+| **Total**           | **2,157** | **✅ Production Ready** |
 
 ---
 
 ## Cost Analysis
 
-| Item | Cost | Notes |
-|------|------|-------|
-| SQLite Database | $0 | File-based, no server |
-| Backend Server | $0 | Self-hosted or free tier |
-| Dependencies | $0 | All open-source |
-| Authentication | $0 | Custom implementation |
+| Item              | Cost   | Notes                    |
+| ----------------- | ------ | ------------------------ |
+| SQLite Database   | $0     | File-based, no server    |
+| Backend Server    | $0     | Self-hosted or free tier |
+| Dependencies      | $0     | All open-source          |
+| Authentication    | $0     | Custom implementation    |
 | **Monthly Total** | **$0** | Fully free until scaling |
 
 **Future Scaling Path:**
+
 - SQLite → PostgreSQL (change `DB_DRIVER=postgresql` in `.env`)
 - Self-hosted → Cloud VM (~$5-20/month)
 - Add authentication service (~$50/month) only if needed
