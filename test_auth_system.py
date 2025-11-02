@@ -17,9 +17,19 @@ from backend.services.auth_service import AuthenticationService
 from backend.schemas import RegisterRequest, LoginRequest
 
 # Create test database
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 client = TestClient(app=app, base_url="http://testserver")
+
+
+@pytest.fixture(autouse=True)
+def cleanup_db():
+    """Clean database before each test."""
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+    yield
+    Base.metadata.drop_all(bind=engine)
 
 
 @pytest.fixture
@@ -40,7 +50,7 @@ def db_session():
 def test_user(db_session):
     """Create a test user."""
     user = User(
-        user_id=uuid4(),
+        user_id=str(uuid4()),
         email="test@example.com",
         password_hash=AuthenticationService.hash_password("Pass123!"),
         first_name="Test",
