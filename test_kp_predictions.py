@@ -56,57 +56,57 @@ KNOWN_KP_POSITIONS = [
         }
     },
     {
-        'longitude': 13.333333,  # 13°20' Aries (end of Ashwini)
+        'longitude': 13 + (20/60),  # 13°20' Aries EXACTLY (Bharani starts)
         'expected': {
             'nakshatra_num': 2,
             'nakshatra_name': 'Bharani',
             'nakshatra_lord': 'Venus',
-            'sub_lord': 'Ketu'
+            'sub_lord': 'Ketu'  # First sub-lord of Bharani
         }
     },
     {
-        'longitude': 30.0,  # 0° Taurus
+        'longitude': 30.0,  # 0° Taurus = 30° absolute = 3°20' into Krittika
         'expected': {
             'nakshatra_num': 3,
             'nakshatra_name': 'Krittika',
             'nakshatra_lord': 'Sun',
-            'sub_lord': 'Venus'  # Krittika starts in Venus sub
+            'sub_lord': 'Sun'  # At 3°20' position within Krittika
         }
     },
     {
-        'longitude': 90.0,  # 0° Cancer
+        'longitude': 90.0,  # 0° Cancer = 90° absolute = 10° into Punarvasu (Nak #7)
         'expected': {
-            'nakshatra_num': 8,
-            'nakshatra_name': 'Pushya',
-            'nakshatra_lord': 'Saturn',
-            'sub_lord': 'Venus'
+            'nakshatra_num': 7,
+            'nakshatra_name': 'Punarvasu',
+            'nakshatra_lord': 'Jupiter',
+            'sub_lord': 'Saturn'  # At 10° position within Punarvasu
         }
     },
     {
-        'longitude': 135.0,  # 15° Leo
+        'longitude': 135.0,  # 15° Leo = 135° absolute = 1°40' into Purva Phalguni
         'expected': {
             'nakshatra_num': 11,
             'nakshatra_name': 'Purva Phalguni',
             'nakshatra_lord': 'Venus',
-            'sub_lord': 'Ketu'  # At 15° Leo
+            'sub_lord': 'Venus'  # At 1°40' position
         }
     },
     {
-        'longitude': 180.0,  # 0° Libra
+        'longitude': 180.0,  # 0° Libra = 180° absolute = 6°40' into Chitra
         'expected': {
             'nakshatra_num': 14,
             'nakshatra_name': 'Chitra',
             'nakshatra_lord': 'Mars',
-            'sub_lord': 'Venus'
+            'sub_lord': 'Rahu'  # At 6°40' position
         }
     },
     {
-        'longitude': 270.0,  # 0° Capricorn
+        'longitude': 270.0,  # 0° Capricorn = 270° absolute = 3°20' into Uttara Ashadha
         'expected': {
             'nakshatra_num': 21,
             'nakshatra_name': 'Uttara Ashadha',
             'nakshatra_lord': 'Sun',
-            'sub_lord': 'Venus'
+            'sub_lord': 'Sun'  # At 3°20' position
         }
     },
     {

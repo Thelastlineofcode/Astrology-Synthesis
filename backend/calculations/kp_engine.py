@@ -80,16 +80,22 @@ def get_sub_lord(longitude_degrees: float) -> SubLordPosition:
     
     # Nakshatra calculation (each 13°20')
     nakshatra_length = 13 + (20/60)  # 13.333333 degrees
-    nakshatra_num = int(longitude_degrees / nakshatra_length)
+    
+    # Calculate nakshatra number (0-26)
+    # KP convention: Lower bound inclusive, upper bound exclusive
+    # [0, 13.333) = Nak 1, [13.333, 26.667) = Nak 2, etc.
+    # Add small epsilon to handle floating point precision at exact boundaries
+    EPSILON = 1e-9
+    nakshatra_num = int((longitude_degrees + EPSILON) / nakshatra_length)
     
     # Handle boundary case (360° = 0°)
     if nakshatra_num >= 27:
         nakshatra_num = 26
     
-    nakshatra_num += 1  # 1-indexed (1-27)
+    # Position within current nakshatra (will be 0 at exact boundaries)
+    position_in_nakshatra = longitude_degrees - (nakshatra_num * nakshatra_length)
     
-    # Position within current nakshatra
-    position_in_nakshatra = longitude_degrees % nakshatra_length
+    nakshatra_num += 1  # Convert to 1-indexed (1-27)
     
     # Nakshatra lord (cycles every 9 nakshatras)
     nakshatra_lord_index = (nakshatra_num - 1) % 9
