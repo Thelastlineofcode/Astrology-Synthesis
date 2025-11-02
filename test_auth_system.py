@@ -57,7 +57,7 @@ class TestRegistration:
     
     def test_register_success(self):
         """Test successful user registration."""
-        response = client.post("/auth/register", json={
+        response = client.post("/api/v1/auth/register", json={
             "email": "newuser@example.com",
             "password": "Pass123!",
             "first_name": "New",
@@ -74,7 +74,7 @@ class TestRegistration:
     def test_register_duplicate_email(self):
         """Test registration with duplicate email."""
         response = client.post(
-            "/auth/register",
+            "/api/v1/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -89,7 +89,7 @@ class TestRegistration:
     def test_register_invalid_email(self):
         """Test registration with invalid email."""
         response = client.post(
-            "/auth/register",
+            "/api/v1/auth/register",
             json={
                 "email": "invalid-email",
                 "password": "Pass123!",
@@ -101,7 +101,7 @@ class TestRegistration:
     def test_register_invalid_email(self):
         """Test registration with invalid email."""
         response = client.post(
-            "/auth/register",
+            "/api/v1/auth/register",
             json={
                 "email": "invalid-email",
                 "password": "SecurePass123",
@@ -116,7 +116,7 @@ class TestRegistration:
     def test_register_weak_password(self):
         """Test registration with weak password."""
         response = client.post(
-            "/auth/register",
+            "/api/v1/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "weak",
@@ -135,7 +135,7 @@ class TestLogin:
     def test_login_success(self, test_user):
         """Test successful login."""
         response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -153,7 +153,7 @@ class TestLogin:
     def test_login_invalid_email(self):
         """Test login with non-existent email."""
         response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "nonexistent@example.com",
                 "password": "Pass123!",
@@ -166,7 +166,7 @@ class TestLogin:
     def test_login_wrong_password(self, test_user):
         """Test login with wrong password."""
         response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "WrongPassword123",
@@ -181,7 +181,7 @@ class TestLogin:
         # Make 5 failed login attempts
         for i in range(5):
             response = client.post(
-                "/auth/login",
+                "/api/v1/auth/login",
                 json={
                     "email": "test@example.com",
                     "password": "WrongPassword",
@@ -202,7 +202,7 @@ class TestTokenRefresh:
         """Test successful token refresh."""
         # First, login to get tokens
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -213,7 +213,7 @@ class TestTokenRefresh:
         
         # Refresh the token
         response = client.post(
-            "/auth/refresh",
+            "/api/v1/auth/refresh",
             json={"refresh_token": refresh_token}
         )
         
@@ -227,7 +227,7 @@ class TestTokenRefresh:
     def test_refresh_with_invalid_token(self):
         """Test token refresh with invalid token."""
         response = client.post(
-            "/auth/refresh",
+            "/api/v1/auth/refresh",
             json={"refresh_token": "invalid.token.here"}
         )
         
@@ -238,7 +238,7 @@ class TestTokenRefresh:
         """Test token refresh with access token (should fail)."""
         # Login to get tokens
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -249,7 +249,7 @@ class TestTokenRefresh:
         
         # Try to use access token as refresh token
         response = client.post(
-            "/auth/refresh",
+            "/api/v1/auth/refresh",
             json={"refresh_token": access_token}
         )
         
@@ -264,7 +264,7 @@ class TestUserProfile:
         """Test getting user profile with valid JWT token."""
         # Login to get token
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -275,7 +275,7 @@ class TestUserProfile:
         
         # Get profile
         response = client.get(
-            "/auth/profile",
+            "/api/v1/auth/profile",
             headers={"Authorization": f"Bearer {access_token}"}
         )
         
@@ -288,7 +288,7 @@ class TestUserProfile:
     
     def test_get_profile_without_token(self):
         """Test getting profile without authentication."""
-        response = client.get("/auth/profile")
+        response = client.get("/api/v1/auth/profile")
         
         assert response.status_code == 401
         assert "Missing authorization header" in response.json()["detail"]
@@ -296,7 +296,7 @@ class TestUserProfile:
     def test_get_profile_with_invalid_token(self):
         """Test getting profile with invalid token."""
         response = client.get(
-            "/auth/profile",
+            "/api/v1/auth/profile",
             headers={"Authorization": "Bearer invalid.token.here"}
         )
         
@@ -310,7 +310,7 @@ class TestAPIKeys:
         """Test creating a new API key."""
         # Login to get token
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -321,7 +321,7 @@ class TestAPIKeys:
         
         # Create API key
         response = client.post(
-            "/auth/api-keys",
+            "/api/v1/auth/api-keys",
             headers={"Authorization": f"Bearer {access_token}"},
             json={"key_name": "test-key"}
         )
@@ -338,7 +338,7 @@ class TestAPIKeys:
         """Test listing API keys."""
         # Login to get token
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -349,14 +349,14 @@ class TestAPIKeys:
         
         # Create API key first
         create_response = client.post(
-            "/auth/api-keys",
+            "/api/v1/auth/api-keys",
             headers={"Authorization": f"Bearer {access_token}"},
             json={"key_name": "test-key"}
         )
         
         # List keys
         response = client.get(
-            "/auth/api-keys",
+            "/api/v1/auth/api-keys",
             headers={"Authorization": f"Bearer {access_token}"}
         )
         
@@ -372,7 +372,7 @@ class TestAPIKeys:
         """Test revoking an API key."""
         # Login to get token
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "test@example.com",
                 "password": "Pass123!",
@@ -383,7 +383,7 @@ class TestAPIKeys:
         
         # Create API key
         create_response = client.post(
-            "/auth/api-keys",
+            "/api/v1/auth/api-keys",
             headers={"Authorization": f"Bearer {access_token}"},
             json={"key_name": "test-key"}
         )
@@ -392,7 +392,7 @@ class TestAPIKeys:
         
         # Revoke key
         response = client.delete(
-            f"/auth/api-keys/{key_id}",
+            f"/api/v1/auth/api-keys/{key_id}",
             headers={"Authorization": f"Bearer {access_token}"}
         )
         
@@ -449,7 +449,7 @@ class TestAuthenticationIntegration:
         """Test complete authentication flow: register -> login -> access profile -> refresh token."""
         # 1. Register
         register_response = client.post(
-            "/auth/register",
+            "/api/v1/auth/register",
             json={
                 "email": "integration@example.com",
                 "password": "IntegrationTest123",
@@ -463,7 +463,7 @@ class TestAuthenticationIntegration:
         
         # 2. Login
         login_response = client.post(
-            "/auth/login",
+            "/api/v1/auth/login",
             json={
                 "email": "integration@example.com",
                 "password": "IntegrationTest123",
@@ -476,7 +476,7 @@ class TestAuthenticationIntegration:
         
         # 3. Get profile
         profile_response = client.get(
-            "/auth/profile",
+            "/api/v1/auth/profile",
             headers={"Authorization": f"Bearer {access_token}"}
         )
         
@@ -485,7 +485,7 @@ class TestAuthenticationIntegration:
         
         # 4. Refresh token
         refresh_response = client.post(
-            "/auth/refresh",
+            "/api/v1/auth/refresh",
             json={"refresh_token": refresh_token}
         )
         
@@ -494,7 +494,7 @@ class TestAuthenticationIntegration:
         
         # 5. Use new token to access profile
         new_profile_response = client.get(
-            "/auth/profile",
+            "/api/v1/auth/profile",
             headers={"Authorization": f"Bearer {new_access_token}"}
         )
         

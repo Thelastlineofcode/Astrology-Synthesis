@@ -141,9 +141,9 @@ class AuthenticationService:
         # Hash password
         password_hash = AuthenticationService.hash_password(register_data.password)
         
-        # Create user with UUID
+        # Create user with UUID as string
         user = User(
-            user_id=uuid4(),
+            user_id=str(uuid4()),
             email=register_data.email,
             password_hash=password_hash,
             first_name=register_data.first_name,
@@ -159,7 +159,7 @@ class AuthenticationService:
         # Create initial API key
         raw_key, hashed_key = AuthenticationService.generate_api_key()
         api_key = APIKey(
-            key_id=uuid4(),
+            key_id=str(uuid4()),
             user_id=user.user_id,
             key_name="default",
             api_key_hash=hashed_key,
@@ -172,7 +172,6 @@ class AuthenticationService:
         
         logger.info(f"✅ User registered: {user.email}")
         return user
-    
     @staticmethod
     def login_user(db: Session, login_data: LoginRequest) -> Optional[User]:
         """
@@ -271,7 +270,7 @@ class AuthenticationService:
         
         raw_key, hashed_key = AuthenticationService.generate_api_key()
         api_key = APIKey(
-            key_id=uuid4(),
+            key_id=str(uuid4()),
             user_id=user_id,
             key_name=key_name,
             api_key_hash=hashed_key,
