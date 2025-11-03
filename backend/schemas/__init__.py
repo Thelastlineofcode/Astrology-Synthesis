@@ -57,6 +57,8 @@ class LoginResponse(BaseModel):
     
     user_id: UUID
     email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     access_token: str
     refresh_token: str
     expires_in: int
