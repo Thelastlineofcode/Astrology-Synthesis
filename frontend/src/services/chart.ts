@@ -67,6 +67,12 @@ class ChartService {
       return await response.json();
     } catch (error) {
       console.error("Chart generation error:", error);
+      // Provide more specific error message for network/connection issues
+      if (error instanceof TypeError && error.message === "Load failed") {
+        throw new Error(
+          "Cannot connect to server. Please check if the backend is running on port 8001."
+        );
+      }
       throw error;
     }
   }
