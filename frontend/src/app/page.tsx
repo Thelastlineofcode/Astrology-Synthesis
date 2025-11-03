@@ -13,12 +13,12 @@ export default function Home() {
         <div className="landing__header-content">
           <Image
             src="/images/logo/Icon_logo.png"
-            alt="Roots Revealed"
+            alt="Mula: The Root"
             width={60}
             height={60}
             className="landing__logo"
           />
-          <h1>Roots Revealed</h1>
+          <h1>Mula: The Root</h1>
         </div>
         <p className="landing__subtitle">
           Discover the roots of your astrological birth chart

@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
 import Card from '../shared/Card';
 import Button from '../shared/Button';
 import './SymbolonCard.css';
@@ -15,11 +14,9 @@ const SymbolonCard = () => {
           Explore archetypal insights through Symbolon card readings
         </p>
         <div className="symbolon-cta">
-          <Link href="/symbolon-demo">
-            <Button variant="primary" className="symbolon-button">
-              Draw a Card
-            </Button>
-          </Link>
+          <Button variant="primary" className="symbolon-button" href="/symbolon-demo">
+            Draw a Card
+          </Button>
         </div>
       </div>
     </Card>

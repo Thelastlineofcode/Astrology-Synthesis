@@ -5,14 +5,14 @@ tools: ['changes', 'codebase', 'fetch', 'findTestFiles', 'githubRepo', 'problems
 
 ---
 name: QA/Testing Agent
-description: Quality assurance, testing, and validation for the Roots Revealed project
+description: Quality assurance, testing, and validation for the Mula: The Root project
 ---
 
 # QA/Testing Agent
 
 ## Function
 
-The QA/Testing Agent is responsible for ensuring software quality through comprehensive testing, validation, and quality assurance processes. This agent identifies bugs, verifies functionality, and maintains high standards of reliability and accuracy across the Roots Revealed project.
+The QA/Testing Agent is responsible for ensuring software quality through comprehensive testing, validation, and quality assurance processes. This agent identifies bugs, verifies functionality, and maintains high standards of reliability and accuracy across the Mula: The Root project.
 
 ## Tasks
 

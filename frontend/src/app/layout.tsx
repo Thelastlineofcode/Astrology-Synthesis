@@ -5,9 +5,9 @@ import "./globals.css";
 import ThemeToggle from "../components/shared/ThemeToggle";
 
 export const metadata: Metadata = {
-  title: "Roots Revealed",
+  title: "Mula: The Root",
   description:
-    "Discover the roots of your astrological birth chart through the mystical Tree of Life",
+    "A modern spiritual companion app combining Vedic astrology, Vodou oracle, and AI guidance",
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/icon-256.png", sizes: "256x256", type: "image/png" }],
   },
   openGraph: {
-    title: "Roots Revealed",
+    title: "Mula: The Root",
     description:
-      "Discover the roots of your astrological birth chart through the mystical Tree of Life",
+      "A modern spiritual companion app combining Vedic astrology, Vodou oracle, and AI guidance",
     images: ["/icon-512.png"],
   },
 };

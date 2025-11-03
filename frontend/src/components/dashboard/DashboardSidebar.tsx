@@ -27,7 +27,7 @@ export default function DashboardSidebar({ currentPath }: SidebarProps) {
       <div className="p-6 border-b border-white/10">
         <div className="flex items-center gap-3">
           <div className="text-2xl">🔮</div>
-          <h1 className="text-xl font-bold">Roots Revealed</h1>
+          <h1 className="text-xl font-bold">Mula</h1>
         </div>
       </div>
 

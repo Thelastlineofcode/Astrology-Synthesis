@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
 import Card from '../shared/Card';
 import Button from '../shared/Button';
 import './BMADSummaryCard.css';
@@ -15,11 +14,9 @@ const BMADSummaryCard = () => {
           Discover insights from your Birth Matrix Analysis Dashboard
         </p>
         <div className="bmad-cta">
-          <Link href="/bmad">
-            <Button variant="primary" className="bmad-button">
-              View Analysis
-            </Button>
-          </Link>
+          <Button variant="primary" className="bmad-button" href="/bmad">
+            View Analysis
+          </Button>
         </div>
       </div>
     </Card>
