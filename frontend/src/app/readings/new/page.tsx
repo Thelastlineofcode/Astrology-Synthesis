@@ -6,6 +6,9 @@ import ChartCanvas from "@/components/chart/ChartCanvas";
 import { mockChartData } from "@/components/chart/mockChartData";
 import authService from "@/services/auth";
 import chartService from "@/services/chart";
+import predictionService, {
+  PredictionResponse,
+} from "@/services/prediction";
 
 interface BirthData {
   date: string;
@@ -33,6 +36,14 @@ export default function NewChartReadingPage() {
   const [showForm, setShowForm] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Prediction state
+  const [predictionData, setPredictionData] =
+    useState<PredictionResponse | null>(null);
+  const [isGeneratingPrediction, setIsGeneratingPrediction] = useState(false);
+  const [predictionQuery, setPredictionQuery] = useState(
+    "Generate a comprehensive reading covering career, relationships, health, and finances for the next 90 days."
+  );
 
   // Client notes and predictions
   const [clientNotes, setClientNotes] = useState("");
@@ -65,9 +76,14 @@ export default function NewChartReadingPage() {
 
   // Transform backend chart data to frontend format
   const transformChartData = (backendData: Record<string, unknown>) => {
+    console.log("Transforming backend data:", backendData);
+
     // Convert planet_positions array to planets object
     const planets: Record<string, unknown> = {};
-    if (backendData.planet_positions) {
+    if (
+      backendData.planet_positions &&
+      Array.isArray(backendData.planet_positions)
+    ) {
       (backendData.planet_positions as Array<Record<string, unknown>>).forEach(
         (p: Record<string, unknown>) => {
           planets[p.planet as string] = {
@@ -76,14 +92,19 @@ export default function NewChartReadingPage() {
             degree: p.degree,
             house: p.house,
             retrograde: p.retrograde,
+            nakshatra: p.nakshatra,
+            pada: p.pada,
           };
         }
       );
+      console.log("Transformed planets:", planets);
+    } else {
+      console.error("No planet_positions in backend data!");
     }
 
     // Convert house_cusps array to houses object
     const houses: Record<string, unknown> = {};
-    if (backendData.house_cusps) {
+    if (backendData.house_cusps && Array.isArray(backendData.house_cusps)) {
       (backendData.house_cusps as Array<Record<string, unknown>>).forEach(
         (h: Record<string, unknown>) => {
           houses[`house_${h.house}`] = {
@@ -93,18 +114,25 @@ export default function NewChartReadingPage() {
           };
         }
       );
+      console.log("Transformed houses:", houses);
+    } else {
+      console.error("No house_cusps in backend data!");
     }
 
-    return {
+    const result = {
       planets,
       houses,
       aspects: backendData.aspects || [],
     };
+
+    console.log("Final transformed data:", result);
+    return result;
   };
 
   const handleGenerateChart = async () => {
     setIsGenerating(true);
     setError(null);
+    setPredictionData(null);
 
     try {
       if (!authService.isAuthenticated()) {
@@ -113,8 +141,10 @@ export default function NewChartReadingPage() {
         return;
       }
 
-      // Call the backend API to generate chart
-      const response = await chartService.generateChart({
+      console.log("🔮 Generating chart with data:", birthData);
+
+      // Step 1: Generate Chart
+      const chartResponse = await chartService.generateChart({
         birth_date: birthData.date,
         birth_time: `${birthData.time}:00`,
         birth_location: birthData.location_name,
@@ -123,16 +153,60 @@ export default function NewChartReadingPage() {
         timezone: birthData.timezone,
       });
 
+      console.log("✅ Chart API response:", chartResponse);
+
+      // Check if chart_data exists and has the expected structure
+      if (!chartResponse.chart_data) {
+        throw new Error("No chart data received from server");
+      }
+
+      if (
+        !chartResponse.chart_data.planet_positions ||
+        !chartResponse.chart_data.house_cusps
+      ) {
+        console.error("Invalid chart data structure:", chartResponse.chart_data);
+        throw new Error("Invalid chart data structure received from server");
+      }
+
       // Transform and update chart with real data from API
-      const transformedData = transformChartData(response.chart_data);
+      const transformedData = transformChartData(chartResponse.chart_data);
       setChartData(transformedData as typeof mockChartData);
-      console.log("Chart generated successfully:", response);
-      console.log("Transformed data:", transformedData);
+      console.log("✅ Chart data transformed and set!");
+
+      // Step 2: Generate Predictions (the main function!)
+      console.log("🔮 Generating predictions...");
+      setIsGeneratingPrediction(true);
+      
+      try {
+        const predictionResponse = await predictionService.generatePrediction({
+          birth_data: {
+            date: birthData.date,
+            time: `${birthData.time}:00`,
+            location_name: birthData.location_name,
+            latitude: birthData.latitude,
+            longitude: birthData.longitude,
+            timezone: birthData.timezone,
+          },
+          query: predictionQuery,
+          prediction_window_days: 90,
+        });
+
+        console.log("✅ Prediction API response:", predictionResponse);
+        setPredictionData(predictionResponse);
+        console.log(`✨ Generated ${predictionResponse.events.length} predictions with ${(predictionResponse.confidence_score * 100).toFixed(1)}% confidence`);
+      } catch (predError) {
+        console.error("⚠️ Prediction generation failed:", predError);
+        // Don't fail the whole operation if predictions fail
+        setError("Chart generated but predictions failed. Please try again.");
+      } finally {
+        setIsGeneratingPrediction(false);
+      }
+
     } catch (err) {
       const errorMsg =
         err instanceof Error ? err.message : "Failed to generate chart";
       setError(errorMsg);
-      console.error("Chart generation error:", err);
+      console.error("❌ Chart generation error:", err);
 
       // If auth error, redirect to login
       if (errorMsg.includes("expired") || errorMsg.includes("authenticated")) {
@@ -445,7 +519,9 @@ export default function NewChartReadingPage() {
               transition: "all 0.2s",
             }}
           >
-            {isGenerating ? "Calculating..." : "✨ Generate Birth Chart"}
+            {isGenerating
+              ? "🔮 Generating Chart & Predictions..."
+              : "✨ Generate Chart & Reading"}
           </button>
 
           <div
@@ -498,6 +574,290 @@ export default function NewChartReadingPage() {
       </div>
 
       <ChartCanvas chartData={chartData} />
+
+      {/* AI-Generated Predictions Section */}
+      {predictionData && (
+        <div
+          style={{
+            marginTop: "2rem",
+            padding: "2rem",
+            backgroundColor: "var(--bg-card-surface)",
+            borderRadius: "12px",
+            border: "3px solid var(--accent-golden)",
+            boxShadow: "0 4px 20px rgba(218, 165, 32, 0.2)",
+          }}
+        >
+          <div style={{ marginBottom: "1.5rem" }}>
+            <h2
+              style={{
+                fontSize: "1.75rem",
+                fontWeight: "bold",
+                color: "var(--accent-golden)",
+                marginBottom: "0.5rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.75rem",
+              }}
+            >
+              ✨ Syncretic Astrological Reading
+            </h2>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
+              Based on KP Astrology, Vimshottari Dasha & Transit Analysis
+            </p>
+          </div>
+
+          {/* Confidence Score */}
+          <div
+            style={{
+              display: "flex",
+              gap: "2rem",
+              marginBottom: "2rem",
+              padding: "1rem",
+              backgroundColor: "rgba(139, 92, 246, 0.1)",
+              borderRadius: "8px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div>
+              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+                Overall Confidence
+              </div>
+              <div style={{ fontSize: "1.5rem", fontWeight: "bold", color: "var(--accent-golden)" }}>
+                {(predictionData.confidence_score * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+                KP Contribution
+              </div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+                {(predictionData.kp_contribution * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+                Dasha Contribution
+              </div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+                {(predictionData.dasha_contribution * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+                Transit Contribution
+              </div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+                {(predictionData.transit_contribution * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+                Events Identified
+              </div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--text-primary)" }}>
+                {predictionData.events.length}
+              </div>
+            </div>
+          </div>
+
+          {/* Prediction Events */}
+          <div>
+            <h3
+              style={{
+                fontSize: "1.25rem",
+                fontWeight: "600",
+                color: "var(--text-primary)",
+                marginBottom: "1rem",
+              }}
+            >
+              Predicted Events (Next 90 Days)
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {predictionData.events.map((event, index) => (
+                <div
+                  key={index}
+                  style={{
+                    padding: "1.25rem",
+                    backgroundColor: "var(--bg-input)",
+                    borderRadius: "8px",
+                    border: `2px solid ${
+                      event.strength_score > 0.7
+                        ? "var(--accent-golden)"
+                        : event.strength_score > 0.4
+                        ? "var(--accent-purple)"
+                        : "var(--accent-blue)"
+                    }`,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "start",
+                      marginBottom: "0.75rem",
+                      flexWrap: "wrap",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <div>
+                      <div
+                        style={{
+                          fontSize: "1.1rem",
+                          fontWeight: "600",
+                          color: "var(--text-primary)",
+                          marginBottom: "0.25rem",
+                        }}
+                      >
+                        {event.event_type.replace(/_/g, " ").toUpperCase()}
+                      </div>
+                      <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
+                        {new Date(event.event_date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        padding: "0.25rem 0.75rem",
+                        backgroundColor:
+                          event.strength_score > 0.7
+                            ? "rgba(218, 165, 32, 0.2)"
+                            : event.strength_score > 0.4
+                            ? "rgba(139, 92, 246, 0.2)"
+                            : "rgba(59, 130, 246, 0.2)",
+                        borderRadius: "12px",
+                        fontSize: "0.875rem",
+                        fontWeight: "600",
+                        color:
+                          event.strength_score > 0.7
+                            ? "var(--accent-golden)"
+                            : event.strength_score > 0.4
+                            ? "var(--accent-purple)"
+                            : "var(--accent-blue)",
+                      }}
+                    >
+                      {(event.strength_score * 100).toFixed(0)}% Strength
+                    </div>
+                  </div>
+
+                  {event.influence_area && (
+                    <div
+                      style={{
+                        fontSize: "0.875rem",
+                        color: "var(--accent-purple)",
+                        marginBottom: "0.5rem",
+                        fontWeight: "500",
+                      }}
+                    >
+                      📍 {event.influence_area}
+                    </div>
+                  )}
+
+                  {(event.primary_planet || event.secondary_planet) && (
+                    <div
+                      style={{
+                        fontSize: "0.875rem",
+                        color: "var(--text-secondary)",
+                        marginBottom: "0.75rem",
+                      }}
+                    >
+                      🪐 Planets:{" "}
+                      {[event.primary_planet, event.secondary_planet]
+                        .filter(Boolean)
+                        .join(" • ")}
+                    </div>
+                  )}
+
+                  <p
+                    style={{
+                      color: "var(--text-primary)",
+                      lineHeight: "1.6",
+                      marginBottom: "0.75rem",
+                    }}
+                  >
+                    {event.description}
+                  </p>
+
+                  {event.recommendation && (
+                    <div
+                      style={{
+                        marginTop: "0.75rem",
+                        padding: "0.75rem",
+                        backgroundColor: "rgba(34, 197, 94, 0.1)",
+                        borderRadius: "6px",
+                        borderLeft: "3px solid rgba(34, 197, 94, 0.5)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: "0.875rem",
+                          fontWeight: "600",
+                          color: "rgba(34, 197, 94, 1)",
+                          marginBottom: "0.25rem",
+                        }}
+                      >
+                        💡 Recommendation
+                      </div>
+                      <div style={{ fontSize: "0.875rem", color: "var(--text-primary)" }}>
+                        {event.recommendation}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Query Info */}
+          <div
+            style={{
+              marginTop: "2rem",
+              padding: "1rem",
+              backgroundColor: "rgba(139, 92, 246, 0.05)",
+              borderRadius: "8px",
+              fontSize: "0.875rem",
+              color: "var(--text-secondary)",
+            }}
+          >
+            <div style={{ marginBottom: "0.5rem" }}>
+              <strong>Query:</strong> {predictionData.query}
+            </div>
+            <div>
+              <strong>Prediction Window:</strong>{" "}
+              {new Date(predictionData.prediction_window_start).toLocaleDateString()} -{" "}
+              {new Date(predictionData.prediction_window_end).toLocaleDateString()}
+            </div>
+            <div style={{ marginTop: "0.5rem", fontSize: "0.75rem" }}>
+              Calculated in {predictionData.calculation_time_ms.toFixed(2)}ms • Model v
+              {predictionData.model_version}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading State for Predictions */}
+      {isGeneratingPrediction && (
+        <div
+          style={{
+            marginTop: "2rem",
+            padding: "2rem",
+            backgroundColor: "var(--bg-card-surface)",
+            borderRadius: "12px",
+            border: "2px solid var(--accent-purple)",
+            textAlign: "center",
+          }}
+        >
+          <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔮</div>
+          <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-golden)" }}>
+            Generating Syncretic Predictions...
+          </div>
+          <div style={{ fontSize: "0.95rem", color: "var(--text-secondary)", marginTop: "0.5rem" }}>
+            Analyzing KP Astrology, Dasha periods, and transits...
+          </div>
+        </div>
+      )}
 
       {/* Predictions & Method Tracking Section */}
       <div
