@@ -6,9 +6,7 @@ import ChartCanvas from "@/components/chart/ChartCanvas";
 import { mockChartData } from "@/components/chart/mockChartData";
 import authService from "@/services/auth";
 import chartService from "@/services/chart";
-import predictionService, {
-  PredictionResponse,
-} from "@/services/prediction";
+import predictionService, { PredictionResponse } from "@/services/prediction";
 
 interface BirthData {
   date: string;
@@ -41,7 +39,7 @@ export default function NewChartReadingPage() {
   const [predictionData, setPredictionData] =
     useState<PredictionResponse | null>(null);
   const [isGeneratingPrediction, setIsGeneratingPrediction] = useState(false);
-  const [predictionQuery, setPredictionQuery] = useState(
+  const [predictionQuery] = useState(
     "Generate a comprehensive reading covering career, relationships, health, and finances for the next 90 days."
   );
 
@@ -164,7 +162,10 @@ export default function NewChartReadingPage() {
         !chartResponse.chart_data.planet_positions ||
         !chartResponse.chart_data.house_cusps
       ) {
-        console.error("Invalid chart data structure:", chartResponse.chart_data);
+        console.error(
+          "Invalid chart data structure:",
+          chartResponse.chart_data
+        );
         throw new Error("Invalid chart data structure received from server");
       }
 
@@ -176,7 +177,7 @@ export default function NewChartReadingPage() {
       // Step 2: Generate Predictions (the main function!)
       console.log("🔮 Generating predictions...");
       setIsGeneratingPrediction(true);
-      
+
       try {
         const predictionResponse = await predictionService.generatePrediction({
           birth_data: {
@@ -193,7 +194,9 @@ export default function NewChartReadingPage() {
 
         console.log("✅ Prediction API response:", predictionResponse);
         setPredictionData(predictionResponse);
-        console.log(`✨ Generated ${predictionResponse.events.length} predictions with ${(predictionResponse.confidence_score * 100).toFixed(1)}% confidence`);
+        console.log(
+          `✨ Generated ${predictionResponse.events.length} predictions with ${(predictionResponse.confidence_score * 100).toFixed(1)}% confidence`
+        );
       } catch (predError) {
         console.error("⚠️ Prediction generation failed:", predError);
         // Don't fail the whole operation if predictions fail
@@ -201,7 +204,6 @@ export default function NewChartReadingPage() {
       } finally {
         setIsGeneratingPrediction(false);
       }
-
     } catch (err) {
       const errorMsg =
         err instanceof Error ? err.message : "Failed to generate chart";
@@ -619,42 +621,102 @@ export default function NewChartReadingPage() {
             }}
           >
             <div>
-              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.25rem",
+                }}
+              >
                 Overall Confidence
               </div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold", color: "var(--accent-golden)" }}>
+              <div
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  color: "var(--accent-golden)",
+                }}
+              >
                 {(predictionData.confidence_score * 100).toFixed(1)}%
               </div>
             </div>
             <div>
-              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.25rem",
+                }}
+              >
                 KP Contribution
               </div>
-              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+              <div
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  color: "var(--accent-purple)",
+                }}
+              >
                 {(predictionData.kp_contribution * 100).toFixed(1)}%
               </div>
             </div>
             <div>
-              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.25rem",
+                }}
+              >
                 Dasha Contribution
               </div>
-              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+              <div
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  color: "var(--accent-purple)",
+                }}
+              >
                 {(predictionData.dasha_contribution * 100).toFixed(1)}%
               </div>
             </div>
             <div>
-              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.25rem",
+                }}
+              >
                 Transit Contribution
               </div>
-              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-purple)" }}>
+              <div
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  color: "var(--accent-purple)",
+                }}
+              >
                 {(predictionData.transit_contribution * 100).toFixed(1)}%
               </div>
             </div>
             <div>
-              <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0.25rem" }}>
+              <div
+                style={{
+                  fontSize: "0.875rem",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.25rem",
+                }}
+              >
                 Events Identified
               </div>
-              <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--text-primary)" }}>
+              <div
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: "600",
+                  color: "var(--text-primary)",
+                }}
+              >
                 {predictionData.events.length}
               </div>
             </div>
@@ -672,7 +734,9 @@ export default function NewChartReadingPage() {
             >
               Predicted Events (Next 90 Days)
             </h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+            >
               {predictionData.events.map((event, index) => (
                 <div
                   key={index}
@@ -684,8 +748,8 @@ export default function NewChartReadingPage() {
                       event.strength_score > 0.7
                         ? "var(--accent-golden)"
                         : event.strength_score > 0.4
-                        ? "var(--accent-purple)"
-                        : "var(--accent-blue)"
+                          ? "var(--accent-purple)"
+                          : "var(--accent-blue)"
                     }`,
                   }}
                 >
@@ -710,12 +774,20 @@ export default function NewChartReadingPage() {
                       >
                         {event.event_type.replace(/_/g, " ").toUpperCase()}
                       </div>
-                      <div style={{ fontSize: "0.875rem", color: "var(--text-secondary)" }}>
-                        {new Date(event.event_date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                      <div
+                        style={{
+                          fontSize: "0.875rem",
+                          color: "var(--text-secondary)",
+                        }}
+                      >
+                        {new Date(event.event_date).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}
                       </div>
                     </div>
                     <div
@@ -725,8 +797,8 @@ export default function NewChartReadingPage() {
                           event.strength_score > 0.7
                             ? "rgba(218, 165, 32, 0.2)"
                             : event.strength_score > 0.4
-                            ? "rgba(139, 92, 246, 0.2)"
-                            : "rgba(59, 130, 246, 0.2)",
+                              ? "rgba(139, 92, 246, 0.2)"
+                              : "rgba(59, 130, 246, 0.2)",
                         borderRadius: "12px",
                         fontSize: "0.875rem",
                         fontWeight: "600",
@@ -734,8 +806,8 @@ export default function NewChartReadingPage() {
                           event.strength_score > 0.7
                             ? "var(--accent-golden)"
                             : event.strength_score > 0.4
-                            ? "var(--accent-purple)"
-                            : "var(--accent-blue)",
+                              ? "var(--accent-purple)"
+                              : "var(--accent-blue)",
                       }}
                     >
                       {(event.strength_score * 100).toFixed(0)}% Strength
@@ -800,7 +872,12 @@ export default function NewChartReadingPage() {
                       >
                         💡 Recommendation
                       </div>
-                      <div style={{ fontSize: "0.875rem", color: "var(--text-primary)" }}>
+                      <div
+                        style={{
+                          fontSize: "0.875rem",
+                          color: "var(--text-primary)",
+                        }}
+                      >
                         {event.recommendation}
                       </div>
                     </div>
@@ -826,12 +903,17 @@ export default function NewChartReadingPage() {
             </div>
             <div>
               <strong>Prediction Window:</strong>{" "}
-              {new Date(predictionData.prediction_window_start).toLocaleDateString()} -{" "}
-              {new Date(predictionData.prediction_window_end).toLocaleDateString()}
+              {new Date(
+                predictionData.prediction_window_start
+              ).toLocaleDateString()}{" "}
+              -{" "}
+              {new Date(
+                predictionData.prediction_window_end
+              ).toLocaleDateString()}
             </div>
             <div style={{ marginTop: "0.5rem", fontSize: "0.75rem" }}>
-              Calculated in {predictionData.calculation_time_ms.toFixed(2)}ms • Model v
-              {predictionData.model_version}
+              Calculated in {predictionData.calculation_time_ms.toFixed(2)}ms •
+              Model v{predictionData.model_version}
             </div>
           </div>
         </div>
@@ -850,10 +932,22 @@ export default function NewChartReadingPage() {
           }}
         >
           <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔮</div>
-          <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "var(--accent-golden)" }}>
+          <div
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: "600",
+              color: "var(--accent-golden)",
+            }}
+          >
             Generating Syncretic Predictions...
           </div>
-          <div style={{ fontSize: "0.95rem", color: "var(--text-secondary)", marginTop: "0.5rem" }}>
+          <div
+            style={{
+              fontSize: "0.95rem",
+              color: "var(--text-secondary)",
+              marginTop: "0.5rem",
+            }}
+          >
             Analyzing KP Astrology, Dasha periods, and transits...
           </div>
         </div>
