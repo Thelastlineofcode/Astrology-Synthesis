@@ -99,7 +99,7 @@ test.describe("Accessibility Tests (WCAG 2.1 AA)", () => {
   }) => {
     // Login first
     await page.goto("/login");
-    await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+    await page.fill('input[name="email"]', "demo@mula.app");
     await page.fill('input[name="password"]', "demo123");
     await page.click('button[type="submit"]');
     await page.waitForURL("/dashboard");
@@ -120,7 +120,7 @@ test.describe("Accessibility Tests (WCAG 2.1 AA)", () => {
   }) => {
     // Login first
     await page.goto("/login");
-    await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+    await page.fill('input[name="email"]', "demo@mula.app");
     await page.fill('input[name="password"]', "demo123");
     await page.click('button[type="submit"]');
     await page.waitForURL("/dashboard");

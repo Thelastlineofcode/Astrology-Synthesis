@@ -33,7 +33,7 @@ test.describe("Critical User Flows", () => {
       await page.goto("/login");
 
       // Use demo credentials (adjust based on your test environment)
-      await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+      await page.fill('input[name="email"]', "demo@mula.app");
       await page.fill('input[name="password"]', "demo123");
 
       // Submit form
@@ -76,7 +76,7 @@ test.describe("Critical User Flows", () => {
     test("should successfully logout", async ({ page }) => {
       // First login
       await page.goto("/login");
-      await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+      await page.fill('input[name="email"]', "demo@mula.app");
       await page.fill('input[name="password"]', "demo123");
       await page.click('button[type="submit"]');
       await page.waitForURL("/dashboard");
@@ -239,7 +239,7 @@ test.describe("Critical User Flows", () => {
     test("should display and update user profile", async ({ page }) => {
       // Login first (use demo account)
       await page.goto("/login");
-      await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+      await page.fill('input[name="email"]', "demo@mula.app");
       await page.fill('input[name="password"]', "demo123");
       await page.click('button[type="submit"]');
       await page.waitForURL("/dashboard");
@@ -276,7 +276,7 @@ test.describe("Critical User Flows", () => {
     test("should display reading history", async ({ page }) => {
       // Login first
       await page.goto("/login");
-      await page.fill('input[name="email"]', "demo@rootsrevealed.com");
+      await page.fill('input[name="email"]', "demo@mula.app");
       await page.fill('input[name="password"]', "demo123");
       await page.click('button[type="submit"]');
       await page.waitForURL("/dashboard");

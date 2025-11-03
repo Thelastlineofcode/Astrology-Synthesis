@@ -1,8 +1,8 @@
-# E2E Testing Guide - Roots Revealed
+# E2E Testing Guide - Mula: The Root
 
 ## Overview
 
-This document describes the comprehensive E2E testing suite for the Roots Revealed astrology application. The test suite ensures quality, performance, accessibility, and mobile responsiveness across all user flows.
+This document describes the comprehensive E2E testing suite for the Mula astrology application. The test suite ensures quality, performance, accessibility, and mobile responsiveness across all user flows.
 
 ## Test Coverage
 
@@ -285,7 +285,7 @@ Create `.env.test` in frontend directory:
 ```env
 BASE_URL=http://localhost:3000
 API_URL=http://localhost:8000
-TEST_EMAIL=demo@rootsrevealed.com
+TEST_EMAIL=demo@mula.app
 TEST_PASSWORD=demo123
 ```
 
@@ -410,7 +410,7 @@ When adding new features:
 
 ### Test Data Management
 
-- Use demo accounts: `demo@rootsrevealed.com`
+- Use demo accounts: `demo@mula.app`
 - Generate unique emails: `test-${Date.now()}@example.com`
 - Mock API responses for unreliable endpoints
 - Clean up test data after runs
