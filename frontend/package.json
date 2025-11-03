@@ -9,7 +9,16 @@
     "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:critical": "playwright test critical-flows.spec.ts",
+    "test:e2e:performance": "playwright test performance.spec.ts",
+    "test:e2e:accessibility": "playwright test accessibility.spec.ts",
+    "test:e2e:mobile": "playwright test mobile-responsive.spec.ts",
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
     "next": "16.0.1",
@@ -17,6 +26,7 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
