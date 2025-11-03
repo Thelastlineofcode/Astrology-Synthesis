@@ -38,7 +38,7 @@ interface RequestOptions extends RequestInit {
 
 class APIClient {
   private baseURL: string;
-  private defaultHeaders: HeadersInit;
+  private defaultHeaders: Record<string, string>;
   private authToken: string | null = null;
 
   constructor(baseURL: string = API_BASE_URL) {
@@ -78,7 +78,7 @@ class APIClient {
    * Prepare request headers
    */
   private prepareHeaders(options: RequestOptions): HeadersInit {
-    const headers: HeadersInit = { ...this.defaultHeaders };
+    const headers: Record<string, string> = { ...this.defaultHeaders };
 
     if (options.requiresAuth) {
       const token = this.getAuthToken();

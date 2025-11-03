@@ -62,10 +62,10 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.security.cors_origins,
-    allow_credentials=settings.security.cors_credentials,
-    allow_methods=settings.security.cors_methods,
-    allow_headers=settings.security.cors_headers,
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Trusted host middleware
@@ -182,6 +182,12 @@ async def root():
         "docs": "/docs",
         "status": "operational"
     }
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy", "version": settings.api.version}
 
 
 if __name__ == "__main__":
