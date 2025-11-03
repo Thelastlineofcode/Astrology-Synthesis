@@ -3,6 +3,7 @@
 ## Overview
 
 This guide covers setting up comprehensive monitoring for the Mula application:
+
 - **Sentry**: Error tracking for frontend and backend
 - **Vercel Analytics**: Frontend performance monitoring
 - **Uptime Monitoring**: Service availability tracking
@@ -20,11 +21,13 @@ This guide covers setting up comprehensive monitoring for the Mula application:
 ### 1.2 Create Projects
 
 #### Frontend Project
+
 1. New Project → Platform: Next.js
 2. Name: `mula-frontend`
 3. Copy DSN: `https://xxxxx@sentry.io/xxxxx`
 
 #### Backend Project
+
 1. New Project → Platform: Python (FastAPI)
 2. Name: `mula-backend`
 3. Copy DSN: `https://xxxxx@sentry.io/xxxxx`
@@ -32,12 +35,14 @@ This guide covers setting up comprehensive monitoring for the Mula application:
 ### 1.3 Install Sentry Packages
 
 #### Frontend
+
 ```bash
 cd /workspaces/Astrology-Synthesis/frontend
 npm install --save @sentry/nextjs
 ```
 
 #### Backend
+
 ```bash
 cd /workspaces/Astrology-Synthesis/backend
 pip install sentry-sdk
@@ -49,6 +54,7 @@ pip install sentry-sdk
 #### Frontend Environment Variables
 
 Add to Vercel Dashboard → Environment Variables:
+
 ```bash
 NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@sentry.io/frontend-project-id
 SENTRY_DSN=https://xxxxx@sentry.io/frontend-project-id
@@ -59,6 +65,7 @@ SENTRY_PROJECT=mula-frontend
 #### Backend Environment Variables
 
 Add to Railway Dashboard → Environment Variables:
+
 ```bash
 SENTRY_DSN=https://xxxxx@sentry.io/backend-project-id
 ENVIRONMENT=production
@@ -67,11 +74,13 @@ ENVIRONMENT=production
 #### Local Development
 
 Frontend `.env.local`:
+
 ```bash
 NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@sentry.io/frontend-project-id
 ```
 
 Backend `.env`:
+
 ```bash
 SENTRY_DSN=https://xxxxx@sentry.io/backend-project-id
 ```
@@ -94,14 +103,18 @@ app.add_middleware(PerformanceMiddleware, slow_threshold_seconds=1.0)
 ### 1.6 Test Sentry Integration
 
 #### Test Frontend
+
 Add a test route `frontend/src/app/test-error/page.tsx`:
+
 ```tsx
-'use client';
+"use client";
 export default function TestError() {
   return (
-    <button onClick={() => {
-      throw new Error('Test Sentry Error from Frontend');
-    }}>
+    <button
+      onClick={() => {
+        throw new Error("Test Sentry Error from Frontend");
+      }}
+    >
       Trigger Error
     </button>
   );
@@ -111,6 +124,7 @@ export default function TestError() {
 Visit `/test-error` and click button. Check Sentry dashboard for error.
 
 #### Test Backend
+
 ```bash
 curl https://your-backend.railway.app/test-error
 ```
@@ -143,6 +157,7 @@ In Sentry Dashboard → Alerts:
 ### 2.1 Enable Vercel Analytics
 
 #### Install Package
+
 ```bash
 cd /workspaces/Astrology-Synthesis/frontend
 npm install @vercel/analytics
@@ -153,7 +168,7 @@ npm install @vercel/analytics
 Edit `frontend/src/app/layout.tsx`:
 
 ```tsx
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({ children }) {
   return (
@@ -174,8 +189,9 @@ npm install @vercel/speed-insights
 ```
 
 Update layout:
+
 ```tsx
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({ children }) {
   return (
@@ -195,30 +211,30 @@ export default function RootLayout({ children }) {
 Create `frontend/src/lib/performance.ts`:
 
 ```typescript
-import * as Sentry from '@sentry/nextjs';
-import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+import * as Sentry from "@sentry/nextjs";
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from "web-vitals";
 
 export function initPerformanceMonitoring() {
   getCLS((metric) => {
-    Sentry.captureMessage('CLS', {
-      level: 'info',
-      tags: { metric: 'cls' },
+    Sentry.captureMessage("CLS", {
+      level: "info",
+      tags: { metric: "cls" },
       extra: { value: metric.value },
     });
   });
 
   getLCP((metric) => {
-    Sentry.captureMessage('LCP', {
-      level: 'info',
-      tags: { metric: 'lcp' },
+    Sentry.captureMessage("LCP", {
+      level: "info",
+      tags: { metric: "lcp" },
       extra: { value: metric.value },
     });
   });
 
   getFID((metric) => {
-    Sentry.captureMessage('FID', {
-      level: 'info',
-      tags: { metric: 'fid' },
+    Sentry.captureMessage("FID", {
+      level: "info",
+      tags: { metric: "fid" },
       extra: { value: metric.value },
     });
   });
@@ -226,8 +242,9 @@ export function initPerformanceMonitoring() {
 ```
 
 Call in `_app.tsx` or `layout.tsx`:
+
 ```tsx
-import { initPerformanceMonitoring } from '@/lib/performance';
+import { initPerformanceMonitoring } from "@/lib/performance";
 
 useEffect(() => {
   initPerformanceMonitoring();
@@ -246,6 +263,7 @@ useEffect(() => {
 ### 3.2 Add Monitors
 
 #### Frontend Monitor
+
 - **Monitor Type**: HTTP(s)
 - **URL**: `https://astrology-synthesis.vercel.app`
 - **Name**: Mula Frontend
@@ -253,6 +271,7 @@ useEffect(() => {
 - **Alert Contacts**: Your email
 
 #### Backend Monitor
+
 - **Monitor Type**: HTTP(s)
 - **URL**: `https://your-backend.railway.app/health`
 - **Name**: Mula Backend API
@@ -268,6 +287,7 @@ useEffect(() => {
 ### 3.4 Alternative: Better Uptime
 
 For more features:
+
 1. Go to https://betteruptime.com
 2. Create account (free tier available)
 3. Add same monitors
@@ -309,6 +329,7 @@ For more features:
 ### 5.1 Sentry Dashboard
 
 Create custom dashboard with widgets:
+
 - Error rate over time
 - Top 10 errors by frequency
 - Top 10 errors by impact (users affected)
@@ -319,6 +340,7 @@ Create custom dashboard with widgets:
 ### 5.2 Vercel Analytics Dashboard
 
 Monitor:
+
 - Real user metrics (RUM)
 - Page load times
 - Web Vitals (LCP, FID, CLS, TTFB, FCP)
@@ -329,6 +351,7 @@ Monitor:
 ### 5.3 Railway Metrics Dashboard
 
 Monitor:
+
 - CPU usage
 - Memory usage
 - Network I/O
@@ -342,14 +365,14 @@ Monitor:
 
 ### Service Level Objectives (SLOs)
 
-| Metric | Target | Alert Threshold |
-|--------|--------|-----------------|
-| Uptime | 99.5% | < 99.0% |
-| Error Rate | < 1% | > 5% |
-| API Response Time (P95) | < 500ms | > 2s |
-| Frontend LCP | < 2.5s | > 4s |
-| Frontend CLS | < 0.1 | > 0.25 |
-| Database Query Time | < 100ms | > 500ms |
+| Metric                  | Target  | Alert Threshold |
+| ----------------------- | ------- | --------------- |
+| Uptime                  | 99.5%   | < 99.0%         |
+| Error Rate              | < 1%    | > 5%            |
+| API Response Time (P95) | < 500ms | > 2s            |
+| Frontend LCP            | < 2.5s  | > 4s            |
+| Frontend CLS            | < 0.1   | > 0.25          |
+| Database Query Time     | < 100ms | > 500ms         |
 
 ### Alert Thresholds
 
@@ -403,16 +426,19 @@ Check Sentry for performance warning.
 ## Part 8: Maintenance
 
 ### Daily Checks
+
 - [ ] Review error dashboard
 - [ ] Check uptime status
 - [ ] Monitor resource usage
 
 ### Weekly Tasks
+
 - [ ] Review performance trends
 - [ ] Analyze top errors
 - [ ] Update alert thresholds if needed
 
 ### Monthly Tasks
+
 - [ ] Review SLO compliance
 - [ ] Analyze user behavior patterns
 - [ ] Optimize slow endpoints
@@ -423,12 +449,14 @@ Check Sentry for performance warning.
 ## Cost Estimation
 
 ### Free Tier
+
 - **Sentry**: 5K errors/month free
 - **Uptime Robot**: 50 monitors free
 - **Vercel Analytics**: Included with Hobby plan
 - **Total**: $0/month
 
 ### Production (Recommended)
+
 - **Sentry Team**: $26/month (50K errors)
 - **Better Uptime**: $18/month (unlimited monitors)
 - **Vercel Analytics**: Included with Pro ($20/month)
