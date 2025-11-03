@@ -1,12 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import Button from "@/components/shared/Button";
 import "./landing.css";
 
 export default function Home() {
   return (
     <div className="modern-landing">
+      {/* Header/Logo */}
+      <header className="landing-header">
+        <div className="landing-header__container">
+          <Link href="/" className="landing-header__logo">
+            <Image
+              src="/images/logo/Icon_logo.png"
+              alt="Mula"
+              width={40}
+              height={40}
+              priority
+            />
+            <span className="landing-header__title">Mula</span>
+          </Link>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="hero">
         <div className="hero__content">

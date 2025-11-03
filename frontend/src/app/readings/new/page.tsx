@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import ChartCanvas from "@/components/chart/ChartCanvas";
 import { mockChartData } from "@/components/chart/mockChartData";
+import authService from "@/services/auth";
+import chartService from "@/services/chart";
 
 interface BirthData {
   date: string;
@@ -25,9 +28,10 @@ interface Prediction {
 }
 
 export default function NewChartReadingPage() {
-  const [chartData] = useState(mockChartData);
+  const router = useRouter();
+  const [chartData, setChartData] = useState(mockChartData);
   const [showForm, setShowForm] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Client notes and predictions
@@ -50,42 +54,92 @@ export default function NewChartReadingPage() {
     location_name: "Metairie, LA",
   });
 
+  // Check authentication on mount
+  useEffect(() => {
+    const authenticated = authService.isAuthenticated();
+
+    if (!authenticated) {
+      router.push("/auth/login");
+    }
+  }, [router]);
+
+  // Transform backend chart data to frontend format
+  const transformChartData = (backendData: Record<string, unknown>) => {
+    // Convert planet_positions array to planets object
+    const planets: Record<string, unknown> = {};
+    if (backendData.planet_positions) {
+      (backendData.planet_positions as Array<Record<string, unknown>>).forEach(
+        (p: Record<string, unknown>) => {
+          planets[p.planet as string] = {
+            longitude: p.longitude,
+            sign: p.zodiac_sign,
+            degree: p.degree,
+            house: p.house,
+            retrograde: p.retrograde,
+          };
+        }
+      );
+    }
+
+    // Convert house_cusps array to houses object
+    const houses: Record<string, unknown> = {};
+    if (backendData.house_cusps) {
+      (backendData.house_cusps as Array<Record<string, unknown>>).forEach(
+        (h: Record<string, unknown>) => {
+          houses[`house_${h.house}`] = {
+            longitude: h.longitude || h.cusp,
+            sign: h.zodiac_sign,
+            degree: h.degree,
+          };
+        }
+      );
+    }
+
+    return {
+      planets,
+      houses,
+      aspects: backendData.aspects || [],
+    };
+  };
+
   const handleGenerateChart = async () => {
-    setLoading(true);
+    setIsGenerating(true);
     setError(null);
 
     try {
-      // Note: This requires authentication. For now, using mock data
-      // When you add auth, uncomment this:
-      /*
-      const response = await fetch('http://localhost:8001/api/v1/chart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${yourAuthToken}`
-        },
-        body: JSON.stringify({
-          birth_data: {
-            ...birthData,
-            time: birthData.time + ':00' // Add seconds
-          }
-        })
-      });
-      
-      if (!response.ok) throw new Error('Chart generation failed');
-      const data = await response.json();
-      setChartData(data.chart_data);
-      */
+      if (!authService.isAuthenticated()) {
+        setError("Please log in to generate charts");
+        router.push("/auth/login");
+        return;
+      }
 
-      // For now, using mock data with the entered birth info
-      console.log("Would generate chart for:", birthData);
-      alert(
-        `Chart calculation ready!\n\nTo connect to backend:\n1. Implement authentication\n2. Uncomment API call in code\n3. Backend is running on port 8001`
-      );
+      // Call the backend API to generate chart
+      const response = await chartService.generateChart({
+        birth_date: birthData.date,
+        birth_time: `${birthData.time}:00`,
+        birth_location: birthData.location_name,
+        latitude: birthData.latitude,
+        longitude: birthData.longitude,
+        timezone: birthData.timezone,
+      });
+
+      // Transform and update chart with real data from API
+      const transformedData = transformChartData(response.chart_data);
+      setChartData(transformedData as typeof mockChartData);
+      console.log("Chart generated successfully:", response);
+      console.log("Transformed data:", transformedData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate chart");
+      const errorMsg =
+        err instanceof Error ? err.message : "Failed to generate chart";
+      setError(errorMsg);
+      console.error("Chart generation error:", err);
+
+      // If auth error, redirect to login
+      if (errorMsg.includes("expired") || errorMsg.includes("authenticated")) {
+        setTimeout(() => router.push("/auth/login"), 2000);
+      }
     } finally {
-      setLoading(false);
+      setIsGenerating(false);
     }
   };
 
@@ -376,22 +430,22 @@ export default function NewChartReadingPage() {
 
           <button
             onClick={handleGenerateChart}
-            disabled={loading}
+            disabled={isGenerating}
             style={{
               marginTop: "1.5rem",
               padding: "1rem 2rem",
-              backgroundColor: loading ? "#666" : "var(--accent-golden)",
+              backgroundColor: isGenerating ? "#666" : "var(--accent-golden)",
               color: "var(--bg-cosmic-dark)",
               border: "none",
               borderRadius: "8px",
-              cursor: loading ? "not-allowed" : "pointer",
+              cursor: isGenerating ? "not-allowed" : "pointer",
               fontSize: "1.125rem",
               fontWeight: "600",
               width: "100%",
               transition: "all 0.2s",
             }}
           >
-            {loading ? "Calculating..." : "✨ Generate Birth Chart"}
+            {isGenerating ? "Calculating..." : "✨ Generate Birth Chart"}
           </button>
 
           <div

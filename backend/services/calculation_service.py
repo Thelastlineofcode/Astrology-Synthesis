@@ -77,6 +77,12 @@ class CalculationService:
             for planet_name, position in planets.items():
                 degree, minutes, seconds = self._degree_to_dms(position.longitude)
                 house_num = self._get_planet_house(position.longitude, house_cusps)
+                
+                # Calculate pada (1-4) from degree in nakshatra
+                # Each nakshatra is 13°20' (13.333°), divided into 4 padas of 3°20' each
+                nakshatra_degree = position.degree_in_sign % 13.333333
+                pada = int(nakshatra_degree / 3.333333) + 1
+                
                 planet_positions.append({
                     "planet": planet_name,
                     "degree": degree,
@@ -89,8 +95,9 @@ class CalculationService:
                     "latitude": position.latitude,
                     "sign": position.sign,
                     "degree_in_sign": position.degree_in_sign,
-                    "is_retrograde": position.is_retrograde,
+                    "retrograde": position.is_retrograde,
                     "nakshatra": position.nakshatra,
+                    "pada": pada,
                 })
             
             # Format house cusps as a list of 12 houses
@@ -99,7 +106,9 @@ class CalculationService:
                 degree, minutes, seconds = self._degree_to_dms(house_cusps.cusps[i])
                 houses_list.append({
                     "house": i + 1,
-                    "degree": house_cusps.cusps[i],
+                    "degree": degree,
+                    "minutes": minutes,
+                    "seconds": seconds,
                     "zodiac_sign": self._get_zodiac_sign(house_cusps.cusps[i]),
                     "zodiac_degree": self._get_zodiac_degree(house_cusps.cusps[i]),
                     "cusp": house_cusps.cusps[i],
