@@ -162,6 +162,12 @@ app.include_router(routes.perplexity_endpoints.router, tags=["LLM & Interpretati
 # Include Phase 5 Knowledge Base routes
 app.include_router(routes.knowledge.router, tags=["Knowledge Base"])
 
+# Include Consultant Chat routes (Mula app)
+app.include_router(routes.consultant.router, prefix="/api/v1", tags=["Consultant"])
+
+# Include Fortune Reading routes (Mula app)
+app.include_router(routes.fortune.router, prefix="/api/v1", tags=["Fortune"])
+
 
 # ============================================================================
 # Root Endpoint

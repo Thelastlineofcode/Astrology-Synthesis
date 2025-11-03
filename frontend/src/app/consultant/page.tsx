@@ -117,44 +117,73 @@ export default function ConsultantPage() {
     setInput('');
     setIsLoading(true);
 
-    // Simulate API call (replace with actual backend call)
-    setTimeout(() => {
-      const responses: Record<string, string[]> = {
-        'papa-legba': [
-          'The crossroads before you hold many possibilities. Trust your intuition to choose the path that calls to your spirit.',
-          'New opportunities are opening, but you must first close the door on what no longer serves you.',
-          'The key to your question lies in understanding that every ending is a new beginning.'
-        ],
-        'erzulie-freda': [
-          'Self-love is the foundation of all other love. Honor yourself first, and others will follow.',
-          'Beauty is not just what you see, but what you feel within. Nurture your inner radiance.',
-          'Love requires both strength and softness. Open your heart while keeping your boundaries clear.'
-        ],
-        'baron-samedi': [
-          'What you fear most is often what you need to embrace. Dance with your shadows.',
-          'Death clears the way for rebirth. Release what weighs you down, and rise renewed.',
-          'Humor is the medicine for the soul. Do not take yourself too seriously in this game of life.'
-        ],
-        'ogoun': [
-          'Victory comes to those who stand firm. Do not retreat from the battle that shapes you.',
-          'Your strength is greater than you know. Channel your fire with purpose and discipline.',
-          'Conflict is not your enemy—it is your teacher. Learn what it has to show you.'
-        ]
-      };
+    try {
+      // Call backend API
+      const response = await fetch('http://localhost:8000/api/v1/consultant/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          advisor_id: selectedAdvisor.id,
+          message: userMessage.content,
+          chat_history: messages.slice(-10), // Send last 10 messages for context
+          user_context: null // TODO: Add user's natal chart data
+        })
+      });
 
-      const advisorResponses = responses[selectedAdvisor.id] || [];
-      const response = advisorResponses[Math.floor(Math.random() * advisorResponses.length)];
+      if (!response.ok) {
+        throw new Error('Failed to get response from consultant');
+      }
+
+      const data = await response.json();
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: response,
+        content: data.response,
+        timestamp: new Date(data.timestamp)
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      
+      // Fallback to simulated response on error
+      const fallbackResponses: Record<string, string[]> = {
+        'papa-legba': [
+          'The crossroads before you hold many possibilities. Trust your intuition to choose the path that calls to your spirit.',
+          'New opportunities are opening, but you must first close the door on what no longer serves you.',
+        ],
+        'erzulie-freda': [
+          'Self-love is the foundation of all other love. Honor yourself first, and others will follow.',
+          'Beauty is not just what you see, but what you feel within. Nurture your inner radiance.',
+        ],
+        'baron-samedi': [
+          'What you fear most is often what you need to embrace. Dance with your shadows.',
+          'Death clears the way for rebirth. Release what weighs you down, and rise renewed.',
+        ],
+        'ogoun': [
+          'Victory comes to those who stand firm. Do not retreat from the battle that shapes you.',
+          'Your strength is greater than you know. Channel your fire with purpose and discipline.',
+        ]
+      };
+
+      const advisorResponses = fallbackResponses[selectedAdvisor.id] || [];
+      const fallbackResponse = advisorResponses[Math.floor(Math.random() * advisorResponses.length)] || 
+        'I sense your question, but the spirits are unclear at this moment. Please try again.';
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: fallbackResponse,
         timestamp: new Date()
       };
 
       setMessages(prev => [...prev, assistantMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
