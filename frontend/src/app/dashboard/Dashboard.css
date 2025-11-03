@@ -1,122 +1,78 @@
-/* Dashboard Layout & Grid */
-.dashboard {
-  max-width: 1400px;
+/* Dashboard Page Styles - Cosmic Midnight Theme */
+
+.dashboard-container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4);
+  padding: 2rem;
+  min-height: 100vh;
 }
 
-.dashboard__header {
-  margin-bottom: var(--space-7);
-  animation: fadeInUp 0.5s ease-out;
+.dashboard-header {
+  margin-bottom: 2rem;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.dashboard__header h1 {
-  font-size: var(--font-size-h2);
+.dashboard-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: var(--space-2);
-  font-weight: var(--font-weight-bold);
+  margin-bottom: 0.5rem;
 }
 
-.dashboard__subtitle {
-  font-size: var(--font-size-h4);
+.dashboard-header p {
   color: var(--text-secondary);
-  font-weight: var(--font-weight-medium);
+  font-size: 0.95rem;
 }
 
-.dashboard__grid {
+.dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Staggered animation for cards */
-.dashboard__grid > * {
-  animation: fadeInCard 0.6s ease-out both;
+.dashboard-card {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
 
-.dashboard__grid > *:nth-child(1) {
-  animation-delay: 0.1s;
+.dashboard-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(218, 165, 32, 0.15);
 }
 
-.dashboard__grid > *:nth-child(2) {
-  animation-delay: 0.2s;
+.loading-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
 }
 
-.dashboard__grid > *:nth-child(3) {
-  animation-delay: 0.3s;
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
 }
 
-.dashboard__grid > *:nth-child(4) {
-  animation-delay: 0.4s;
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
 }
 
-@keyframes fadeInCard {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .dashboard__header,
-  .dashboard__grid > * {
-    animation: none;
+  .dashboard-header h1 {
+    font-size: 1.5rem;
   }
-}
 
-/* Tablet */
-@media (min-width: 768px) {
-  .dashboard__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .dashboard__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  /* Quick Chart Card spans 2 columns */
-  .dashboard__grid > :first-child {
-    grid-column: span 2;
-  }
-}
-
-/* Print styles */
-@media print {
-  .dashboard {
-    padding: var(--space-4);
-  }
-  
-  .dashboard__grid {
+  .dashboard-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
-  }
-  
-  .dashboard__grid > :first-child {
-    grid-column: span 1;
-  }
-  
-  /* Remove animations for print */
-  .dashboard__header,
-  .dashboard__grid > * {
-    animation: none;
+    gap: 1rem;
   }
 }
