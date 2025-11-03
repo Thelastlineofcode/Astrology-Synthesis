@@ -8,7 +8,7 @@
 
 ## 🎯 Executive Summary
 
-**Mula** (Sanskrit for "root") is a mobile-first companion app for spiritual readings, combining Vedic astrology, Vodou oracle wisdom, and tarot divination. The app pivots from the desktop-focused "Roots Revealed" astrology calculator to a modern, mystical experience designed for daily spiritual guidance.
+**Mula** (Sanskrit for "root") is a mobile-first companion app for spiritual readings, combining Vedic astrology, Vodou oracle wisdom, and tarot divination. The app pivots from the desktop-focused "Mula: The Root" astrology calculator to a modern, mystical experience designed for daily spiritual guidance.
 
 ### Vision Statement
 
@@ -447,7 +447,7 @@ User management and customization.
 
 ### Immediate Actions
 1. ✅ Create this architecture document
-2. 🔄 Archive old "Roots Revealed" branding
+2. 🔄 Archive old "Mula: The Root" branding
 3. 🔄 Update all frontend components with new design system
 4. 🔄 Implement fortune reading page (already exists at `/fortune`)
 5. 🔄 Create Vodou Oracle card dataset

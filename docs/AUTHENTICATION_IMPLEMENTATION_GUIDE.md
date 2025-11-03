@@ -44,7 +44,7 @@ JWT_REFRESH_EXPIRES_IN=7d
 EMAIL_PROVIDER=sendgrid
 SENDGRID_API_KEY=your_sendgrid_api_key
 FROM_EMAIL=noreply@rootsrevealed.com
-FROM_NAME=Roots Revealed
+FROM_NAME=Mula: The Root
 
 # Alternative: Nodemailer (SMTP)
 # EMAIL_PROVIDER=smtp
@@ -509,7 +509,7 @@ class EmailService {
     
     await this.sendEmail({
       to: email,
-      subject: 'Verify Your Email Address - Roots Revealed',
+      subject: 'Verify Your Email Address - Mula: The Root',
       html: `
         <!DOCTYPE html>
         <html>
@@ -525,7 +525,7 @@ class EmailService {
           </head>
           <body>
             <div class="container">
-              <h2>Welcome to Roots Revealed, ${name}! ✨</h2>
+              <h2>Welcome to Mula: The Root, ${name}! ✨</h2>
               <p>Thank you for creating an account. Please verify your email address to unlock all features.</p>
               <a href="${verificationUrl}" class="button">Verify Email Address</a>
               <p>Or copy and paste this link into your browser:</p>
@@ -533,13 +533,13 @@ class EmailService {
               <p>This link will expire in 24 hours.</p>
               <div class="footer">
                 <p>If you didn't create an account, please ignore this email.</p>
-                <p>&copy; 2025 Roots Revealed. All rights reserved.</p>
+                <p>&copy; 2025 Mula: The Root. All rights reserved.</p>
               </div>
             </div>
           </body>
         </html>
       `,
-      text: `Welcome to Roots Revealed, ${name}! Verify your email: ${verificationUrl}`,
+      text: `Welcome to Mula: The Root, ${name}! Verify your email: ${verificationUrl}`,
     });
   }
 
@@ -548,7 +548,7 @@ class EmailService {
     
     await this.sendEmail({
       to: email,
-      subject: 'Reset Your Password - Roots Revealed',
+      subject: 'Reset Your Password - Mula: The Root',
       html: `
         <!DOCTYPE html>
         <html>
@@ -577,7 +577,7 @@ class EmailService {
                 If you didn't request this reset, please ignore this email and ensure your account is secure.
               </div>
               <div class="footer">
-                <p>&copy; 2025 Roots Revealed. All rights reserved.</p>
+                <p>&copy; 2025 Mula: The Root. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -590,7 +590,7 @@ class EmailService {
   async sendPasswordChangedEmail(email: string, name: string): Promise<void> {
     await this.sendEmail({
       to: email,
-      subject: 'Your Password Has Been Changed - Roots Revealed',
+      subject: 'Your Password Has Been Changed - Mula: The Root',
       html: `
         <!DOCTYPE html>
         <html>
@@ -610,7 +610,7 @@ class EmailService {
               <p><strong>If you made this change:</strong> No further action is needed.</p>
               <p><strong>If you didn't make this change:</strong> Please contact our support team immediately.</p>
               <div class="footer">
-                <p>&copy; 2025 Roots Revealed. All rights reserved.</p>
+                <p>&copy; 2025 Mula: The Root. All rights reserved.</p>
               </div>
             </div>
           </body>

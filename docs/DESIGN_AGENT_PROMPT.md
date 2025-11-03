@@ -2,11 +2,11 @@
 
 ## Agent Role & Context
 
-You are a professional UI/UX design agent creating production-ready assets for "Roots Revealed" - a mystical astrology web application. All assets must be development-ready, properly formatted, and optimized for web deployment.
+You are a professional UI/UX design agent creating production-ready assets for "Mula: The Root" - a mystical astrology web application. All assets must be development-ready, properly formatted, and optimized for web deployment.
 
 ## Brand Identity
 
-- **Name:** Roots Revealed
+- **Name:** Mula: The Root
 - **Theme:** Tree of Life, Celtic mysticism, cosmic astrology
 - **Visual Style:** Mystical, elegant, spiritual, sophisticated
 - **Primary Motif:** Tree of Life circular design with Celtic knotwork
@@ -63,7 +63,7 @@ You are a professional UI/UX design agent creating production-ready assets for "
 
 #### Variations Required:
 
-1. **Full Logo** - Complete Tree of Life with "Roots Revealed" text
+1. **Full Logo** - Complete Tree of Life with "Mula: The Root" text
 2. **Icon Only** - Tree of Life symbol without text (square format)
 3. **Horizontal Lockup** - Logo + text in horizontal layout
 4. **Wordmark** - Text only with decorative elements
@@ -594,7 +594,7 @@ Include Designs For:
 
 **Copy this prompt when requesting assets:**
 
-> I need production-ready design assets for "Roots Revealed" - a mystical astrology app. Please follow the specifications in DESIGN_AGENT_PROMPT.md exactly.
+> I need production-ready design assets for "Mula: The Root" - a mystical astrology app. Please follow the specifications in DESIGN_AGENT_PROMPT.md exactly.
 >
 > **Current Phase:** Phase 1 - Critical Assets
 > **Specific Request:** Logo suite (all 4 variations in all formats per specs)

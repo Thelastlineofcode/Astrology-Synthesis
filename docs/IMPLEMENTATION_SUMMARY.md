@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-This document provides a high-level summary of the astrological interpretation system architecture designed for the Roots Revealed application (Issue #6).
+This document provides a high-level summary of the astrological interpretation system architecture designed for the Mula: The Root application (Issue #6).
 
 **Status**: ✅ Architecture Complete - Ready for Implementation  
 **Date**: October 29, 2025  

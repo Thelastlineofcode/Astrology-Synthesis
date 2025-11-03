@@ -2,7 +2,7 @@
 
 ## Overview
 
-This guide provides comprehensive instructions for testing the accessibility of the Roots Revealed astrology application. All features must meet WCAG 2.1 Level AA standards.
+This guide provides comprehensive instructions for testing the accessibility of the Mula: The Root astrology application. All features must meet WCAG 2.1 Level AA standards.
 
 ## Quick Reference
 

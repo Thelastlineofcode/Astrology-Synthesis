@@ -1,4 +1,4 @@
-# Project Pivot Guide: Roots Revealed → Mula: The Root
+# Project Pivot Guide: Mula: The Root → Mula: The Root
 
 **Migration Date:** November 3, 2025  
 **Status:** Active Transition  
@@ -8,7 +8,7 @@
 
 ## 📋 What's Changing
 
-### OLD: Roots Revealed
+### OLD: Mula: The Root
 - ❌ Desktop-first astrology calculator
 - ❌ Complex multi-feature dashboard (BMAD, Symbolon, Journaling, Workflows)
 - ❌ "Healing Cosmos" pastel color scheme
@@ -40,7 +40,7 @@
 - `CHART_TESTING_GUIDE.md` → Simplified for Mula
 
 **Old Branding**
-- Any references to "Roots Revealed" as product name
+- Any references to "Mula: The Root" as product name
 - "Healing Cosmos" color palette documentation
 
 ### Files to Update (In-Place)
@@ -71,7 +71,7 @@
 
 ### Components to Remove/Archive
 
-**Dashboard Components** (Old "Roots Revealed" design)
+**Dashboard Components** (Old "Mula: The Root" design)
 ```
 frontend/src/components/dashboard/
 ├── QuickChartCard.tsx          → Archive (too complex)
@@ -320,7 +320,7 @@ frontend/
 ### Phase 2: Frontend Cleanup (Week 1-2)
 - [ ] Archive deprecated components (`/components/dashboard/`, `/app/symbolon-demo/`)
 - [ ] Update CSS variables (`variables.css`, `themes.css`)
-- [ ] Replace "Roots Revealed" text with "Mula" throughout codebase
+- [ ] Replace "Mula: The Root" text with "Mula" throughout codebase
 - [ ] Update logo files in `/public/`
 - [ ] Create placeholder Vodou Oracle card images
 - [ ] Test existing `/fortune` page with new design
@@ -365,9 +365,9 @@ frontend/
 # Navigate to project root
 cd /workspaces/Astrology-Synthesis
 
-# Replace "Roots Revealed" with "Mula" in all markdown files
+# Replace "Mula: The Root" with "Mula" in all markdown files
 find . -name "*.md" -not -path "./node_modules/*" -not -path "./.git/*" \
-  -exec sed -i 's/Roots Revealed/Mula: The Root/g' {} +
+  -exec sed -i 's/Mula: The Root/Mula: The Root/g' {} +
 
 # Replace "Healing Cosmos" with "Cosmic Midnight"
 find . -name "*.md" -not -path "./node_modules/*" \
@@ -378,7 +378,7 @@ find frontend/src -name "*.css" \
   -exec sed -i 's/--color-primary-light/#8B6FA8/g' {} +
 
 # Update meta tags in layout.tsx
-sed -i 's/Roots Revealed/Mula: The Root/g' frontend/src/app/layout.tsx
+sed -i 's/Mula: The Root/Mula: The Root/g' frontend/src/app/layout.tsx
 sed -i 's/Discover the roots of your astrological birth chart/Your pocket guide to cosmic wisdom/g' frontend/src/app/layout.tsx
 ```
 
@@ -417,11 +417,11 @@ export const metadata: Metadata = {
 
 **User Communication:**
 ```
-Subject: Exciting Update: Roots Revealed is Now Mula!
+Subject: Exciting Update: Mula: The Root is Now Mula!
 
 Hi [Name],
 
-We're thrilled to announce that Roots Revealed has evolved into 
+We're thrilled to announce that Mula: The Root has evolved into 
 Mula: The Root—a mobile-first companion app for daily spiritual 
 guidance.
 
@@ -451,7 +451,7 @@ The Mula Team
 ### Migration Completion Criteria
 
 **Code Quality**
-- [ ] Zero references to "Roots Revealed" in active codebase
+- [ ] Zero references to "Mula: The Root" in active codebase
 - [ ] All old color tokens replaced with new system
 - [ ] Test suite passing (>90% coverage)
 - [ ] No console errors in production build

@@ -1,4 +1,4 @@
-# Roots Revealed - Design Art Implementation Action Plan
+# Mula: The Root - Design Art Implementation Action Plan
 
 ## Project Overview
 

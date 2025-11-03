@@ -135,7 +135,7 @@ This document provides visual representations of the authentication system flows
 │  ┌───────────────────────────────────┐  │
 │  │ ✓ Account Created!                │  │
 │  │                                   │  │
-│  │ Welcome to Roots Revealed!        │  │
+│  │ Welcome to Mula: The Root!        │  │
 │  │                                   │  │
 │  │ We've sent a verification email   │  │
 │  │ to john@example.com               │  │

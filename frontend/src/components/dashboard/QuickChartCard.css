@@ -1,7 +1,7 @@
-/* Quick Chart Card - Brown Mystical Theme */
+/* Quick Chart Card - Cosmic Midnight Theme */
 .quick-chart-card {
-  background: var(--color-card-brown);
-  color: var(--color-text-primary);
+  background: var(--bg-card-surface);
+  color: var(--text-primary);
   position: relative;
   overflow: hidden;
 }

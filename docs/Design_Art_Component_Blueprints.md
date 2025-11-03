@@ -1,8 +1,8 @@
-# Design Assets Required - Roots Revealed
+# Design Assets Required - Mula: The Root
 
-**Project:** Roots Revealed - Astrological Birth Chart Application  
+**Project:** Mula: The Root - Astrological Birth Chart Application  
 **Designer Reference:** See provided mockup images for style guidance  
-**Brand Name:** Roots Revealed (not "Stellaris")
+**Brand Name:** Mula: The Root (not "Stellaris")
 
 ---
 
@@ -27,7 +27,7 @@
 
 **Design Elements to Include:**
 
-- Tree of Life motif (roots below, branches above) - symbolizes "Roots Revealed"
+- Tree of Life motif (roots below, branches above) - symbolizes "Mula: The Root"
 - Celestial/cosmic theme (stars, planets, orbits)
 - Ornate circular border (Celtic/mystical style)
 - Zodiac symbolism (optional: 12 signs around border)
@@ -417,7 +417,7 @@ Create mystical astrological-themed interpretations:
 
 ## NOTES FOR DESIGNER
 
-- **Brand Name:** Use "Roots Revealed" NOT "Stellaris" (Stellaris was prototype only)
+- **Brand Name:** Use "Mula: The Root" NOT "Stellaris" (Stellaris was prototype only)
 - **Aesthetic:** Modern mystical - avoid being too medieval/fantasy
 - **Consistency:** All assets should feel cohesive (same color palette, style, lighting)
 - **File Formats:** SVG preferred for logos/icons, PNG for illustrations/photos

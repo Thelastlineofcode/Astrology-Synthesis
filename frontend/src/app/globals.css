@@ -9,14 +9,14 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  background: var(--bg-cosmic-dark);
+  color: var(--text-primary);
   font-family: var(--font-primary);
   min-height: 100vh;
 }
 
 body {
-  background-image: var(--gradient-mystical);
+  background-image: var(--gradient-cosmic);
   background-attachment: fixed;
 }
 
@@ -30,6 +30,7 @@ body {
   --font-primary:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", sans-serif;
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
 
   /* Font Weights */

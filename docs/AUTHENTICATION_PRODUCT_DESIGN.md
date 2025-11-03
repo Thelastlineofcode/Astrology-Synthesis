@@ -1,7 +1,7 @@
 # User Authentication & Profile Management System - Product Design Document
 
 ## Document Information
-- **Product**: Roots Revealed - Astrology Synthesis Platform
+- **Product**: Mula: The Root - Astrology Synthesis Platform
 - **Feature**: User Authentication & Profile Management
 - **Author**: Product Management Agent (BMAD)
 - **Date**: October 29, 2025
@@ -14,7 +14,7 @@
 
 ## Executive Summary
 
-This document outlines the complete design for the user authentication and profile management system for Roots Revealed. This critical feature enables users to create accounts, securely access the platform, save their birth charts, and maintain personalized astrological data. The system follows modern security best practices while providing a seamless user experience aligned with the BMAD (Behavioral, Modern, Archetypal, and Digital) methodology.
+This document outlines the complete design for the user authentication and profile management system for Mula: The Root. This critical feature enables users to create accounts, securely access the platform, save their birth charts, and maintain personalized astrological data. The system follows modern security best practices while providing a seamless user experience aligned with the BMAD (Behavioral, Modern, Archetypal, and Digital) methodology.
 
 ---
 
@@ -1622,7 +1622,7 @@ Strength Levels:
 ### Appendix C: Email Templates
 
 **Welcome Email**:
-- Subject: "Welcome to Roots Revealed! ✨"
+- Subject: "Welcome to Mula: The Root! ✨"
 - Content: Introduction, verification link, getting started guide
 
 **Email Verification**:
@@ -1660,7 +1660,7 @@ Strength Levels:
 
 ## 17. Conclusion
 
-This authentication and profile management system provides a comprehensive, secure, and user-friendly foundation for the Roots Revealed platform. By following the BMAD methodology, we ensure that the system addresses both user needs and business goals while maintaining modern technical standards.
+This authentication and profile management system provides a comprehensive, secure, and user-friendly foundation for the Mula: The Root platform. By following the BMAD methodology, we ensure that the system addresses both user needs and business goals while maintaining modern technical standards.
 
 The phased implementation approach allows for iterative development, testing, and refinement. The system is designed to scale from initial launch to supporting millions of users while maintaining security, performance, and user satisfaction.
 
