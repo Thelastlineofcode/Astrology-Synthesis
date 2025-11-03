@@ -1,30 +1,11 @@
 "use client";
 
 import React, { useState } from 'react';
+import CardDraw from '../../components/fortune/CardDraw';
 import './fortune.css';
-
-interface FortuneData {
-  dailyReading: string;
-  weeklyReading: string;
-  monthlyReading: string;
-}
 
 export default function FortunePage() {
   const [selectedReading, setSelectedReading] = useState<'daily' | 'weekly' | 'monthly'>('daily');
-  
-  const fortuneData: FortuneData = {
-    dailyReading: "Today's energies align perfectly for new beginnings. The stars suggest taking bold action in your creative pursuits. Trust your intuition and embrace opportunities that come your way.",
-    weeklyReading: "This week brings transformative energy into your relationships. Focus on communication and understanding. A significant opportunity for personal growth emerges mid-week.",
-    monthlyReading: "This month marks a powerful cycle of manifestation. Your goals and dreams are within reach. Stay focused on your intentions and maintain balance between work and personal life."
-  };
-
-  const getCurrentReading = () => {
-    switch(selectedReading) {
-      case 'daily': return fortuneData.dailyReading;
-      case 'weekly': return fortuneData.weeklyReading;
-      case 'monthly': return fortuneData.monthlyReading;
-    }
-  };
 
   return (
     <div className="fortune-page">
@@ -133,21 +114,8 @@ export default function FortunePage() {
           </button>
         </div>
 
-        {/* Reading Content */}
-        <div className="reading-content">
-          <div className="reading-card">
-            <div className="zodiac-symbol">♊</div>
-            <p className="reading-text">{getCurrentReading()}</p>
-            <div className="reading-actions">
-              <button className="action-button">
-                <span>💾</span> Save
-              </button>
-              <button className="action-button">
-                <span>📤</span> Share
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* Interactive Card Draw */}
+        <CardDraw />
       </div>
 
       {/* Bottom Navigation */}

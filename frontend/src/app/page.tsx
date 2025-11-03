@@ -77,7 +77,7 @@ export default function Home() {
               <li>☽ House Positions</li>
               <li>⚹ Planetary Aspects</li>
               <li>✧ Transits & Progressions</li>
-              <li>�� Symbolon Cards</li>
+              <li>🎴 Vodou Oracle & Tarot</li>
             </ul>
           </Card>
         </div>

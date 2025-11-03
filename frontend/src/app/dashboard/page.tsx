@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import QuickChartCard from "@/components/dashboard/QuickChartCard";
 import RecentChartsCard from "@/components/dashboard/RecentChartsCard";
-import BMADSummaryCard from "@/components/dashboard/BMADSummaryCard";
-import SymbolonCard from "@/components/dashboard/SymbolonCard";
 import "./dashboard.css";
 
 interface Chart {
@@ -44,10 +42,6 @@ export default function Dashboard() {
         <QuickChartCard />
 
         <RecentChartsCard charts={recentCharts} loading={loading} />
-
-        <BMADSummaryCard />
-
-        <SymbolonCard />
       </div>
     </div>
   );
