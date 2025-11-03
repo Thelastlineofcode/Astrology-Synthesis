@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  productionBrowserSourceMaps: true, // Enable source maps for debugging
   images: {
     unoptimized: false,
     formats: ["image/avif", "image/webp"],

@@ -24,7 +24,7 @@ interface Prediction {
   notes?: string;
 }
 
-export default function ChartDemoPage() {
+export default function NewChartReadingPage() {
   const [chartData] = useState(mockChartData);
   const [showForm, setShowForm] = useState(true);
   const [loading, setLoading] = useState(false);
