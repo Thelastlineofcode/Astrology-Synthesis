@@ -41,14 +41,19 @@ body {
   --font-weight-bold: 700;
 
   /* Line Heights */
-  --line-height-tight: 1.2; /* Headings */
-  --line-height-normal: 1.5; /* Body text */
-  --line-height-loose: 1.75; /* Loose text */
+  --line-height-tight: 1.2;
+  /* Headings */
+  --line-height-normal: 1.5;
+  /* Body text */
+  --line-height-loose: 1.75;
+  /* Loose text */
 
   /* Letter Spacing */
-  --letter-spacing-tight: -0.02em; /* Large headings */
+  --letter-spacing-tight: -0.02em;
+  /* Large headings */
   --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.02em; /* Small text, uppercase */
+  --letter-spacing-wide: 0.02em;
+  /* Small text, uppercase */
 
   /* Desktop Font Sizes */
   --font-size-h1: 40px;
@@ -88,12 +93,13 @@ body {
   }
 }
 
-@theme inline {
+/* Tailwind v4 theme configuration - commented out to avoid CSS warnings */
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-primary);
   --font-mono: var(--font-mono);
-}
+} */
 
 a {
   color: inherit;
@@ -181,15 +187,19 @@ pre,
 .font-light {
   font-weight: var(--font-weight-light);
 }
+
 .font-regular {
   font-weight: var(--font-weight-regular);
 }
+
 .font-medium {
   font-weight: var(--font-weight-medium);
 }
+
 .font-semibold {
   font-weight: var(--font-weight-semibold);
 }
+
 .font-bold {
   font-weight: var(--font-weight-bold);
 }
@@ -197,9 +207,11 @@ pre,
 .line-height-tight {
   line-height: var(--line-height-tight);
 }
+
 .line-height-normal {
   line-height: var(--line-height-normal);
 }
+
 .line-height-loose {
   line-height: var(--line-height-loose);
 }

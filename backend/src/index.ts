@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import { errorHandler } from './middleware/errorHandler';
 import { swaggerSpec } from './config/swagger';
 import healthRouter from './routes/health';
-import authRouter, { createAdminUser } from './routes/auth';
+import authRouter from './routes/auth';
 import chartRouter from './routes/chart';
 import bmadRouter from './routes/bmad';
 
