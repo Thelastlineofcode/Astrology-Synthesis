@@ -120,26 +120,25 @@ export default function FortunePage() {
 
       {/* Bottom Navigation */}
       <nav className="bottom-nav">
-        <button className="nav-item">
+        <button className="nav-item" onClick={() => window.location.href = '/dashboard'}>
           <span className="nav-icon">🔍</span>
           <span className="nav-label">Discover</span>
         </button>
-        <button className="nav-item">
-          <span className="nav-icon">🌙</span>
-          <span className="nav-label">Astrolocers</span>
+        <button className="nav-item active">
+          <span className="nav-icon">�</span>
+          <span className="nav-label">Fortune</span>
         </button>
-        <button className="nav-item">
-          <span className="nav-icon">🪐</span>
-          <span className="nav-label">Starbase</span>
-        </button>
-        <button className="nav-item">
+        <button className="nav-item" onClick={() => window.location.href = '/consultant'}>
           <span className="nav-icon">💬</span>
           <span className="nav-label">Consultant</span>
         </button>
-        <button className="nav-item active">
+        <button className="nav-item" onClick={() => window.location.href = '/chart-demo'}>
+          <span className="nav-icon">�</span>
+          <span className="nav-label">Chart</span>
+        </button>
+        <button className="nav-item" onClick={() => window.location.href = '/profile'}>
           <span className="nav-icon">👤</span>
           <span className="nav-label">Profile</span>
-          <span className="nav-badge">5</span>
         </button>
       </nav>
     </div>

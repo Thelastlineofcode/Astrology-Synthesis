@@ -112,14 +112,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Heading Styles */
+/* Heading Styles - Use Cinzel display font for mystical aesthetic */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   color: var(--text-primary);
