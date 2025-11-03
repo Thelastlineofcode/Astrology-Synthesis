@@ -240,8 +240,8 @@ class CalculationService:
             prediction_end = prediction_start + timedelta(days=prediction_window_days)
             
             # Initialize calculators
-            dasha_calc = DashaCalculator(moon_longitude, birth_datetime_utc)
-            transit_analyzer = TransitAnalyzer(birth_chart)
+            dasha_calc = DashaCalculator()
+            transit_analyzer = TransitAnalyzer()
             
             # Collect all events
             all_events: List[PredictionEventData] = []
@@ -257,7 +257,7 @@ class CalculationService:
             # 2. Dasha System analysis
             dasha_score = 0.0
             dasha_events = self._analyze_dasha_system(
-                dasha_calc, prediction_start, prediction_end
+                dasha_calc, prediction_start, prediction_end, birth_datetime_utc
             )
             all_events.extend(dasha_events)
             dasha_score = sum(e.strength_score for e in dasha_events) / len(dasha_events) if dasha_events else 0.5
@@ -335,27 +335,36 @@ class CalculationService:
         dasha_calc: DashaCalculator,
         start_date: datetime,
         end_date: datetime,
+        birth_date: datetime,
     ) -> List[PredictionEventData]:
         """Analyze Dasha system for prediction events."""
         events = []
         
         try:
-            # Get dasha timeline
-            timeline = dasha_calc.get_dasha_timeline(start_date, end_date)
+            # Calculate years forward from birth to end_date
+            years_forward = max(2, int((end_date - birth_date).days / 365.25) + 1)
             
-            for dasha_info in timeline:
+            # Get dasha timeline
+            timeline = dasha_calc.get_dasha_timeline(birth_date, years_forward)
+            
+            for dasha_phase in timeline:
+                # Only include periods within our prediction window
+                if dasha_phase.start_date > end_date:
+                    continue
+                if dasha_phase.end_date < start_date:
+                    continue
+                    
                 event = PredictionEventData(
                     event_type="dasha_change",
-                    event_date=dasha_info.get("start_date", start_date),
-                    event_window_start=dasha_info.get("start_date", start_date),
-                    event_window_end=dasha_info.get("end_date", end_date),
-                    primary_planet=dasha_info.get("mahadasha_planet"),
-                    secondary_planet=dasha_info.get("antardasha_planet"),
+                    event_date=dasha_phase.start_date,
+                    event_window_start=dasha_phase.start_date,
+                    event_window_end=dasha_phase.end_date,
+                    primary_planet=dasha_phase.planet,
+                    secondary_planet=None,
                     strength_score=0.75,
                     influence_area="Overall life",
-                    description=f"Dasha period: {dasha_info.get('mahadasha_planet', 'Unknown')} "
-                                f"→ {dasha_info.get('antardasha_planet', 'Unknown')}",
-                    recommendation="Leverage dasha energies for major life decisions"
+                    description=f"Mahadasha period: {dasha_phase.planet}",
+                    recommendation=f"Leverage {dasha_phase.planet} energies for major life decisions"
                 )
                 events.append(event)
             
