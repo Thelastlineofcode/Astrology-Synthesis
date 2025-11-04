@@ -58,7 +58,15 @@ async def create_prediction(
             confidence_score=int(result.confidence_score * 100),  # Convert 0-1 to 0-100
             strength_classification="Medium" if result.confidence_score > 0.6 else "Low",
             prediction_data={
-                "events": [e.dict() for e in result.events],
+                "events": [
+                    {
+                        **e.dict(),
+                        "event_date": e.event_date.isoformat() if e.event_date else None,
+                        "event_window_start": e.event_window_start.isoformat() if e.event_window_start else None,
+                        "event_window_end": e.event_window_end.isoformat() if e.event_window_end else None,
+                    }
+                    for e in result.events
+                ],
                 "query": prediction_request.query,
                 "kp_contribution": result.kp_contribution,
                 "dasha_contribution": result.dasha_contribution,

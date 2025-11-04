@@ -12,7 +12,7 @@ indicating which planet "rules" a given time period and influences events.
 
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 import math
 
@@ -388,7 +388,7 @@ class DashaCalculator:
         Generate a timeline of dasha periods from birth into the future.
         
         Args:
-            birth_date: Native's birth date
+            birth_date: Native's birth date (should be timezone-aware)
             years_forward: How many years forward to calculate (default 2 years)
             level: 'Mahadasha', 'Antardasha', or 'Pratyantardasha'
         
@@ -397,27 +397,35 @@ class DashaCalculator:
         """
         timeline = []
         current_date = birth_date
-        end_date = datetime.now() + timedelta(days=years_forward * 365.25)
+        
+        # Ensure birth_date is timezone-aware
+        if birth_date.tzinfo is None:
+            birth_date = birth_date.replace(tzinfo=timezone.utc)
+            current_date = birth_date
+        
+        # Calculate end boundary (timezone-aware)
+        now_utc = datetime.now(timezone.utc)
+        boundary_date = now_utc + timedelta(days=years_forward * 365.25)
         
         if level == 'Mahadasha':
             for planet in self.sequence:
                 duration = self.years[planet]
                 start_date = current_date
-                end_date = current_date + timedelta(days=duration * 365.25)
+                period_end = current_date + timedelta(days=duration * 365.25)
                 
                 timeline.append(DashaPhase(
                     planet=planet,
                     level='Mahadasha',
                     start_date=start_date,
-                    end_date=end_date,
+                    end_date=period_end,
                     duration_years=duration,
                     start_age_at_birth=(start_date - birth_date).days / 365.25,
-                    end_age_at_birth=(end_date - birth_date).days / 365.25
+                    end_age_at_birth=(period_end - birth_date).days / 365.25
                 ))
                 
-                current_date = end_date
+                current_date = period_end
                 
-                if current_date > end_date:
+                if current_date > boundary_date:
                     break
         
         return timeline

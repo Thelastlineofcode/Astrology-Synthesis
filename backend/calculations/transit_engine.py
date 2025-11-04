@@ -296,14 +296,16 @@ class TransitAnalyzer:
                 else:
                     # End current window, start new one
                     if current_window and favorable_count > 0:
+                        # Calculate duration_days inline
+                        duration_days = (current_window['end'] - current_window['start']).days + 1
                         window = ActivationWindow(
                             start_date=current_window['start'],
                             end_date=current_window['end'],
-                            duration_days=(current_window['end'] - current_window['start']).days + 1,
+                            duration_days=duration_days,
                             event_type=event_type,
                             key_planets=list(current_window['planets']),
                             favorable_days=favorable_count,
-                            unfavorable_days=current_window['duration_days'] - favorable_count if 'duration_days' in current_window else 0,
+                            unfavorable_days=duration_days - favorable_count,
                             peak_date=current_window['peak_date'],
                             peak_confidence=current_window['peak_confidence']
                         )

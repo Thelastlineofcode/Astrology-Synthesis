@@ -2,6 +2,7 @@
 Calculation orchestration service.
 Wraps all Phase 2 calculation engines (KP, Dasha, Transit, Ephemeris).
 Implements the syncretic synthesis formula and data transformation.
+Integrates UnifiedInterpreter for multi-tradition interpretations.
 """
 
 from typing import Dict, List, Any, Optional
@@ -14,6 +15,7 @@ from backend.calculations.kp_engine import (
 from backend.calculations.dasha_engine import DashaCalculator
 from backend.calculations.transit_engine import TransitAnalyzer
 from backend.calculations.ephemeris import EphemerisCalculator
+from backend.calculations.unified_interpreter import UnifiedInterpreter
 from backend.schemas import BirthDataInput, PredictionEventData
 import logging
 from dataclasses import dataclass
@@ -39,6 +41,7 @@ class CalculationService:
     def __init__(self):
         """Initialize calculation service."""
         self.ephemeris = EphemerisCalculator()
+        self.interpreter = UnifiedInterpreter()
     
     def generate_birth_chart(self, birth_data: BirthDataInput) -> Dict[str, Any]:
         """
@@ -235,8 +238,8 @@ class CalculationService:
             
             moon_longitude = moon_position["degree"] + moon_position["minutes"]/60 + moon_position["seconds"]/3600
             
-            # Calculate prediction window
-            prediction_start = datetime.utcnow()
+            # Calculate prediction window (timezone-aware UTC)
+            prediction_start = datetime.now(pytz.UTC)
             prediction_end = prediction_start + timedelta(days=prediction_window_days)
             
             # Initialize calculators
@@ -265,7 +268,7 @@ class CalculationService:
             # 3. Transit analysis
             transit_score = 0.0
             transit_events = self._analyze_transits(
-                transit_analyzer, prediction_start, prediction_end
+                transit_analyzer, birth_chart, prediction_start, prediction_end
             )
             all_events.extend(transit_events)
             transit_score = sum(e.strength_score for e in transit_events) / len(transit_events) if transit_events else 0.5
@@ -275,6 +278,9 @@ class CalculationService:
             
             # Sort events by date
             all_events.sort(key=lambda e: e.event_date)
+            
+            # Enrich events with unified interpretations
+            all_events = self._enrich_events_with_interpretations(all_events, birth_chart)
             
             calculation_time = (time.time() - start_time) * 1000  # Convert to ms
             
@@ -304,21 +310,38 @@ class CalculationService:
         events = []
         
         try:
+            # Extract planets dict for KP analysis
+            planets_dict = {}
+            for planet_data in birth_chart.get("planet_positions", []):
+                planets_dict[planet_data["planet"]] = {
+                    "longitude": planet_data["longitude"],
+                    "house": planet_data["house"],
+                    "sign": planet_data["sign"],
+                    "degree_in_sign": planet_data["degree_in_sign"],
+                }
+            
+            # Extract house cusps as list of longitudes
+            house_cusps = [house["cusp"] for house in birth_chart.get("house_cusps", [])]
+            
             # Get significators for houses
             for house_num in range(1, 13):
-                significators = get_significators_for_house(house_num, birth_chart)
+                significators = get_significators_for_house(house_num, planets_dict, house_cusps)
                 
                 if significators:
+                    # Extract planet names from Significator objects
+                    primary = significators[0].planet if significators else None
+                    secondary = significators[1].planet if len(significators) > 1 else None
+                    
                     event = PredictionEventData(
                         event_type="kp_significator",
                         event_date=start_date + timedelta(days=house_num * 3),
                         event_window_start=start_date,
                         event_window_end=end_date,
-                        primary_planet=significators[0] if significators else None,
-                        secondary_planet=significators[1] if len(significators) > 1 else None,
-                        strength_score=0.6,
+                        primary_planet=primary,
+                        secondary_planet=secondary,
+                        strength_score=significators[0].strength if significators else 0.6,
                         influence_area=self._get_house_influence(house_num),
-                        description=f"KP House {house_num} activations",
+                        description=f"KP House {house_num}: {significators[0].reason if significators else 'Active'}",
                         recommendation="Monitor planetary transits"
                     )
                     events.append(event)
@@ -378,6 +401,7 @@ class CalculationService:
     def _analyze_transits(
         self,
         transit_analyzer: TransitAnalyzer,
+        birth_chart: Dict[str, Any],
         start_date: datetime,
         end_date: datetime,
     ) -> List[PredictionEventData]:
@@ -385,20 +409,25 @@ class CalculationService:
         events = []
         
         try:
-            # Get transit windows
-            windows = transit_analyzer.get_favorable_windows(start_date, end_date)
+            # Get transit windows (returns ActivationWindow dataclass objects)
+            windows = transit_analyzer.get_favorable_windows(
+                birth_chart, start_date, end_date
+            )
             
             for window in windows:
+                # Extract primary planet from key_planets list
+                primary_planet = window.key_planets[0] if window.key_planets else None
+                
                 event = PredictionEventData(
                     event_type="transit_window",
-                    event_date=window.get("start_date", start_date),
-                    event_window_start=window.get("start_date", start_date),
-                    event_window_end=window.get("end_date", end_date),
-                    primary_planet=window.get("planet"),
-                    strength_score=window.get("strength", 0.5),
-                    influence_area=window.get("area", "General"),
-                    description=f"Transit window: {window.get('description', 'Favorable period')}",
-                    recommendation=window.get("recommendation", "Take action during this window")
+                    event_date=window.peak_date,
+                    event_window_start=window.start_date,
+                    event_window_end=window.end_date,
+                    primary_planet=primary_planet,
+                    strength_score=window.peak_confidence,
+                    influence_area=window.event_type,
+                    description=f"Transit window for {window.event_type}: {window.favorable_days} favorable days",
+                    recommendation=f"Peak activation on {window.peak_date.strftime('%Y-%m-%d')}"
                 )
                 events.append(event)
             
@@ -408,6 +437,60 @@ class CalculationService:
         except Exception as e:
             logger.error(f"❌ Transit analysis failed: {str(e)}")
             return []
+    
+    def _enrich_events_with_interpretations(
+        self,
+        events: List[PredictionEventData],
+        birth_chart: Dict[str, Any],
+    ) -> List[PredictionEventData]:
+        """
+        Enrich prediction events with unified multi-tradition interpretations.
+        
+        This is the proprietary system - weaves Vedic, Western, Voodoo, 
+        Mysticism, and Lunar Mansions into single unified interpretations.
+        """
+        enriched_events = []
+        
+        for event in events:
+            try:
+                # Get planet data from birth chart
+                planet_data = None
+                if event.primary_planet:
+                    planet_data = next(
+                        (p for p in birth_chart.get("planet_positions", [])
+                         if p["planet"] == event.primary_planet),
+                        None
+                    )
+                
+                if planet_data:
+                    # Generate unified interpretation
+                    interpretation = self.interpreter.interpret_event(
+                        event_type=event.event_type,
+                        primary_planet=event.primary_planet,
+                        secondary_planet=event.secondary_planet,
+                        planet_sign=planet_data.get("sign"),
+                        planet_house=planet_data.get("house"),
+                        planet_nakshatra=planet_data.get("nakshatra"),
+                        event_date=event.event_date,
+                        strength_score=event.strength_score,
+                    )
+                    
+                    # Update event with interpretation
+                    event.description = interpretation.get("description", event.description)
+                    event.recommendation = interpretation.get("recommendation", event.recommendation)
+                    
+                    # Add interpretation details if available
+                    if hasattr(event, 'interpretation_details'):
+                        event.interpretation_details = interpretation.get("details", {})
+                
+                enriched_events.append(event)
+                
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to interpret event: {str(e)}")
+                enriched_events.append(event)  # Keep original event
+        
+        logger.info(f"✅ Enriched {len(enriched_events)} events with unified interpretations")
+        return enriched_events
     
     @staticmethod
     def _get_house_influence(house_number: int) -> str:

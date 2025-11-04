@@ -62,8 +62,11 @@ export default function ChartCanvas({
   const centerX = width / 2;
   const centerY = height / 2;
   const outerRadius = Math.min(width, height) * 0.45;
-  const middleRadius = outerRadius * 0.75;
-  const innerRadius = outerRadius * 0.5;
+  const signRadius = outerRadius * 0.9; // Outer ring for zodiac signs
+  const degreeOuterRadius = outerRadius * 0.75; // Outer edge of degree ring
+  const degreeInnerRadius = outerRadius * 0.65; // Inner edge of degree ring
+  const middleRadius = outerRadius * 0.6; // Planet ring
+  const innerRadius = outerRadius * 0.45; // Inner circle
 
   // Round to 6 decimal places to prevent hydration mismatches
   const round = (num: number): number => {
@@ -106,7 +109,7 @@ export default function ChartCanvas({
       const endRad = (180 - endAngle) * (Math.PI / 180);
       const midRad = (180 - (startAngle + signSize / 2)) * (Math.PI / 180);
 
-      // Calculate path for segment
+      // Calculate path for segment (signs in outer ring)
       const startOuter = {
         x: round(centerX + outerRadius * Math.cos(startRad)),
         y: round(centerY - outerRadius * Math.sin(startRad)),
@@ -115,17 +118,17 @@ export default function ChartCanvas({
         x: round(centerX + outerRadius * Math.cos(endRad)),
         y: round(centerY - outerRadius * Math.sin(endRad)),
       };
-      const startMiddle = {
-        x: round(centerX + middleRadius * Math.cos(startRad)),
-        y: round(centerY - middleRadius * Math.sin(startRad)),
+      const startSign = {
+        x: round(centerX + signRadius * Math.cos(startRad)),
+        y: round(centerY - signRadius * Math.sin(startRad)),
       };
-      const endMiddle = {
-        x: round(centerX + middleRadius * Math.cos(endRad)),
-        y: round(centerY - middleRadius * Math.sin(endRad)),
+      const endSign = {
+        x: round(centerX + signRadius * Math.cos(endRad)),
+        y: round(centerY - signRadius * Math.sin(endRad)),
       };
 
       // Position for sign symbol
-      const symbolRadius = (outerRadius + middleRadius) / 2;
+      const symbolRadius = (outerRadius + signRadius) / 2;
       const symbolPos = {
         x: round(centerX + symbolRadius * Math.cos(midRad)),
         y: round(centerY - symbolRadius * Math.sin(midRad)),
@@ -134,8 +137,8 @@ export default function ChartCanvas({
       const pathData = `
         M ${startOuter.x} ${startOuter.y}
         A ${outerRadius} ${outerRadius} 0 0 0 ${endOuter.x} ${endOuter.y}
-        L ${endMiddle.x} ${endMiddle.y}
-        A ${middleRadius} ${middleRadius} 0 0 1 ${startMiddle.x} ${startMiddle.y}
+        L ${endSign.x} ${endSign.y}
+        A ${signRadius} ${signRadius} 0 0 1 ${startSign.x} ${startSign.y}
         Z
       `;
 
@@ -170,6 +173,86 @@ export default function ChartCanvas({
     return segments;
   };
 
+  // Draw degree ring with degree markers
+  const drawDegreeRing = () => {
+    const degreeMarkers: React.ReactElement[] = [];
+
+    // Draw major degree lines every 5 degrees
+    for (let deg = 0; deg < 360; deg += 5) {
+      const adjustedDeg = deg - ascendantDegree;
+      const normalizedDeg = adjustedDeg < 0 ? adjustedDeg + 360 : adjustedDeg;
+
+      const outerPos = getPosition(normalizedDeg, degreeOuterRadius);
+      const innerPos = getPosition(normalizedDeg, degreeInnerRadius);
+
+      // Major line every 10 degrees
+      const isMajor = deg % 10 === 0;
+
+      degreeMarkers.push(
+        <line
+          key={`deg-${deg}`}
+          x1={outerPos.x}
+          y1={outerPos.y}
+          x2={innerPos.x}
+          y2={innerPos.y}
+          stroke="var(--color-primary)"
+          strokeWidth={isMajor ? "1.5" : "0.5"}
+          opacity={isMajor ? "0.6" : "0.3"}
+        />
+      );
+
+      // Add degree text every 30 degrees (at sign boundaries)
+      if (deg % 30 === 0) {
+        const textRadius = (degreeOuterRadius + degreeInnerRadius) / 2;
+        const textPos = getPosition(normalizedDeg, textRadius);
+
+        degreeMarkers.push(
+          <text
+            key={`deg-text-${deg}`}
+            x={textPos.x}
+            y={textPos.y}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="10"
+            fill="var(--text-secondary)"
+            fontWeight="bold"
+          >
+            {deg}°
+          </text>
+        );
+      }
+    }
+
+    // Draw inner and outer circles for degree ring
+    degreeMarkers.push(
+      <circle
+        key="degree-ring-outer"
+        cx={centerX}
+        cy={centerY}
+        r={degreeOuterRadius}
+        fill="none"
+        stroke="var(--color-primary)"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+    );
+
+    degreeMarkers.push(
+      <circle
+        key="degree-ring-inner"
+        cx={centerX}
+        cy={centerY}
+        r={degreeInnerRadius}
+        fill="none"
+        stroke="var(--color-primary)"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+    );
+
+    return degreeMarkers;
+  };
+
   // Draw house divisions
   const drawHouses = () => {
     const houses: React.ReactElement[] = [];
@@ -182,6 +265,10 @@ export default function ChartCanvas({
         const adjustedDegree = adjustDegree(house.longitude);
         const pos = getPosition(adjustedDegree, outerRadius);
         const innerPos = getPosition(adjustedDegree, innerRadius);
+        const degreeTextPos = getPosition(
+          adjustedDegree,
+          degreeInnerRadius - 10
+        );
 
         houses.push(
           <g key={`house-${i}`}>
@@ -205,6 +292,17 @@ export default function ChartCanvas({
               fill="var(--text-primary)"
             >
               {i}
+            </text>
+            {/* Show house cusp degree */}
+            <text
+              x={degreeTextPos.x}
+              y={degreeTextPos.y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize="8"
+              fill="var(--text-secondary)"
+            >
+              {house.longitude.toFixed(1)}°
             </text>
           </g>
         );
@@ -257,6 +355,17 @@ export default function ChartCanvas({
                 ℞
               </text>
             )}
+            {/* Show exact degree below planet */}
+            <text
+              x={pos.x}
+              y={pos.y + 24}
+              textAnchor="middle"
+              fontSize="9"
+              fill="var(--text-secondary)"
+              fontWeight="normal"
+            >
+              {planet.longitude.toFixed(1)}°
+            </text>
           </g>
         );
       }
@@ -321,6 +430,9 @@ export default function ChartCanvas({
 
           {/* Zodiac wheel */}
           {drawZodiacWheel()}
+
+          {/* Degree ring with markers */}
+          {drawDegreeRing()}
 
           {/* Inner circle */}
           <circle

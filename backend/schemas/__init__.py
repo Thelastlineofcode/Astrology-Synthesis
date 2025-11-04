@@ -207,7 +207,7 @@ class CreateBirthChartRequest(BaseModel):
     birth_data: BirthDataInput
     name: Optional[str] = Field(None, description="Chart name (e.g., 'My Chart', 'John Doe')")
     notes: Optional[str] = None
-    ayanamsa: Optional[float] = Field(24.147, description="Ayanamsa in degrees (default: Lahiri)")
+    ayanamsa: Optional[float] = Field(24.6978, description="Ayanamsa in degrees (default: Lahiri 2025)")
     house_system: Optional[str] = Field("PLACIDUS", description="House system (e.g., PLACIDUS, WHOLE_SIGN, EQUAL)")
 
 
@@ -216,8 +216,8 @@ class BirthChartResponse(BaseModel):
     
     chart_id: UUID
     user_id: UUID
-    birth_date: datetime
-    birth_time: str
+    birth_date: str  # YYYY-MM-DD format
+    birth_time: str  # HH:MM:SS format
     birth_latitude: float
     birth_longitude: float
     timezone: str
