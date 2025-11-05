@@ -11,14 +11,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Database URL from environment
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost:5432/mula_mvp")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./mula_mvp.db")
 
-# Create engine
+# Create engine with SQLite-compatible settings
+connect_args = {}
+if DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}  # SQLite specific
+
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True,  # Verify connections before using
-    pool_size=10,
-    max_overflow=20,
+    connect_args=connect_args,
     echo=os.getenv("DEBUG", "False") == "True"  # SQL logging in debug mode
 )
 
