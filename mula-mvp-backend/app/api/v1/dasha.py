@@ -37,8 +37,10 @@ async def get_current_dasha(
         )
     
     # Calculate days remaining
+    from datetime import timezone
+    now_utc = datetime.utcnow().replace(tzinfo=timezone.utc)
     if chart.current_period_end:
-        days_remaining = (chart.current_period_end - datetime.utcnow()).days
+        days_remaining = (chart.current_period_end - now_utc).days
     else:
         days_remaining = 0
     
@@ -51,8 +53,8 @@ async def get_current_dasha(
         mahadasha=chart.current_mahadasha or "Unknown",
         antardasha=chart.current_antardasha or "Unknown",
         pratyantardasha=chart.current_pratyantardasha,
-        period_start=chart.current_period_start or datetime.utcnow(),
-        period_end=chart.current_period_end or datetime.utcnow(),
+        period_start=chart.current_period_start or now_utc,
+        period_end=chart.current_period_end or now_utc,
         days_remaining=days_remaining,
         interpretation=interpretation,
         themes=themes

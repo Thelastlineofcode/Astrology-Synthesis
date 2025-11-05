@@ -49,8 +49,15 @@ async def create_chart(
     # Calculate current dasha (placeholder)
     current_mahadasha = "Venus"
     current_antardasha = "Mercury"
-    current_period_start = datetime.utcnow()
-    current_period_end = datetime(2027, 5, 15)
+    from datetime import timezone
+    current_period_start = datetime.utcnow().replace(tzinfo=timezone.utc)
+    current_period_end = datetime(2027, 5, 15, tzinfo=timezone.utc)
+
+    # Ensure all datetimes used in calculations are timezone-aware
+    # If using Vedic calculation engine, make birth_datetime and query_date aware
+    # Example:
+    # birth_datetime = datetime.fromisoformat(f"{chart_data.birth_date} {chart_data.birth_time}").replace(tzinfo=timezone.utc)
+    # query_date = datetime.now(timezone.utc)
     
     # Create birth chart
     new_chart = BirthChart(
