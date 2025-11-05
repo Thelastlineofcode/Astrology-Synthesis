@@ -205,52 +205,95 @@ QA Agent: "I'll create a comprehensive test suite:
 
 ---
 
-### Agent 5: AI/LLM Agent
+### Agent 5: Perplexity AI Agent
 
 ```yaml
 ID: ai-agent
-Name: "AI & LLM Integration Specialist"
-Domain: LLM Integration, Prompt Engineering
-Specialty: LLM APIs, Prompt Design, RAG
+Name: "Perplexity AI Specialist"
+Domain: AI/LLM Integration via Perplexity
+Specialty: Perplexity API, Prompt Engineering, Knowledge Integration
 Personality: Creative, thoughtful about language & nuance
-Tools: Perplexity API, Embeddings, Vector DBs, Prompt Engineering
+Tools: Perplexity API (pplx-api), Prompt Engineering, Knowledge Base
 Experience Level: Expert
+Access: 12-month Perplexity subscription (primary AI automation)
 Response Style: Conversational, focuses on quality & user experience
 ```
 
 **Core Competencies**:
 
-- LLM API integration (Perplexity)
-- Prompt engineering
-- System prompt design
-- Token optimization
-- Retrieval-Augmented Generation (RAG)
-- Vector databases
-- Knowledge base management
+- Perplexity API integration & optimization
+- System prompt engineering
+- Personality trait definition & refinement
+- Contextual knowledge base integration
 - Response quality evaluation
-- Cost tracking
+- Token & cost optimization
+- Multi-turn conversation management
+- Real-time information access (Perplexity strength)
+- Advisor personality authenticity
 
 **When to Engage**:
 
-- LLM integration
-- Prompt design & tuning
+- Perplexity API integration into backend
+- System prompt design for advisor personalities
+- Knowledge base context injection
 - Response quality issues
-- Cost optimization
-- RAG system design
-- Knowledge base strategy
+- Cost optimization (token usage)
 - Advisor personality refinement
+- Real-time information requirements
+
+**Perplexity API Integration Points**:
+
+1. **Backend Integration**:
+   - FastAPI endpoint: `POST /api/v1/advisor/query`
+   - Payload: question, context, advisor_id
+   - Response: advisor_response with sources
+
+2. **System Prompts**:
+   - Papa Legba (Crossroads/Guidance)
+   - Marie Laveau (Spirituality/Healing)
+   - John the Baptist (Purification/Clarity)
+   - Erzulie Dantor (Protection/Boundaries)
+   - Custom advisors per user preference
+
+3. **Knowledge Injection**:
+   - Astrology knowledge base (50K+ lines)
+   - Vedic calculations & interpretations
+   - Syncretic traditions documentation
+   - Real-time planetary/astrological data
 
 **Example Interaction**:
 
 ```
-User: "How do we make Papa Legba respond authentically?"
-AI Agent: "I'll engineer a system prompt that captures his essence:
-'You are Papa Legba, guardian of crossroads...' combined with:
-1. Specific personality traits
-2. Response length guidelines
-3. Tone specifications
-4. Knowledge base context injection
-Then test and refine based on user feedback..."
+User: "How do we integrate Perplexity for Papa Legba?"
+AI Agent: "I'll set up the Perplexity API integration:
+1. Create system prompt: 'You are Papa Legba, guardian of crossroads...'
+2. Inject knowledge base context about Vodou traditions
+3. Configure pplx-api client with 12-month subscription
+4. Build FastAPI endpoint that handles advisor queries
+5. Test personality authenticity & response quality
+6. Monitor token usage & costs across 12 months
+Then iteratively refine based on user feedback..."
+```
+
+**Perplexity Configuration**:
+
+```python
+# Backend integration example
+import anthropic
+
+client = anthropic.Anthropic(api_key="pplx-api-key")
+
+async def query_advisor(question: str, advisor_id: str, context: str) -> str:
+    system_prompt = ADVISOR_PROMPTS[advisor_id]  # Papa Legba, Marie Laveau, etc.
+
+    response = client.messages.create(
+        model="pplx-api",
+        max_tokens=1024,
+        system=f"{system_prompt}\n\nContext: {context}",
+        messages=[{"role": "user", "content": question}]
+    )
+
+    return response.content[0].text
 ```
 
 ---
@@ -517,13 +560,15 @@ Each agent maintains expertise in:
 - Performance metrics
 - Bug lifecycle management
 
-**AI Agent**:
+**AI Agent (Perplexity)**:
 
-- LLM prompting techniques
-- Prompt engineering patterns
-- RAG systems
-- Vector embeddings
-- Token optimization
+- Perplexity API integration & optimization
+- System prompt engineering for advisor personalities
+- Knowledge base context injection
+- Multi-turn conversation management
+- Token & cost optimization (12-month subscription)
+- Personality authenticity & refinement
+- Real-time information access
 
 ---
 
@@ -561,10 +606,12 @@ Each agent maintains expertise in:
 
 **AI Agent**:
 
-- [ ] Perplexity API integrated
-- [ ] 4 advisor personalities working
-- [ ] Response time < 3s
-- [ ] Cost tracking active
+- [ ] Perplexity API integrated in backend
+- [ ] 4 advisor personalities configured & tested
+- [ ] System prompts refined for authenticity
+- [ ] Knowledge base context injected
+- [ ] Response time < 3s average
+- [ ] Cost tracking active (12-month budget planning)
 
 ---
 

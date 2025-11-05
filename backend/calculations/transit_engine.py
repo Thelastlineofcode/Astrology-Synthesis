@@ -111,7 +111,7 @@ class TransitAnalyzer:
         Find all transit activation events within a date range.
         
         Args:
-            birth_chart: Dict with 'natal_planets', 'moon_longitude', 'dasha_balance_years'
+            birth_chart: Dict with 'planet_positions' (list), 'moon_longitude', 'dasha_balance_years'
             start_date: Beginning of analysis period
             end_date: End of analysis period
             target_houses: Specific houses to focus on (None = all)
@@ -122,11 +122,29 @@ class TransitAnalyzer:
         """
         events = []
         
-        # Get natal significators for each house
-        natal_planets = birth_chart.get('natal_planets', {})
+        # Convert planet_positions list to dict format for get_significators_for_house
+        planet_positions = birth_chart.get('planet_positions', [])
+        natal_planets = {}
+        for p in planet_positions:
+            natal_planets[p['planet']] = {
+                'longitude': p['longitude'],
+                'house': p['house'],
+                'latitude': p.get('latitude', 0)
+            }
+        
+        # Extract house cusp longitudes from house_cusps list
+        house_cusps_list = birth_chart.get('house_cusps', [])
+        house_cusp_longitudes = []
+        if isinstance(house_cusps_list, list) and len(house_cusps_list) > 0:
+            # If it's a list of dicts, extract 'cusp' or 'longitude'
+            if isinstance(house_cusps_list[0], dict):
+                house_cusp_longitudes = [h.get('cusp', h.get('longitude', 0)) for h in house_cusps_list]
+            else:
+                # It's a list of floats
+                house_cusp_longitudes = house_cusps_list
+        
         moon_longitude = birth_chart.get('moon_longitude', 0)
         dasha_balance = birth_chart.get('dasha_balance_years', 0)
-        house_cusps = birth_chart.get('house_cusps', [0] * 12)  # 12 house cusps
         
         # Get KP significators for all houses
         significators = {}
@@ -134,15 +152,26 @@ class TransitAnalyzer:
             sigs = get_significators_for_house(
                 house,
                 natal_planets,
-                house_cusps
+                house_cusp_longitudes
             )
             # Extract planet names from Significator objects
             sig_planets = [sig.planet for sig in sigs] if sigs else []
             significators[house] = sig_planets
         
+        # Ensure start_date is timezone-aware (UTC)
+        if start_date.tzinfo is None:
+            import pytz
+            start_date = pytz.UTC.localize(start_date)
+        
+        # Get birth date from chart (or use start_date as fallback)
+        birth_date = birth_chart.get('birth_date', start_date)
+        if birth_date.tzinfo is None:
+            import pytz
+            birth_date = pytz.UTC.localize(birth_date)
+        
         # Current dasha info
         current_dasha = self.dasha.calculate_dasha_position(
-            datetime.now(),
+            birth_date,
             moon_longitude,
             dasha_balance,
             start_date
@@ -317,7 +346,6 @@ class TransitAnalyzer:
                         'peak_confidence': event.combined_confidence,
                         'peak_date': event.event_date,
                         'planets': set([event.transiting_planet]),
-                        'duration_days': 0,
                     }
                     favorable_count = 1 if event.combined_confidence >= 0.7 else 0
         
