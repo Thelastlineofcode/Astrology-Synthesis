@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { ReactNode } from "react";
 import { LogoutButton } from "@/components/logout-button";
+import { NavLink } from "@/components/nav-link";
 
 export const metadata = {
   title: "Mula Dasha Timer",
@@ -15,9 +16,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between gap-3">
             <a href="/" className="font-semibold">Mula Dasha Timer</a>
             <nav className="flex items-center gap-4 text-sm">
-              <a href="/auth/login" className="hover:underline">Login</a>
-              <a href="/auth/signup" className="hover:underline">Signup</a>
-              <a href="/dashboard" className="hover:underline">Dashboard</a>
+              <NavLink href="/auth/login">Login</NavLink>
+              <NavLink href="/auth/signup">Signup</NavLink>
+              <NavLink href="/dashboard">Dashboard</NavLink>
               <LogoutButton />
             </nav>
           </div>
