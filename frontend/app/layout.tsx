@@ -1,14 +1,6 @@
-import "./globals.css";
-import type { ReactNode } from "react";
-import { LogoutButton } from "@/components/logout-button";
 import { NavLink } from "@/components/nav-link";
 
-export const metadata = {
-  title: "Mula Dasha Timer",
-  description: "MVP app to view Vedic dasha periods",
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -19,7 +11,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <NavLink href="/auth/login">Login</NavLink>
               <NavLink href="/auth/signup">Signup</NavLink>
               <NavLink href="/dashboard">Dashboard</NavLink>
-              <LogoutButton />
+              <NavLink href="/settings/notifications">Settings</NavLink>
             </nav>
           </div>
         </header>
