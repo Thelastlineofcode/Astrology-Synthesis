@@ -16,6 +16,10 @@ from datetime import datetime, timedelta, timezone
 from enum import Enum
 import math
 
+# Precision constant for floating-point boundary calculations
+# Used to handle edge cases where values are very close to boundaries
+CALCULATION_EPSILON = 1e-9
+
 
 # Vimshottari dasha sequence and durations (in years)
 DASHA_SEQUENCE = ['Ketu', 'Venus', 'Sun', 'Moon', 'Mars', 'Rahu', 'Jupiter', 'Saturn', 'Mercury']
@@ -105,9 +109,8 @@ class DashaCalculator:
         # Calculate which nakshatra
         # Critical: Due to floating point precision, a position like 13.333333°
         # may be slightly less than the true boundary 13.33333333...
-        # Add epsilon large enough to push past these precision gaps
-        EPSILON = 1e-5  # Push past floating point precision issues
-        quotient = (position + EPSILON) / nakshatra_length
+        # Add epsilon to handle floating point precision edge cases
+        quotient = (position + CALCULATION_EPSILON) / nakshatra_length
         nakshatra_num = int(quotient) + 1
         
         # Handle edge case: if exactly at end of zodiac, should be Nak 27

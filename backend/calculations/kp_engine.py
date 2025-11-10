@@ -12,6 +12,10 @@ from typing import Dict, List, Tuple, Optional
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 
+# Precision constant for floating-point boundary calculations
+# Used to handle edge cases where values are very close to boundaries
+CALCULATION_EPSILON = 1e-9
+
 
 # Vimshottari Dasha proportions (degrees in each sub-division within one nakshatra)
 # Total years: 120, Nakshatra length: 13°20' = 800 arc-minutes
@@ -84,9 +88,8 @@ def get_sub_lord(longitude_degrees: float) -> SubLordPosition:
     # Calculate nakshatra number (0-26)
     # KP convention: Lower bound inclusive, upper bound exclusive
     # [0, 13.333) = Nak 1, [13.333, 26.667) = Nak 2, etc.
-    # Add small epsilon to handle floating point precision at exact boundaries
-    EPSILON = 1e-9
-    nakshatra_num = int((longitude_degrees + EPSILON) / nakshatra_length)
+    # Add epsilon to handle floating point precision at exact boundaries
+    nakshatra_num = int((longitude_degrees + CALCULATION_EPSILON) / nakshatra_length)
     
     # Handle boundary case (360° = 0°)
     if nakshatra_num >= 27:
