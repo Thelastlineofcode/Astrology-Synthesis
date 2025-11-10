@@ -16,11 +16,29 @@ from backend.calculations.dasha_engine import DashaCalculator
 from backend.calculations.transit_engine import TransitAnalyzer
 from backend.calculations.ephemeris import EphemerisCalculator
 from backend.calculations.unified_interpreter import UnifiedInterpreter
+from backend.calculations.exceptions import (
+    InvalidPredictionWindowError,
+    InvalidBirthDataError,
+    CalculationError
+)
 from backend.schemas import BirthDataInput, PredictionEventData
 import logging
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
+
+# Constants for validation
+MAX_PREDICTION_WINDOW_DAYS = 365
+MIN_PREDICTION_WINDOW_DAYS = 1
+
+# Calculation constants
+NAKSHATRA_LENGTH_DEGREES = 13.333333  # 13°20' = 13.333333 degrees
+PADA_LENGTH_DEGREES = 3.333333  # Each nakshatra divided into 4 padas
+DEGREES_PER_SIGN = 30.0  # Zodiac sign length
+
+# Synthesis formula weights
+KP_WEIGHT = 0.6
+DASHA_WEIGHT = 0.4
 
 
 @dataclass
@@ -82,9 +100,9 @@ class CalculationService:
                 house_num = self._get_planet_house(position.longitude, house_cusps)
                 
                 # Calculate pada (1-4) from degree in nakshatra
-                # Each nakshatra is 13°20' (13.333°), divided into 4 padas of 3°20' each
-                nakshatra_degree = position.degree_in_sign % 13.333333
-                pada = int(nakshatra_degree / 3.333333) + 1
+                # Each nakshatra is 13°20', divided into 4 padas of 3°20' each
+                nakshatra_degree = position.degree_in_sign % NAKSHATRA_LENGTH_DEGREES
+                pada = int(nakshatra_degree / PADA_LENGTH_DEGREES) + 1
                 
                 planet_positions.append({
                     "planet": planet_name,
@@ -199,20 +217,35 @@ class CalculationService:
     ) -> SyntheticPredictionResult:
         """
         Generate comprehensive syncretic prediction combining KP, Dasha, and Transit.
-        
+
         Synthesis Formula: (KP × 0.6) + (Dasha × 0.4)
-        
+
         Args:
             birth_data: Birth data
             query: User's prediction query
-            prediction_window_days: Days to look ahead
-            
+            prediction_window_days: Days to look ahead (max 365)
+
         Returns:
             SyntheticPredictionResult with all analysis
+
+        Raises:
+            InvalidPredictionWindowError: If prediction_window_days is out of valid range
+            InvalidBirthDataError: If birth data is incomplete or invalid
+            CalculationError: If calculation fails
         """
         import time
         start_time = time.time()
-        
+
+        # Validate input parameters
+        if prediction_window_days < MIN_PREDICTION_WINDOW_DAYS:
+            raise InvalidPredictionWindowError(
+                f"Prediction window must be at least {MIN_PREDICTION_WINDOW_DAYS} day(s)"
+            )
+        if prediction_window_days > MAX_PREDICTION_WINDOW_DAYS:
+            raise InvalidPredictionWindowError(
+                f"Prediction window cannot exceed {MAX_PREDICTION_WINDOW_DAYS} days"
+            )
+
         try:
             import pytz
             from datetime import datetime as dt
@@ -234,9 +267,10 @@ class CalculationService:
             )
             
             if not moon_position:
-                raise ValueError("Moon position not found in birth chart")
-            
-            moon_longitude = moon_position["degree"] + moon_position["minutes"]/60 + moon_position["seconds"]/3600
+                raise InvalidBirthDataError("Moon position not found in birth chart")
+
+            # Use the pre-calculated longitude directly (0-360 degrees)
+            moon_longitude = moon_position["longitude"]
             
             # Calculate prediction window (timezone-aware UTC)
             prediction_start = datetime.now(pytz.UTC)
@@ -273,8 +307,8 @@ class CalculationService:
             all_events.extend(transit_events)
             transit_score = sum(e.strength_score for e in transit_events) / len(transit_events) if transit_events else 0.5
             
-            # Compute syncretic confidence
-            confidence_score = (kp_score * 0.6) + (dasha_score * 0.4)
+            # Compute syncretic confidence using weighted formula
+            confidence_score = (kp_score * KP_WEIGHT) + (dasha_score * DASHA_WEIGHT)
             
             # Sort events by date
             all_events.sort(key=lambda e: e.event_date)
@@ -526,22 +560,23 @@ class CalculationService:
             "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
         ]
-        sign_index = int(degree / 30)
+        sign_index = int(degree / DEGREES_PER_SIGN)
         return zodiac_signs[min(sign_index, 11)]
-    
+
     @staticmethod
     def _get_zodiac_degree(degree: float) -> float:
         """Get degree within zodiac sign (0-30)."""
-        return degree % 30
+        return degree % DEGREES_PER_SIGN
     
     @staticmethod
     def _get_planet_house(planet_degree: float, house_cusps) -> int:
         """Determine which house a planet is in based on its degree."""
-        cusps = [house_cusps.ascendant] + house_cusps.cusps
+        # house_cusps.cusps already contains 12 cusps, with cusps[0] being the ascendant
+        cusps = house_cusps.cusps
         for i in range(12):
             cusp1 = cusps[i]
             cusp2 = cusps[(i + 1) % 12]
-            
+
             # Handle the wrap-around at 360/0
             if cusp1 <= cusp2:
                 if cusp1 <= planet_degree < cusp2:
@@ -549,5 +584,5 @@ class CalculationService:
             else:  # wrap-around
                 if planet_degree >= cusp1 or planet_degree < cusp2:
                     return i + 1
-        
+
         return 1  # default to house 1
