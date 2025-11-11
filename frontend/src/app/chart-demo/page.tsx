@@ -116,7 +116,16 @@ export default function ChartDemoPage() {
             gap: "0.75rem",
           }}
         >
-          Chart Reading Tool
+          🌟 Professional Chart Reading Tool
+          <span
+            style={{
+              fontSize: "0.875rem",
+              color: "var(--text-secondary)",
+              fontWeight: "normal",
+            }}
+          >
+            The Last of Laplace
+          </span>
         </h1>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -791,6 +800,43 @@ export default function ChartDemoPage() {
             💾 Save Session Notes
           </button>
         </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: "3rem",
+          padding: "1.5rem",
+          backgroundColor: "var(--bg-secondary)",
+          borderRadius: "8px",
+        }}
+      >
+        <h3
+          style={{
+            fontSize: "1.125rem",
+            fontWeight: "600",
+            marginBottom: "1rem",
+            color: "var(--text-primary)",
+          }}
+        >
+          Chart Features
+        </h3>
+        <ul
+          style={{
+            listStyleType: "disc",
+            paddingLeft: "1.5rem",
+            color: "var(--text-primary)",
+            lineHeight: "1.8",
+          }}
+        >
+          <li>Interactive SVG chart with zoom controls</li>
+          <li>12 houses with division lines</li>
+          <li>Planet glyphs with accurate positioning</li>
+          <li>Zodiac signs around perimeter</li>
+          <li>Toggleable aspect lines between planets</li>
+          <li>Hover tooltips showing planet details</li>
+          <li>Keyboard accessible</li>
+          <li>Responsive design</li>
+        </ul>
       </div>
     </div>
   );
