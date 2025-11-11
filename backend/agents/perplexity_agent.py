@@ -7,7 +7,13 @@ Uses Perplexity's sonar-small model via LangChain's ChatOpenAI interface.
 from typing import Dict, List, Any, Optional
 import logging
 from langchain_community.chat_models import ChatPerplexity
-from langchain.agents import AgentExecutor, create_react_agent
+try:
+    # Try LangChain 1.0+ imports
+    from langchain.agents import AgentExecutor
+    from langchain import hub
+except ImportError:
+    # Fallback for older LangChain versions
+    from langchain.agents import AgentExecutor, create_react_agent
 from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 

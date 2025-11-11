@@ -168,6 +168,12 @@ app.include_router(routes.consultant.router, prefix="/api/v1", tags=["Consultant
 # Include Fortune Reading routes (Mula app)
 app.include_router(routes.fortune.router, prefix="/api/v1", tags=["Fortune"])
 
+# Include Personal Development routes
+app.include_router(routes.personal_development.router, prefix="/api/v1", tags=["Personal Development"])
+
+# Include Synastry routes
+app.include_router(routes.synastry.router, prefix="/api/v1", tags=["Synastry"])
+
 
 # ============================================================================
 # Root Endpoint

@@ -19,19 +19,16 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
-import sys
-import os
 
 # Import required modules
-sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
-from dasha_engine import DashaCalculator, DashaPosition
-from kp_engine import (
+from backend.calculations.dasha_engine import DashaCalculator, DashaPosition
+from backend.calculations.kp_engine import (
     get_sub_lord,
     get_significators_for_house,
     get_ruling_planets,
     VIMSHOTTARI_PROPORTIONS
 )
-from ephemeris import EphemerisCalculator, PlanetPosition
+from backend.calculations.ephemeris import EphemerisCalculator, PlanetPosition
 
 
 @dataclass
