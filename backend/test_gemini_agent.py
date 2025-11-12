@@ -52,7 +52,7 @@ def test_gemini_agent():
         # Create agent
         agent = create_gemini_agent(
             api_key=api_key,
-            model="gemini-1.5-flash",  # Fast and free
+            model="gemini-pro",  # Free tier model
             verbose=True  # Show detailed output
         )
 
