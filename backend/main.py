@@ -174,6 +174,9 @@ app.include_router(routes.personal_development.router, prefix="/api/v1", tags=["
 # Include Synastry routes
 app.include_router(routes.synastry.router, prefix="/api/v1", tags=["Synastry"])
 
+# Include Gemini Demo routes
+app.include_router(routes.gemini_demo.router, prefix="/api/v1", tags=["Gemini Demo"])
+
 
 # ============================================================================
 # Root Endpoint

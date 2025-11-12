@@ -11,8 +11,9 @@ from . import consultant
 from . import fortune
 from . import personal_development
 from . import synastry
+from . import gemini_demo
 
-__all__ = ["auth", "predictions", "charts", "transits", "health", "perplexity_endpoints", "knowledge", "consultant", "fortune", "personal_development", "synastry"]
+__all__ = ["auth", "predictions", "charts", "transits", "health", "perplexity_endpoints", "knowledge", "consultant", "fortune", "personal_development", "synastry", "gemini_demo"]
 
 # Import routers
 auth_router = auth.router
@@ -26,3 +27,4 @@ consultant_router = consultant.router
 fortune_router = fortune.router
 personal_development_router = personal_development.router
 synastry_router = synastry.router
+gemini_demo_router = gemini_demo.router

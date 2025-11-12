@@ -13,7 +13,7 @@ alembic==1.13.0
 # Authentication & Security
 pydantic[email]==2.5.0
 pydantic-settings==2.1.0
-pyjwt==2.8.1
+pyjwt==2.10.1
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
 cryptography==41.0.7
@@ -52,6 +52,7 @@ langsmith==0.0.77
 # LangChain LLM Integrations
 langchain-openai==0.0.2post1
 openai==1.6.1
+langchain-google-genai==1.0.1
 
 # Agent Memory & Callbacks
 tiktoken==0.5.2
