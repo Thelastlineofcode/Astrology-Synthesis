@@ -1,411 +1,286 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Card from "../../components/shared/Card";
-import Button from "../../components/shared/Button";
-import { useAPI } from "@/lib/hooks";
-import { api, User } from "@/lib/api";
 import "./profile.css";
 
-interface UserProfile extends Partial<User> {
-  birthDate?: string;
-  birthTime?: string;
-  birthPlace?: string;
-  latitude?: number;
-  longitude?: number;
-  zodiacSign?: string;
-  sunSign?: string;
-  moonSign?: string;
-  risingSign?: string;
+interface UserProfile {
+  id: string;
+  username: string;
+  email: string;
+  birth_date: string;
+  birth_time: string;
+  birth_location: string;
+  timezone: string;
+  created_at: string;
+}
+
+interface ProfileFormProps {
+  profile: UserProfile;
+  onSave: (data: Partial<UserProfile>) => void;
+  onCancel: () => void;
+}
+
+function ProfileForm({ profile, onSave, onCancel }: ProfileFormProps) {
+  const [formData, setFormData] = useState<Partial<UserProfile>>(profile);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSave(formData);
+  };
+
+  const handleChange = (field: keyof UserProfile, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="profile-form">
+      <div className="form-group">
+        <label htmlFor="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          value={formData.username || ""}
+          onChange={(e) => handleChange("username", e.target.value)}
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          value={formData.email || ""}
+          onChange={(e) => handleChange("email", e.target.value)}
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="birth_date">Birth Date</label>
+        <input
+          id="birth_date"
+          type="date"
+          value={formData.birth_date || ""}
+          onChange={(e) => handleChange("birth_date", e.target.value)}
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="birth_time">Birth Time</label>
+        <input
+          id="birth_time"
+          type="time"
+          value={formData.birth_time || ""}
+          onChange={(e) => handleChange("birth_time", e.target.value)}
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="birth_location">Birth Location</label>
+        <input
+          id="birth_location"
+          type="text"
+          value={formData.birth_location || ""}
+          onChange={(e) => handleChange("birth_location", e.target.value)}
+          placeholder="City, State/Country"
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="timezone">Timezone</label>
+        <input
+          id="timezone"
+          type="text"
+          value={formData.timezone || ""}
+          onChange={(e) => handleChange("timezone", e.target.value)}
+          placeholder="e.g., America/New_York"
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-actions">
+        <button type="button" onClick={onCancel} className="btn-secondary">
+          Cancel
+        </button>
+        <button type="submit" className="btn-primary">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Partial<UserProfile>>({});
-
-  // Use the new API hook
-  const {
-    data,
-    loading: isLoading,
-    error: apiError,
-    execute,
-  } = useAPI(api.auth.getCurrentUser, {
-    onSuccess: (user) => {
-      setProfile({
-        ...user,
-        birthDate: "1990-05-15", // TODO: These will come from user settings/chart data
-        birthTime: "14:30",
-        birthPlace: "New York, NY",
-        latitude: 40.7128,
-        longitude: -74.006,
-        zodiacSign: "Taurus",
-        sunSign: "Taurus",
-        moonSign: "Cancer",
-        risingSign: "Virgo",
-      });
-    },
-    onError: (err) => {
-      setError(err.message);
-    },
-  });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Try to fetch profile, fallback to demo if not authenticated
-    execute().catch(() => {
-      // Show demo data if not authenticated
-      setProfile({
-        id: 0,
-        email: "demo@example.com",
-        first_name: "Demo",
-        last_name: "User",
-        birthDate: "1990-05-15",
-        birthTime: "14:30",
-        birthPlace: "New York, NY",
-        latitude: 40.7128,
-        longitude: -74.006,
-        zodiacSign: "Taurus",
-        sunSign: "Taurus",
-        moonSign: "Cancer",
-        risingSign: "Virgo",
-        created_at: new Date().toISOString(),
-        is_active: true,
-      });
-    });
+    fetchProfile();
   }, []);
 
-  const handleEdit = () => {
-    setFormData(profile || {});
-    setIsEditing(true);
-  };
-
-  const handleCancel = () => {
-    setFormData({});
-    setIsEditing(false);
-    setError(null);
-  };
-
-  const handleChange = (field: string, value: string | number) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSave = async () => {
+  const fetchProfile = async () => {
     try {
-      setError(null);
+      const token = localStorage.getItem("access_token");
+
+      // Demo fallback if no token
+      if (!token) {
+        setProfile({
+          id: "demo-123",
+          username: "demo_user",
+          email: "demo@mularoot.com",
+          birth_date: "1990-05-15",
+          birth_time: "14:30",
+          birth_location: "New York, NY, USA",
+          timezone: "America/New_York",
+          created_at: new Date().toISOString(),
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/v1/user/profile`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to load profile");
+      const data = await response.json();
+      setProfile(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error loading profile");
+      // Fallback to demo data on error
+      setProfile({
+        id: "demo-123",
+        username: "demo_user",
+        email: "demo@mularoot.com",
+        birth_date: "1990-05-15",
+        birth_time: "14:30",
+        birth_location: "New York, NY, USA",
+        timezone: "America/New_York",
+        created_at: new Date().toISOString(),
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSave = async (updatedData: Partial<UserProfile>) => {
+    try {
+      const token = localStorage.getItem("access_token");
 
       // Demo mode - just update local state
-      if (!authToken) {
-        setProfile((prev) =>
-          prev
-            ? { ...prev, ...formData, updatedAt: new Date().toISOString() }
-            : null
-        );
+      if (!token) {
+        setProfile((prev) => (prev ? { ...prev, ...updatedData } : null));
         setIsEditing(false);
         return;
       }
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/users/profile`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/v1/user/profile`,
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${authToken}`,
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(updatedData),
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to update profile");
-      }
-
+      if (!response.ok) throw new Error("Failed to update profile");
       const data = await response.json();
-      setProfile(data.data);
+      setProfile(data);
       setIsEditing(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      setError(err instanceof Error ? err.message : "Error saving profile");
     }
   };
 
   if (isLoading) {
     return (
-      <div className="profile-page">
-        <div className="profile-container">
-          <Card className="profile-loading">
-            <p>Loading profile...</p>
-          </Card>
-        </div>
+      <div className="profile-container">
+        <div className="loading">Loading profile...</div>
       </div>
     );
   }
 
-  if (!profile) {
+  if (error && !profile) {
     return (
-      <div className="profile-page">
-        <div className="profile-container">
-          <Card className="profile-error">
-            <h2>Profile Not Found</h2>
-            <p>Please log in to view your profile.</p>
-          </Card>
-        </div>
+      <div className="profile-container">
+        <div className="error">Error: {error}</div>
       </div>
     );
   }
 
   return (
-    <div className="profile-page">
-      <div className="profile-container">
-        <Card className="profile-card">
-          <div className="profile-header">
-            <h1>Your Profile</h1>
-            {!isEditing && (
-              <Button variant="primary" onClick={handleEdit}>
-                Edit Profile
-              </Button>
-            )}
-          </div>
+    <div className="profile-container">
+      <div className="profile-header">
+        <h1>Your Profile</h1>
+        {!isEditing && (
+          <button onClick={() => setIsEditing(true)} className="btn-edit">
+            Edit Profile
+          </button>
+        )}
+      </div>
 
-          {error && <div className="profile-error-message">{error}</div>}
+      {error && <div className="error-message">{error}</div>}
 
+      {profile && (
+        <div className="profile-card">
           {isEditing ? (
-            <div className="profile-form">
-              <div className="form-section">
-                <h2>Personal Information</h2>
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    id="name"
-                    type="text"
-                    value={formData.name || ""}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={profile.email}
-                    disabled
-                    className="disabled"
-                  />
-                  <small>Email cannot be changed</small>
-                </div>
-              </div>
-
-              <div className="form-section">
-                <h2>Birth Information</h2>
-                <div className="form-group">
-                  <label htmlFor="birthDate">Birth Date</label>
-                  <input
-                    id="birthDate"
-                    type="date"
-                    value={formData.birthDate || ""}
-                    onChange={(e) => handleChange("birthDate", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="birthTime">Birth Time</label>
-                  <input
-                    id="birthTime"
-                    type="time"
-                    value={formData.birthTime || ""}
-                    onChange={(e) => handleChange("birthTime", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="birthPlace">Birth Place</label>
-                  <input
-                    id="birthPlace"
-                    type="text"
-                    value={formData.birthPlace || ""}
-                    onChange={(e) => handleChange("birthPlace", e.target.value)}
-                    placeholder="City, State/Country"
-                  />
-                </div>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="latitude">Latitude</label>
-                    <input
-                      id="latitude"
-                      type="number"
-                      step="0.0001"
-                      min="-90"
-                      max="90"
-                      value={formData.latitude || ""}
-                      onChange={(e) =>
-                        handleChange("latitude", parseFloat(e.target.value))
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="longitude">Longitude</label>
-                    <input
-                      id="longitude"
-                      type="number"
-                      step="0.0001"
-                      min="-180"
-                      max="180"
-                      value={formData.longitude || ""}
-                      onChange={(e) =>
-                        handleChange("longitude", parseFloat(e.target.value))
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-section">
-                <h2>Astrological Signs</h2>
-                <div className="form-group">
-                  <label htmlFor="zodiacSign">Zodiac Sign</label>
-                  <input
-                    id="zodiacSign"
-                    type="text"
-                    value={formData.zodiacSign || ""}
-                    onChange={(e) => handleChange("zodiacSign", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="sunSign">Sun Sign</label>
-                  <input
-                    id="sunSign"
-                    type="text"
-                    value={formData.sunSign || ""}
-                    onChange={(e) => handleChange("sunSign", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="moonSign">Moon Sign</label>
-                  <input
-                    id="moonSign"
-                    type="text"
-                    value={formData.moonSign || ""}
-                    onChange={(e) => handleChange("moonSign", e.target.value)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="risingSign">Rising Sign</label>
-                  <input
-                    id="risingSign"
-                    type="text"
-                    value={formData.risingSign || ""}
-                    onChange={(e) => handleChange("risingSign", e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="form-actions">
-                <Button variant="secondary" onClick={handleCancel}>
-                  Cancel
-                </Button>
-                <Button variant="primary" onClick={handleSave}>
-                  Save Changes
-                </Button>
-              </div>
-            </div>
+            <ProfileForm
+              profile={profile}
+              onSave={handleSave}
+              onCancel={() => setIsEditing(false)}
+            />
           ) : (
             <div className="profile-view">
-              <div className="profile-section">
-                <h2>Personal Information</h2>
-                <div className="profile-field">
-                  <span className="field-label">Name:</span>
-                  <span className="field-value">{profile.name}</span>
-                </div>
-                <div className="profile-field">
-                  <span className="field-label">Email:</span>
-                  <span className="field-value">{profile.email}</span>
-                </div>
+              <div className="field-group">
+                <label>Username</label>
+                <p>{profile.username}</p>
               </div>
 
-              <div className="profile-section">
-                <h2>Birth Information</h2>
-                {profile.birthDate ? (
-                  <>
-                    <div className="profile-field">
-                      <span className="field-label">Birth Date:</span>
-                      <span className="field-value">
-                        {new Date(profile.birthDate).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <div className="profile-field">
-                      <span className="field-label">Birth Time:</span>
-                      <span className="field-value">
-                        {profile.birthTime || "Not set"}
-                      </span>
-                    </div>
-                    <div className="profile-field">
-                      <span className="field-label">Birth Place:</span>
-                      <span className="field-value">
-                        {profile.birthPlace || "Not set"}
-                      </span>
-                    </div>
-                    {profile.latitude && profile.longitude && (
-                      <div className="profile-field">
-                        <span className="field-label">Coordinates:</span>
-                        <span className="field-value">
-                          {profile.latitude.toFixed(4)},{" "}
-                          {profile.longitude.toFixed(4)}
-                        </span>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <p className="field-empty">
-                    No birth information provided yet.
-                  </p>
-                )}
+              <div className="field-group">
+                <label>Email</label>
+                <p>{profile.email}</p>
               </div>
 
-              <div className="profile-section profile-zodiac">
-                <h2>Your Astrological Profile</h2>
-                {profile.zodiacSign ||
-                profile.sunSign ||
-                profile.moonSign ||
-                profile.risingSign ? (
-                  <div className="zodiac-grid">
-                    {profile.zodiacSign && (
-                      <div className="zodiac-item">
-                        <span className="zodiac-label">Zodiac Sign</span>
-                        <span className="zodiac-value">
-                          {profile.zodiacSign}
-                        </span>
-                      </div>
-                    )}
-                    {profile.sunSign && (
-                      <div className="zodiac-item">
-                        <span className="zodiac-label">Sun Sign</span>
-                        <span className="zodiac-value">{profile.sunSign}</span>
-                      </div>
-                    )}
-                    {profile.moonSign && (
-                      <div className="zodiac-item">
-                        <span className="zodiac-label">Moon Sign</span>
-                        <span className="zodiac-value">{profile.moonSign}</span>
-                      </div>
-                    )}
-                    {profile.risingSign && (
-                      <div className="zodiac-item">
-                        <span className="zodiac-label">Rising Sign</span>
-                        <span className="zodiac-value">
-                          {profile.risingSign}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <p className="field-empty">
-                    No astrological information provided yet. Click "Edit
-                    Profile" to add your signs.
-                  </p>
-                )}
+              <div className="field-group">
+                <label>Birth Date</label>
+                <p>{new Date(profile.birth_date).toLocaleDateString()}</p>
+              </div>
+
+              <div className="field-group">
+                <label>Birth Time</label>
+                <p>{profile.birth_time}</p>
+              </div>
+
+              <div className="field-group">
+                <label>Birth Location</label>
+                <p>{profile.birth_location}</p>
+              </div>
+
+              <div className="field-group">
+                <label>Timezone</label>
+                <p>{profile.timezone}</p>
+              </div>
+
+              <div className="field-group">
+                <label>Member Since</label>
+                <p>{new Date(profile.created_at).toLocaleDateString()}</p>
               </div>
             </div>
           )}
-        </Card>
-      </div>
+        </div>
+      )}
     </div>
   );
 }

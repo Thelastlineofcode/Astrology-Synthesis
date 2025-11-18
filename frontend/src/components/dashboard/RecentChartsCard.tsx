@@ -22,12 +22,13 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({
 }) => {
   if (loading) {
     return (
-      <Card className="recent-charts-card" onClick={() => {}}>
+      <Card className="recent-charts-card">
         <h3>Recent Charts</h3>
-        <div className="loading-skeleton">
+        <div className="loading-skeleton" role="status" aria-label="Loading recent charts">
           <div className="skeleton-line" />
           <div className="skeleton-line" />
           <div className="skeleton-line" />
+          <span className="sr-only">Loading your recent charts...</span>
         </div>
       </Card>
     );
@@ -35,9 +36,9 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({
 
   if (charts.length === 0) {
     return (
-      <Card className="recent-charts-card" onClick={() => {}}>
+      <Card className="recent-charts-card">
         <h3>Recent Charts</h3>
-        <div className="empty-state">
+        <div className="empty-state" role="status">
           <p className="empty-state__text">
             No charts yet. Generate your first chart to get started!
           </p>
@@ -47,19 +48,20 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({
   }
 
   return (
-    <Card className="recent-charts-card" onClick={() => {}}>
+    <Card className="recent-charts-card">
       <div className="card-header">
         <h3>Recent Charts</h3>
         <Button
           variant="secondary"
           size="small"
-          onClick={() => (window.location.href = "/chart-demo")}
+          href="/chart-demo"
+          aria-label="View all recent charts"
         >
           View All
         </Button>
       </div>
 
-      <ul className="chart-list">
+      <ul className="chart-list" aria-label="Recent charts list">
         {charts.map((chart) => (
           <li key={chart.id} className="chart-item">
             <div className="chart-item__info">
@@ -71,7 +73,8 @@ const RecentChartsCard: React.FC<RecentChartsCardProps> = ({
             <Button
               variant="secondary"
               size="small"
-              onClick={() => (window.location.href = `/chart-demo`)}
+              href={`/chart-demo`}
+              aria-label={`View chart for ${chart.name || "Unnamed Chart"}`}
             >
               View
             </Button>

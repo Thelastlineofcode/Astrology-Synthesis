@@ -2,6 +2,7 @@
 Calculation orchestration service.
 Wraps all Phase 2 calculation engines (KP, Dasha, Transit, Ephemeris).
 Implements the syncretic synthesis formula and data transformation.
+Integrates UnifiedInterpreter for multi-tradition interpretations.
 """
 
 from typing import Dict, List, Any, Optional
@@ -14,11 +15,30 @@ from backend.calculations.kp_engine import (
 from backend.calculations.dasha_engine import DashaCalculator
 from backend.calculations.transit_engine import TransitAnalyzer
 from backend.calculations.ephemeris import EphemerisCalculator
+from backend.calculations.unified_interpreter import UnifiedInterpreter
+from backend.calculations.exceptions import (
+    InvalidPredictionWindowError,
+    InvalidBirthDataError,
+    CalculationError
+)
 from backend.schemas import BirthDataInput, PredictionEventData
 import logging
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
+
+# Constants for validation
+MAX_PREDICTION_WINDOW_DAYS = 365
+MIN_PREDICTION_WINDOW_DAYS = 1
+
+# Calculation constants
+NAKSHATRA_LENGTH_DEGREES = 13.333333  # 13°20' = 13.333333 degrees
+PADA_LENGTH_DEGREES = 3.333333  # Each nakshatra divided into 4 padas
+DEGREES_PER_SIGN = 30.0  # Zodiac sign length
+
+# Synthesis formula weights
+KP_WEIGHT = 0.6
+DASHA_WEIGHT = 0.4
 
 
 @dataclass
@@ -39,6 +59,7 @@ class CalculationService:
     def __init__(self):
         """Initialize calculation service."""
         self.ephemeris = EphemerisCalculator()
+        self.interpreter = UnifiedInterpreter()
     
     def generate_birth_chart(self, birth_data: BirthDataInput) -> Dict[str, Any]:
         """
@@ -77,6 +98,12 @@ class CalculationService:
             for planet_name, position in planets.items():
                 degree, minutes, seconds = self._degree_to_dms(position.longitude)
                 house_num = self._get_planet_house(position.longitude, house_cusps)
+                
+                # Calculate pada (1-4) from degree in nakshatra
+                # Each nakshatra is 13°20', divided into 4 padas of 3°20' each
+                nakshatra_degree = position.degree_in_sign % NAKSHATRA_LENGTH_DEGREES
+                pada = int(nakshatra_degree / PADA_LENGTH_DEGREES) + 1
+                
                 planet_positions.append({
                     "planet": planet_name,
                     "degree": degree,
@@ -89,8 +116,9 @@ class CalculationService:
                     "latitude": position.latitude,
                     "sign": position.sign,
                     "degree_in_sign": position.degree_in_sign,
-                    "is_retrograde": position.is_retrograde,
+                    "retrograde": position.is_retrograde,
                     "nakshatra": position.nakshatra,
+                    "pada": pada,
                 })
             
             # Format house cusps as a list of 12 houses
@@ -99,7 +127,9 @@ class CalculationService:
                 degree, minutes, seconds = self._degree_to_dms(house_cusps.cusps[i])
                 houses_list.append({
                     "house": i + 1,
-                    "degree": house_cusps.cusps[i],
+                    "degree": degree,
+                    "minutes": minutes,
+                    "seconds": seconds,
                     "zodiac_sign": self._get_zodiac_sign(house_cusps.cusps[i]),
                     "zodiac_degree": self._get_zodiac_degree(house_cusps.cusps[i]),
                     "cusp": house_cusps.cusps[i],
@@ -187,20 +217,35 @@ class CalculationService:
     ) -> SyntheticPredictionResult:
         """
         Generate comprehensive syncretic prediction combining KP, Dasha, and Transit.
-        
+
         Synthesis Formula: (KP × 0.6) + (Dasha × 0.4)
-        
+
         Args:
             birth_data: Birth data
             query: User's prediction query
-            prediction_window_days: Days to look ahead
-            
+            prediction_window_days: Days to look ahead (max 365)
+
         Returns:
             SyntheticPredictionResult with all analysis
+
+        Raises:
+            InvalidPredictionWindowError: If prediction_window_days is out of valid range
+            InvalidBirthDataError: If birth data is incomplete or invalid
+            CalculationError: If calculation fails
         """
         import time
         start_time = time.time()
-        
+
+        # Validate input parameters
+        if prediction_window_days < MIN_PREDICTION_WINDOW_DAYS:
+            raise InvalidPredictionWindowError(
+                f"Prediction window must be at least {MIN_PREDICTION_WINDOW_DAYS} day(s)"
+            )
+        if prediction_window_days > MAX_PREDICTION_WINDOW_DAYS:
+            raise InvalidPredictionWindowError(
+                f"Prediction window cannot exceed {MAX_PREDICTION_WINDOW_DAYS} days"
+            )
+
         try:
             import pytz
             from datetime import datetime as dt
@@ -222,17 +267,18 @@ class CalculationService:
             )
             
             if not moon_position:
-                raise ValueError("Moon position not found in birth chart")
+                raise InvalidBirthDataError("Moon position not found in birth chart")
+
+            # Use the pre-calculated longitude directly (0-360 degrees)
+            moon_longitude = moon_position["longitude"]
             
-            moon_longitude = moon_position["degree"] + moon_position["minutes"]/60 + moon_position["seconds"]/3600
-            
-            # Calculate prediction window
-            prediction_start = datetime.utcnow()
+            # Calculate prediction window (timezone-aware UTC)
+            prediction_start = datetime.now(pytz.UTC)
             prediction_end = prediction_start + timedelta(days=prediction_window_days)
             
             # Initialize calculators
-            dasha_calc = DashaCalculator(moon_longitude, birth_datetime_utc)
-            transit_analyzer = TransitAnalyzer(birth_chart)
+            dasha_calc = DashaCalculator()
+            transit_analyzer = TransitAnalyzer()
             
             # Collect all events
             all_events: List[PredictionEventData] = []
@@ -248,7 +294,7 @@ class CalculationService:
             # 2. Dasha System analysis
             dasha_score = 0.0
             dasha_events = self._analyze_dasha_system(
-                dasha_calc, prediction_start, prediction_end
+                dasha_calc, prediction_start, prediction_end, birth_datetime_utc
             )
             all_events.extend(dasha_events)
             dasha_score = sum(e.strength_score for e in dasha_events) / len(dasha_events) if dasha_events else 0.5
@@ -256,16 +302,19 @@ class CalculationService:
             # 3. Transit analysis
             transit_score = 0.0
             transit_events = self._analyze_transits(
-                transit_analyzer, prediction_start, prediction_end
+                transit_analyzer, birth_chart, prediction_start, prediction_end
             )
             all_events.extend(transit_events)
             transit_score = sum(e.strength_score for e in transit_events) / len(transit_events) if transit_events else 0.5
             
-            # Compute syncretic confidence
-            confidence_score = (kp_score * 0.6) + (dasha_score * 0.4)
+            # Compute syncretic confidence using weighted formula
+            confidence_score = (kp_score * KP_WEIGHT) + (dasha_score * DASHA_WEIGHT)
             
             # Sort events by date
             all_events.sort(key=lambda e: e.event_date)
+            
+            # Enrich events with unified interpretations
+            all_events = self._enrich_events_with_interpretations(all_events, birth_chart)
             
             calculation_time = (time.time() - start_time) * 1000  # Convert to ms
             
@@ -295,21 +344,38 @@ class CalculationService:
         events = []
         
         try:
+            # Extract planets dict for KP analysis
+            planets_dict = {}
+            for planet_data in birth_chart.get("planet_positions", []):
+                planets_dict[planet_data["planet"]] = {
+                    "longitude": planet_data["longitude"],
+                    "house": planet_data["house"],
+                    "sign": planet_data["sign"],
+                    "degree_in_sign": planet_data["degree_in_sign"],
+                }
+            
+            # Extract house cusps as list of longitudes
+            house_cusps = [house["cusp"] for house in birth_chart.get("house_cusps", [])]
+            
             # Get significators for houses
             for house_num in range(1, 13):
-                significators = get_significators_for_house(house_num, birth_chart)
+                significators = get_significators_for_house(house_num, planets_dict, house_cusps)
                 
                 if significators:
+                    # Extract planet names from Significator objects
+                    primary = significators[0].planet if significators else None
+                    secondary = significators[1].planet if len(significators) > 1 else None
+                    
                     event = PredictionEventData(
                         event_type="kp_significator",
                         event_date=start_date + timedelta(days=house_num * 3),
                         event_window_start=start_date,
                         event_window_end=end_date,
-                        primary_planet=significators[0] if significators else None,
-                        secondary_planet=significators[1] if len(significators) > 1 else None,
-                        strength_score=0.6,
+                        primary_planet=primary,
+                        secondary_planet=secondary,
+                        strength_score=significators[0].strength if significators else 0.6,
                         influence_area=self._get_house_influence(house_num),
-                        description=f"KP House {house_num} activations",
+                        description=f"KP House {house_num}: {significators[0].reason if significators else 'Active'}",
                         recommendation="Monitor planetary transits"
                     )
                     events.append(event)
@@ -326,27 +392,36 @@ class CalculationService:
         dasha_calc: DashaCalculator,
         start_date: datetime,
         end_date: datetime,
+        birth_date: datetime,
     ) -> List[PredictionEventData]:
         """Analyze Dasha system for prediction events."""
         events = []
         
         try:
-            # Get dasha timeline
-            timeline = dasha_calc.get_dasha_timeline(start_date, end_date)
+            # Calculate years forward from birth to end_date
+            years_forward = max(2, int((end_date - birth_date).days / 365.25) + 1)
             
-            for dasha_info in timeline:
+            # Get dasha timeline
+            timeline = dasha_calc.get_dasha_timeline(birth_date, years_forward)
+            
+            for dasha_phase in timeline:
+                # Only include periods within our prediction window
+                if dasha_phase.start_date > end_date:
+                    continue
+                if dasha_phase.end_date < start_date:
+                    continue
+                    
                 event = PredictionEventData(
                     event_type="dasha_change",
-                    event_date=dasha_info.get("start_date", start_date),
-                    event_window_start=dasha_info.get("start_date", start_date),
-                    event_window_end=dasha_info.get("end_date", end_date),
-                    primary_planet=dasha_info.get("mahadasha_planet"),
-                    secondary_planet=dasha_info.get("antardasha_planet"),
+                    event_date=dasha_phase.start_date,
+                    event_window_start=dasha_phase.start_date,
+                    event_window_end=dasha_phase.end_date,
+                    primary_planet=dasha_phase.planet,
+                    secondary_planet=None,
                     strength_score=0.75,
                     influence_area="Overall life",
-                    description=f"Dasha period: {dasha_info.get('mahadasha_planet', 'Unknown')} "
-                                f"→ {dasha_info.get('antardasha_planet', 'Unknown')}",
-                    recommendation="Leverage dasha energies for major life decisions"
+                    description=f"Mahadasha period: {dasha_phase.planet}",
+                    recommendation=f"Leverage {dasha_phase.planet} energies for major life decisions"
                 )
                 events.append(event)
             
@@ -360,6 +435,7 @@ class CalculationService:
     def _analyze_transits(
         self,
         transit_analyzer: TransitAnalyzer,
+        birth_chart: Dict[str, Any],
         start_date: datetime,
         end_date: datetime,
     ) -> List[PredictionEventData]:
@@ -367,20 +443,25 @@ class CalculationService:
         events = []
         
         try:
-            # Get transit windows
-            windows = transit_analyzer.get_favorable_windows(start_date, end_date)
+            # Get transit windows (returns ActivationWindow dataclass objects)
+            windows = transit_analyzer.get_favorable_windows(
+                birth_chart, start_date, end_date
+            )
             
             for window in windows:
+                # Extract primary planet from key_planets list
+                primary_planet = window.key_planets[0] if window.key_planets else None
+                
                 event = PredictionEventData(
                     event_type="transit_window",
-                    event_date=window.get("start_date", start_date),
-                    event_window_start=window.get("start_date", start_date),
-                    event_window_end=window.get("end_date", end_date),
-                    primary_planet=window.get("planet"),
-                    strength_score=window.get("strength", 0.5),
-                    influence_area=window.get("area", "General"),
-                    description=f"Transit window: {window.get('description', 'Favorable period')}",
-                    recommendation=window.get("recommendation", "Take action during this window")
+                    event_date=window.peak_date,
+                    event_window_start=window.start_date,
+                    event_window_end=window.end_date,
+                    primary_planet=primary_planet,
+                    strength_score=window.peak_confidence,
+                    influence_area=window.event_type,
+                    description=f"Transit window for {window.event_type}: {window.favorable_days} favorable days",
+                    recommendation=f"Peak activation on {window.peak_date.strftime('%Y-%m-%d')}"
                 )
                 events.append(event)
             
@@ -390,6 +471,60 @@ class CalculationService:
         except Exception as e:
             logger.error(f"❌ Transit analysis failed: {str(e)}")
             return []
+    
+    def _enrich_events_with_interpretations(
+        self,
+        events: List[PredictionEventData],
+        birth_chart: Dict[str, Any],
+    ) -> List[PredictionEventData]:
+        """
+        Enrich prediction events with unified multi-tradition interpretations.
+        
+        This is the proprietary system - weaves Vedic, Western, Voodoo, 
+        Mysticism, and Lunar Mansions into single unified interpretations.
+        """
+        enriched_events = []
+        
+        for event in events:
+            try:
+                # Get planet data from birth chart
+                planet_data = None
+                if event.primary_planet:
+                    planet_data = next(
+                        (p for p in birth_chart.get("planet_positions", [])
+                         if p["planet"] == event.primary_planet),
+                        None
+                    )
+                
+                if planet_data:
+                    # Generate unified interpretation
+                    interpretation = self.interpreter.interpret_event(
+                        event_type=event.event_type,
+                        primary_planet=event.primary_planet,
+                        secondary_planet=event.secondary_planet,
+                        planet_sign=planet_data.get("sign"),
+                        planet_house=planet_data.get("house"),
+                        planet_nakshatra=planet_data.get("nakshatra"),
+                        event_date=event.event_date,
+                        strength_score=event.strength_score,
+                    )
+                    
+                    # Update event with interpretation
+                    event.description = interpretation.get("description", event.description)
+                    event.recommendation = interpretation.get("recommendation", event.recommendation)
+                    
+                    # Add interpretation details if available
+                    if hasattr(event, 'interpretation_details'):
+                        event.interpretation_details = interpretation.get("details", {})
+                
+                enriched_events.append(event)
+                
+            except Exception as e:
+                logger.warning(f"⚠️ Failed to interpret event: {str(e)}")
+                enriched_events.append(event)  # Keep original event
+        
+        logger.info(f"✅ Enriched {len(enriched_events)} events with unified interpretations")
+        return enriched_events
     
     @staticmethod
     def _get_house_influence(house_number: int) -> str:
@@ -425,22 +560,23 @@ class CalculationService:
             "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
         ]
-        sign_index = int(degree / 30)
+        sign_index = int(degree / DEGREES_PER_SIGN)
         return zodiac_signs[min(sign_index, 11)]
-    
+
     @staticmethod
     def _get_zodiac_degree(degree: float) -> float:
         """Get degree within zodiac sign (0-30)."""
-        return degree % 30
+        return degree % DEGREES_PER_SIGN
     
     @staticmethod
     def _get_planet_house(planet_degree: float, house_cusps) -> int:
         """Determine which house a planet is in based on its degree."""
-        cusps = [house_cusps.ascendant] + house_cusps.cusps
+        # house_cusps.cusps already contains 12 cusps, with cusps[0] being the ascendant
+        cusps = house_cusps.cusps
         for i in range(12):
             cusp1 = cusps[i]
             cusp2 = cusps[(i + 1) % 12]
-            
+
             # Handle the wrap-around at 360/0
             if cusp1 <= cusp2:
                 if cusp1 <= planet_degree < cusp2:
@@ -448,5 +584,5 @@ class CalculationService:
             else:  # wrap-around
                 if planet_degree >= cusp1 or planet_degree < cusp2:
                     return i + 1
-        
+
         return 1  # default to house 1

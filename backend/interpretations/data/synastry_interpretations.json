@@ -1,0 +1,23 @@
+{
+  "_note": "Synastry (relationship) interpretations",
+  "inter_aspects": {
+    "_note": "Aspects between two charts",
+    "venus_trine_mars": {
+      "title": "Person A's Venus Trine Person B's Mars",
+      "compatibility_score": 0.85,
+      "description": "This is one of the most classic indicators of romantic and sexual attraction. Venus person is naturally drawn to Mars person's assertiveness, while Mars person appreciates Venus person's receptivity.",
+      "relationship_impact": "Strong physical and romantic chemistry, natural give-and-take dynamic",
+      "advice": "Enjoy the natural flow between you. This aspect helps smooth over other challenging aspects."
+    }
+  },
+  "house_overlays": {
+    "_note": "One person's planet in another's house",
+    "sun_house_7_overlay": {
+      "title": "Person A's Sun in Person B's 7th House",
+      "description": "Person A energizes Person B's partnership sector. Person B sees Person A as an ideal partner archetype.",
+      "activation": "Person B's relationship needs, partnership ideals, commitment themes",
+      "dynamic": "Strong pull toward partnership, Person A illuminates Person B's relationship patterns"
+    }
+  },
+  "_status": "NEEDS COMPLETION - Only sample entries provided. Comprehensive synastry data to be sourced."
+}

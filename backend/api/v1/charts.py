@@ -32,7 +32,10 @@ async def create_birth_chart(
     """
     try:
         # Generate birth chart
-        chart_data = calc_service.generate_birth_chart(chart_request.birth_data)
+        chart_data_dict = calc_service.generate_birth_chart(chart_request.birth_data)
+        
+        # Validate chart_data structure
+        chart_data_obj = BirthChartData(**chart_data_dict)
         
         # Store in database
         db_chart = BirthChart(
@@ -43,8 +46,8 @@ async def create_birth_chart(
             birth_longitude=chart_request.birth_data.longitude,
             timezone=chart_request.birth_data.timezone,
             birth_location=chart_request.birth_data.location_name,
-            chart_data=chart_data,
-            ayanamsa=chart_request.ayanamsa,
+            chart_data=chart_data_dict,
+            ayanamsa=str(chart_request.ayanamsa),
             house_system=chart_request.house_system or "PLACIDUS",
         )
         
@@ -54,17 +57,18 @@ async def create_birth_chart(
         
         logger.info(f"✅ Birth chart created: {db_chart.chart_id}")
         
+        # Convert database values to proper types for response
         return BirthChartResponse(
             chart_id=db_chart.chart_id,
-            user_id=current_user.user_id,
-            birth_date=db_chart.birth_date,
-            birth_time=db_chart.birth_time,
+            user_id=db_chart.user_id,
+            birth_date=chart_request.birth_data.date,
+            birth_time=chart_request.birth_data.time,
             birth_latitude=db_chart.birth_latitude,
             birth_longitude=db_chart.birth_longitude,
             timezone=db_chart.timezone,
             birth_location=db_chart.birth_location,
-            chart_data=chart_data,
-            ayanamsa=db_chart.ayanamsa,
+            chart_data=chart_data_obj,
+            ayanamsa=float(db_chart.ayanamsa) if isinstance(db_chart.ayanamsa, str) else db_chart.ayanamsa,
             house_system=db_chart.house_system,
             created_at=db_chart.created_at,
         )
@@ -101,17 +105,21 @@ async def get_birth_chart(
                 detail="Birth chart not found",
             )
         
+        # Validate and parse chart_data
+        chart_data_obj = BirthChartData(**chart.chart_data)
+        
         return BirthChartResponse(
             chart_id=chart.chart_id,
             user_id=chart.user_id,
             birth_date=chart.birth_date,
+            birth_time=chart.birth_time,
             birth_latitude=chart.birth_latitude,
             birth_longitude=chart.birth_longitude,
-            birth_timezone=chart.birth_timezone,
-            birth_location_name=chart.birth_location_name,
-            chart_data=BirthChartData(**chart.chart_data),
-            ayanamsa=chart.ayanamsa,
-            name=chart.name,
+            timezone=chart.timezone,
+            birth_location=chart.birth_location,
+            chart_data=chart_data_obj,
+            ayanamsa=float(chart.ayanamsa) if isinstance(chart.ayanamsa, str) else chart.ayanamsa,
+            house_system=chart.house_system,
             created_at=chart.created_at,
         )
         
@@ -148,13 +156,14 @@ async def list_charts(
                 chart_id=chart.chart_id,
                 user_id=chart.user_id,
                 birth_date=chart.birth_date,
+                birth_time=chart.birth_time,
                 birth_latitude=chart.birth_latitude,
                 birth_longitude=chart.birth_longitude,
-                birth_timezone=chart.birth_timezone,
-                birth_location_name=chart.birth_location_name,
+                timezone=chart.timezone,
+                birth_location=chart.birth_location,
                 chart_data=BirthChartData(**chart.chart_data),
-                ayanamsa=chart.ayanamsa,
-                name=chart.name,
+                ayanamsa=float(chart.ayanamsa) if isinstance(chart.ayanamsa, str) else chart.ayanamsa,
+                house_system=chart.house_system,
                 created_at=chart.created_at,
             )
             for chart in charts

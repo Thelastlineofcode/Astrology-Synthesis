@@ -1,0 +1,26 @@
+{
+  "_note": "Lunar Mansion (Nakshatra) interpretations and compatibility matrix",
+  "_total_nakshatras": 27,
+  "individual_nakshatras": {
+    "ashwini": {
+      "name": "Ashwini",
+      "number": 1,
+      "ruling_deity": "Ashwini Kumaras",
+      "symbol": "Horse's head",
+      "keywords": ["healing", "speed", "pioneering", "initiative"],
+      "description": "Ashwini represents swift action and healing power. Those with Moon in Ashwini are natural healers and initiators."
+    }
+  },
+  "compatibility_matrix": {
+    "_note": "Nakshatra compatibility pairs",
+    "ashwini_rohini": {
+      "compatibility_score": 0.75,
+      "category": "good",
+      "description": "Ashwini's swift energy complements Rohini's grounded creativity. Good emotional compatibility with some adjustment needed.",
+      "emotional_harmony": "Generally harmonious, though pacing differences may require compromise",
+      "challenges": ["Different speeds - Ashwini rushes, Rohini savors"],
+      "strengths": ["Mutual appreciation", "Complementary energies", "Growth potential"]
+    }
+  },
+  "_status": "NEEDS COMPLETION - Full 27×27 compatibility matrix (729 entries) to be calculated and interpreted. Individual Nakshatra data already exists in lunar_mansions.py"
+}

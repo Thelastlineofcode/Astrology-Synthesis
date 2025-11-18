@@ -1,476 +1,228 @@
-# 📖 Astrology-Synthesis - Complete Documentation Index
+# Mula: The Root - Documentation Index
 
-**Project Status:** Phase 3 Week 2 Complete → Phase 3 Week 3 Ready  
-**Date:** November 2, 2025  
-**Handoff Status:** ✅ COMPLETE
+**Complete documentation for the Mula spiritual companion app**
 
----
-
-## 🚀 START HERE - Quick Navigation
-
-### For the Next Agent 👇
-
-**FIRST:** Read these in order (total: 45 minutes)
-
-1. **QUICK_START_NEXT_AGENT.md** ← START HERE (30 min)
-   - Day-by-day breakdown
-   - Step-by-step code examples
-   - Command cheatsheet
-
-2. **EXECUTIVE_HANDOFF_SUMMARY.md** (10 min)
-   - High-level overview
-   - What's complete vs. delegated
-   - Success criteria
-
-3. **PHASE_3_WEEK_3_HANDOFF.md** (5 min)
-   - Detailed task descriptions
-   - Acceptance criteria for each task
-
-**THEN:** Run the API
-
-```bash
-cd /Users/houseofobi/Documents/GitHub/Astrology-Synthesis
-source .venv/bin/activate
-pytest -v  # See current status
-python -m uvicorn backend.main:app --reload  # Start API
-```
-
-**THEN:** Start with Task 1 from QUICK_START_NEXT_AGENT.md
+> Last updated: November 3, 2025
 
 ---
 
-## 📚 Complete Documentation Files
+## 🚀 BACKEND INTEGRATION COMPLETE
 
-### Essential References
+### ✨ NEW: Backend Integration Documentation
 
-| File                             | Lines | Purpose                  | Read When          |
-| -------------------------------- | ----- | ------------------------ | ------------------ |
-| **QUICK_START_NEXT_AGENT.md**    | 350+  | ⭐ Day-by-day guide      | FIRST (30 min)     |
-| **EXECUTIVE_HANDOFF_SUMMARY.md** | 400+  | Overview & summary       | Second (10 min)    |
-| **README_COMPLETE_PROJECT.md**   | 808   | Full technical reference | During development |
-| **PHASE_3_WEEK_3_HANDOFF.md**    | 450+  | Detailed task breakdown  | For detailed tasks |
+Start here for the authentication and chart generation integration:
 
-### Deployment & Operations
+- **[QUICK_START_TESTING.md](QUICK_START_TESTING.md)** ⭐ **START HERE** - Copy-paste commands to test (5 min read)
+- **[COMPLETION_SUMMARY.md](COMPLETION_SUMMARY.md)** - What was implemented and what to do next
+- **[BACKEND_INTEGRATION_COMPLETE.md](BACKEND_INTEGRATION_COMPLETE.md)** - Complete reference guide
+- **[IMPLEMENTATION_DETAILS.md](IMPLEMENTATION_DETAILS.md)** - Technical deep-dive with diagrams
+- **[VISUAL_GUIDE.md](VISUAL_GUIDE.md)** - Visual explanations of data flows
 
-| File                                           | Lines | Purpose                  | Read When        |
-| ---------------------------------------------- | ----- | ------------------------ | ---------------- |
-| **DEPLOYMENT_GUIDE_PRODUCTION.md**             | 250+  | Production setup         | Before deploying |
-| **PHASE_3_WEEK_2_IMPLEMENTATION_CHECKLIST.md** | 500+  | Implementation reference | During coding    |
+### Files Created (Backend Integration)
 
-### Architecture & Integration
+- `/frontend/src/services/auth.ts` - Authentication service
+- `/frontend/src/services/chart.ts` - Chart generation service
+- `/frontend/src/app/auth/login/page.tsx` - Login/Register UI
+- `/frontend/src/app/auth/login/login.css` - Auth page styles
 
-| File                                  | Lines | Purpose             | Read When                  |
-| ------------------------------------- | ----- | ------------------- | -------------------------- |
-| **AUTHENTICATION_SYSTEM_COMPLETE.md** | 250+  | Auth system details | Understanding auth         |
-| **PHASE_2_ENGINE_INTEGRATION.md**     | 300+  | Calculation engines | Understanding calculations |
+### What's Now Working
 
-### Design Documentation
-
-| File                                 | Lines | Purpose       | Read When          |
-| ------------------------------------ | ----- | ------------- | ------------------ |
-| **PROJECT_STATUS_PHASE_3_WEEK_1.md** | 500+  | Phase history | Background context |
-| **Plus 3 design system docs**        | 400+  | Design system | UI/frontend work   |
+✅ User registration with validation
+✅ User login with JWT tokens
+✅ Protected chart page routes
+✅ Real chart generation from backend
+✅ Token persistence and session management
+✅ Error handling and recovery
 
 ---
 
-## 🎯 Task Breakdown for Next Agent
+## Getting Started
 
-### ✅ What's Complete (Don't Touch)
+Start here if you're new to the project:
 
-- ✅ Authentication system (22/22 tests)
-- ✅ Database infrastructure (15 tables, 64 indices)
-- ✅ Auth endpoints (8 endpoints, 100% functional)
-- ✅ Health check endpoint
-- ✅ Configuration system
-
-### 🔄 What Needs Completion (16 hours)
-
-**Task 1: Fix Calculation Tests** (3-4 hours)
-
-- File: `backend/services/calculation_service.py`
-- File: `backend/calculations/ephemeris.py`
-- Tests: Fix 12 failing tests in `test_calculation_service.py`
-- Result: 5/17 → 17/17 passing
-- Guide: QUICK_START_NEXT_AGENT.md (Days 2-3)
-
-**Task 2: Write Integration Tests** (3-4 hours)
-
-- File: Create `test_integration_endpoints.py`
-- Tests: Write 15+ integration tests
-- Result: 0 → 15 passing
-- Guide: QUICK_START_NEXT_AGENT.md (Days 4-5)
-
-**Task 3: Performance & Docker** (3-4 hours)
-
-- Create: `Dockerfile`
-- Create: `docker-compose.yml`
-- Tests: Load testing (locust)
-- Result: Containerized, P95 <500ms
-- Guide: QUICK_START_NEXT_AGENT.md (Day 6)
-
-**Task 4: CI/CD Setup** (2-3 hours)
-
-- Create: `.github/workflows/tests.yml`
-- Result: GitHub Actions configured
-- Guide: QUICK_START_NEXT_AGENT.md (Day 7)
-
-**Task 5: Documentation Review** (1-2 hours)
-
-- Update: All markdown documentation
-- Result: Docs complete & accurate
-- Guide: QUICK_START_NEXT_AGENT.md (Day 8)
-
-**Total: 16 working hours (2 business days)**
+- **[README.md](../README.md)** - Project overview, features, quick start
+- **[Mula App Architecture](docs/MULA_APP_ARCHITECTURE.md)** - Complete product specification
+- **[Migration Guide](docs/PROJECT_PIVOT_MIGRATION_GUIDE.md)** - Transition from Roots Revealed
+- **[Quick Start Guide](QUICK_START_GUIDE.md)** - Development environment setup
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute code
 
 ---
 
-## 📊 Current Test Status
+## 📱 Frontend Development
 
-### ✅ Passing (27/39 = 69%)
+### Core Architecture
 
-**Authentication Tests:** 22/22 (100%)
+- **[Mula App Architecture](docs/MULA_APP_ARCHITECTURE.md)** - Mobile app features & design
+- **[Design System](docs/Design_Art_Component_Blueprints.md)** - Cosmic Midnight theme
+- **[Vodou Oracle Guide](docs/vodou-tarot-template.md)** - Card system specifications
 
-```
-TestRegistration (4/4)
-TestLogin (4/4)
-TestTokenRefresh (3/3)
-TestUserProfile (3/3)
-TestAPIKeys (4/4)
-TestSecurityFeatures (3/3)
-TestAuthenticationIntegration (1/1)
-```
+### Implementation Guides
 
-**Calculation Tests (Core):** 5/17 (29%)
+- **[Frontend API Implementation](FRONTEND_API_IMPLEMENTATION.md)** - API client usage
+- **[Chart Testing Guide](CHART_TESTING_GUIDE.md)** - Testing natal chart components
 
-```
-✅ test_generate_birth_chart_basic
-✅ test_chart_contains_required_fields
-✅ test_invalid_timezone
-(5 more basic functionality tests)
-```
+### Design Resources
 
-### ⚠️ Failing (12/39 = 31%)
-
-**Calculation Tests:** 12/17 failing
-
-```
-❌ Aspect calculation tests (3)
-❌ House validation tests (2)
-❌ Error handling tests (2)
-❌ Historical chart tests (2)
-❌ Edge case tests (3)
-```
-
-**Note:** All failures are fixable in <1 hour each (total 3-4 hours for all 12)
+- **[Tarot Deck Assets](docs/Design/Tarot-Deck/)** - Card artwork & specifications
+- **Consultant Avatars** - Lwa character designs (coming soon)
 
 ---
 
-## 🏗️ Project Architecture
+## ⚙️ Backend Development
 
-```
-Astrology-Synthesis (Backend API)
-│
-├── 📊 API Layer (17 endpoints)
-│   ├── Auth endpoints (8) ✅
-│   ├── Chart endpoints (4) 🔄
-│   ├── Prediction endpoints (3) 🔄
-│   ├── Transit endpoints (2) 🔄
-│   └── Health endpoint (1) ✅
-│
-├── 🔐 Service Layer (5 services)
-│   ├── AuthService ✅
-│   ├── CalculationService 🔄
-│   ├── ChartService 🔄
-│   ├── PredictionService 🔄
-│   └── TransitService 🔄
-│
-├── 🧮 Calculation Layer (4 engines)
-│   ├── Ephemeris Calculator ✅
-│   ├── KP Engine ✅
-│   ├── Dasha Calculator ✅
-│   └── Transit Analyzer ✅
-│
-├── 💾 Data Layer (SQLAlchemy ORM)
-│   ├── 15 tables ✅
-│   ├── 64 indices ✅
-│   └── Models & schemas ✅
-│
-└── 🗄️ Database (SQLite/PostgreSQL)
-    ├── users, api_keys, audit_logs
-    ├── birth_charts, planets, houses, aspects
-    ├── predictions, events, transits, remedies
-    └── dasha_periods, yoga_analysis, compatibility
-```
+### Core Systems
+
+- **[API Architecture](API_ARCHITECTURE.md)** - Backend structure & patterns
+- **[API Documentation](API_DOCUMENTATION.md)** - Endpoint reference
+- **[Database Schema](DATABASE_SCHEMA_DETAILED.md)** - PostgreSQL tables & relationships
+
+### Calculation Engines
+
+- **[KP System Architecture](docs/KP_SYSTEM_ARCHITECTURE.md)** - Sub-lord precision engine
+- **[Syncretic AI System](SYNCRETIC_AI_PREDICTION_SYSTEM.md)** - Multi-tradition predictions
+- **Backend BMAD Pattern Recognition** - Archived (old system)
+
+### Authentication & Security
+
+- **[Authentication System](AUTHENTICATION_SYSTEM_COMPLETE.md)** - NextAuth.js setup
+- **[Authentication Implementation](docs/AUTHENTICATION_IMPLEMENTATION_GUIDE.md)** - Detailed guide
 
 ---
 
-## 🔧 Key Commands
+## 🧪 Testing & Quality
 
-### Setup
-
-```bash
-cd /Users/houseofobi/Documents/GitHub/Astrology-Synthesis
-source .venv/bin/activate
-```
-
-### Run Tests
-
-```bash
-pytest -v                                    # All tests
-pytest test_auth_system.py -v               # Auth tests
-pytest test_calculation_service.py -v       # Calc tests
-pytest test_calculation_service.py -v --tb=short  # With traceback
-pytest -x                                    # Stop on first failure
-pytest -s                                    # Show print output
-```
-
-### Start API
-
-```bash
-python -m uvicorn backend.main:app --reload --port 8000
-# Visit: http://localhost:8000/docs for Swagger UI
-```
-
-### Database Operations
-
-```bash
-python -c "from backend.config.database import init_db; init_db()"  # Init DB
-rm backend/astrology.db                      # Reset database
-sqlite3 backend/astrology.db ".schema"       # View schema
-sqlite3 backend/astrology.db ".tables"       # List tables
-```
-
-### Docker
-
-```bash
-docker build -t astrology-synthesis:latest .
-docker-compose up -d
-docker-compose down
-curl http://localhost:8000/health
-```
+- **[Chart Testing Guide](CHART_TESTING_GUIDE.md)** - Natal chart component tests
+- **[Accessibility Guide](ACCESSIBILITY_TESTING_GUIDE.md)** - WCAG 2.1 AA compliance
+- **Testing Strategy** - Unit, integration, E2E tests (in development)
 
 ---
 
-## 📈 Progress Timeline
+## 🚀 Deployment & Operations
 
-### ✅ Phase 3 Week 1 (Complete)
+### Production Deployment
 
-- Days 1-3: Database infrastructure
-- Days 4-5: Authentication system
-- Result: 15 tables, 22/22 tests passing
+- **[Production Guide](DEPLOYMENT_GUIDE_PRODUCTION.md)** - Vercel + Railway deployment
+- **[Production Deployment Guide](PRODUCTION_DEPLOYMENT_GUIDE.md)** - Alternative strategies
+- **[Cost Analysis](COST_ANALYSIS_REPORT.md)** - Infrastructure costs breakdown
 
-### 🔄 Phase 3 Week 2 (In Progress)
+### DevOps
 
-- Days 1-2: Service layer (started)
-- Days 3-4: API endpoints (started)
-- Days 5: Documentation (complete)
-- Result: 17 endpoints, framework ready
-
-### 📋 Phase 3 Week 3 (Delegated - 16 hours)
-
-- Days 1-2: Fix calculation tests
-- Days 3-4: Integration tests
-- Days 5-6: Performance & Docker
-- Days 7-8: CI/CD & documentation
-- Target: 39+ tests passing, production ready
-
-### 🚀 Phase 4 (Planned)
-
-- Production deployment
-- Monitoring & operations
-- Final handoff
+- **[Docker & CI/CD Guide](docs/archive/roots-revealed/AGENT_1_DOCKER_CICD_GUIDE.md)** - Containerization
+- **Database Initialization**:
+  - `database_init.sql` - PostgreSQL production schema
+  - `database_init_sqlite.sql` - SQLite development schema
 
 ---
 
-## 💡 Quick Tips
+## 📖 Additional Resources
 
-### If Tests Are Failing
+### Development Workflow
 
-1. Run with verbose output: `pytest -vv --tb=short`
-2. Check database: `python -c "from backend.config.database import init_db; init_db()"`
-3. Check imports: Verify `.venv/bin/activate` is source'd
-4. Review error message carefully - they're usually descriptive
+- **[Development Guide](DEVELOPMENT.md)** - Development best practices
+- **[Contributing](CONTRIBUTING.md)** - Git workflow & PR guidelines
 
-### If Port 8000 Is In Use
+### API & SDK
 
-```bash
-lsof -i :8000
-kill -9 <PID>
-```
+- **[API Phase 5 Documentation](API_PHASE_5_DOCS.md)** - Advanced API features
+- **[Interpretation API Spec](docs/INTERPRETATION_API_SPECIFICATION.md)** - AI interpretation endpoints
 
-### If You Get Import Errors
+### Project Management
 
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-### If You're Stuck
-
-1. Check the relevant documentation file
-2. Look at similar passing tests for patterns
-3. Read error messages carefully
-4. Use verbose output flags (`-vv`, `-s`)
-5. Review QUICK_START_NEXT_AGENT.md for your specific task
+- **[Migration Guide](docs/PROJECT_PIVOT_MIGRATION_GUIDE.md)** - Detailed pivot execution plan
+- **Development Roadmap** - See README.md Phase 3-6 sections
 
 ---
 
-## 🎯 Success Criteria
+## 📚 Archived Documentation
 
-### For Phase 3 Week 3
+Old "Roots Revealed" documentation is preserved in:
 
-- [ ] All 39+ tests passing
-- [ ] All API endpoints functional
-- [ ] Database operational
-- [ ] Docker image builds
-- [ ] CI/CD pipeline works
-- [ ] Performance validated (P95 <500ms)
-- [ ] Documentation complete
-
-### For Production Deployment (Phase 4)
-
-- [ ] Security audit passed
-- [ ] Load testing passed
-- [ ] Monitoring setup
-- [ ] Runbook created
-- [ ] Operations training complete
+- **[Archive Folder](docs/archive/roots-revealed/)** - All legacy documentation
+  - Old design system (Healing Cosmos palette)
+  - BMAD methodology documents
+  - Issue tracking & agent assignments
+  - Phase completion reports
+  - Handoff packages & summaries
 
 ---
 
-## 📞 Support Resources
+## 🗂️ Document Categories
 
-### Documentation
+### By Audience
 
-- **QUICK_START_NEXT_AGENT.md** - Day-by-day guide ⭐ START HERE
-- **README_COMPLETE_PROJECT.md** - Full technical reference
-- **PHASE_3_WEEK_3_HANDOFF.md** - Detailed tasks
+**For Developers:**
 
-### Code References
+- Mula App Architecture
+- API Documentation
+- Database Schema
+- Frontend API Implementation
+- Testing Guides
 
-- **test_auth_system.py** - 22/22 passing (use as reference)
-- **test_calculation_service.py** - 5/17 passing (work in progress)
-- **backend/services/auth_service.py** - Complete implementation
+**For Designers:**
 
-### External Resources
+- Design System
+- Vodou Oracle Guide
+- Tarot Deck Assets
+- Accessibility Guide
 
-- FastAPI: https://fastapi.tiangolo.com/
-- SQLAlchemy: https://www.sqlalchemy.org/
-- pytest: https://docs.pytest.org/
-- Docker: https://docs.docker.com/
+**For DevOps:**
 
----
+- Deployment Guides
+- Docker & CI/CD
+- Cost Analysis
+- Database Setup
 
-## 📋 File Structure
+**For Product Managers:**
 
-```
-/Users/houseofobi/Documents/GitHub/Astrology-Synthesis/
-├── 📄 README_COMPLETE_PROJECT.md              (Main reference)
-├── 📄 QUICK_START_NEXT_AGENT.md               (⭐ START HERE)
-├── 📄 EXECUTIVE_HANDOFF_SUMMARY.md            (Overview)
-├── 📄 PHASE_3_WEEK_3_HANDOFF.md               (Tasks)
-├── 📄 DEPLOYMENT_GUIDE_PRODUCTION.md          (Deployment)
-├── 📄 AUTHENTICATION_SYSTEM_COMPLETE.md       (Auth details)
-├── 📄 PHASE_2_ENGINE_INTEGRATION.md           (Integration)
-├── 📄 DOCUMENTATION_INDEX.md                  (This file)
-│
-├── backend/
-│   ├── main.py                                (FastAPI app)
-│   ├── services/
-│   │   ├── auth_service.py                    (✅ Complete)
-│   │   └── calculation_service.py             (🔄 Needs fixes)
-│   ├── api/v1/
-│   │   ├── auth_endpoints.py                  (✅ Complete)
-│   │   ├── charts.py                          (🔄 Needs fixes)
-│   │   ├── predictions.py                     (🔄 Needs fixes)
-│   │   ├── transits.py                        (🔄 Needs fixes)
-│   │   └── health.py                          (✅ Complete)
-│   ├── models/
-│   │   └── database.py                        (✅ Complete)
-│   ├── calculations/
-│   │   ├── ephemeris.py                       (✅ Complete)
-│   │   ├── kp_engine.py                       (✅ Complete)
-│   │   ├── dasha_engine.py                    (✅ Complete)
-│   │   └── transit_engine.py                  (✅ Complete)
-│   └── config/
-│       ├── settings.py                        (✅ Complete)
-│       └── database.py                        (✅ Complete)
-│
-├── 🧪 test_auth_system.py                     (22/22 passing)
-├── 🧪 test_calculation_service.py             (5/17 passing)
-├── 🗄️ backend/astrology.db                    (SQLite database)
-└── 📦 requirements.txt                        (Dependencies)
-```
+- README Overview
+- Migration Guide
+- Development Roadmap
+- Cost Analysis
 
 ---
 
-## 🎓 Knowledge Base
+## 📝 Quick Links
 
-### Key Concepts
-
-**Syncretic Prediction:**
-
-```
-confidence_score = (KP_score × 0.6) + (Dasha_score × 0.4)
-```
-
-**Security:**
-
-- Passwords: Bcrypt 12 rounds (~300ms)
-- Tokens: JWT HS256 (30-min access, 7-day refresh)
-- API Keys: SHA256 with per-key tracking
-- Protection: Account lockout (5 failures → 15-min)
-
-**Database:**
-
-- 15 tables with strategic indexing
-- 64 optimized indices
-- Zero-cost SQLite for development
-- PostgreSQL support for production
-
-**Testing:**
-
-- Unit tests for services & endpoints
-- Integration tests for workflows
-- Performance tests for load validation
-- TDD approach used throughout
+| Category         | Document                                                 | Purpose               |
+| ---------------- | -------------------------------------------------------- | --------------------- |
+| **Start Here**   | [README](../README.md)                                   | Project overview      |
+| **Architecture** | [Mula App](docs/MULA_APP_ARCHITECTURE.md)                | Complete product spec |
+| **API**          | [API Docs](API_DOCUMENTATION.md)                         | Endpoint reference    |
+| **Design**       | [Design System](docs/Design_Art_Component_Blueprints.md) | UI components & theme |
+| **Database**     | [Schema](DATABASE_SCHEMA_DETAILED.md)                    | Database structure    |
+| **Deploy**       | [Production](DEPLOYMENT_GUIDE_PRODUCTION.md)             | Hosting guide         |
+| **Test**         | [Testing](CHART_TESTING_GUIDE.md)                        | Test strategy         |
+| **Contribute**   | [Contributing](CONTRIBUTING.md)                          | How to help           |
 
 ---
 
-## 🚀 Next Steps
+## 🔍 Finding Documentation
 
-### Immediate (Today)
+**Can't find what you need?**
 
-1. Read QUICK_START_NEXT_AGENT.md
-2. Read EXECUTIVE_HANDOFF_SUMMARY.md
-3. Run tests: `pytest -v`
-4. Start API: `python -m uvicorn backend.main:app --reload`
+1. **Search by keyword**: Use your IDE's search (Ctrl/Cmd + Shift + F)
+2. **Check README**: Many links in main README
+3. **Browse `/docs/`**: All detailed documentation lives here
+4. **Check archive**: Old docs in `/docs/archive/roots-revealed/`
 
-### This Week
+**Common searches:**
 
-1. Fix calculation tests (Day 2-3)
-2. Write integration tests (Day 4-5)
-3. Performance & Docker (Day 6)
-4. CI/CD setup (Day 7)
-5. Documentation review (Day 8)
-
-### Next Week
-
-1. Final validation
-2. Production deployment preparation
-3. Hand off to operations team
+- "KP" → KP System Architecture
+- "fortune" → Vodou Oracle Guide
+- "deploy" → Production Deployment Guide
+- "test" → Testing guides
+- "API" → API Documentation
 
 ---
 
-## ✅ Handoff Status
+## 📮 Need Help?
 
-**Status:** ✅ COMPLETE  
-**Date:** November 2, 2025  
-**Tests:** 27/39 passing (69% baseline, 100% achievable in 16 hours)  
-**Documentation:** 8 comprehensive files (2,800+ lines)  
-**Code Quality:** Production-ready with type hints, error handling, logging  
-**Next Phase:** Phase 3 Week 3 Development (16 hours)  
-**Final Phase:** Phase 4 Production Deployment
+- **GitHub Issues**: Bug reports & feature requests
+- **Discord**: https://discord.gg/mula-community (coming soon)
+- **Email**: support@mula-app.com
 
 ---
 
-**Everything you need is here. Start with QUICK_START_NEXT_AGENT.md. Good luck! 🚀**
+**Built with 💜 by the Mula Team**
+
+_"Return to your roots. Reach for the stars."_

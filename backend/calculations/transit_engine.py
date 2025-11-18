@@ -19,19 +19,16 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
-import sys
-import os
 
 # Import required modules
-sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
-from dasha_engine import DashaCalculator, DashaPosition
-from kp_engine import (
+from backend.calculations.dasha_engine import DashaCalculator, DashaPosition
+from backend.calculations.kp_engine import (
     get_sub_lord,
     get_significators_for_house,
     get_ruling_planets,
     VIMSHOTTARI_PROPORTIONS
 )
-from ephemeris import EphemerisCalculator, PlanetPosition
+from backend.calculations.ephemeris import EphemerisCalculator, PlanetPosition
 
 
 @dataclass
@@ -111,7 +108,7 @@ class TransitAnalyzer:
         Find all transit activation events within a date range.
         
         Args:
-            birth_chart: Dict with 'natal_planets', 'moon_longitude', 'dasha_balance_years'
+            birth_chart: Dict with 'planet_positions' (list), 'moon_longitude', 'dasha_balance_years'
             start_date: Beginning of analysis period
             end_date: End of analysis period
             target_houses: Specific houses to focus on (None = all)
@@ -122,11 +119,29 @@ class TransitAnalyzer:
         """
         events = []
         
-        # Get natal significators for each house
-        natal_planets = birth_chart.get('natal_planets', {})
+        # Convert planet_positions list to dict format for get_significators_for_house
+        planet_positions = birth_chart.get('planet_positions', [])
+        natal_planets = {}
+        for p in planet_positions:
+            natal_planets[p['planet']] = {
+                'longitude': p['longitude'],
+                'house': p['house'],
+                'latitude': p.get('latitude', 0)
+            }
+        
+        # Extract house cusp longitudes from house_cusps list
+        house_cusps_list = birth_chart.get('house_cusps', [])
+        house_cusp_longitudes = []
+        if isinstance(house_cusps_list, list) and len(house_cusps_list) > 0:
+            # If it's a list of dicts, extract 'cusp' or 'longitude'
+            if isinstance(house_cusps_list[0], dict):
+                house_cusp_longitudes = [h.get('cusp', h.get('longitude', 0)) for h in house_cusps_list]
+            else:
+                # It's a list of floats
+                house_cusp_longitudes = house_cusps_list
+        
         moon_longitude = birth_chart.get('moon_longitude', 0)
         dasha_balance = birth_chart.get('dasha_balance_years', 0)
-        house_cusps = birth_chart.get('house_cusps', [0] * 12)  # 12 house cusps
         
         # Get KP significators for all houses
         significators = {}
@@ -134,15 +149,26 @@ class TransitAnalyzer:
             sigs = get_significators_for_house(
                 house,
                 natal_planets,
-                house_cusps
+                house_cusp_longitudes
             )
             # Extract planet names from Significator objects
             sig_planets = [sig.planet for sig in sigs] if sigs else []
             significators[house] = sig_planets
         
+        # Ensure start_date is timezone-aware (UTC)
+        if start_date.tzinfo is None:
+            import pytz
+            start_date = pytz.UTC.localize(start_date)
+        
+        # Get birth date from chart (or use start_date as fallback)
+        birth_date = birth_chart.get('birth_date', start_date)
+        if birth_date.tzinfo is None:
+            import pytz
+            birth_date = pytz.UTC.localize(birth_date)
+        
         # Current dasha info
         current_dasha = self.dasha.calculate_dasha_position(
-            datetime.now(),
+            birth_date,
             moon_longitude,
             dasha_balance,
             start_date
@@ -296,14 +322,16 @@ class TransitAnalyzer:
                 else:
                     # End current window, start new one
                     if current_window and favorable_count > 0:
+                        # Calculate duration_days inline
+                        duration_days = (current_window['end'] - current_window['start']).days + 1
                         window = ActivationWindow(
                             start_date=current_window['start'],
                             end_date=current_window['end'],
-                            duration_days=(current_window['end'] - current_window['start']).days + 1,
+                            duration_days=duration_days,
                             event_type=event_type,
                             key_planets=list(current_window['planets']),
                             favorable_days=favorable_count,
-                            unfavorable_days=current_window['duration_days'] - favorable_count if 'duration_days' in current_window else 0,
+                            unfavorable_days=duration_days - favorable_count,
                             peak_date=current_window['peak_date'],
                             peak_confidence=current_window['peak_confidence']
                         )
@@ -315,7 +343,6 @@ class TransitAnalyzer:
                         'peak_confidence': event.combined_confidence,
                         'peak_date': event.event_date,
                         'planets': set([event.transiting_planet]),
-                        'duration_days': 0,
                     }
                     favorable_count = 1 if event.combined_confidence >= 0.7 else 0
         

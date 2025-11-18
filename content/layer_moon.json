@@ -1,0 +1,86 @@
+{
+  "Aries": {
+    "moon": {
+      "nakshatra": "Ashwini",
+      "qualities": ["courageous", "impulsive", "healing"],
+      "spiritual_meaning": "The healer and swift messenger, connected to ancestral vitality."
+    }
+  },
+  "Taurus": {
+    "moon": {
+      "nakshatra": "Bharani",
+      "qualities": ["steadfast", "sensual", "transformative"],
+      "spiritual_meaning": "Guardian of life and death, embodying transformation and rebirth."
+    }
+  },
+  "Gemini": {
+    "moon": {
+      "nakshatra": "Krittika",
+      "qualities": ["intellectual", "fiery", "disciplinary"],
+      "spiritual_meaning": "Fiery purifier, guardian of sacred knowledge and threshold."
+    }
+  },
+  "Cancer": {
+    "moon": {
+      "nakshatra": "Rohini",
+      "qualities": ["nurturing", "creative", "deeply emotional"],
+      "spiritual_meaning": "Fertile and flourishing, connected to growth and abundance."
+    }
+  },
+  "Leo": {
+    "moon": {
+      "nakshatra": "Mrigashira",
+      "qualities": ["searching", "curious", "gentle"],
+      "spiritual_meaning": "Seeker of truth and beauty, bringing messages of love."
+    }
+  },
+  "Virgo": {
+    "moon": {
+      "nakshatra": "Ardra",
+      "qualities": ["stormy", "transformative", "compassionate"],
+      "spiritual_meaning": "Cleansing storm, compassionate transformation through tears."
+    }
+  },
+  "Libra": {
+    "moon": {
+      "nakshatra": "Punarvasu",
+      "qualities": ["renewing", "hopeful", "harmonious"],
+      "spiritual_meaning": "Return of the light, hopeful balance and renewal."
+    }
+  },
+  "Scorpio": {
+    "moon": {
+      "nakshatra": "Pushya",
+      "qualities": ["nurturing", "strong", "protective"],
+      "spiritual_meaning": "Nourishing power, protector of sacred spaces and souls."
+    }
+  },
+  "Sagittarius": {
+    "moon": {
+      "nakshatra": "Ashlesha",
+      "qualities": ["mysterious", "serpent-like", "intuitive"],
+      "spiritual_meaning": "Hidden wisdom, healer of the unseen and deep mysteries."
+    }
+  },
+  "Capricorn": {
+    "moon": {
+      "nakshatra": "Magha",
+      "qualities": ["regal", "authoritative", "ancestral"],
+      "spiritual_meaning": "Lineage and ancestral power, seat of sacred kingship."
+    }
+  },
+  "Aquarius": {
+    "moon": {
+      "nakshatra": "Purva Phalguni",
+      "qualities": ["joyful", "creative", "independent"],
+      "spiritual_meaning": "Creative force of renewal, bringer of joy and independence."
+    }
+  },
+  "Pisces": {
+    "moon": {
+      "nakshatra": "Uttara Phalguni",
+      "qualities": ["supportive", "empathetic", "harmonious"],
+      "spiritual_meaning": "Supportive light, empathetic and harmonious connector."
+    }
+  }
+}

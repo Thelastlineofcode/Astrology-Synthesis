@@ -1,0 +1,24 @@
+{
+  "_note": "Aspect interpretations - 5 major aspects × multiple planet pairs",
+  "_structure": "Key format: {planet1_lowercase}_{aspect_type}_{planet2_lowercase}",
+  "sun_trine_moon": {
+    "title": "Sun Trine Moon",
+    "nature": "harmonious",
+    "description": "The harmonious trine between Sun and Moon indicates inner integration between conscious will and emotional needs. This creates a balanced, authentic personality.",
+    "manifestation": "Natural ease in expressing emotions, harmonious relationships, balanced masculine/feminine energies"
+  },
+  "venus_square_mars": {
+    "title": "Venus Square Mars",
+    "nature": "challenging",
+    "description": "The square between Venus and Mars creates dynamic tension between affection and assertion, receptivity and action. This can manifest as passionate intensity in relationships.",
+    "manifestation": "Passionate attractions, potential for conflict in relationships, learning to balance desire with harmony"
+  },
+  "_template": {
+    "title": "{Planet1} {Aspect} {Planet2}",
+    "nature": "harmonious|challenging|neutral",
+    "description": "",
+    "manifestation": ""
+  },
+  "_aspects": ["conjunction", "sextile", "square", "trine", "opposition"],
+  "_status": "NEEDS COMPLETION - Only 2 sample entries provided. Full aspect matrix to be sourced."
+}

@@ -3,98 +3,106 @@
 import Link from "next/link";
 import Image from "next/image";
 import Button from "@/components/shared/Button";
-import Card from "@/components/shared/Card";
 import "./landing.css";
 
 export default function Home() {
   return (
-    <div className="landing">
-      <header className="landing__header">
-        <div className="landing__header-content">
-          <Image
-            src="/images/logo/Icon_logo.png"
-            alt="Roots Revealed"
-            width={60}
-            height={60}
-            className="landing__logo"
-          />
-          <h1>Roots Revealed</h1>
+    <div className="modern-landing">
+      {/* Header/Logo */}
+      <header className="landing-header">
+        <div className="landing-header__container">
+          <Link href="/" className="landing-header__logo">
+            <Image
+              src="/images/logo/Icon_logo.png"
+              alt="Mula"
+              width={40}
+              height={40}
+              priority
+            />
+            <span className="landing-header__title">Mula</span>
+          </Link>
         </div>
-        <p className="landing__subtitle">
-          Discover the roots of your astrological birth chart
-        </p>
       </header>
 
-      <main className="landing__main">
-        <div className="landing__grid">
-          <Card className="landing__card landing__card--primary">
-            <h2>✨ Generate Your Chart</h2>
-            <p>
-              Create your natal chart instantly. Enter your birth details and
-              unlock cosmic insights about your personality and life path.
-            </p>
-            <Link href="/chart-demo">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero__content">
+          <div className="hero__badge">Professional Astrology Tool</div>
+          <h1 className="hero__title">
+            Chart Reading
+            <span className="hero__title-accent">Simplified</span>
+          </h1>
+          <p className="hero__description">
+            A modern companion app for professional astrologers. Calculate
+            accurate natal charts and track client insights.
+          </p>
+          <div className="hero__actions">
+            <Link href="/readings/new">
               <Button variant="primary" size="large">
-                Calculate Chart
+                New Chart Reading
               </Button>
             </Link>
-          </Card>
-
-          <Card className="landing__card landing__card--secondary">
-            <h2>🌙 Planetary Positions</h2>
-            <div className="landing__planets">
-              {["Sun", "Moon", "Venus", "Neptune", "Uranus"].map((planet) => (
-                <div key={planet} className="landing__planet">
-                  <Image
-                    src={`/images/planets/${planet === "Moon" ? "MooN" : planet}_render.png`}
-                    alt={planet}
-                    width={50}
-                    height={50}
-                  />
-                </div>
-              ))}
-            </div>
-            <p className="landing__note">View planetary aspects and transits</p>
-          </Card>
-
-          <Card className="landing__card landing__card--tertiary">
-            <h2>📊 Your Dashboard</h2>
-            <p>
-              Access your saved charts, birth data profiles, and personalized
-              astrological insights all in one place.
-            </p>
             <Link href="/dashboard">
               <Button variant="secondary" size="large">
                 View Dashboard
               </Button>
             </Link>
-          </Card>
+          </div>
+        </div>
+      </section>
 
-          <Card className="landing__card landing__card--features">
-            <h2>🔮 Cosmic Features</h2>
-            <ul className="landing__features">
-              <li>☉ Natal Chart Calculation</li>
-              <li>☽ House Positions</li>
-              <li>⚹ Planetary Aspects</li>
-              <li>✧ Transits & Progressions</li>
-              <li>�� Symbolon Cards</li>
-            </ul>
-          </Card>
+      {/* Features Grid */}
+      <section className="features">
+        <div className="feature-card">
+          <div className="feature-card__icon">📊</div>
+          <h3 className="feature-card__title">Precise Calculations</h3>
+          <p className="feature-card__description">
+            Swiss Ephemeris powered chart calculations with house systems and
+            aspects
+          </p>
         </div>
 
-        <Card className="landing__cta">
-          <h2>Begin Your Cosmic Journey</h2>
-          <p>
-            Unlock the ancient wisdom of astrology with precision calculations
-            and beautiful visualizations
+        <div className="feature-card">
+          <div className="feature-card__icon">📝</div>
+          <h3 className="feature-card__title">Client Notes</h3>
+          <p className="feature-card__description">
+            Track predictions, observations, and method development for each
+            reading
           </p>
-          <Link href="/chart-demo">
+        </div>
+
+        <div className="feature-card">
+          <div className="feature-card__icon">🎯</div>
+          <h3 className="feature-card__title">Prediction Tracking</h3>
+          <p className="feature-card__description">
+            Log transits, dashas, progressions with timestamps for accuracy
+            verification
+          </p>
+        </div>
+
+        <div className="feature-card">
+          <div className="feature-card__icon">💾</div>
+          <h3 className="feature-card__title">Session Management</h3>
+          <p className="feature-card__description">
+            Save and retrieve client sessions with all notes and chart data
+          </p>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta">
+        <div className="cta__content">
+          <h2 className="cta__title">Ready to work?</h2>
+          <p className="cta__description">
+            Generate your first chart reading and start tracking insights
+          </p>
+          <Link href="/readings/new">
             <Button variant="primary" size="large">
-              Calculate Your Chart Now
+              Get Started
             </Button>
           </Link>
-        </Card>
-      </main>
+        </div>
+      </section>
     </div>
   );
 }

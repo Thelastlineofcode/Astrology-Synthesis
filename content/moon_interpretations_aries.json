@@ -1,0 +1,147 @@
+{
+  "sign": "Aries",
+  "element": "Fire",
+  "modality": "Cardinal", 
+  "ruling_planet": "Mars",
+  "core_archetype": "The Pioneer - Initiative, courage, breaking new ground, overcoming obstacles",
+  
+  "psychological_themes": [
+    "Strong need for independence and self-direction",
+    "Quick to act, impulsive emotional responses",
+    "Natural leadership and pioneering spirit",
+    "Courage in facing challenges and adversity",
+    "Direct, honest emotional expression"
+  ],
+  
+  "nakshatras": {
+    "Ashwini": {
+      "range": "0°00' - 13°20' Aries",
+      "ruling_planet": "Ketu",
+      "symbol": "Horse's head",
+      "core_meaning": "Speed, healing, initiation",
+      "psychological_archetype": "The Healer/First Responder - Natural ability to quickly assess situations and take healing action. Embodies swift movement, emergency response, and pioneering medical or therapeutic approaches.",
+      
+      "padas": {
+        "1": {
+          "range": "0°00' - 3°20' Aries",
+          "navamsa": "Aries (Mars)",
+          "qualities": ["initiating", "vital", "direct", "self-motivated"],
+          "interpretation": "Pure initiative and raw vital force. These individuals are natural pioneers who act first and think later. They possess exceptional courage to start new ventures and breakthrough abilities in crisis situations. Strong healing instinct combined with warrior energy - excellent for emergency medicine, crisis intervention, or entrepreneurial ventures requiring bold first moves.",
+          "career_aptitudes": ["Emergency medicine", "Entrepreneurship", "Crisis management", "Athletic training", "Surgical fields"],
+          "relationship_style": "Direct and honest, prefers partners who can match their energy and independence",
+          "growth_challenge": "Learning patience and considering consequences before acting",
+          "remedies": "Support teachers, mentors, or healing professionals; donate to educational or medical causes"
+        },
+        
+        "2": {
+          "range": "3°20' - 6°40' Aries",
+          "navamsa": "Taurus (Venus)",
+          "qualities": ["exploratory", "courageous", "protective", "talented"],
+          "interpretation": "Initiative combined with resourcefulness. These natives blend pioneering spirit with practical skills and aesthetic sensibility. They explore new territories while building sustainable systems. Natural protectors who combine courage with wisdom. Talented in multiple areas with scriptural or traditional knowledge.",
+          "career_aptitudes": ["Architecture", "Land development", "Protective services", "Teaching", "Arts combined with healing"],
+          "relationship_style": "Protective and loyal, values stability within adventurous partnerships",
+          "growth_challenge": "Balancing exploration with grounding and commitment",
+          "remedies": "No specific remedies needed; continue developing multiple talents"
+        },
+        
+        "3": {
+          "range": "6°40' - 10°00' Aries",
+          "navamsa": "Gemini (Mercury)",
+          "qualities": ["healer", "transformer", "teacher", "analytical"],
+          "interpretation": "Healing through knowledge and communication. These individuals transform difficult situations through quick thinking and adaptability. Natural teachers and communicators who can explain complex healing or technical concepts. Mathematical and analytical abilities combined with physical skill.",
+          "career_aptitudes": ["Teaching", "Technical writing", "Health education", "Mathematics", "Physical therapy"],
+          "relationship_style": "Intellectually engaging, needs mental stimulation and variety",
+          "growth_challenge": "Focusing energy rather than scattering across too many interests",
+          "remedies": "No specific remedies needed; channel gifts into teaching and healing"
+        },
+        
+        "4": {
+          "range": "10°00' - 13°20' Aries",
+          "navamsa": "Cancer (Moon)",
+          "qualities": ["altruistic", "unifying", "wise", "nurturing"],
+          "interpretation": "Community healer and unifier. These natives combine swift action with emotional intelligence and collective consciousness. Natural counselors and community organizers who respond quickly to group needs. Knowledge of psychological patterns and family systems. Wealthy in wisdom and social connections.",
+          "career_aptitudes": ["Counseling", "Social work", "Community organizing", "Astrology", "Family therapy"],
+          "relationship_style": "Nurturing and emotionally attuned, creates family feeling in relationships",
+          "growth_challenge": "Maintaining boundaries while serving collective needs",
+          "remedies": "No specific remedies needed; share knowledge for community benefit"
+        }
+      }
+    },
+    
+    "Bharani": {
+      "range": "13°20' - 26°40' Aries",
+      "ruling_planet": "Venus",
+      "symbol": "Yoni (creative/transformative vessel)",
+      "core_meaning": "Transformation, passion, life-death cycles",
+      "psychological_archetype": "The Transformer - Deep understanding of life's cycles, endings, and new beginnings. Capacity to hold and transform intense emotions and experiences. Natural understanding of psychology, sexuality, and the shadow side of human nature.",
+      
+      "padas": {
+        "1": {
+          "range": "13°20' - 16°40' Aries",
+          "navamsa": "Leo (Sun)",
+          "qualities": ["passionate", "intense", "strong-tempered", "valorous"],
+          "interpretation": "Passionate transformer with leadership qualities. These individuals possess fierce courage to confront difficult truths and catalyze change. Strong-tempered but broad-minded, they can handle intense emotional and psychological material. Natural ability to defeat opposition through sheer force of will and integrity.",
+          "career_aptitudes": ["Psychology", "Transformational leadership", "Depth therapy", "Competitive fields", "Surgery or forensics"],
+          "relationship_style": "Intense and all-or-nothing, passionate partnerships with strong boundaries",
+          "growth_challenge": "Managing intensity and anger; channeling passion constructively",
+          "remedies": "No specific remedies needed; use passion for transformation work"
+        },
+        
+        "2": {
+          "range": "16°40' - 20°00' Aries",
+          "navamsa": "Virgo (Mercury)",
+          "qualities": ["protective", "clever", "analytical", "service-oriented"],
+          "interpretation": "Analytical transformer who serves through protection. These natives combine emotional intensity with intellectual discernment. Natural counselors and healthcare providers who understand both body and psyche. Religious or philosophical mind applied to practical service. May appear lazy but possess sharp intelligence.",
+          "career_aptitudes": ["Nursing", "Counseling", "Research", "Religious/spiritual service", "Analytical psychology"],
+          "relationship_style": "Protective and selective, analyzing compatibility deeply before committing",
+          "growth_challenge": "Overcoming laziness; activating rather than just analyzing",
+          "remedies": "No specific remedies needed; apply cleverness to serving others"
+        },
+        
+        "3": {
+          "range": "20°00' - 23°20' Aries",
+          "navamsa": "Libra (Venus)",
+          "qualities": ["creative", "artistic", "balanced", "wise"],
+          "interpretation": "Transformation through art and beauty. These individuals alchemize pain into creative expression. Natural artists, musicians, or designers who understand that suffering can birth beauty. Balanced temperament with wisdom earned through experience. Pride tempered by aesthetic sensitivity.",
+          "career_aptitudes": ["Arts", "Design", "Music therapy", "Aesthetic counseling", "Creative healing modalities"],
+          "relationship_style": "Seeks harmony and beauty in partnerships, artistic collaboration",
+          "growth_challenge": "May affect parents; working through family patterns creatively",
+          "remedies": "Support teachers and spiritual communities; share meals with elders or those in study"
+        },
+        
+        "4": {
+          "range": "23°20' - 26°40' Aries",
+          "navamsa": "Scorpio (Mars)",
+          "qualities": ["resolute", "penetrating", "finalizing", "wise"],
+          "interpretation": "Deep transformer who completes karmic cycles. These natives understand endings, death, and rebirth at profound levels. Courageous in facing darkness and bringing closure. Natural researchers of hidden matters, psychology, or occult subjects. May be stubborn but possess hard-won wisdom.",
+          "career_aptitudes": ["Depth psychology", "End-of-life care", "Research", "Detective work", "Occult studies"],
+          "relationship_style": "Intense and transformative, seeks deep soul connections",
+          "growth_challenge": "Avoiding destructive patterns; choosing growth over stagnation",
+          "remedies": "No specific remedies needed; honor ancestors and complete unfinished business"
+        }
+      }
+    },
+    
+    "Krittika": {
+      "range": "26°40' Aries - 10°00' Taurus (Pada 1 only in Aries)",
+      "ruling_planet": "Sun",
+      "symbol": "Spear, razor, flame",
+      "core_meaning": "Purification, truth, cutting through illusion",
+      "psychological_archetype": "The Truth-Seeker - Sharp discernment and ability to cut through deception. Natural investigator who purifies situations by exposing truth. Combines warrior courage with spiritual clarity. Can be blunt but ultimately serves highest integrity.",
+      
+      "padas": {
+        "1": {
+          "range": "26°40' - 30°00' Aries",
+          "navamsa": "Sagittarius (Jupiter)",
+          "qualities": ["wise", "noble", "direct", "truth-seeking", "short-tempered"],
+          "interpretation": "Spiritual warrior who seeks and speaks truth. These individuals combine fiery courage with philosophical wisdom. Naturally noble-minded but can be blunt, critical, and short-tempered when encountering dishonesty. Knowledge-seekers with good manners but low tolerance for deception. Health challenges balanced by longevity when living authentically.",
+          "career_aptitudes": ["Teaching", "Journalism", "Law", "Spiritual leadership", "Truth advocacy"],
+          "relationship_style": "Values honesty above all; direct communication essential",
+          "growth_challenge": "Softening delivery of truth; patience with those still learning",
+          "remedies": "No specific remedies needed; continue truth-seeking and spiritual study",
+          "note": "Krittika Padas 2-4 fall in Taurus (0°00' - 10°00') and will be covered in Taurus Moon interpretations"
+        }
+      }
+    }
+  }
+}

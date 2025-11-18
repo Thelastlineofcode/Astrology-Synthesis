@@ -52,20 +52,27 @@ async def create_prediction(
         db_prediction = Prediction(
             user_id=current_user.user_id,
             chart_id=None,  # Will be populated if chart is saved
-            query_text=prediction_request.query,
-            query_date=datetime.utcnow(),
-            prediction_start_date=prediction_start,
-            prediction_end_date=prediction_end,
+            prediction_type="syncretic",
+            prediction_date_start=prediction_start,
+            prediction_date_end=prediction_end,
+            confidence_score=int(result.confidence_score * 100),  # Convert 0-1 to 0-100
+            strength_classification="Medium" if result.confidence_score > 0.6 else "Low",
             prediction_data={
-                "events": [e.dict() for e in result.events],
+                "events": [
+                    {
+                        **e.dict(),
+                        "event_date": e.event_date.isoformat() if e.event_date else None,
+                        "event_window_start": e.event_window_start.isoformat() if e.event_window_start else None,
+                        "event_window_end": e.event_window_end.isoformat() if e.event_window_end else None,
+                    }
+                    for e in result.events
+                ],
                 "query": prediction_request.query,
+                "kp_contribution": result.kp_contribution,
+                "dasha_contribution": result.dasha_contribution,
+                "transit_contribution": result.transit_contribution,
+                "calculation_time_ms": int(result.calculation_time_ms),
             },
-            confidence_score=result.confidence_score,
-            kp_contribution=result.kp_contribution,
-            dasha_contribution=result.dasha_contribution,
-            transit_contribution=result.transit_contribution,
-            model_version="1.0.0",
-            calculation_time_ms=int(result.calculation_time_ms),
         )
         
         db.add(db_prediction)

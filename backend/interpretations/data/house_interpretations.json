@@ -1,0 +1,35 @@
+{
+  "_note": "Planet-in-House interpretations - 10 planets × 12 houses = 120 entries",
+  "_structure": "Key format: {planet_lowercase}_house_{house_number}",
+  "sun_house_1": {
+    "title": "Sun in 1st House",
+    "keywords": ["identity", "self-expression", "vitality", "presence"],
+    "description": "The Sun in the 1st house places emphasis on personal identity and self-expression. This individual radiates their solar energy through their personality and physical presence.",
+    "life_areas": [
+      "Personal identity and self-image",
+      "Physical appearance and vitality",
+      "How others perceive you",
+      "Leadership through presence"
+    ]
+  },
+  "_template": {
+    "title": "{Planet} in {House_Number}th House",
+    "keywords": [],
+    "description": "",
+    "life_areas": []
+  },
+  "_planets": [
+    "sun",
+    "moon",
+    "mercury",
+    "venus",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
+    "neptune",
+    "pluto"
+  ],
+  "_houses": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  "_status": "NEEDS COMPLETION - Only 1 of 120 entries populated. Remaining entries to be sourced."
+}

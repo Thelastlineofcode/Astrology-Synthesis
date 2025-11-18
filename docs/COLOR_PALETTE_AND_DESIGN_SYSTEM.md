@@ -2,7 +2,7 @@
 
 ## Overview
 
-The "Healing Cosmos" design system provides a comprehensive, accessible, and cohesive visual language for the Roots Revealed astrology application. This document serves as the single source of truth for all design tokens, color usage, typography, spacing, and component styling guidelines.
+The "Healing Cosmos" design system provides a comprehensive, accessible, and cohesive visual language for the Mula: The Root astrology application. This document serves as the single source of truth for all design tokens, color usage, typography, spacing, and component styling guidelines.
 
 ## Table of Contents
 

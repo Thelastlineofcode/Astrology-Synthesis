@@ -1,0 +1,74 @@
+{
+  "Aries": {
+    "cuspSublord": "Mars",
+    "modalities": ["cardinal", "fire"],
+    "hermetic_correspondence": "Iron, red",
+    "ancestral_aspect": "Warrior spirit, initiative force"
+  },
+  "Taurus": {
+    "cuspSublord": "Venus",
+    "modalities": ["fixed", "earth"],
+    "hermetic_correspondence": "Copper, green",
+    "ancestral_aspect": "Earth nurturer, grounded abundance"
+  },
+  "Gemini": {
+    "cuspSublord": "Mercury",
+    "modalities": ["mutable", "air"],
+    "hermetic_correspondence": "Mercury, yellow",
+    "ancestral_aspect": "Messenger, communicator, keen intellect"
+  },
+  "Cancer": {
+    "cuspSublord": "Moon",
+    "modalities": ["cardinal", "water"],
+    "hermetic_correspondence": "Silver, white",
+    "ancestral_aspect": "Motherly protector, emotional depth"
+  },
+  "Leo": {
+    "cuspSublord": "Sun",
+    "modalities": ["fixed", "fire"],
+    "hermetic_correspondence": "Gold, orange",
+    "ancestral_aspect": "Kingly authority, radiant charisma"
+  },
+  "Virgo": {
+    "cuspSublord": "Mercury",
+    "modalities": ["mutable", "earth"],
+    "hermetic_correspondence": "Mercury, green",
+    "ancestral_aspect": "Healer, analyst, pragmatic servant"
+  },
+  "Libra": {
+    "cuspSublord": "Venus",
+    "modalities": ["cardinal", "air"],
+    "hermetic_correspondence": "Copper, blue",
+    "ancestral_aspect": "Balance seeker, gracious diplomat"
+  },
+  "Scorpio": {
+    "cuspSublord": "Mars",
+    "modalities": ["fixed", "water"],
+    "hermetic_correspondence": "Iron, black",
+    "ancestral_aspect": "Warrior of spirit, alchemical rebirth"
+  },
+  "Sagittarius": {
+    "cuspSublord": "Jupiter",
+    "modalities": ["mutable", "fire"],
+    "hermetic_correspondence": "Tin, purple",
+    "ancestral_aspect": "Explorer, teacher, seeker of truth"
+  },
+  "Capricorn": {
+    "cuspSublord": "Saturn",
+    "modalities": ["cardinal", "earth"],
+    "hermetic_correspondence": "Lead, dark blue",
+    "ancestral_aspect": "Builder, tradition keeper"
+  },
+  "Aquarius": {
+    "cuspSublord": "Saturn",
+    "modalities": ["fixed", "air"],
+    "hermetic_correspondence": "Lead, indigo",
+    "ancestral_aspect": "Innovator, visionary thinker"
+  },
+  "Pisces": {
+    "cuspSublord": "Jupiter",
+    "modalities": ["mutable", "water"],
+    "hermetic_correspondence": "Tin, sea green",
+    "ancestral_aspect": "Dreamer, healer, cosmic wanderer"
+  }
+}

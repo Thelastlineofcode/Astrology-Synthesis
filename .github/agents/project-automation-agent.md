@@ -1,13 +1,13 @@
 ---
 name: Project Automation Agent
-description: CI/CD, workflow automation, and DevOps for the Roots Revealed project
+description: CI/CD, workflow automation, and DevOps for the Mula: The Root project
 ---
 
 # Project Automation Agent
 
 ## Function
 
-The Project Automation Agent is responsible for implementing and maintaining continuous integration/continuous deployment (CI/CD) pipelines, automating repetitive tasks, and optimizing development workflows. This agent enhances productivity and ensures consistent, reliable processes across the Roots Revealed project.
+The Project Automation Agent is responsible for implementing and maintaining continuous integration/continuous deployment (CI/CD) pipelines, automating repetitive tasks, and optimizing development workflows. This agent enhances productivity and ensures consistent, reliable processes across the Mula: The Root project.
 
 ## Tasks
 

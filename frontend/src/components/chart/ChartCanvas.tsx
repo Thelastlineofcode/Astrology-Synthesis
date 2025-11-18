@@ -1,6 +1,6 @@
-import React from 'react';
-import { ChartData } from '@/types/chart';
-import './ChartCanvas.css';
+import React from "react";
+import { ChartData } from "@/types/chart";
+import "./ChartCanvas.css";
 
 export interface ChartCanvasProps {
   chartData: ChartData;
@@ -9,55 +9,80 @@ export interface ChartCanvasProps {
 }
 
 const PLANET_SYMBOLS: { [key: string]: string } = {
-  'Sun': '☉',
-  'Moon': '☽',
-  'Mercury': '☿',
-  'Venus': '♀',
-  'Mars': '♂',
-  'Jupiter': '♃',
-  'Saturn': '♄',
-  'Uranus': '♅',
-  'Neptune': '♆',
-  'Pluto': '♇',
-  'North Node': '☊',
-  'South Node': '☋',
-  'Chiron': '⚷'
+  Sun: "☉",
+  Moon: "☽",
+  Mercury: "☿",
+  Venus: "♀",
+  Mars: "♂",
+  Jupiter: "♃",
+  Saturn: "♄",
+  Uranus: "♅",
+  Neptune: "♆",
+  Pluto: "♇",
+  "North Node": "☊",
+  "South Node": "☋",
+  Chiron: "⚷",
 };
 
 const SIGN_SYMBOLS: { [key: string]: string } = {
-  'Aries': '♈',
-  'Taurus': '♉',
-  'Gemini': '♊',
-  'Cancer': '♋',
-  'Leo': '♌',
-  'Virgo': '♍',
-  'Libra': '♎',
-  'Scorpio': '♏',
-  'Sagittarius': '♐',
-  'Capricorn': '♑',
-  'Aquarius': '♒',
-  'Pisces': '♓'
+  Aries: "♈",
+  Taurus: "♉",
+  Gemini: "♊",
+  Cancer: "♋",
+  Leo: "♌",
+  Virgo: "♍",
+  Libra: "♎",
+  Scorpio: "♏",
+  Sagittarius: "♐",
+  Capricorn: "♑",
+  Aquarius: "♒",
+  Pisces: "♓",
 };
 
 const SIGNS_ORDER = [
-  'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-  'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+  "Aries",
+  "Taurus",
+  "Gemini",
+  "Cancer",
+  "Leo",
+  "Virgo",
+  "Libra",
+  "Scorpio",
+  "Sagittarius",
+  "Capricorn",
+  "Aquarius",
+  "Pisces",
 ];
 
-export default function ChartCanvas({ chartData, width = 500, height = 500 }: ChartCanvasProps) {
+export default function ChartCanvas({
+  chartData,
+  width = 500,
+  height = 500,
+}: ChartCanvasProps) {
   const centerX = width / 2;
   const centerY = height / 2;
   const outerRadius = Math.min(width, height) * 0.45;
-  const middleRadius = outerRadius * 0.75;
-  const innerRadius = outerRadius * 0.5;
+  const signRadius = outerRadius * 0.9; // Outer ring for zodiac signs
+  const degreeOuterRadius = outerRadius * 0.75; // Outer edge of degree ring
+  const degreeInnerRadius = outerRadius * 0.65; // Inner edge of degree ring
+  const middleRadius = outerRadius * 0.6; // Planet ring
+  const innerRadius = outerRadius * 0.45; // Inner circle
+
+  // Round to 6 decimal places to prevent hydration mismatches
+  const round = (num: number): number => {
+    return Math.round(num * 1000000) / 1000000;
+  };
 
   // Calculate position on circle
-  const getPosition = (degree: number, radius: number): { x: number; y: number } => {
+  const getPosition = (
+    degree: number,
+    radius: number
+  ): { x: number; y: number } => {
     // Convert to radians and adjust so 0° is at 9 o'clock (left) and increases counterclockwise
     const angle = (180 - degree) * (Math.PI / 180);
     return {
-      x: centerX + radius * Math.cos(angle),
-      y: centerY - radius * Math.sin(angle)
+      x: round(centerX + radius * Math.cos(angle)),
+      y: round(centerY - radius * Math.sin(angle)),
     };
   };
 
@@ -78,42 +103,42 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
     SIGNS_ORDER.forEach((sign, index) => {
       const startAngle = index * signSize - ascendantDegree;
       const endAngle = startAngle + signSize;
-      
+
       // Convert angles to radians (0° is at 9 o'clock, counterclockwise)
       const startRad = (180 - startAngle) * (Math.PI / 180);
       const endRad = (180 - endAngle) * (Math.PI / 180);
       const midRad = (180 - (startAngle + signSize / 2)) * (Math.PI / 180);
 
-      // Calculate path for segment
+      // Calculate path for segment (signs in outer ring)
       const startOuter = {
-        x: centerX + outerRadius * Math.cos(startRad),
-        y: centerY - outerRadius * Math.sin(startRad)
+        x: round(centerX + outerRadius * Math.cos(startRad)),
+        y: round(centerY - outerRadius * Math.sin(startRad)),
       };
       const endOuter = {
-        x: centerX + outerRadius * Math.cos(endRad),
-        y: centerY - outerRadius * Math.sin(endRad)
+        x: round(centerX + outerRadius * Math.cos(endRad)),
+        y: round(centerY - outerRadius * Math.sin(endRad)),
       };
-      const startMiddle = {
-        x: centerX + middleRadius * Math.cos(startRad),
-        y: centerY - middleRadius * Math.sin(startRad)
+      const startSign = {
+        x: round(centerX + signRadius * Math.cos(startRad)),
+        y: round(centerY - signRadius * Math.sin(startRad)),
       };
-      const endMiddle = {
-        x: centerX + middleRadius * Math.cos(endRad),
-        y: centerY - middleRadius * Math.sin(endRad)
+      const endSign = {
+        x: round(centerX + signRadius * Math.cos(endRad)),
+        y: round(centerY - signRadius * Math.sin(endRad)),
       };
 
       // Position for sign symbol
-      const symbolRadius = (outerRadius + middleRadius) / 2;
+      const symbolRadius = (outerRadius + signRadius) / 2;
       const symbolPos = {
-        x: centerX + symbolRadius * Math.cos(midRad),
-        y: centerY - symbolRadius * Math.sin(midRad)
+        x: round(centerX + symbolRadius * Math.cos(midRad)),
+        y: round(centerY - symbolRadius * Math.sin(midRad)),
       };
 
       const pathData = `
         M ${startOuter.x} ${startOuter.y}
         A ${outerRadius} ${outerRadius} 0 0 0 ${endOuter.x} ${endOuter.y}
-        L ${endMiddle.x} ${endMiddle.y}
-        A ${middleRadius} ${middleRadius} 0 0 1 ${startMiddle.x} ${startMiddle.y}
+        L ${endSign.x} ${endSign.y}
+        A ${signRadius} ${signRadius} 0 0 1 ${startSign.x} ${startSign.y}
         Z
       `;
 
@@ -124,7 +149,11 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
             className={`zodiac-segment zodiac-${sign.toLowerCase()}`}
             stroke="var(--color-primary)"
             strokeWidth="1"
-            fill={index % 2 === 0 ? 'rgba(100, 100, 200, 0.05)' : 'rgba(150, 150, 255, 0.05)'}
+            fill={
+              index % 2 === 0
+                ? "rgba(100, 100, 200, 0.05)"
+                : "rgba(150, 150, 255, 0.05)"
+            }
           />
           <text
             x={symbolPos.x}
@@ -144,18 +173,102 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
     return segments;
   };
 
+  // Draw degree ring with degree markers
+  const drawDegreeRing = () => {
+    const degreeMarkers: React.ReactElement[] = [];
+
+    // Draw major degree lines every 5 degrees
+    for (let deg = 0; deg < 360; deg += 5) {
+      const adjustedDeg = deg - ascendantDegree;
+      const normalizedDeg = adjustedDeg < 0 ? adjustedDeg + 360 : adjustedDeg;
+
+      const outerPos = getPosition(normalizedDeg, degreeOuterRadius);
+      const innerPos = getPosition(normalizedDeg, degreeInnerRadius);
+
+      // Major line every 10 degrees
+      const isMajor = deg % 10 === 0;
+
+      degreeMarkers.push(
+        <line
+          key={`deg-${deg}`}
+          x1={outerPos.x}
+          y1={outerPos.y}
+          x2={innerPos.x}
+          y2={innerPos.y}
+          stroke="var(--color-primary)"
+          strokeWidth={isMajor ? "1.5" : "0.5"}
+          opacity={isMajor ? "0.6" : "0.3"}
+        />
+      );
+
+      // Add degree text every 30 degrees (at sign boundaries)
+      if (deg % 30 === 0) {
+        const textRadius = (degreeOuterRadius + degreeInnerRadius) / 2;
+        const textPos = getPosition(normalizedDeg, textRadius);
+
+        degreeMarkers.push(
+          <text
+            key={`deg-text-${deg}`}
+            x={textPos.x}
+            y={textPos.y}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="10"
+            fill="var(--text-secondary)"
+            fontWeight="bold"
+          >
+            {deg}°
+          </text>
+        );
+      }
+    }
+
+    // Draw inner and outer circles for degree ring
+    degreeMarkers.push(
+      <circle
+        key="degree-ring-outer"
+        cx={centerX}
+        cy={centerY}
+        r={degreeOuterRadius}
+        fill="none"
+        stroke="var(--color-primary)"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+    );
+
+    degreeMarkers.push(
+      <circle
+        key="degree-ring-inner"
+        cx={centerX}
+        cy={centerY}
+        r={degreeInnerRadius}
+        fill="none"
+        stroke="var(--color-primary)"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+    );
+
+    return degreeMarkers;
+  };
+
   // Draw house divisions
   const drawHouses = () => {
     const houses: React.ReactElement[] = [];
-    
+
     for (let i = 1; i <= 12; i++) {
       const houseKey = `house_${i}`;
       const house = chartData.houses[houseKey];
-      
+
       if (house && house.longitude !== undefined) {
         const adjustedDegree = adjustDegree(house.longitude);
         const pos = getPosition(adjustedDegree, outerRadius);
         const innerPos = getPosition(adjustedDegree, innerRadius);
+        const degreeTextPos = getPosition(
+          adjustedDegree,
+          degreeInnerRadius - 10
+        );
 
         houses.push(
           <g key={`house-${i}`}>
@@ -179,6 +292,17 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
               fill="var(--text-primary)"
             >
               {i}
+            </text>
+            {/* Show house cusp degree */}
+            <text
+              x={degreeTextPos.x}
+              y={degreeTextPos.y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              fontSize="8"
+              fill="var(--text-secondary)"
+            >
+              {house.longitude.toFixed(1)}°
             </text>
           </g>
         );
@@ -205,7 +329,7 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
               cy={pos.y}
               r="16"
               fill="var(--bg-secondary)"
-              stroke={planet.retrograde ? '#ef4444' : 'var(--color-accent)'}
+              stroke={planet.retrograde ? "#ef4444" : "var(--color-accent)"}
               strokeWidth="2"
               className="planet-circle"
             />
@@ -231,6 +355,17 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
                 ℞
               </text>
             )}
+            {/* Show exact degree below planet */}
+            <text
+              x={pos.x}
+              y={pos.y + 24}
+              textAnchor="middle"
+              fontSize="9"
+              fill="var(--text-secondary)"
+              fontWeight="normal"
+            >
+              {planet.longitude.toFixed(1)}°
+            </text>
           </g>
         );
       }
@@ -244,7 +379,7 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
     if (!chartData.ascendant) return null;
 
     const pos = getPosition(0, outerRadius * 1.05);
-    
+
     return (
       <g className="ascendant-marker">
         <line
@@ -275,7 +410,7 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
         <span className="chart-canvas-icon">🌟</span>
         Birth Chart Wheel
       </h2>
-      
+
       <div className="chart-svg-wrapper">
         <svg
           width={width}
@@ -295,6 +430,9 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
 
           {/* Zodiac wheel */}
           {drawZodiacWheel()}
+
+          {/* Degree ring with markers */}
+          {drawDegreeRing()}
 
           {/* Inner circle */}
           <circle
@@ -319,11 +457,17 @@ export default function ChartCanvas({ chartData, width = 500, height = 500 }: Ch
 
       <div className="chart-canvas-legend">
         <div className="legend-item">
-          <span className="legend-color" style={{ background: '#10b981' }}></span>
+          <span
+            className="legend-color"
+            style={{ background: "#10b981" }}
+          ></span>
           <span>Direct Motion</span>
         </div>
         <div className="legend-item">
-          <span className="legend-color" style={{ background: '#ef4444' }}></span>
+          <span
+            className="legend-color"
+            style={{ background: "#ef4444" }}
+          ></span>
           <span>Retrograde ℞</span>
         </div>
       </div>

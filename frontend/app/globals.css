@@ -1,0 +1,24 @@
+a[href^="/"]:focus,
+button:focus,
+input:focus {
+  outline: 2px solid rgba(255,255,255,0.3);
+  outline-offset: 2px;
+}
+
+header a[href^="/"] {
+  position: relative;
+}
+header a[href^="/"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  height: 2px;
+  width: 0;
+  background: white;
+  transition: width 200ms ease;
+}
+header a[href^="/"].active::after,
+header a[href^="/"]:hover::after {
+  width: 100%;
+}

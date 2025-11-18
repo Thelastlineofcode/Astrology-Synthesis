@@ -4,7 +4,7 @@
 
 ### OLD VISION (Abandoned)
 
-- **Frontend-focused** "Roots Revealed" web application
+- **Frontend-focused** "Mula: The Root" web application
 - Multiple features: BMAD analysis, Symbolon cards, journaling, workflows
 - Consumer-facing app with "Healing Cosmos" design system
 - React/Next.js UI development as primary focus

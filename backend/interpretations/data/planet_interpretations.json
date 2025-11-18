@@ -1,0 +1,54 @@
+{
+  "_note": "Planet-in-Sign interpretations - 10 planets × 12 signs = 120 entries",
+  "_structure": "Key format: {planet_lowercase}_{sign_lowercase}",
+  "sun_aries": {
+    "title": "Sun in Aries",
+    "keywords": ["leadership", "initiative", "courage", "independence"],
+    "description": "The Sun in Aries radiates with pioneering spirit and dynamic energy. This placement indicates a natural leader who takes initiative and charges forward with confidence.",
+    "strengths": [
+      "Natural leadership abilities",
+      "Courageous and bold",
+      "High energy and enthusiasm",
+      "Independent and self-reliant"
+    ],
+    "challenges": [
+      "Can be impulsive",
+      "May struggle with patience",
+      "Tendency toward self-centeredness"
+    ]
+  },
+  "_template": {
+    "title": "{Planet} in {Sign}",
+    "keywords": [],
+    "description": "",
+    "strengths": [],
+    "challenges": []
+  },
+  "_planets": [
+    "sun",
+    "moon",
+    "mercury",
+    "venus",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
+    "neptune",
+    "pluto"
+  ],
+  "_signs": [
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces"
+  ],
+  "_status": "NEEDS COMPLETION - Only 1 of 120 entries populated. Remaining entries to be sourced from external astrological texts."
+}

@@ -18,7 +18,12 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
+from functools import lru_cache
+import logging
 import math
+from .exceptions import PlanetNotFoundError, EphemerisError, HouseCalculationError
+
+logger = logging.getLogger(__name__)
 
 
 class HouseSystem(Enum):
@@ -119,7 +124,7 @@ class EphemerisCalculator:
         'Neptune': swe.NEPTUNE,
         'Pluto': swe.PLUTO,
         'Rahu': swe.MEAN_NODE,     # Moon's mean ascending node
-        'Ketu': swe.MEAN_NODE + 1, # Opposite of Rahu
+        'Ketu': 'KETU_SPECIAL',    # Calculated as Rahu + 180°
     }
     
     def __init__(self, ayanamsa_system: Ayanamsa = Ayanamsa.LAHIRI):
@@ -137,10 +142,10 @@ class EphemerisCalculator:
     def _datetime_to_jd(self, dt: datetime) -> float:
         """
         Convert Python datetime to Julian Day Number.
-        
+
         Args:
             dt: Python datetime object
-        
+
         Returns:
             Julian Day Number (float)
         """
@@ -149,9 +154,51 @@ class EphemerisCalculator:
         month = dt.month
         day = dt.day
         hour = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
-        
+
         jd = swe.julday(year, month, day, hour, swe.GREG_CAL)
         return jd
+
+    @lru_cache(maxsize=256)
+    def _get_planet_data_cached(
+        self,
+        planet_id: int,
+        jd: float,
+        tropical: bool,
+        is_ketu: bool = False
+    ) -> Tuple[float, float, float, float]:
+        """
+        Cached helper for planet position calculation.
+
+        Args:
+            planet_id: Swiss Ephemeris planet ID
+            jd: Julian Day
+            tropical: Use tropical zodiac
+            is_ketu: Special flag for Ketu calculation
+
+        Returns:
+            Tuple of (longitude, latitude, distance, speed)
+        """
+        if is_ketu:
+            # Get Rahu and calculate Ketu as opposite
+            if tropical:
+                result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED)
+            else:
+                result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED | swe.FLG_SIDEREAL)
+            longitude = (result[0] + 180.0) % 360
+            latitude = -result[1]
+            distance = result[2]
+            speed = result[3]
+        else:
+            if tropical:
+                result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED)
+            else:
+                result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED | swe.FLG_SIDEREAL)
+            longitude = result[0] % 360
+            latitude = result[1]
+            distance = result[2]
+            speed = result[3]
+
+        return longitude, latitude, distance, speed
     
     
     def get_planet_position(
@@ -162,33 +209,35 @@ class EphemerisCalculator:
     ) -> PlanetPosition:
         """
         Get a planet's position at a specific date/time.
-        
+
         Args:
             planet_name: Planet name ('Sun', 'Moon', 'Mercury', etc.)
             date: Query date/time (UTC recommended)
             tropical: If True, use tropical zodiac; if False, use sidereal (Vedic)
-        
+
         Returns:
             PlanetPosition object with all positional data
+
+        Raises:
+            PlanetNotFoundError: If planet_name is not recognized
         """
         if planet_name not in self.PLANETS:
-            raise ValueError(f"Unknown planet: {planet_name}")
-        
+            raise PlanetNotFoundError(f"Unknown planet: {planet_name}")
+
         planet_id = self.PLANETS[planet_name]
         jd = self._datetime_to_jd(date)
-        
-        # Get position - returns (xx, retflags)
-        if tropical:
-            result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED)
+
+        # Use cached calculation
+        if planet_name == 'Ketu':
+            # Get Rahu ID and calculate Ketu as opposite
+            rahu_id = self.PLANETS['Rahu']
+            longitude, latitude, distance, speed = self._get_planet_data_cached(
+                rahu_id, jd, tropical, is_ketu=True
+            )
         else:
-            # Sidereal (Vedic)
-            result, flags = swe.calc_ut(jd, planet_id, swe.FLG_SPEED | swe.FLG_SIDEREAL)
-        
-        # result is 6-element tuple: [longitude, latitude, distance, lon_speed, lat_speed, dist_speed]
-        longitude = result[0] % 360
-        latitude = result[1]
-        distance = result[2]
-        speed = result[3]  # Longitude speed
+            longitude, latitude, distance, speed = self._get_planet_data_cached(
+                planet_id, jd, tropical, is_ketu=False
+            )
         
         # Determine sign
         sign_index = int(longitude / 30)
@@ -396,13 +445,14 @@ class EphemerisCalculator:
         # Calculate houses for current time
         try:
             houses = self.get_house_cusps(now, latitude, longitude)
-            
+
             # Assign houses to planets
             for planet in planets.values():
                 planet.house = self.get_planet_house(planet, houses)
-        except:
-            # If house calculation fails, continue without houses
-            pass
+        except Exception as e:
+            # If house calculation fails, continue without houses but log the error
+            logger.warning(f"Failed to calculate house positions: {str(e)}")
+            # Planets will have house=None, which is acceptable
         
         return planets
     

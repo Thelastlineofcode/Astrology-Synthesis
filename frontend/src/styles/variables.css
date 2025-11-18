@@ -1,46 +1,130 @@
-/* Roots Revealed - Mystical Astrology Design System
-   Based on the dashboard mockups - Dark chocolate theme
+/* Mula: The Root - Cosmic Midnight Design System
+   Mystic realism meets urban spirituality
+   Dark space aesthetics with glowing mystical elements
 */
 :root {
-  /* Primary Colors - From Mockups */
-  --color-bg-primary: #3d2e29; /* Dark chocolate brown background */
-  --color-bg-secondary: #4a3933; /* Slightly lighter brown */
-  --color-bg-tertiary: #2d211e; /* Darkest brown for depth */
+  /* ========================================
+     PRIMARY BACKGROUNDS - Cosmic Midnight
+     ======================================== */
+  --bg-cosmic-dark: #1A0F1E;      /* Deep space purple-black */
+  --bg-card-surface: #2D1F2B;     /* Card surfaces */
+  --bg-surface-elevated: #3D2844; /* Modals, elevated elements */
+  --bg-input: rgba(255, 255, 255, 0.05); /* Input fields */
 
-  /* Card Backgrounds */
-  --color-card-brown: #8b6f47; /* Warm brown card */
-  --color-card-blue: #4a5f8e; /* Blue accent card */
-  --color-card-dark: #3a2c27; /* Dark card variant */
+  /* Legacy aliases for compatibility */
+  --color-bg-primary: var(--bg-cosmic-dark);
+  --color-bg-secondary: var(--bg-card-surface);
+  --color-bg-tertiary: #1A0F1E;
+  --color-card-dark: var(--bg-card-surface);
 
-  /* Accent Colors */
-  --color-accent-orange: #e86f4d; /* Primary orange accent */
-  --color-accent-orange-hover: #ff8566; /* Lighter orange for hover */
-  --color-accent-blue: #5a7ab8; /* Secondary blue accent */
+  /* ========================================
+     ACCENT COLORS - Glowing Elements
+     ======================================== */
+  --accent-golden: #E8B598;       /* Golden highlights, premium */
+  --accent-orange: #E86F4D;       /* CTAs, active states */
+  --accent-purple: #8B6FA8;       /* Mystical elements, primary actions */
+  --accent-cyan: #5FA9B8;         /* Water/moon elements */
 
-  /* Text Colors */
-  --color-text-primary: #ffffff; /* White primary text */
-  --color-text-secondary: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
-  --color-text-muted: rgba(255, 255, 255, 0.5); /* Muted white */
-  --color-text-brown: #d4a574; /* Warm text on brown */
+  /* Hover states */
+  --accent-orange-hover: #FF8566;
+  --accent-purple-hover: #9D7FBA;
+  --accent-golden-hover: #F5C9AB;
 
-  /* Planet Colors (for sidebar) */
-  --color-planet-blue: #4a7fbf; /* Blue planets */
-  --color-planet-orange: #d4845f; /* Orange/Mars planets */
-  --color-planet-yellow: #e8c76f; /* Yellow/Saturn */
-  --color-planet-gray: #8a8a8a; /* Gray/Mercury */
+  /* Legacy card colors (using new palette) */
+  --color-card-brown: var(--bg-card-surface);
+  --color-card-blue: #4A5F8E;
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-orange-hover: var(--accent-orange-hover);
+  --color-accent-blue: var(--accent-cyan);
 
-  /* UI Elements */
-  --color-border: rgba(255, 255, 255, 0.1); /* Subtle borders */
-  --color-divider: rgba(255, 255, 255, 0.15); /* Dividers */
-  --color-overlay: rgba(0, 0, 0, 0.3); /* Modal overlays */
+  /* ========================================
+     PLANET COLORS - From KP System
+     ======================================== */
+  --planet-sun: #FFD700;          /* Gold */
+  --planet-moon: #C0C0D0;         /* Silver */
+  --planet-mars: #E8684D;         /* Red-orange */
+  --planet-mercury: #6FA8C0;      /* Cyan */
+  --planet-jupiter: #D4A574;      /* Warm gold */
+  --planet-venus: #FFC1CC;        /* Pink */
+  --planet-saturn: #4A5F8E;       /* Deep blue */
+  --planet-rahu: #8B6FA8;         /* Purple */
+  --planet-ketu: #A89B6F;         /* Olive */
 
-  /* Success/Warning/Error - Adapted for dark theme */
-  --color-success: #6fb881; /* Green success */
-  --color-warning: #e8b86d; /* Yellow warning */
-  --color-error: #e86f6f; /* Red error */
-  --color-info: #6fa8e8; /* Blue info */
+  /* Legacy planet colors */
+  --color-planet-blue: var(--planet-mercury);
+  --color-planet-orange: var(--planet-mars);
+  --color-planet-yellow: var(--planet-sun);
+  --color-planet-gray: #8A8A8A;
 
-  /* Spacing Scale (8pt Grid) */
+  /* ========================================
+     TEXT COLORS - White Hierarchy
+     ======================================== */
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-gold: var(--accent-golden);
+
+  /* Legacy text colors */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-brown: var(--text-gold);
+
+  /* ========================================
+     UI ELEMENTS
+     ======================================== */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.2);
+  --divider: rgba(255, 255, 255, 0.15);
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  /* Legacy UI colors */
+  --color-border: var(--border-subtle);
+  --color-divider: var(--divider);
+  --color-overlay: var(--overlay);
+
+  /* ========================================
+     SEMANTIC COLORS - Status States
+     ======================================== */
+  --color-success: #4CAF50;       /* Green - success */
+  --color-warning: #FFC107;       /* Yellow - warning */
+  --color-error: #E63946;         /* Red - error */
+  --color-info: var(--accent-cyan); /* Cyan - info */
+
+  /* ========================================
+     TYPOGRAPHY SYSTEM
+     ======================================== */
+  /* Font Families - Next.js Font Variables */
+  --font-primary: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: var(--font-cinzel), 'Trajan Pro', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Font Sizes - Mobile First */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --text-3xl: 40px;
+
+  /* Legacy font sizes */
+  --font-size-h1: var(--text-3xl);
+  --font-size-h2: var(--text-2xl);
+  --font-size-h3: var(--text-xl);
+  --font-size-h4: var(--text-lg);
+  --font-size-body: var(--text-base);
+  --font-size-small: var(--text-sm);
+  --font-size-tiny: var(--text-xs);
+
+  /* Mobile typography */
+  --font-size-h1-mobile: var(--text-2xl);
+  --font-size-h2-mobile: 28px;
+  --font-size-h3-mobile: 20px;
+
+  /* ========================================
+     SPACING SCALE - 8pt Grid System
+     ======================================== */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -50,52 +134,34 @@
   --space-7: 48px;
   --space-8: 64px;
 
-  /* Typography scale */
-  --font-size-h1: 40px;
-  --font-size-h2: 32px;
-  --font-size-h3: 24px;
-  --font-size-h4: 20px;
-  --font-size-body: 16px;
-  --font-size-small: 14px;
-  --font-size-tiny: 12px;
-
-  /* Mobile typography */
-  --font-size-h1-mobile: 32px;
-  --font-size-h2-mobile: 28px;
-  --font-size-h3-mobile: 20px;
-
-  /* Border radius */
+  /* ========================================
+     BORDER RADIUS - Rounded Corners
+     ======================================== */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* Theme variables (for compatibility) */
-  --bg-primary: var(--color-bg-primary);
-  --bg-secondary: var(--color-bg-secondary);
-  --surface-elev-1: var(--color-card-dark);
-  --surface-elev-2: var(--color-bg-secondary);
+  /* ========================================
+     SHADOWS - Elevation System
+     ======================================== */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.7);
 
-  --text-primary: var(--color-text-primary);
-  --text-secondary: var(--color-text-secondary);
-  --muted: var(--color-text-muted);
-  --border-color: var(--color-border);
+  /* Glow effects for mystical elements */
+  --shadow-glow-purple: 0 0 20px rgba(139, 111, 168, 0.3);
+  --shadow-glow-orange: 0 0 20px rgba(232, 111, 77, 0.3);
+  --shadow-glow-gold: 0 0 20px rgba(232, 181, 152, 0.3);
 
-  /* Focus & accessibility */
-  --focus-ring: 2px solid var(--color-accent-orange);
-  --focus-outline-offset: 2px;
-
-  /* Elevation shadows - Darker for mystical feel */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6);
-
-  /* Gradient overlays for mystical effect */
+  /* ========================================
+     GRADIENTS - Mystical Overlays
+     ======================================== */
   --gradient-mystical: radial-gradient(
     circle at 50% 50%,
-    rgba(139, 111, 71, 0.1) 0%,
+    rgba(139, 111, 168, 0.1) 0%,
     transparent 70%
   );
   --gradient-card: linear-gradient(
@@ -103,170 +169,59 @@
     rgba(255, 255, 255, 0.05) 0%,
     rgba(255, 255, 255, 0) 100%
   );
+  --gradient-cosmic: radial-gradient(
+    ellipse at top,
+    rgba(139, 111, 168, 0.2) 0%,
+    transparent 50%
+  );
+
+  /* ========================================
+     FOCUS & ACCESSIBILITY
+     ======================================== */
+  --focus-ring: 2px solid var(--accent-purple);
+  --focus-outline-offset: 2px;
+  --focus-glow: 0 0 0 3px rgba(139, 111, 168, 0.3);
+
+  /* ========================================
+     THEME COMPATIBILITY ALIASES
+     ======================================== */
+  --bg-primary: var(--bg-cosmic-dark);
+  --bg-secondary: var(--bg-card-surface);
+  --surface-elev-1: var(--bg-card-surface);
+  --surface-elev-2: var(--bg-surface-elevated);
+  --muted: var(--text-muted);
+  --border-color: var(--border-subtle);
 }
 
-/* A small utility to ensure reduced-motion is respected globally */
+/* ========================================
+   ACCESSIBILITY - Reduced Motion
+   ======================================== */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
 }
-/* Healing Cosmos - design tokens (colors, spacing, semantic tokens) */
-:root {
-  /* Colors - Healing Cosmos Palette */
-  --color-primary: #3e4b6e;
-  --color-primary-light: #5a6b8f;
-  --color-primary-dark: #2c3651;
 
-  --color-secondary: #a5b8a4;
-  --color-secondary-light: #c4d4c3;
-  --color-secondary-dark: #8a9c89;
-
-  --color-accent: #b296ca;
-  --color-accent-light: #d1bbe3;
-  --color-accent-dark: #9477a8;
-
-  --color-cta: #c17b5c;
-  --color-cta-light: #d89c7d;
-  --color-cta-dark: #a56249;
-
-  --color-neutral-50: #f5f3ee;
-  --color-neutral-100: #e8e4db;
-  --color-neutral-200: #d4cec1;
-  --color-neutral-700: #4a4e5c;
-  --color-neutral-800: #383c4a;
-  --color-neutral-900: #2d3142;
-
-  /* Semantic Colors */
-  --color-success: #81987f;
-  --color-warning: #e8b86d;
-  --color-error: #c17b5c;
-  --color-info: #7fa99b;
-
-  /* Spacing Scale (8pt grid) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-  --space-7: 64px;
-
-  /* Theme Variables (reassignable) */
-  --bg-primary: var(--color-neutral-50);
-  --bg-secondary: #ffffff;
-  --text-primary: var(--color-neutral-900);
-  --text-secondary: rgba(62, 75, 110, 0.7);
-  --border-color: rgba(165, 184, 164, 0.3);
-
-  /* Elevation (Shadows) */
-  --elevation-1: 0 1px 2px rgba(45, 49, 66, 0.04);
-  --elevation-2: 0 4px 12px rgba(45, 49, 66, 0.06);
-  --elevation-3: 0 8px 24px rgba(45, 49, 66, 0.08);
-
-  /* Typography - Font Families */
-  --font-primary:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", "Courier New", monospace;
-
-  /* Typography - Font Sizes (ascending order for clarity) */
-  --font-size-h1: 32px;
-  --font-size-h2: 28px;
-  --font-size-h3: 24px;
-  --font-size-h4: 20px;
-  --font-size-base: 16px;
-  --font-size-small: 14px;
-  --font-size-tiny: 12px;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* Typography - Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
-  --line-height-loose: 1.75;
-
-  /* Typography - Letter Spacing */
-  --letter-spacing-tight: -0.025em;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.025em;
-
-  /* Border Radius */
-  --radius-small: 4px;
-  --radius-medium: 8px;
-  --radius-large: 12px;
-  --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 350ms ease;
-
-  /* Additional theme variables */
-  --bg-hover: rgba(165, 184, 164, 0.1);
-  --focus-ring: 2px solid var(--color-accent);
-}
-
-/* Responsive Typography */
-@media (max-width: 767px) {
+/* ========================================
+   RESPONSIVE TYPOGRAPHY
+   ======================================== */
+@media (max-width: 768px) {
   :root {
-    --font-size-h1: 28px;
-    --font-size-h2: 24px;
-    --font-size-h3: 20px;
-    --font-size-h4: 18px;
+    --text-3xl: 32px;
+    --text-2xl: 28px;
+    --text-xl: 20px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --font-size-h1: 24px;
-    --font-size-h2: 22px;
-    --font-size-h3: 18px;
+    --text-3xl: 28px;
+    --text-2xl: 24px;
+    --text-xl: 18px;
   }
-}
-
-[data-theme="dark"] {
-  --bg-primary: var(--color-neutral-900);
-  --bg-secondary: #3a4257;
-  --text-primary: var(--color-neutral-50);
-  --text-secondary: var(--color-secondary);
-  --border-color: rgba(62, 75, 110, 0.4);
-}
-
-/* Auto theme detection when no explicit data-theme is set */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg-primary: var(--color-neutral-900);
-    --bg-secondary: #3a4257;
-    --text-primary: var(--color-neutral-50);
-    --text-secondary: var(--color-secondary);
-  }
-}
-
-/* Apply core tokens to document */
-html,
-body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-}
-
-/* Utility tokens for components */
-.bg-primary {
-  background-color: var(--bg-primary);
-}
-.bg-secondary {
-  background-color: var(--bg-secondary);
-}
-.text-primary {
-  color: var(--text-primary);
-}
-.text-secondary {
-  color: var(--text-secondary);
-}
-.border {
-  border-color: var(--border-color);
 }

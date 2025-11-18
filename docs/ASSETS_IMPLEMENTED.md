@@ -10,7 +10,7 @@ Designer-delivered assets have been organized and implemented into the frontend 
 
 **Location:** `/frontend/public/images/logo/`
 
-1. **logo.png** (1024x1024) - Main Roots Revealed logo with Tree of Life design
+1. **logo.png** (1024x1024) - Main Mula: The Root logo with Tree of Life design
 2. **Icon_logo.png** (1024x1024) - Icon version for square displays
 3. **Horizontal_Lockup.png** (1024x1024) - Horizontal layout variant
 4. **rootsrevealedlogonobg.png** (1024x1024) - Transparent background version
@@ -62,7 +62,7 @@ Delivered (5 of 10):
 
 **Location:** `/frontend/public/images/tarot/` (not yet delivered)
 
-Needed: 22 Major Arcana cards in Roots Revealed style
+Needed: 22 Major Arcana cards in Mula: The Root style
 
 - Template: Vertical card (600x1000px recommended)
 - Style: Tree of Life, Celtic knotwork, copper/bronze borders
@@ -125,7 +125,7 @@ Each with: Normal, Hover, Active, Disabled states
 ### Awaiting Designer
 
 1. Create 5 missing planet renders (Mercury, Mars, Jupiter, Saturn, Pluto)
-2. Design 22 tarot card templates in Roots Revealed style
+2. Design 22 tarot card templates in Mula: The Root style
 3. Create 6 navigation SVG icons
 4. Provide button state visual designs (or confirm using blueprint specs)
 

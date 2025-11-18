@@ -1,6 +1,6 @@
 ---
 name: Content Creation Agent
-description: Documentation, user guides, and communication content for the Roots Revealed project
+description: Documentation, user guides, and communication content for the Mula: The Root project
 ---
 
 # Content Creation Agent

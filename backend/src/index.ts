@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import { errorHandler } from './middleware/errorHandler';
 import { swaggerSpec } from './config/swagger';
 import healthRouter from './routes/health';
-import authRouter, { createAdminUser } from './routes/auth';
+import authRouter from './routes/auth';
 import chartRouter from './routes/chart';
 import bmadRouter from './routes/bmad';
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: 'Roots Revealed API Docs',
+  customSiteTitle: 'Mula: The Root API Docs',
 }));
 
 // Swagger JSON endpoint
@@ -61,7 +61,7 @@ app.use('/api/bmad', bmadRouter);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Roots Revealed API
+ *                   example: Mula: The Root API
  *                 version:
  *                   type: string
  *                   example: 1.0.0
@@ -83,7 +83,7 @@ app.use('/api/bmad', bmadRouter);
  */
 app.get('/', (_req, res) => {
   res.json({
-    message: 'Roots Revealed API',
+    message: 'Mula: The Root API',
     version: '1.0.0',
     endpoints: {
       health: '/api/health',

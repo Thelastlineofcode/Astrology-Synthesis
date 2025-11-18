@@ -4,7 +4,7 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Roots Revealed API',
+      title: 'Mula: The Root API',
       version: '1.0.0',
       description: 'RESTful API for Astrology Synthesis application with birth chart calculations, BMAD analysis, and Symbolon card interpretations',
       contact: {

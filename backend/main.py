@@ -62,10 +62,10 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.security.cors_origins,
-    allow_credentials=settings.security.cors_credentials,
-    allow_methods=settings.security.cors_methods,
-    allow_headers=settings.security.cors_headers,
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:3001").split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Trusted host middleware
@@ -162,6 +162,21 @@ app.include_router(routes.perplexity_endpoints.router, tags=["LLM & Interpretati
 # Include Phase 5 Knowledge Base routes
 app.include_router(routes.knowledge.router, tags=["Knowledge Base"])
 
+# Include Consultant Chat routes (Mula app)
+app.include_router(routes.consultant.router, prefix="/api/v1", tags=["Consultant"])
+
+# Include Fortune Reading routes (Mula app)
+app.include_router(routes.fortune.router, prefix="/api/v1", tags=["Fortune"])
+
+# Include Personal Development routes
+app.include_router(routes.personal_development.router, prefix="/api/v1", tags=["Personal Development"])
+
+# Include Synastry routes
+app.include_router(routes.synastry.router, prefix="/api/v1", tags=["Synastry"])
+
+# Include Gemini Demo routes
+app.include_router(routes.gemini_demo.router, prefix="/api/v1", tags=["Gemini Demo"])
+
 
 # ============================================================================
 # Root Endpoint
@@ -176,6 +191,12 @@ async def root():
         "docs": "/docs",
         "status": "operational"
     }
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy", "version": settings.api.version}
 
 
 if __name__ == "__main__":
